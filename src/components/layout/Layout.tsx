@@ -1,9 +1,9 @@
 import { useRouter } from "next/router";
 import colors from "../../../styles";
 import { GetScreenWidth } from "../../assets/getScreenWidth";
-import Footer from "./Footer";
 import Header from "./Header";
 import Navigation from "./Navigation";
+import TabBar from "./TabBar";
 
 interface LayoutProps {
   children?: JSX.Element;
@@ -20,7 +20,7 @@ export default function Layout({ children }: LayoutProps) {
       <div className="container">
         {viewType === "main" ? <Header /> : <Navigation />}
         {children}
-        <Footer />
+        <TabBar />
       </div>
 
       <style jsx>{`
