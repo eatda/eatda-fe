@@ -1,10 +1,13 @@
 import colors from "../../../styles";
+import { GetScreenWidth } from "../../assets/getScreenWidth";
 
 interface LayoutProps {
     children?: JSX.Element;
 }
 
 export default function Layout({ children }: LayoutProps){
+    const screenWidth = GetScreenWidth();
+
     return(
         <>
         <div className="container">
@@ -14,7 +17,7 @@ export default function Layout({ children }: LayoutProps){
         <style jsx>{`
             .container {
                 background: ${colors.grayBackground};
-                width: 390px;
+                width: ${screenWidth}px;
                 height: 650px;
             }
         `}</style>
