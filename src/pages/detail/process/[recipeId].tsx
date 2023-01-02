@@ -36,10 +36,37 @@ export default function Process() {
     <>
       <div>
         <Navigation text="상세정보" />
-        <div className="container"></div>
+        <div className="container">
+          {ProcessData.map((process) => (
+            <div key={process.step} className="process-box">
+              <h2>{process.step}</h2>
+              <div>
+                재료:
+                {process.ingredients.map((ingredient) => (
+                  <span> {ingredient},</span>
+                ))}
+              </div>
+              {process.text}
+            </div>
+          ))}
+        </div>
         <FooterButton text="요리 완료하기" path="/" />
       </div>
-      <style jsx>{``}</style>
+      <style jsx>{`
+        .container {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+          justify-content: center;
+          margin-top: 60px;
+        }
+        .process-box {
+          background-color: white;
+          width: 350px;
+          min-height: 176px;
+          border-radius: 4px;
+        }
+      `}</style>
     </>
   );
 }
