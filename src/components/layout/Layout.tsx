@@ -5,7 +5,6 @@ import TabBar from "./TabBar";
 
 interface LayoutProps {
   children?: JSX.Element;
-  viewType: "main" | "sub";
 }
 
 export default function Layout({ children }: LayoutProps) {

@@ -43,7 +43,7 @@ export default function Process() {
               <div>
                 재료:
                 {process.ingredients.map((ingredient) => (
-                  <span> {ingredient},</span>
+                  <span key={ingredient}> {ingredient},</span>
                 ))}
               </div>
               <>
