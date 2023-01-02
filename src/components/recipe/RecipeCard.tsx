@@ -1,6 +1,4 @@
 import colors from "../../../styles"
-import heart_full from '../../assets/button/heart_full.svg';
-import Image from "next/image";
 
 export default function RecipeCard(){
     return(
@@ -8,7 +6,7 @@ export default function RecipeCard(){
             <div className="container">
                 <div className="itemImg">
                     <div className='buttonImg'>
-                        <Image src={heart_full} alt="heart"></Image>
+                        <img src='/img/heart_full.svg' alt="heart"/>
                     </div>
                 </div>
                 <div className="itemText">
