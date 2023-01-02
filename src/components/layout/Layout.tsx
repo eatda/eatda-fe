@@ -21,7 +21,7 @@ export default function Layout({ children }: LayoutProps) {
       <div className="container">
         {viewType === "main" ? <Header /> : <Navigation />}
         {children}
-        <TabBar />
+        {viewType === "main" && <TabBar />}
       </div>
 
       <style jsx>{`
