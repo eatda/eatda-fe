@@ -1,8 +1,6 @@
 import { useRouter } from "next/router";
 import colors from "../../../styles";
 import { GetScreenWidth } from "../../assets/getScreenWidth";
-import Header from "./Header";
-import Navigation from "./Navigation";
 import TabBar from "./TabBar";
 
 interface LayoutProps {
@@ -19,7 +17,6 @@ export default function Layout({ children }: LayoutProps) {
   return (
     <>
       <div className="container">
-        {viewType === "main" ? <Header /> : <Navigation />}
         <div className="content">{children}</div>
         {viewType === "main" && <TabBar />}
       </div>
