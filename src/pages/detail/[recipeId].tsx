@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import pasta from "../../assets/temp/pasta.png";
+import FooterButton from "../../components/common/FooterButton";
 
 interface Ingredients {
   name: string;
@@ -62,32 +63,13 @@ export default function Detail() {
             </div>
           ))}
         </div>
+        <FooterButton
+          path={`/detail/process/${recipeId}`}
+          text="요리 시작하기"
+        />
         <div className="tip"></div>
-
-        <div className="footer">
-          <Link href={`/detail/process/${recipeId}`}>
-            <button>요리 시작하기</button>
-          </Link>
-        </div>
       </div>
-      <style jsx>{`
-        .footer {
-          position: fixed;
-          bottom: 0;
-          right: 0;
-          left: 0;
-          display: flex;
-          justify-content: center;
-        }
-        .footer button {
-          background-color: tomato;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          height: 50px;
-          width: 350px;
-        }
-      `}</style>
+      <style jsx>{``}</style>
     </>
   );
 }
