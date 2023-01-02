@@ -46,7 +46,11 @@ export default function Process() {
                   <span> {ingredient},</span>
                 ))}
               </div>
-              {process.text}
+              <>
+                {process.text.split(process.ingredients[0])[0]}
+                <span className="highlight">{process.ingredients[0]}</span>
+                {process.text.split(process.ingredients[0])[1]}
+              </>
             </div>
           ))}
         </div>
@@ -65,6 +69,9 @@ export default function Process() {
           width: 350px;
           min-height: 176px;
           border-radius: 4px;
+        }
+        .highlight {
+          color: tomato;
         }
       `}</style>
     </>
