@@ -1,4 +1,6 @@
 import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/router";
 import pasta from "../../assets/temp/pasta.png";
 
 interface Ingredients {
@@ -14,6 +16,9 @@ const ingredientsData: Ingredients[] = [
 ];
 
 export default function Detail() {
+  const { query } = useRouter();
+  const recipeId = query.recipeId;
+
   return (
     <>
       <div>
@@ -58,15 +63,29 @@ export default function Detail() {
           ))}
         </div>
         <div className="tip"></div>
-        <button className="next-button">요리 시작하기</button>
+
+        <div className="footer">
+          <Link href={`/detail/process/${recipeId}`}>
+            <button>요리 시작하기</button>
+          </Link>
+        </div>
       </div>
       <style jsx>{`
-        .next-button {
+        .footer {
           position: fixed;
           bottom: 0;
           right: 0;
           left: 0;
+          display: flex;
+          justify-content: center;
+        }
+        .footer button {
+          background-color: tomato;
+          display: flex;
+          justify-content: center;
+          align-items: center;
           height: 50px;
+          width: 350px;
         }
       `}</style>
     </>
