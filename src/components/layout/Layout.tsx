@@ -20,15 +20,16 @@ export default function Layout({ children }: LayoutProps) {
     <>
       <div className="container">
         {viewType === "main" ? <Header /> : <Navigation />}
-        {children}
+        <div className="content">{children}</div>
         {viewType === "main" && <TabBar />}
       </div>
-
       <style jsx>{`
         .container {
           background: ${colors.grayBackground};
           width: ${screenWidth}px;
-          height: 650px;
+        }
+        .content {
+          padding-bottom: 60px;
         }
       `}</style>
     </>
