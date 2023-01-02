@@ -1,12 +1,15 @@
 import { useRouter } from "next/router";
 
-export default function Navigation() {
+interface NavigationProps {
+  text: string;
+}
+export default function Navigation({ text }: NavigationProps) {
   const router = useRouter();
   return (
     <>
       <div className="container">
         <button onClick={() => router.back()}>back</button>
-        <h4>상세 정보</h4>
+        <h4>{text}</h4>
       </div>
       <style jsx>{`
         .container {

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import pasta from "../../assets/temp/pasta.png";
 import FooterButton from "../../components/common/FooterButton";
+import Navigation from "../../components/common/Navigation";
 
 interface Ingredients {
   name: string;
@@ -23,6 +24,7 @@ export default function Detail() {
   return (
     <>
       <div>
+        <Navigation text="상세정보" />
         <Image src={pasta} alt="pasta" placeholder="blur" />
         <h5>마음까지 신선해지는</h5>
         <h4>냉파스타 샐러드</h4>
