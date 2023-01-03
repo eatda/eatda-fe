@@ -1,9 +1,13 @@
 import RecipeList from "../../components/recipe/RecipeList"
 import colors from "../../../styles"
+import MiniHeader from "../../components/common/MiniHeader"
 
 export default function Recipe(){
     return(
         <>
+        <div className='miniHeader'>
+            <MiniHeader left="추천 식사" right="Our Pick!" left_url="/recipe" right_url="/recipe/ourpick"/>
+        </div>
         <div className="container">
             Recipe<br/>
             나에게 딱 맞는 레시피! <br/>
@@ -25,6 +29,9 @@ export default function Recipe(){
                 width: 390px;
 
                 margin-bottom: 18px;
+            }
+            .miniHeader {
+                margin-top: 25px;
             }
         `}</style>
         </>
