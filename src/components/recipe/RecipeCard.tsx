@@ -15,6 +15,7 @@ export default function RecipeCard(){
             </div>
             <style jsx>{`
                 .container {
+                    // margin-left: 5px;
                     margin-right: 10px;
                     margin-bottom: 9px;
                     background: ${colors.grayWhite};
@@ -26,7 +27,6 @@ export default function RecipeCard(){
                 .itemImg {
                     height: 131px;
                     width: 170px;
-                    // background: black;
 
                     display: flex;
                     flex-direction: row-reverse;

@@ -10,10 +10,11 @@ export default function App({ Component, pageProps }: AppProps) {
       <style jsx global>
         {`
           body {
-            height: 100vh;
+            // height: 100vh;
             display: flex;
             justify-content: center;
-            align-items: center;
+            // align-items: center;
+            background: grey;
           }
         `}
       </style>

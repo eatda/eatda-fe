@@ -4,13 +4,15 @@ import MiniHeader from "../../components/common/MiniHeader"
 
 export default function OurPick(){
     return(
-        <>
+        <div className="box">
         <div className='miniHeader'>
             <MiniHeader left="추천 식사" right="Our Pick!" left_url="/recipe" right_url="/recipe/ourpick"/>
         </div>
         <div className="container">
             가족 모두의 PICK! <br/>
-            <RecipeList type="top"/>
+            <div className="margin">
+                <RecipeList type="top"/>
+            </div>
         </div>
         <div className="bar" />
         <div className="container">
@@ -18,9 +20,13 @@ export default function OurPick(){
             <RecipeList type="bottom"/>
         </div>
         <style jsx>{`
+            .box {
+                width: 390px
+            }
             .container {
                 margin-left: 20px;
-                margin-right: 20px;
+                width: 390px
+                background: black;
             }
             .bar {
                 background: ${colors.grayBackgroundSub};
@@ -29,7 +35,13 @@ export default function OurPick(){
 
                 margin-bottom: 18px;
             }
+            .miniHeader {
+                margin-top: 25px;
+            }
+            .margin {
+                margin-right: 20px
+            }
         `}</style>
-        </>
+        </div>
     )
 }

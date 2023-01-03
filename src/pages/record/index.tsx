@@ -1,7 +1,14 @@
 export default function Library() {
   return (
     <>
-      <div>서재</div>
+      <div className="container">
+        서재
+      </div>
+      <style jsx>{`
+        .container {
+          width: 390px;
+        }
+      `}</style>
     </>
   );
 }
