@@ -14,7 +14,6 @@ export default function App({ Component, pageProps }: AppProps) {
             display: flex;
             justify-content: center;
             // align-items: center;
-            background: grey;
           }
         `}
       </style>
