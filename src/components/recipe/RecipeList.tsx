@@ -46,6 +46,7 @@ export default function RecipeList({type} : RecipeListType){
                     return(
                         <RecipeCard
                         key={idx}
+                        type={type}
                         />
                     )
                 })
