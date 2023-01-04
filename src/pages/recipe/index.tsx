@@ -7,9 +7,7 @@ export default function Recipe(){
     return(
         <div className="box">
         <Header text="주방"/>
-        <div className='miniHeader'>
-            <MiniHeader left="추천 식사" right="Our Pick!" left_url="/recipe" right_url="/recipe/ourpick"/>
-        </div>
+        <MiniHeader left="추천 식사" right="Our Pick!" left_url="/recipe" right_url="/recipe/ourpick"/>
         <div className="container">
             나에게 딱 맞는 레시피! <br/>
             <div className="margin">
@@ -36,9 +34,6 @@ export default function Recipe(){
                 width: 390px;
 
                 margin-bottom: 18px;
-            }
-            .miniHeader {
-                margin-top: 25px;
             }
             .margin {
                 margin-right: 20px

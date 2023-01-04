@@ -41,6 +41,7 @@ export default function MiniHeader({left,right,left_url,right_url}:MiniHeaderTyp
       .container {
         display: flex;
         justify-content: center;
+        margin-top: 25px;
       }
       .item {
         display: flex;
