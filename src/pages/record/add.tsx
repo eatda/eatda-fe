@@ -4,9 +4,20 @@ import { useState } from "react"
 export default function Add(){
     const [toggle,setToggle] = useState(false);
 
+    const offset = new Date().getTimezoneOffset() * 60000;
+    const today = new Date(Date.now() - offset);
+    const [time, setTime] = useState(today.toISOString().slice(11, 16));
+
     const handleClick = () => {
         setToggle(!toggle);
     }
+
+    const handleTimeChange = (e:React.FormEvent<HTMLInputElement>) => {
+        const newValue = (e.target as HTMLInputElement).value;
+        setTime(newValue)
+        console.log(time)
+    }
+
     return(
         <>
         <Navigation text="식후 혈당 기록하기"/>
@@ -28,7 +39,7 @@ export default function Add(){
             </div>
             <div className="item">
                 시간
-                <input type="time"/>
+                <input type="time" onChange={handleTimeChange} value={time}/>
             </div>
             <div className="item">
                 혈당
