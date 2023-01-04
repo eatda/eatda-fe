@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import colors from "../../../styles";
 
 export default function TabBar() {
   const router = useRouter();
@@ -44,7 +45,10 @@ export default function TabBar() {
                   width= {26}
                   height= {26}
                   priority
-                />
+                /><br/>
+                <div className={isSelected ? "select" : "empty"}>
+                {item.title}
+                </div>
               </div>
             )
           })
@@ -61,6 +65,12 @@ export default function TabBar() {
           bottom: 0;
           left: 0;
           right: 0;
+        }
+        .select {
+          color: ${colors.mainOrange}
+        }
+        .empty {
+          color: ${colors.graySubTitle}
         }
       `}</style>
     </>
