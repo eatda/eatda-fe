@@ -1,37 +1,54 @@
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/router";
+import { useState } from "react";
 
 export default function TabBar() {
+  const router = useRouter();
+  const [currentPath, setCurrentPath] = useState(router.pathname);
+
+  const handleRouting = (src:string)=>{
+    setCurrentPath(`/${src}`);
+    router.push(`/${src}`);
+  }
+  const TabBarItems = [
+    {
+      id:1,
+      src: 'recipe',
+      title: '주방'
+    },
+    {
+      id:2,
+      src: 'home',
+      title: '홈'
+    },
+    {
+      id:3,
+      src: 'record',
+      title: '서재'
+    },
+  ]
+
   return (
     <>
       <div className="container">
-        <Link href="recipe">
-          <Image
-            src="/img/kitchen_empty.svg"
-            alt="주방"
-            width= {25.13}
-            height= {26}
-            priority
-          />
-        </Link>
-        <Link href="home">
-          <Image
-            src="/img/home_empty.svg"
-            alt="홈"
-            width= {28}
-            height= {28}
-            priority
-          />
-        </Link>
-        <Link href="record">
-          <Image
-            src="/img/record_empty.svg"
-            alt="서재"
-            width= {34}
-            height= {25.58}
-            priority
-          />
-        </Link>
+        {
+          TabBarItems.map((item,idx)=>{
+            const isSelected = currentPath === `/${item.src}`;
+
+            return(
+              <div key={idx} onClick={()=>handleRouting(item.src)}>
+                <Image
+                  src={`/img/${item.src}${isSelected ? '' : '_empty'}.svg`}
+                  alt={item.title}
+                  width= {26}
+                  height= {26}
+                  priority
+                />
+              </div>
+            )
+          })
+        }
       </div>
       <style jsx>{`
         .container {
