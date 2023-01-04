@@ -1,10 +1,12 @@
 import RecipeList from "../../components/recipe/RecipeList"
 import colors from "../../../styles"
 import MiniHeader from "../../components/common/MiniHeader"
+import Header from "../../components/common/Header"
 
 export default function OurPick(){
     return(
         <div className="box">
+        <Header text="주방"/>
         <div className='miniHeader'>
             <MiniHeader left="추천 식사" right="Our Pick!" left_url="/recipe" right_url="/recipe/ourpick"/>
         </div>
