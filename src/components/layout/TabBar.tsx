@@ -1,12 +1,37 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function TabBar() {
   return (
     <>
       <div className="container">
-        <Link href="recipe">주방</Link>
-        <Link href="home">홈</Link>
-        <Link href="record">서재</Link>
+        <Link href="recipe">
+          <Image
+            src="/img/kitchen_empty.svg"
+            alt="주방"
+            width= {25.13}
+            height= {26}
+            priority
+          />
+        </Link>
+        <Link href="home">
+          <Image
+            src="/img/home_empty.svg"
+            alt="홈"
+            width= {28}
+            height= {28}
+            priority
+          />
+        </Link>
+        <Link href="record">
+          <Image
+            src="/img/record_empty.svg"
+            alt="서재"
+            width= {34}
+            height= {25.58}
+            priority
+          />
+        </Link>
       </div>
       <style jsx>{`
         .container {
