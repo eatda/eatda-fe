@@ -5,66 +5,95 @@ import colors from '../../../styles';
 interface MiniHeaderType{
   left: string;
   right: string;
-  left_url: string;
-  right_url: string;
+  leftURL: string;
+  rightURL: string;
+  button?: string;
+  buttonURL?: string;
 }
 
 // 필터 부분 추가해야 함
-export default function MiniHeader({left,right,left_url,right_url}:MiniHeaderType) {
+export default function MiniHeader({left,right,leftURL,rightURL,button,buttonURL}:MiniHeaderType) {
   const router = useRouter();
 
-  return (
-    <div className='container'>
-      <div className='item'>
-        <Link
-          href={{
-            pathname: left_url,
-          }}
-        >
-          <div className='text'>
-          {left}
-          </div>
-        </Link>
-        <div className={router.pathname === left_url ? 'true' : 'false'}></div>
-      </div>
-      <div className='item'>
-        <Link
-          href={{
-            pathname: right_url,
-          }}
-        >
-          {right}
-        </Link>
-        <div className={router.pathname === right_url ? 'true' : 'false'}></div>
-      </div>
-    <style jsx>{`
-      .container {
-        display: flex;
-        justify-content: center;
-        margin-top: 25px;
-      }
-      .item {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-      }
-      .text {
-        // color: white;
-        text-decoration: none;
-      }
+  const handleClick = () => {
+    if (buttonURL){
+      router.push(buttonURL)
+    }
+  }
 
-      .true {
-        height: 2px;
-        background: ${colors.mainOrange};
-        width: 178px;
+  return (
+    <>
+      <div className='container'>
+        <div className='item'>
+          <Link
+            href={{
+              pathname: leftURL,
+            }}
+          >
+            <div className='text'>
+            {left}
+            </div>
+          </Link>
+          <div className={router.pathname === leftURL ? 'true' : 'false'}></div>
+        </div>
+        <div className='item'>
+          <Link
+            href={{
+              pathname: rightURL,
+            }}
+          >
+            {right}
+          </Link>
+          <div className={router.pathname === rightURL ? 'true' : 'false'}></div>
+        </div>
+      </div>
+      {
+        button?
+        <button className='buttonStyle' onClick={handleClick}>{button}</button>
+        :
+        null
       }
-      .false {
-        height: 2px;
-        background: ${colors.graySubTitle2};
-        width: 178px;
-      }
-    `}</style>
-    </div>
+      <br/>
+      <style jsx>{`
+        .container {
+          display: flex;
+          justify-content: center;
+          margin-top: 25px;
+        }
+        .item {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+        }
+        .text {
+          // color: white;
+          text-decoration: none;
+        }
+
+        .true {
+          height: 2px;
+          background: ${colors.mainOrange};
+          width: 178px;
+        }
+        .false {
+          height: 2px;
+          background: ${colors.graySubTitle2};
+          width: 178px;
+        }
+
+        .buttonStyle {
+          width: 350px;
+          height: 34px;
+          background: ${colors.grayWhite};
+          margin-left: 20px;
+          margin-right: 20px;
+          margin-top: 12px;
+          margin-bottom: 8px;
+          border: none;
+          border-radius: 20px;
+        }
+      `}</style>
+    </>
   );
 }

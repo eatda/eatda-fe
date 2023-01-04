@@ -87,7 +87,7 @@ export default function Library() {
     <>
       <div className="container">
         <Header text="서재"/>
-        <MiniHeader left="식후 혈당 기록하기" right="주간레포트" left_url="/record" right_url="/record/report"/>
+        <MiniHeader left="식후 혈당 기록하기" right="주간레포트" leftURL="/record" rightURL="/record/report" button="추가" buttonURL="/record/add"/>
         {
           testData.map((v,idx)=>{
             return(

@@ -8,7 +8,7 @@ export default function OurPick(){
         <div className="box">
         <Header text="주방"/>
         <div className='miniHeader'>
-            <MiniHeader left="추천 식사" right="Our Pick!" left_url="/recipe" right_url="/recipe/ourpick"/>
+            <MiniHeader left="추천 식사" right="Our Pick!" leftURL="/recipe" rightURL="/recipe/ourpick"/>
         </div>
         <div className="container">
             가족 모두의 PICK! <br/>
