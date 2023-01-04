@@ -87,7 +87,7 @@ export default function Library() {
   return (
     <>
         <Header text="서재"/>
-        <MiniHeader left="식후 혈당 기록하기" right="주간레포트" leftURL="/record" rightURL="/record/report" button="추가" buttonURL="/record/add"/>
+        <MiniHeader left="식후 혈당 기록하기" right="주간레포트" leftURL="/library" rightURL="/library/report" button="추가" buttonURL="/library/add"/>
         <div className="container">
         {
           testData.length === 0 ?

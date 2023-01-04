@@ -15,7 +15,7 @@ export default function TabBar() {
   const TabBarItems = [
     {
       id:1,
-      src: 'recipe',
+      src: 'kitchen',
       title: '주방'
     },
     {
@@ -25,7 +25,7 @@ export default function TabBar() {
     },
     {
       id:3,
-      src: 'record',
+      src: 'library',
       title: '서재'
     },
   ]

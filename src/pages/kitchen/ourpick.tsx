@@ -3,20 +3,22 @@ import colors from "../../../styles"
 import MiniHeader from "../../components/common/MiniHeader"
 import Header from "../../components/common/Header"
 
-export default function Recipe(){
+export default function OurPick(){
     return(
         <div className="box">
         <Header text="주방"/>
-        <MiniHeader left="추천 식사" right="Our Pick!" leftURL="/recipe" rightURL="/recipe/ourpick" button="필터" buttonURL="/recipe/filter"/>
+        <div className='miniHeader'>
+            <MiniHeader left="추천 식사" right="Our Pick!" leftURL="/kitchen" rightURL="/kitchen/ourpick"/>
+        </div>
         <div className="container">
-            나에게 딱 맞는 레시피! <br/>
+            가족 모두의 PICK! <br/>
             <div className="margin">
                 <RecipeList type="top"/>
             </div>
         </div>
         <div className="bar" />
         <div className="container">
-            오늘 이 레시피는 어때요?
+            가족 내 인기 PICK!
             <RecipeList type="bottom"/>
         </div>
         <style jsx>{`
@@ -34,6 +36,9 @@ export default function Recipe(){
                 width: 390px;
 
                 margin-bottom: 18px;
+            }
+            .miniHeader {
+                margin-top: 25px;
             }
             .margin {
                 margin-right: 20px
