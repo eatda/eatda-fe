@@ -9,15 +9,23 @@ export default function RecipeCard({type}:RecipeCardType){
     const router = useRouter();
     const marginBottom = (type === "bottom" && router.pathname === '/recipe/ourpick') ? '45px' : '9px';
     const display = (type === "bottom" && router.pathname === '/recipe/ourpick') ? 'visible' : 'none';
+
+    const handleClick = () =>{
+        router.push('/detail/1');
+    }
+
+    const handleLike = () => {
+        console.log('like');
+    }
     return(
         <>
             <div className="container">
                 <div className="itemImg">
-                    <div className='buttonImg'>
+                    <div onClick={handleLike} className='buttonImg'>
                         <img src='/img/heart_full.svg' alt="heart"/>
                     </div>
                 </div>
-                <div className="itemText">
+                <div onClick={handleClick} className="itemText">
                     text
                 </div>
                 <div className="like">
