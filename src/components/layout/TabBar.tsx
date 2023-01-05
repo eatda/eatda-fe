@@ -8,51 +8,50 @@ export default function TabBar() {
   const router = useRouter();
   const [currentPath, setCurrentPath] = useState(router.pathname);
 
-  const handleRouting = (src:string)=>{
+  const handleRouting = (src: string) => {
     setCurrentPath(`/${src}`);
     router.push(`/${src}`);
-  }
+  };
   const TabBarItems = [
     {
-      id:1,
-      src: 'kitchen',
-      title: '주방'
+      id: 1,
+      src: "kitchen",
+      title: "주방",
     },
     {
-      id:2,
-      src: 'home',
-      title: '홈'
+      id: 2,
+      src: "home",
+      title: "홈",
     },
     {
-      id:3,
-      src: 'library',
-      title: '서재'
+      id: 3,
+      src: "library",
+      title: "서재",
     },
-  ]
+  ];
 
   return (
     <>
       <div className="container">
-        {
-          TabBarItems.map((item,idx)=>{
-            const isSelected = currentPath === `/${item.src}`;
+        {TabBarItems.map((item, idx) => {
+          const isSelected = currentPath === `/${item.src}`;
 
-            return(
-              <div key={idx} onClick={()=>handleRouting(item.src)}>
-                <Image
-                  src={`/img/${item.src}${isSelected ? '' : '_empty'}.svg`}
-                  alt={item.title}
-                  width= {26}
-                  height= {26}
-                  priority
-                /><br/>
-                <div className={isSelected ? "select" : "empty"}>
+          return (
+            <div key={idx} onClick={() => handleRouting(item.src)}>
+              <Image
+                src={`/tabbar/${item.src}${isSelected ? "" : "_empty"}.svg`}
+                alt={item.title}
+                width={26}
+                height={26}
+                priority
+              />
+              <br />
+              <div className={isSelected ? "select" : "empty"}>
                 {item.title}
-                </div>
               </div>
-            )
-          })
-        }
+            </div>
+          );
+        })}
       </div>
       <style jsx>{`
         .container {
@@ -67,10 +66,10 @@ export default function TabBar() {
           right: 0;
         }
         .select {
-          color: ${colors.mainOrange}
+          color: ${colors.mainOrange};
         }
         .empty {
-          color: ${colors.graySubTitle}
+          color: ${colors.graySubTitle};
         }
       `}</style>
     </>

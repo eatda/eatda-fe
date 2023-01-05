@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { pasta } from "../../assets/imagePath";
 import FooterButton from "../../components/common/FooterButton";
 import Navigation from "../../components/common/Navigation";
 
@@ -28,13 +29,7 @@ export default function Detail() {
     <>
       <div>
         <Navigation text="상세정보" />
-        <Image
-          src="/img/pasta.png"
-          alt="pasta"
-          width={390}
-          height={300}
-          priority
-        />
+        <Image src={pasta} alt="pasta" width={390} height={300} priority />
         <h5>마음까지 신선해지는</h5>
         <h4>냉파스타 샐러드</h4>
         <div className="container">
