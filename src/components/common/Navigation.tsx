@@ -1,14 +1,18 @@
 import { useRouter } from "next/router";
+import Image from "next/image";
 
 interface NavigationProps {
   text: string;
 }
 export default function Navigation({ text }: NavigationProps) {
   const router = useRouter();
+  const back = "<";
   return (
     <>
       <div className="container">
-        <button onClick={() => router.back()}>back</button>
+        <button onClick={() => router.back()}>
+          {back}
+        </button>
         <h4>{text}</h4>
       </div>
       <style jsx>{`

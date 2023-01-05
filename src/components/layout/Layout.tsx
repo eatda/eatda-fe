@@ -22,7 +22,8 @@ export default function Layout({ children }: LayoutProps) {
       <style jsx>{`
         .container {
           background: ${colors.grayBackground};
-          width: ${screenWidth}px;
+          // width: ${screenWidth}px;
+          // width: 390px;
         }
         .content {
           padding-bottom: 60px;

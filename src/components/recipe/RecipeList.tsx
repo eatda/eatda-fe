@@ -6,10 +6,8 @@ interface RecipeListType {
 
 export default function RecipeList({type} : RecipeListType){
 
-    const height_container = type === 'top' ? 'auto' : '320px'
     const overflow_container = type === 'top' ? 'auto' : 'visible'
     const item_wrap = type === 'top' ? 'nowrap' : 'wrap'
-    const item_width = type === 'top' ? 'auto' : '400px'
 
 
     const dummyData = [
@@ -48,6 +46,7 @@ export default function RecipeList({type} : RecipeListType){
                     return(
                         <RecipeCard
                         key={idx}
+                        type={type}
                         />
                     )
                 })
@@ -59,7 +58,7 @@ export default function RecipeList({type} : RecipeListType){
                 display: flex;
                 flex-direction: column;
                 
-                height: ${height_container};
+                height: auto;
                 margin-bottom: 24px;
 
                 overflow: ${overflow_container};
@@ -73,7 +72,7 @@ export default function RecipeList({type} : RecipeListType){
             .item {
                 display: flex;
                 flex-wrap: ${item_wrap};
-                width: ${item_width};
+                width: auto;
 
                 overflow: auto;
                 -ms-overflow-style: none; /* 인터넷 익스플로러 */
