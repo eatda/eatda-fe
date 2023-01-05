@@ -2,9 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { pasta } from "../../assets/imagePath";
-import FooterButton from "../../components/common/FooterButton";
-import Navigation from "../../components/common/Navigation";
+import { pasta } from "../../../assets/imagePath";
+import FooterButton from "../../../components/common/FooterButton";
+import Navigation from "../../../components/common/Navigation";
 
 interface Ingredients {
   name: string;
@@ -103,7 +103,7 @@ export default function Detail() {
           </div>
         </div>
         <FooterButton
-          path={`/detail/process/${recipeId}`}
+          path={`/kitchen/process/${recipeId}`}
           text="요리 시작하기"
         />
       </div>
