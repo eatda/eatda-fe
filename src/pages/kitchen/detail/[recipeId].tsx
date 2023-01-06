@@ -2,8 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import FooterButton from "../../components/common/FooterButton";
-import Navigation from "../../components/common/Navigation";
+import { pasta } from "../../../assets/imagePath";
+import FooterButton from "../../../components/common/FooterButton";
+import Navigation from "../../../components/common/Navigation";
 
 interface Ingredients {
   name: string;
@@ -15,6 +16,20 @@ const ingredientsData: Ingredients[] = [
   { name: "방울토마토", amount: "5개" },
   { name: "오이", amount: "20g" },
   { name: "새우", amount: "1/2개" },
+];
+interface Tip {
+  title: string;
+  text: string;
+}
+const tipData: Tip[] = [
+  {
+    title: "1. 영양 덩어리 방울토마토",
+    text: "방울토마토는 큰 토마토보다 비타민 B, 비타민 C, 칼륨, 식이섬유가 1.5~2배로 많고 라이코펜은 3배로 많습니다.껍질에는 항산화 물질인 플라보노이드가 풍부해 콜레스테롤 수치를 개선해 혈관 벽을 보호하고, 혈액순환을 원활하게 해줍니다. 방울토마토는 큰 토마토보다 껍질 비율이높기 때문에, 같은 양을 먹어도 더 많은 플라보노이드를 섭취할 수 있습니다.",
+  },
+  {
+    title: "2.  양질의 단백질 공급원, 새우",
+    text: "새우의 단백질 함량은 붉은 고기만큼 높지만, 지방은훨씬 적습니다. 새우는 탄수화물 함량이 낮아 혈당 조절에용이합니다. 인슐린이 원활히 분비되게 돕는 아연도 풍부하게 들어있습니다.",
+  },
 ];
 
 export default function Detail() {
@@ -28,13 +43,7 @@ export default function Detail() {
     <>
       <div>
         <Navigation text="상세정보" />
-        <Image
-          src="/img/pasta.png"
-          alt="pasta"
-          width={390}
-          height={300}
-          priority
-        />
+        <Image src={pasta} alt="pasta" width={390} height={300} priority />
         <h5>마음까지 신선해지는</h5>
         <h4>냉파스타 샐러드</h4>
         <div className="container">
@@ -92,23 +101,19 @@ export default function Detail() {
               <hr />
               {isTipOpen && (
                 <div className="content">
-                  영양 덩어리 방울토마토 방울토마토는 큰 토마토보다 비타민 B,
-                  비타민 C, 칼륨, 식이섬유가 1.5~2배로 많고 라이코펜은 3배로
-                  많습니다.껍질에는 항산화 물질인 플라보노이드가 풍부해 콜레스
-                  테롤 수치를 개선해 혈관 벽을 보호하고, 혈액순환을 원활 하게
-                  해줍니다. 방울토마토는 큰 토마토보다 껍질 비율이 높기 때문에,
-                  같은 양을 먹어도 더 많은 플라보노이드를 섭취할 수 있습니다. 2.
-                  양질의 단백질 공급원, 새우 새우의 단백질 함량은 붉은 고기만큼
-                  높지만, 지방은 훨씬 적습니다. 새우는 탄수화물 함량이 낮아 혈당
-                  조절에 용이합니다. 인슐린이 원활히 분비되게 돕는 아연도
-                  풍부하게 들어있습니다.
+                  {tipData.map((tip) => (
+                    <div key={tip.title}>
+                      <h5>{tip.title}</h5>
+                      <div>{tip.text}</div>
+                    </div>
+                  ))}
                 </div>
               )}
             </div>
           </div>
         </div>
         <FooterButton
-          path={`/detail/process/${recipeId}`}
+          path={`/kitchen/process/${recipeId}`}
           text="요리 시작하기"
         />
       </div>
