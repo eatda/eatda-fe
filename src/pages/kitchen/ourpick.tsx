@@ -13,7 +13,7 @@ export default function OurPick(){
         <div className="container">
             가족 모두의 PICK! <br/>
             <div className="margin">
-                <RecipeList type="top"/>
+                <RecipeList type="right"/>
             </div>
         </div>
         <div className="bar" />
