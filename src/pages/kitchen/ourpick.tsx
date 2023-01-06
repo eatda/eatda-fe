@@ -11,15 +11,15 @@ export default function OurPick(){
             <MiniHeader left="추천 식사" right="Our Pick!" leftURL="/kitchen" rightURL="/kitchen/ourpick"/>
         </div>
         <div className="container">
-            가족 모두의 PICK! <br/>
+            가족들의 인기 PICK! <br/>
             <div className="margin">
                 <RecipeList type="right"/>
             </div>
         </div>
         <div className="bar" />
         <div className="container">
-            가족 내 인기 PICK!
-            <RecipeList type="bottom"/>
+            맘스터치의 PICK!
+            <RecipeList type="right"/>
         </div>
         <style jsx>{`
             .box {
