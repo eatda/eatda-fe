@@ -6,6 +6,7 @@ interface Process {
   step: number;
   ingredients: string[];
   text: string;
+  regx?: string;
 }
 const ProcessData: Process[] = [
   {
@@ -32,6 +33,15 @@ const ProcessData: Process[] = [
 
 export default function Process() {
   const router = useRouter();
+  ProcessData.forEach((process) => {
+    let regx = "";
+    process.ingredients.forEach((ingredient) => {
+      regx = regx + ingredient + "|";
+    });
+    regx = regx.slice(0, -1);
+    process.regx = regx;
+  });
+
   return (
     <>
       <div>
@@ -47,9 +57,15 @@ export default function Process() {
                 ))}
               </div>
               <>
-                {process.text.split(process.ingredients[0])[0]}
+                {/* {process.ingredients.map((ingredient) => (
+                  <>
+                    {process.text.split(ingredient)[0]}
+                    <br />
+                  </>
+                ))} */}
+                {/* {process.text.split(process.ingredients[0])[0]}
                 <span className="highlight">{process.ingredients[0]}</span>
-                {process.text.split(process.ingredients[0])[1]}
+                {process.text.split(process.ingredients[0])[1]} */}
               </>
             </div>
           ))}
