@@ -6,7 +6,7 @@ interface Process {
   step: number;
   ingredients: string[];
   text: string;
-  regx?: string;
+  splitted?: string[];
 }
 const ProcessData: Process[] = [
   {
@@ -34,12 +34,14 @@ const ProcessData: Process[] = [
 export default function Process() {
   const router = useRouter();
   ProcessData.forEach((process) => {
-    let regx = "";
+    let regex_str = "";
     process.ingredients.forEach((ingredient) => {
-      regx = regx + ingredient + "|";
+      regex_str = regex_str + ingredient + "|";
     });
-    regx = regx.slice(0, -1);
-    process.regx = regx;
+    regex_str = regex_str.slice(0, -1);
+
+    const regex = new RegExp(regex_str);
+    process.splitted = process.text.split(regex);
   });
 
   return (
@@ -50,22 +52,15 @@ export default function Process() {
           {ProcessData.map((process) => (
             <div key={process.step} className="process-box">
               <h2>{process.step}</h2>
-              <div>
-                재료:
-                {process.ingredients.map((ingredient) => (
-                  <span key={ingredient}> {ingredient},</span>
-                ))}
-              </div>
               <>
-                {/* {process.ingredients.map((ingredient) => (
-                  <>
-                    {process.text.split(ingredient)[0]}
-                    <br />
-                  </>
-                ))} */}
-                {/* {process.text.split(process.ingredients[0])[0]}
-                <span className="highlight">{process.ingredients[0]}</span>
-                {process.text.split(process.ingredients[0])[1]} */}
+                {process.splitted?.map((word, idx) => (
+                  <span key={idx}>
+                    {word}
+                    <span className="highlight">
+                      {process.ingredients[idx]}
+                    </span>
+                  </span>
+                ))}
               </>
             </div>
           ))}
