@@ -48,6 +48,9 @@ export default function CreatePlace(){
                 </>
                 :
                 <>
+                <div className="subText">
+                    가족 구성원이 이미 가입하셨군요!
+                </div>
                     초대 코드를 입력해주세요 
                 </>
 
@@ -69,13 +72,13 @@ export default function CreatePlace(){
                 left: 0;
                 right: 0;
             }
-            .margin {
-                width: 10px;
-            }
             .groudId {
                 width: 350px;
                 height: 134px;
                 background: ${colors.grayWhite};
+            }
+            .subText {
+                color: ${colors.graySubTitle};
             }
         `}</style>
         </>
