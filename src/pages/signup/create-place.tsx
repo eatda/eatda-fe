@@ -1,20 +1,57 @@
-import { CTA1ButtonOnSmall } from "../../components/common/Button"
+import { useRouter } from "next/router"
+import { useState } from "react";
+import { CTA1ButtonOnSmall, CTA1ButtonOn } from "../../components/common/Button"
 import Navigation from "../../components/common/Navigation"
+import colors from "../../../styles";
 
 export default function CreatePlace(){
-    const handleClick = () => {
-        console.log('~~')
+    const router = useRouter();
+    const [page,setPage] = useState(0);
+
+    const handleClickNo = () => {
+        setPage(2);
     }
+
+    const handleClickYes = () => {
+        setPage(1);
+    }
+
+    const handleClickEnter = () => {
+        router.push('/signup')
+    }
+
     return (
         <>
         <Navigation text="가족 공간 생성"/>
         <div className="container">
-            가족 중 최초로 가입하셨나요?
-            <div className="buttonItem">
-            <CTA1ButtonOnSmall onClick={handleClick} textMain="네" textSub="가족 공간 생성"/>
-            <CTA1ButtonOnSmall onClick={handleClick} textMain="아니오" textSub="가족 공간 들어가기"/>
-            </div>
+            {
+                page === 0 ?
+                <>
+                    가족 중 최초로 가입하셨나요?
+                    <div className="buttonItem">
+                    <CTA1ButtonOnSmall onClick={handleClickYes} textMain="네" textSub="가족 공간 생성"/>
+                    <CTA1ButtonOnSmall onClick={handleClickNo} textMain="아니오" textSub="가족 공간 들어가기"/>
+                    </div>
+                </>
+                :
+                page === 1 ?
+                <>
+                    우리 가족만을 위한 집을<br/>
+                    새로 만들었어요!
+                    <br/>
+                    <div className="groudId">
+                        초대 코드를 복사하여 가족에게 공유하세요!
+                    </div>
+                    <div className="buttonItem">
+                    <CTA1ButtonOn onClick={handleClickEnter} text="입장하기"/>
+                    </div>
+                </>
+                :
+                <>
+                    초대 코드를 입력해주세요 
+                </>
 
+            }
         </div>
         <style jsx>{`
             .container {
@@ -34,6 +71,11 @@ export default function CreatePlace(){
             }
             .margin {
                 width: 10px;
+            }
+            .groudId {
+                width: 350px;
+                height: 134px;
+                background: ${colors.grayWhite};
             }
         `}</style>
         </>
