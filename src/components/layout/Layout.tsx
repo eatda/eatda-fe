@@ -10,7 +10,7 @@ interface LayoutProps {
 export default function Layout({ children }: LayoutProps) {
   const { pathname, route } = useRouter();
   const viewType =
-    pathname === "/record/add" || pathname.includes("/detail") ? "sub" : "main";
+    pathname === "/record/add" || pathname.includes("/detail") || pathname.includes("/signup") ? "sub" : "main";
   const screenWidth = GetScreenWidth();
 
   return (

@@ -11,7 +11,7 @@ export default function Recipe(){
         <div className="container">
             나에게 딱 맞는 레시피! <br/>
             <div className="margin">
-                <RecipeList type="top"/>
+                <RecipeList type="right"/>
             </div>
         </div>
         <div className="bar" />

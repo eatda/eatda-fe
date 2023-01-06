@@ -6,8 +6,8 @@ interface RecipeListType {
 
 export default function RecipeList({type} : RecipeListType){
 
-    const overflow_container = type === 'top' ? 'auto' : 'visible'
-    const item_wrap = type === 'top' ? 'nowrap' : 'wrap'
+    const overflow_container = type === 'right' ? 'auto' : 'visible'
+    const item_wrap = type === 'right' ? 'nowrap' : 'wrap'
 
 
     const dummyData = [
