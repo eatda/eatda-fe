@@ -1,4 +1,5 @@
-import { CTA1ButtonOff, CTA1ButtonOn,CTA1ButtonOnSmall, CTA1ButtonOffSmall, CTA2ButtonOff, CTA2ButtonOn } from "../../components/common/Button"
+import { CTA1ButtonOnSmall } from "../../components/common/Button"
+import Navigation from "../../components/common/Navigation"
 
 export default function CreatePlace(){
     const handleClick = () => {
@@ -6,23 +7,34 @@ export default function CreatePlace(){
     }
     return (
         <>
+        <Navigation text="가족 공간 생성"/>
         <div className="container">
             가족 중 최초로 가입하셨나요?
-            <CTA1ButtonOff onClick={handleClick} text="다음"/><br/>
-            <CTA1ButtonOn onClick={handleClick} text="다음"/><br/>
-            <CTA2ButtonOff onClick={handleClick} text="다음"/><br/>
-            <CTA2ButtonOn onClick={handleClick} text="다음"/>
-            <CTA1ButtonOnSmall onClick={handleClick} text="다음"/>
-            <CTA1ButtonOffSmall onClick={handleClick} text="다음"/>
+            <div className="buttonItem">
+            <CTA1ButtonOnSmall onClick={handleClick} textMain="네" textSub="가족 공간 생성"/>
+            <CTA1ButtonOnSmall onClick={handleClick} textMain="아니오" textSub="가족 공간 들어가기"/>
+            </div>
 
         </div>
         <style jsx>{`
             .container {
                 width: 390px;
+                padding-top: 60px;
+                height: 100vh;
+            } 
+            .buttonItem {
                 display: flex;
                 justify-content: center;
-                flex-direction: column;
-            } 
+                align-items: center;
+                height: 60px;
+                position: fixed;
+                bottom: 36px;
+                left: 0;
+                right: 0;
+            }
+            .margin {
+                width: 10px;
+            }
         `}</style>
         </>
     )

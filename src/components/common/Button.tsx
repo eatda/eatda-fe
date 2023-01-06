@@ -4,6 +4,12 @@ interface CTA1ButtonI {
     onClick: () => void;
 }
 
+interface CTA1ButtonSmallI {
+    textMain: string;
+    textSub: string;
+    onClick: () => void;
+}
+
 interface CTA2ButtonI {
     text: string;
     onClick: () => void;
@@ -58,17 +64,24 @@ export function CTA1ButtonOff({onClick,text}:CTA1ButtonI){
     )
 }
 
-export function CTA1ButtonOnSmall({onClick,text}:CTA1ButtonI){
+export function CTA1ButtonOnSmall({onClick,textMain,textSub}:CTA1ButtonSmallI){
     return(
         <>
         <button onClick={onClick}>
-            {text}
+            {textMain}
+            <div className="sub">
+            {textSub}
+            </div>
         </button>
         <style jsx>{`
         button {
             ${CTA1Source}
             width: 170px;
             background: ${colors.mainOrange};
+            margin: 5px;
+        }
+        .sub {
+            color: ${colors.mainYellow};
         }
         `}</style>
         </>
