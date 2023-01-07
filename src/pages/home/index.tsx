@@ -3,6 +3,7 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import MealCard from "../../components/home/MealCard";
 import { pasta } from "../../assets/imagePath";
+import SugarCard from "../../components/home/SugarCard";
 
 const sliderSettings = {
   dots: true,
@@ -45,7 +46,11 @@ export default function Home() {
         </div>
         <div className="homeBox">
           <h4>오늘의 식후 혈당</h4>
-          <div>카드</div>
+          <Slider {...sliderSettings}>
+            <SugarCard timeline={0} value={145} time={"14:05"} />
+            <SugarCard timeline={1} value={150} time={"14:05"} />
+            <SugarCard timeline={2} value={160} time={"14:05"} />
+          </Slider>
         </div>
         <div className="homeBox">
           <h4>주간 혈당 요약</h4>
