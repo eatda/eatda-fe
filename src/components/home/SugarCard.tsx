@@ -21,13 +21,37 @@ export default function SugarCard({ timeline, value, time }: SugarCardProps) {
   return (
     <>
       <div className="container">
-        <div className="type">{mealType()}</div>
-        <div className="data">
-          <h4>{value}mg/dl</h4>
-          <div>{time} 측정</div>
+        <div className="card">
+          <div className="type">{mealType()}</div>
+          <div className="data">
+            <div>{value}mg/dl</div>
+            <div>{time} 측정</div>
+          </div>
         </div>
       </div>
-      <style jsx>{``}</style>
+      <style jsx>{`
+        .container {
+            display: flex;
+            justify-content: center;
+        }
+        .card {
+          display: flex;
+          width: 350px;
+          height: 68px;
+          padding: 15px;
+          box-sizing: border-box;
+          background-color: white;
+          border-radius: 5px;
+          border: 1px solid #E6E6E6
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: center;
+        }
+        .data {
+          display: flex;
+          flex-direction: column;
+        }
+      `}</style>
     </>
   );
 }
