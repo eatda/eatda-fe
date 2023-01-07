@@ -1,8 +1,8 @@
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-import Image from "next/image";
 import MealCard from "../../components/home/MealCard";
+import { pasta } from "../../assets/imagePath";
 
 const sliderSettings = {
   dots: true,
@@ -23,7 +23,24 @@ export default function Home() {
         <div className="homeBox">
           <h4>오늘의 식사</h4>
           <Slider {...sliderSettings}>
-            <MealCard />
+            <MealCard
+              type={"아침"}
+              text={"마음까지 신선해지는"}
+              name={"냉파스타 샐러드"}
+              img={pasta}
+            />
+            <MealCard
+              type={"점심"}
+              text={"마음까지 신선해지는"}
+              name={"냉파스타 샐러드"}
+              img={pasta}
+            />
+            <MealCard
+              type={"저녁"}
+              text={"마음까지 신선해지는"}
+              name={"냉파스타 샐러드"}
+              img={pasta}
+            />
           </Slider>
         </div>
         <div className="homeBox">

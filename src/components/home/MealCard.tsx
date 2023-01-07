@@ -1,21 +1,36 @@
 import Image from "next/image";
-import { pasta } from "../../assets/imagePath";
 
-export default function MealCard() {
+interface MealCardProps {
+  type: string;
+  text: string;
+  name: string;
+  img: string;
+}
+
+export default function MealCard({ type, text, name, img }: MealCardProps) {
   return (
     <>
-      <div className="meal-card">
-        <div className="card-text">
-          <h4>점심</h4>
-          <h5>마음까지 신선해지는,</h5>
-          <h3>냉파스타 샐러드</h3>
+      <div className="container">
+        <div className="card">
+          <div className="text">
+            <h4>{type}</h4>
+            <h5>{text}</h5>
+            <h3>{name}</h3>
+          </div>
+          <Image src={img} width={200} height={156} alt="파스타" />
         </div>
-        <Image src={pasta} width={200} height={150} alt="파스타" />
       </div>
+
       <style jsx>{`
-        .meal-card {
+        .container {
+          display: flex;
+          justify-content: center;
+        }
+        .card {
           display: flex;
           flex-direction: row;
+          justify-content: space-between;
+          align-items: center;
           width: 349px;
           height: 158px;
           border: 1px solid #e6e6e6;
