@@ -42,6 +42,7 @@ export default function CreatePlace(){
                     <div className="groudId">
                         초대 코드를 복사하여 가족에게 공유하세요!
                     </div>
+                    <button>링크 복사하기</button>
                     <div className="buttonItem">
                     <CTA1ButtonOn onClick={handleClickEnter} text="입장하기"/>
                     </div>
