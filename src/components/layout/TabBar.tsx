@@ -7,7 +7,6 @@ import colors from "../../../styles";
 export default function TabBar() {
   const router = useRouter();
   const [currentPath, setCurrentPath] = useState(router.pathname);
-  console.log("🚀 ~ file: TabBar.tsx:10 ~ TabBar ~ currentPath", currentPath);
 
   const handleRouting = (src: string) => {
     setCurrentPath(`/${src}`);
