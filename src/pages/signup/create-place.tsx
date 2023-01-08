@@ -42,16 +42,12 @@ export default function CreatePlace(){
                     <div className="groudId">
                         초대 코드를 복사하여 가족에게 공유하세요!
                     </div>
-                    <button>링크 복사하기</button>
                     <div className="buttonItem">
                     <CTA1ButtonOn onClick={handleClickEnter} text="입장하기"/>
                     </div>
                 </>
                 :
                 <>
-                <div className="subText">
-                    가족 구성원이 이미 가입하셨군요!
-                </div>
                     초대 코드를 입력해주세요 
                 </>
 
@@ -73,13 +69,13 @@ export default function CreatePlace(){
                 left: 0;
                 right: 0;
             }
+            .margin {
+                width: 10px;
+            }
             .groudId {
                 width: 350px;
                 height: 134px;
                 background: ${colors.grayWhite};
-            }
-            .subText {
-                color: ${colors.graySubTitle};
             }
         `}</style>
         </>

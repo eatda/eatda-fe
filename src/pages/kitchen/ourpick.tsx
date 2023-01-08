@@ -19,9 +19,7 @@ export default function OurPick(){
         <div className="bar" />
         <div className="container">
             맘스터치의 PICK!
-            <div className="margin">
-                <RecipeList type="right"/>
-            </div>
+            <RecipeList type="right"/>
         </div>
         <style jsx>{`
             .box {
