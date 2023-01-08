@@ -16,7 +16,7 @@ const sliderSettings = {
 export default function Home() {
   return (
     <>
-      <div>
+      <div className="container">
         <div className="header">
           <h2>Eat Da</h2>
           <button>character</button>
@@ -62,6 +62,11 @@ export default function Home() {
           display: flex;
           flex-direction: row;
           justify-content: space-between;
+        }
+        .container {
+          display: flex;
+          flex-direction: column;
+          width: 390px;
         }
       `}</style>
     </>

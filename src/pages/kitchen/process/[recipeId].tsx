@@ -13,26 +13,58 @@ interface Process {
   text: string;
   splitted?: string[];
 }
+// const ProcessData: Process[] = [
+//   {
+//     step: 1,
+//     ingredients: ["양상추", "오이", "계란"],
+//     text: "양상추와 오이는 먹기 좋은 크기로 자른 후, 삶은 계란도 자른다",
+//   },
+//   {
+//     step: 2,
+//     ingredients: ["새우"],
+//     text: "손질한 새우는 끓는 물에서 삶은 후 체에 받쳐 놓는다",
+//   },
+//   {
+//     step: 3,
+//     ingredients: ["올리브"],
+//     text: "올리브를 잘게 다진다",
+//   },
+//   {
+//     step: 4,
+//     ingredients: ["드레싱"],
+//     text: "드레싱 재료를 섞는다",
+//   },
+// ];
 const ProcessData: Process[] = [
   {
     step: 1,
-    ingredients: ["양상추", "오이", "계란"],
-    text: "양상추와 오이는 먹기 좋은 크기로 자른 후, 삶은 계란도 자른다",
+    ingredients: ["쌀가루 팬케이크"],
+    text: "쌀가루 팬케이크",
   },
   {
     step: 2,
-    ingredients: ["새우"],
-    text: "손질한 새우는 끓는 물에서 삶은 후 체에 받쳐 놓는다",
+    ingredients: ["쌀가루", "달걀", "우유", "설탕", "베이킹파우더"],
+    text: "볼에 쌀가루, 달걀, 우유, 설탕, 베이킹파우더를 넣고 덩어리지지 않게 잘 섞는다.",
   },
   {
     step: 3,
-    ingredients: ["올리브"],
-    text: "올리브를 잘게 다진다",
+    ingredients: ["식용유", "키친타월"],
+    text: "팬에 식용유를 살짝 두르고 키친타월로 닦아낸 뒤 팬케이크 반죽을 떠 넣어 굽는다. 반죽의 테두리 부분이 익어갈 때쯤 뒤집어 앞뒤로 노릇노릇하게 굽는다.",
   },
   {
     step: 4,
-    ingredients: ["드레싱"],
-    text: "드레싱 재료를 섞는다",
+    ingredients: ["치아시드 과일요거트"],
+    text: "치아시드 과일요거트",
+  },
+  {
+    step: 5,
+    ingredients: ["천도복숭아", "청포도"],
+    text: "천도복숭아는 꺠끗이 씻어 적당한 크기로 썰고, 청포도는 알알이 떼어 깨끗하게 씻는다",
+  },
+  {
+    step: 6,
+    ingredients: ["요구르트", "치아시드", "청포도", "천도 복숭아"],
+    text: "그릇에 요구르트와 치아시드를 담고 청포도와 천도 복숭아를 올린다.",
   },
 ];
 
@@ -104,6 +136,7 @@ export default function Process() {
           justify-content: center;
           margin-top: 60px;
           overflow: hidden;
+          width: 390px;
         }
         .process-box {
           background-color: white;
