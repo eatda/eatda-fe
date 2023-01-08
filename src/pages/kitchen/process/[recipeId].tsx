@@ -142,6 +142,7 @@ export default function Process() {
             infinite={false}
             arrows={false}
             focusOnSelect={true}
+            swipeToSlide={true}
             beforeChange={(slide, newSlide) => {
               setCurCard(newSlide);
             }}
