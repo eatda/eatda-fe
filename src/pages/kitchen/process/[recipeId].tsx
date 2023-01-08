@@ -1,6 +1,11 @@
 import { useRouter } from "next/router";
 import FooterButton from "../../../components/common/FooterButton";
 import Navigation from "../../../components/common/Navigation";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
+import { useState } from "react";
+import colors from "../../../../styles";
 
 interface Process {
   step: number;
@@ -33,6 +38,8 @@ const ProcessData: Process[] = [
 
 export default function Process() {
   const router = useRouter();
+
+  // 레시피 과정 데이터에서 재료만 골라서 하이라이트
   ProcessData.forEach((process) => {
     let regex_str = "";
     process.ingredients.forEach((ingredient) => {
@@ -44,26 +51,48 @@ export default function Process() {
     process.splitted = process.text.split(regex);
   });
 
+  const [curCard, setCurCard] = useState(0);
+
   return (
     <>
       <div>
         <Navigation text="상세정보" />
         <div className="container">
-          {ProcessData.map((process) => (
-            <div key={process.step} className="process-box">
-              <h2>{process.step}</h2>
-              <>
-                {process.splitted?.map((word, idx) => (
-                  <span key={idx}>
-                    {word}
-                    <span className="highlight">
-                      {process.ingredients[idx]}
+          <Slider
+            vertical={true}
+            verticalSwiping={true}
+            slidesToShow={4}
+            infinite={false}
+            arrows={false}
+            focusOnSelect={true}
+            beforeChange={(slide, newSlide) => {
+              setCurCard(newSlide);
+            }}
+          >
+            {ProcessData.map((process, idx) => (
+              <div
+                key={idx}
+                className={
+                  idx == curCard ? "process-box selected" : "process-box"
+                }
+              >
+                <h2>{process.step}</h2>
+                <>
+                  {process.splitted?.map((word, idx) => (
+                    <span key={idx}>
+                      {word}
+                      <span className="highlight">
+                        {process.ingredients[idx]}
+                      </span>
                     </span>
-                  </span>
-                ))}
-              </>
-            </div>
-          ))}
+                  ))}
+                </>
+              </div>
+            ))}
+            <div className="process-box blank">1</div>
+            <div className="process-box blank">2</div>
+            <div className="process-box blank">3</div>
+          </Slider>
         </div>
         <FooterButton text="요리 완료하기" path="/" />
       </div>
@@ -74,12 +103,19 @@ export default function Process() {
           gap: 8px;
           justify-content: center;
           margin-top: 60px;
+          overflow: hidden;
         }
         .process-box {
           background-color: white;
           width: 350px;
-          min-height: 176px;
+          min-height: 108px;
           border-radius: 4px;
+        }
+        .selected {
+          border: 1px solid ${colors.mainOrange};
+        }
+        .blank {
+          opacity: 0;
         }
         .highlight {
           color: tomato;
