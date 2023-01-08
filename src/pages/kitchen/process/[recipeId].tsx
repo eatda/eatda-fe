@@ -6,6 +6,7 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { useEffect, useState } from "react";
 import colors from "../../../../styles";
+import ProcessCard from "../../../components/recipe/ProcessCard";
 
 interface ProcessType {
   num: number;
@@ -17,10 +18,7 @@ interface Recipe {
   title: string;
   process: ProcessType[];
 }
-interface CardProps {
-  type: "title" | "step";
-  content: string | ProcessType;
-}
+type CardProps = string | ProcessType;
 const IngredientData = [
   { name: "쌀가루", amount: "2큰 술" },
   { name: "달걀", amount: "2큰 술" },
@@ -70,65 +68,29 @@ const RecipeData: Recipe[] = [
 ];
 
 const CardData: CardProps[] = [];
-// const ProcessData: Process[] = [
-//   {
-//     step: 1,
-//     ingredients: ["쌀가루 팬케이크"],
-//     text: "쌀가루 팬케이크",
-//   },
-//   {
-//     step: 2,
-//     ingredients: ["쌀가루", "달걀", "우유", "설탕", "베이킹파우더"],
-//     text: "볼에 쌀가루, 달걀, 우유, 설탕, 베이킹파우더를 넣고 덩어리지지 않게 잘 섞는다.",
-//   },
-//   {
-//     step: 3,
-//     ingredients: ["식용유", "키친타월"],
-//     text: "팬에 식용유를 살짝 두르고 키친타월로 닦아낸 뒤 팬케이크 반죽을 떠 넣어 굽는다. 반죽의 테두리 부분이 익어갈 때쯤 뒤집어 앞뒤로 노릇노릇하게 굽는다.",
-//   },
-//   {
-//     step: 4,
-//     ingredients: ["치아시드 과일요거트"],
-//     text: "치아시드 과일요거트",
-//   },
-//   {
-//     step: 5,
-//     ingredients: ["천도복숭아", "청포도"],
-//     text: "천도복숭아는 꺠끗이 씻어 적당한 크기로 썰고, 청포도는 알알이 떼어 깨끗하게 씻는다",
-//   },
-//   {
-//     step: 6,
-//     ingredients: ["요구르트", "치아시드", "청포도", "천도 복숭아"],
-//     text: "그릇에 요구르트와 치아시드를 담고 청포도와 천도 복숭아를 올린다.",
-//   },
-// ];
+
+// 레시피 과정 데이터에서 재료에 해당하는 단어 뽑아서 카드 데이터 넣기
+RecipeData.forEach((menu) => {
+  CardData.push(menu.title);
+
+  menu.process.forEach((step) => {
+    // 재료 단어들로 정규식 만들기
+    let regex_str = "";
+    step.ingredients.forEach((ingredient) => {
+      regex_str = regex_str + ingredient + "|";
+    });
+    regex_str = regex_str.slice(0, -1);
+    const regex = new RegExp(regex_str);
+
+    step.splitted = step.text.split(regex);
+
+    CardData.push(step);
+  });
+});
 
 export default function Process() {
   const router = useRouter();
   const [curCard, setCurCard] = useState(0);
-
-  useEffect(() => {
-    // 레시피 과정 데이터에서 재료에 해당하는 단어 뽑아서 카드 데이터 넣기
-    RecipeData.forEach((menu) => {
-      CardData.push({ type: "title", content: menu.title });
-
-      menu.process.forEach((step) => {
-        // 재료 단어들로 정규식 만들기
-        let regex_str = "";
-        step.ingredients.forEach((ingredient) => {
-          regex_str = regex_str + ingredient + "|";
-        });
-        regex_str = regex_str.slice(0, -1);
-        const regex = new RegExp(regex_str);
-
-        step.splitted = step.text.split(regex);
-
-        CardData.push({ type: "step", content: step });
-      });
-    });
-  }, []);
-
-  console.log(CardData);
 
   return (
     <>
@@ -147,36 +109,14 @@ export default function Process() {
               setCurCard(newSlide);
             }}
           >
-            {CardData.map(({ type, content }, idx) => (
+            {CardData.map((content, idx) => (
               <div key={idx}>
-                {typeof content == "string" ? (
-                  <div className="process-box">
-                    <h2>{content}</h2>
-                  </div>
-                ) : (
-                  <div
-                    className={
-                      idx == curCard ? "process-box selected" : "process-box"
-                    }
-                  >
-                    <h3>{content.num}</h3>
-                    <div>
-                      {content.splitted?.map((word, idx) => (
-                        <span key={idx}>
-                          {word}
-                          <span className="highlight">
-                            {content.ingredients[idx]}
-                          </span>
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                )}
+                <ProcessCard content={content} selected={curCard == idx} />
               </div>
             ))}
-            <div className="process-box blank">1</div>
-            <div className="process-box blank">2</div>
-            <div className="process-box blank">3</div>
+            <div className="blank">1</div>
+            <div className="blank">2</div>
+            <div className="blank">3</div>
           </Slider>
         </div>
         <FooterButton text="요리 완료하기" path="/" />
@@ -191,20 +131,8 @@ export default function Process() {
           overflow: hidden;
           width: 390px;
         }
-        .process-box {
-          background-color: white;
-          width: 350px;
-          min-height: 108px;
-          border-radius: 4px;
-        }
-        .selected {
-          border: 1px solid ${colors.mainOrange};
-        }
         .blank {
           opacity: 0;
-        }
-        .highlight {
-          color: tomato;
         }
       `}</style>
     </>
