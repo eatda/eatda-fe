@@ -1,9 +1,11 @@
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react"
-import { CTA1ButtonOn } from "../../components/common/Button";
+import React, { useEffect, useState } from "react"
+import { CTA1ButtonOn,CTA1ButtonOff,TextBoxOn } from "../../components/common/Button";
+import Navigation from "../../components/common/Navigation";
 
 export default function Signup(){
   const [page,setPage] = useState(0);
+  const [name, setName] = useState('');
   const router = useRouter();
 
   const handleClick = () => {
@@ -15,15 +17,29 @@ export default function Signup(){
     router.push('/signup/survey');
   }
 
-  useEffect(()=>{
+  const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    setName(e.target.value);
+    console.log(name)
+  }
+  // useEffect(()=>{
+  //   setTimeout(()=>{
+  //     let num = page;
+  //     setPage(++num);
+  //   },2000) 
+  // },[])
+
+  if (page === 0){
     setTimeout(()=>{
       let num = page;
       setPage(++num);
-    },2000) 
-  },[])
+    },2000)
+  }
 
   
   return(
+    <>
+    <Navigation text="프로필 설정"/>
     <div className="container">
       {
         page === 0 ?
@@ -35,6 +51,8 @@ export default function Signup(){
         page === 1 ?
         <>
         닉네임 설정해주세요
+        <TextBoxOn text="맘스터치" onChange={handleChange} value={name}/>
+        <br/><br/>
         </>
         :
         page === 2 ?
@@ -51,12 +69,15 @@ export default function Signup(){
       {
         page !== 0 && <CTA1ButtonOn text="다음" onClick={handleClick}/>
       }
+      {/* <CTA1ButtonOff text="다음"/> */}
       <style jsx>{`
 
         .container {
           width: 390px;
+          padding-top: 60px;
         }
       `}</style>
     </div>
+    </>
   )
 }

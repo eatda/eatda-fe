@@ -53,6 +53,7 @@ export default function CreatePlace(){
                     가족 구성원이 이미 가입하셨군요!
                 </div>
                     초대 코드를 입력해주세요 
+                    <input />
                 </>
 
             }

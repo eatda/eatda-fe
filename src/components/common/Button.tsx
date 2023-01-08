@@ -1,18 +1,24 @@
 import colors from "../../../styles";
 interface CTA1ButtonI {
-    text: string;
-    onClick: () => void;
+    text?: string;
+    onClick?: () => void;
 }
 
 interface CTA1ButtonSmallI {
-    textMain: string;
-    textSub: string;
-    onClick: () => void;
+    textMain?: string;
+    textSub?: string;
+    onClick?: () => void;
 }
 
 interface CTA2ButtonI {
-    text: string;
-    onClick: () => void;
+    text?: string;
+    onClick?: () => void;
+}
+
+interface TextBoxI {
+    text?: string;
+    onChange?: (e:React.ChangeEvent<HTMLInputElement>) => void;
+    value?: string;
 }
 
 const CTA1Source = `
@@ -29,6 +35,7 @@ const CTA2Source = `
     border-radius: 6px;
     color: white;
 `
+
 
 export function CTA1ButtonOn({onClick,text}:CTA1ButtonI){
     return(
@@ -137,4 +144,33 @@ export function CTA2ButtonOff({onClick,text}:CTA2ButtonI){
     )
 }
 
-export default {CTA1ButtonOff, CTA1ButtonOn, CTA1ButtonOnSmall, CTA1ButtonOffSmall, CTA2ButtonOff, CTA2ButtonOn};
+export function TextBoxOn({text, onChange, value} : TextBoxI){
+    return(
+        <>
+        <input
+        placeholder={text}
+        onChange={onChange}
+        value={value}
+        />
+        <style jsx>{`
+        input {
+            width: 350px;
+            border: none;
+            border-bottom: 2px solid ${colors.mainOrange};
+            background: none;
+            text-align: center;
+        }
+        `}</style>
+        </>
+    )
+}
+
+export default {
+    CTA1ButtonOff, 
+    CTA1ButtonOn, 
+    CTA1ButtonOnSmall, 
+    CTA1ButtonOffSmall, 
+    CTA2ButtonOff, 
+    CTA2ButtonOn,
+    TextBoxOn
+};
