@@ -1,14 +1,19 @@
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react"
 import { CTA1ButtonOn } from "../../components/common/Button";
 
 export default function Signup(){
   const [page,setPage] = useState(0);
+  const router = useRouter();
 
   const handleClick = () => {
     let num = page;
     setPage(++num);
   }
 
+  const handleClickSugar = () => {
+    router.push('/signup/survey');
+  }
 
   useEffect(()=>{
     setTimeout(()=>{
@@ -18,8 +23,6 @@ export default function Signup(){
   },[])
 
   
-
-
   return(
     <div className="container">
       {
@@ -41,6 +44,8 @@ export default function Signup(){
         :
         <>
         당뇨인이신가요?
+        <CTA1ButtonOn text="네, 당뇨인이에요" onClick={handleClickSugar}/>
+        <CTA1ButtonOn text="아니요, 당뇨인 가족이에요" onClick={handleClick}/>
         </>
       }
       {
