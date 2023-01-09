@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import Navigation from "../../components/common/Navigation";
+import FilterButton from "../../components/filter/FilterButton";
 
-interface FilterType {
+export interface FilterType {
   id: number;
   name: string;
   filter_category_id: number;
+  selected?: boolean;
 }
 interface FilterDataType {
   filter_category: { id: number; name: string };
@@ -55,8 +57,7 @@ export default function Filter() {
     new Set()
   );
 
-  const clickFilter = (selected: boolean | undefined, filter: FilterType) => {
-    // filter.selected = filter.selected ? false : true;
+  const clickFilter = (selected: boolean, filter: FilterType) => {
     if (selected) {
       selectedFilter.delete(filter);
       setSelectedFilter(selectedFilter);
@@ -73,22 +74,26 @@ export default function Filter() {
         <div className="content">
           {FilterData.map((category) => (
             <div key={category.filter_category.id} className="category">
-              <h5>{category.filter_category.name}</h5>
-              {category.filter.map((filter) => (
-                <button
-                  key={filter.id}
-                  onClick={(e) =>
-                    clickFilter(selectedFilter.has(filter), filter)
-                  }
-                >
-                  {filter.name}
-                </button>
-              ))}
+              <h2>{category.filter_category.name}</h2>
+              <div className="filters">
+                {category.filter.map((filter) => (
+                  <FilterButton
+                    key={filter.id}
+                    filter={filter}
+                    clickFilter={clickFilter}
+                  />
+                ))}
+              </div>
             </div>
           ))}
         </div>
       </div>
-      <style jsx>{``}</style>
+      <style jsx>{`
+        .filters {
+          display: flex;
+          flex-direction: row;
+        }
+      `}</style>
     </>
   );
 }
