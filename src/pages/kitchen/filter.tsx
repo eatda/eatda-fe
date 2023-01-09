@@ -1,14 +1,17 @@
+import { useEffect, useState } from "react";
 import Navigation from "../../components/common/Navigation";
 
+interface FilterType {
+  id: number;
+  name: string;
+  filter_category_id: number;
+  selected?: boolean;
+}
 interface FilterDataType {
   filter_category: { id: number; name: string };
-  filter: {
-    id: number;
-    name: string;
-    filter_category_id: number;
-    selected?: boolean;
-  }[];
+  filter: FilterType[];
 }
+
 const FilterData: FilterDataType[] = [
   {
     filter_category: {
@@ -49,6 +52,19 @@ const FilterData: FilterDataType[] = [
 ];
 
 export default function Filter() {
+  const [selectedFilter, setSelectedFilter] = useState<Set<FilterType>>(
+    new Set()
+  );
+
+  const clickFilter = (selected: boolean | undefined, filter: FilterType) => {
+    filter.selected = filter.selected ? false : true;
+    if (selected) {
+      console.log("delete: ", filter);
+    } else {
+      setSelectedFilter(selectedFilter.add(filter));
+    }
+  };
+
   return (
     <>
       <div className="container">
@@ -58,13 +74,38 @@ export default function Filter() {
             <div key={category.filter_category.id} className="category">
               <h5>{category.filter_category.name}</h5>
               {category.filter.map((filter) => (
-                <button key={filter.id}>{filter.name}</button>
+                <button
+                  key={filter.id}
+                  onClick={() => clickFilter(filter.selected, filter)}
+                  className={filter.selected ? "selected" : "not-selected"}
+                >
+                  {filter.name}
+                </button>
               ))}
             </div>
           ))}
         </div>
+        <button
+          onClick={() => {
+            console.log(
+              "🚀 ~ file: filter.tsx:56 ~ Filter ~ selected",
+              selectedFilter
+            );
+          }}
+        >
+          fkfkfk
+        </button>
       </div>
-      <style jsx>{``}</style>
+      <style jsx>{`
+        .selected {
+          background-color: black;
+          color: white;
+        }
+        .not-selected {
+          background-color: white
+          color: black;
+        }
+      `}</style>
     </>
   );
 }
