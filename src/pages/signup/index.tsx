@@ -6,22 +6,34 @@ import Navigation from "../../components/common/Navigation";
 export default function Signup(){
   const [page,setPage] = useState(0);
   const [name, setName] = useState('');
+  const [character,setCharacter] = useState(0);
+  const [sugar,setSugar] = useState(true);
   const router = useRouter();
 
   const handleClick = () => {
     let num = page;
     setPage(++num);
+    if(page>3){
+      router.push('/signup/loading');
+    }
   }
 
   const handleClickSugar = () => {
+    setSugar(true)
     router.push('/signup/survey');
   }
+
+  const handleClickCharacter = (e:React.MouseEvent<HTMLButtonElement>) => {
+    setCharacter(Number(e.currentTarget.value))
+  }
+
 
   const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     setName(e.target.value);
     console.log(name)
   }
+
   // useEffect(()=>{
   //   setTimeout(()=>{
   //     let num = page;
@@ -35,6 +47,25 @@ export default function Signup(){
       setPage(++num);
     },2000)
   }
+
+  const characters = [
+    {
+      id: 1,
+
+    },
+    {
+      id: 2,
+
+    },
+    {
+      id: 3,
+
+    },
+    {
+      id: 4,
+
+    }
+  ]
 
   
   return(
@@ -58,6 +89,17 @@ export default function Signup(){
         page === 2 ?
         <>
         활동 캐릭터를 설정해주세요.
+        {
+          characters.map((v,idx)=>{
+            return(
+              <div key = {idx}>
+              <button onClick={handleClickCharacter} value={v.id}>
+                {v.id}
+              </button>
+              </div>
+            )
+          })
+        }
         </>
         :
         <>
