@@ -9,8 +9,9 @@ interface CTA1ButtonI {
 interface CTA1ButtonSmallI {
     textMain?: string;
     textSub?: string;
-    onClick?: () => void;
+    onClick?: React.MouseEventHandler<HTMLButtonElement>;
     active? : boolean;
+    value?: string;
 }
 
 interface CTA2ButtonI {
@@ -58,10 +59,10 @@ export function CTA1Button({onClick,text,active,value}:CTA1ButtonI){
     )
 }
 
-export function CTA1ButtonSmall({onClick,textMain,textSub,active}:CTA1ButtonSmallI){
+export function CTA1ButtonSmall({onClick,textMain,textSub,active,value}:CTA1ButtonSmallI){
     return(
         <>
-        <button onClick={onClick}>
+        <button onClick={onClick} value={value}>
             {textMain}
             <div className="sub">
             {textSub}

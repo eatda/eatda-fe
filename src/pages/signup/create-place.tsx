@@ -8,16 +8,20 @@ export default function CreatePlace(){
     const router = useRouter();
     const [page,setPage] = useState(0);
 
-    const handleClickNo = () => {
-        setPage(2);
-    }
-
-    const handleClickYes = () => {
-        setPage(1);
-    }
-
-    const handleClickEnter = () => {
-        router.push('/signup')
+    const handleClick = (e:React.MouseEvent<HTMLButtonElement>) => {
+        switch (e.currentTarget.value) {
+            case "true":
+                setPage(prevNumber => prevNumber +1);
+                break;
+            case "false":
+                router.replace('/signup/enter-place');
+                break;
+            case "enter":
+                router.replace('/signup');
+                break;
+            default:
+                break;
+        }
     }
 
     return (
@@ -29,12 +33,11 @@ export default function CreatePlace(){
                 <>
                     가족 중 최초로 가입하셨나요?
                     <div className="buttonItem">
-                    <CTA1ButtonSmall active={true} onClick={handleClickYes} textMain="네" textSub="가족 공간 생성"/>
-                    <CTA1ButtonSmall active={true} onClick={handleClickNo} textMain="아니오" textSub="가족 공간 들어가기"/>
+                    <CTA1ButtonSmall active={true} value="true" onClick={handleClick} textMain="네" textSub="가족 공간 생성"/>
+                    <CTA1ButtonSmall active={true} value="false" onClick={handleClick} textMain="아니오" textSub="가족 공간 들어가기"/>
                     </div>
                 </>
                 :
-                page === 1 ?
                 <>
                     우리 가족만을 위한 집을<br/>
                     새로 만들었어요!
@@ -44,16 +47,8 @@ export default function CreatePlace(){
                     </div>
                     <button>링크 복사하기</button>
                     <div className="buttonItem">
-                    <CTA1Button active={true} onClick={handleClickEnter} text="입장하기"/>
+                    <CTA1Button active={true} value="enter" onClick={handleClick} text="입장하기"/>
                     </div>
-                </>
-                :
-                <>
-                <div className="subText">
-                    가족 구성원이 이미 가입하셨군요!
-                </div>
-                    초대 코드를 입력해주세요 
-                    <input />
                 </>
 
             }
