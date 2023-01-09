@@ -53,7 +53,16 @@ export default function Filter() {
     <>
       <div className="container">
         <Navigation text={"필터"} />
-        <div className="content"></div>
+        <div className="content">
+          {FilterData.map((category) => (
+            <div key={category.filter_category.id} className="category">
+              <h5>{category.filter_category.name}</h5>
+              {category.filter.map((filter) => (
+                <button key={filter.id}>{filter.name}</button>
+              ))}
+            </div>
+          ))}
+        </div>
       </div>
       <style jsx>{``}</style>
     </>
