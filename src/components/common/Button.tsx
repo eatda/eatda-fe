@@ -1,8 +1,9 @@
 import colors from "../../../styles";
 interface CTA1ButtonI {
     text?: string;
-    onClick?: () => void;
+    onClick?: React.MouseEventHandler<HTMLButtonElement>;
     active?: boolean;
+    value?: string;
 }
 
 interface CTA1ButtonSmallI {
@@ -40,10 +41,10 @@ const CTA2Source = `
 `
 
 
-export function CTA1Button({onClick,text,active}:CTA1ButtonI){
+export function CTA1Button({onClick,text,active,value}:CTA1ButtonI){
     return(
         <>
-        <button onClick={onClick}>
+        <button onClick={onClick} value={value}>
             {text}
         </button>
         <style jsx>{`
