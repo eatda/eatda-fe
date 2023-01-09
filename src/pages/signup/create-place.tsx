@@ -1,6 +1,6 @@
 import { useRouter } from "next/router"
 import { useState } from "react";
-import { CTA1ButtonOnSmall, CTA1ButtonOn } from "../../components/common/Button"
+import { CTA1ButtonSmall, CTA1Button } from "../../components/common/Button"
 import Navigation from "../../components/common/Navigation"
 import colors from "../../../styles";
 
@@ -29,8 +29,8 @@ export default function CreatePlace(){
                 <>
                     가족 중 최초로 가입하셨나요?
                     <div className="buttonItem">
-                    <CTA1ButtonOnSmall onClick={handleClickYes} textMain="네" textSub="가족 공간 생성"/>
-                    <CTA1ButtonOnSmall onClick={handleClickNo} textMain="아니오" textSub="가족 공간 들어가기"/>
+                    <CTA1ButtonSmall active={true} onClick={handleClickYes} textMain="네" textSub="가족 공간 생성"/>
+                    <CTA1ButtonSmall active={true} onClick={handleClickNo} textMain="아니오" textSub="가족 공간 들어가기"/>
                     </div>
                 </>
                 :
@@ -44,7 +44,7 @@ export default function CreatePlace(){
                     </div>
                     <button>링크 복사하기</button>
                     <div className="buttonItem">
-                    <CTA1ButtonOn onClick={handleClickEnter} text="입장하기"/>
+                    <CTA1Button active={true} onClick={handleClickEnter} text="입장하기"/>
                     </div>
                 </>
                 :
