@@ -5,7 +5,6 @@ interface FilterType {
   id: number;
   name: string;
   filter_category_id: number;
-  selected?: boolean;
 }
 interface FilterDataType {
   filter_category: { id: number; name: string };
@@ -57,12 +56,14 @@ export default function Filter() {
   );
 
   const clickFilter = (selected: boolean | undefined, filter: FilterType) => {
-    filter.selected = filter.selected ? false : true;
+    // filter.selected = filter.selected ? false : true;
     if (selected) {
-      console.log("delete: ", filter);
+      selectedFilter.delete(filter);
+      setSelectedFilter(selectedFilter);
     } else {
       setSelectedFilter(selectedFilter.add(filter));
     }
+    console.log(selectedFilter);
   };
 
   return (
@@ -76,8 +77,9 @@ export default function Filter() {
               {category.filter.map((filter) => (
                 <button
                   key={filter.id}
-                  onClick={() => clickFilter(filter.selected, filter)}
-                  className={filter.selected ? "selected" : "not-selected"}
+                  onClick={(e) =>
+                    clickFilter(selectedFilter.has(filter), filter)
+                  }
                 >
                   {filter.name}
                 </button>
@@ -85,27 +87,8 @@ export default function Filter() {
             </div>
           ))}
         </div>
-        <button
-          onClick={() => {
-            console.log(
-              "🚀 ~ file: filter.tsx:56 ~ Filter ~ selected",
-              selectedFilter
-            );
-          }}
-        >
-          fkfkfk
-        </button>
       </div>
-      <style jsx>{`
-        .selected {
-          background-color: black;
-          color: white;
-        }
-        .not-selected {
-          background-color: white
-          color: black;
-        }
-      `}</style>
+      <style jsx>{``}</style>
     </>
   );
 }
