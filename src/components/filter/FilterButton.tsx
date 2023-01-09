@@ -1,4 +1,6 @@
+import Image from "next/image";
 import { useState } from "react";
+import colors from "../../../styles";
 import { FilterType } from "../../pages/kitchen/filter";
 
 interface FilterButtonProps {
@@ -14,7 +16,7 @@ export default function FilterButton({
   return (
     <>
       <div className="container">
-        <button
+        <div
           key={filter.id}
           onClick={() => {
             setSelected(!selected);
@@ -22,19 +24,35 @@ export default function FilterButton({
           }}
           className={selected ? "selected" : "not-selected"}
         >
-          {filter.name}
-        </button>
+          <div className="icon">
+            <Image
+              src={"/tabbar/home_empty.svg"}
+              alt={"icon"}
+              width={48}
+              height={48}
+            />
+          </div>
+          <div className="name-text">{filter.name}</div>
+        </div>
       </div>
       <style jsx>{`
-      .selected {
-          background-color: black;
+        .container {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 48px;
+          height: 80px;
+        }
+        .selected .icon {
+          background-color: ${colors.mainOrange};
+          border-radius: 50%;
           color: white;
         }
         .not-selected {
-          background-color: white
+          background-color: white;
           color: black;
         }
-    `}</style>
+      `}</style>
     </>
   );
 }
