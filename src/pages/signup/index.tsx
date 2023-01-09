@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react"
-import { CTA1ButtonOn,CTA1ButtonOff,TextBoxOn } from "../../components/common/Button";
+import { CTA1Button,TextBoxOn } from "../../components/common/Button";
 import Navigation from "../../components/common/Navigation";
 
 export default function Signup(){
@@ -14,13 +14,14 @@ export default function Signup(){
     let num = page;
     setPage(++num);
     if(page>3){
-      router.push('/signup/loading');
+      setSugar(false);
+      router.replace('/signup/loading');
     }
   }
 
   const handleClickSugar = () => {
     setSugar(true)
-    router.push('/signup/survey');
+    router.replace('/signup/survey');
   }
 
   const handleClickCharacter = (e:React.MouseEvent<HTMLButtonElement>) => {
@@ -104,12 +105,12 @@ export default function Signup(){
         :
         <>
         당뇨인이신가요?
-        <CTA1ButtonOn text="네, 당뇨인이에요" onClick={handleClickSugar}/>
-        <CTA1ButtonOn text="아니요, 당뇨인 가족이에요" onClick={handleClick}/>
+        <CTA1Button active={true} text="네, 당뇨인이에요" onClick={handleClickSugar}/>
+        <CTA1Button active={true} text="아니요, 당뇨인 가족이에요" onClick={handleClick}/>
         </>
       }
       {
-        page !== 0 && <CTA1ButtonOn text="다음" onClick={handleClick}/>
+        page !== 0 && <CTA1Button active={true} text="다음" onClick={handleClick}/>
       }
       {/* <CTA1ButtonOff text="다음"/> */}
       <style jsx>{`

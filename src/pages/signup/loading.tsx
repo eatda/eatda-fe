@@ -1,5 +1,5 @@
 import { useRouter } from "next/router"
-import { CTA1ButtonOn } from "../../components/common/Button"
+import { CTA1Button } from "../../components/common/Button"
 export default function Loading(){
     const router = useRouter();
     const handleClick = () => {
@@ -8,7 +8,7 @@ export default function Loading(){
     return(
         <>
         Loading page
-        <CTA1ButtonOn text="식단 만들러 가기" onClick={handleClick}/>
+        <CTA1Button active={true} text="식단 만들러 가기" onClick={handleClick}/>
         </>
     )
 }

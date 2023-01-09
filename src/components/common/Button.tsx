@@ -2,17 +2,20 @@ import colors from "../../../styles";
 interface CTA1ButtonI {
     text?: string;
     onClick?: () => void;
+    active?: boolean;
 }
 
 interface CTA1ButtonSmallI {
     textMain?: string;
     textSub?: string;
     onClick?: () => void;
+    active? : boolean;
 }
 
 interface CTA2ButtonI {
     text?: string;
     onClick?: () => void;
+    active? : boolean;
 }
 
 interface TextBoxI {
@@ -37,7 +40,7 @@ const CTA2Source = `
 `
 
 
-export function CTA1ButtonOn({onClick,text}:CTA1ButtonI){
+export function CTA1Button({onClick,text,active}:CTA1ButtonI){
     return(
         <>
         <button onClick={onClick}>
@@ -47,31 +50,14 @@ export function CTA1ButtonOn({onClick,text}:CTA1ButtonI){
         button {
             ${CTA1Source}
             width: 350px;
-            background: ${colors.mainOrange};
+            background: ${active ? colors.mainOrange : colors.grayBackgroundSub};
         }
         `}</style>
         </>
     )
 }
 
-export function CTA1ButtonOff({onClick,text}:CTA1ButtonI){
-    return(
-        <>
-        <button onClick={onClick}>
-            {text}
-        </button>
-        <style jsx>{`
-        button {
-            ${CTA1Source}
-            width: 350px;
-            background: ${colors.grayBackgroundSub};
-        }
-        `}</style>
-        </>
-    )
-}
-
-export function CTA1ButtonOnSmall({onClick,textMain,textSub}:CTA1ButtonSmallI){
+export function CTA1ButtonSmall({onClick,textMain,textSub,active}:CTA1ButtonSmallI){
     return(
         <>
         <button onClick={onClick}>
@@ -84,7 +70,7 @@ export function CTA1ButtonOnSmall({onClick,textMain,textSub}:CTA1ButtonSmallI){
         button {
             ${CTA1Source}
             width: 170px;
-            background: ${colors.mainOrange};
+            background: ${active ? colors.mainOrange : colors.grayBackgroundSub};
             margin: 5px;
         }
         .sub {
@@ -95,24 +81,8 @@ export function CTA1ButtonOnSmall({onClick,textMain,textSub}:CTA1ButtonSmallI){
     )
 }
 
-export function CTA1ButtonOffSmall({onClick,text}:CTA1ButtonI){
-    return(
-        <>
-        <button onClick={onClick}>
-            {text}
-        </button>
-        <style jsx>{`
-        button {
-            ${CTA1Source}
-            width: 170px;
-            background: ${colors.grayBackgroundSub};
-        }
-        `}</style>
-        </>
-    )
-}
 
-export function CTA2ButtonOn({onClick,text}:CTA2ButtonI){
+export function CTA2Button({onClick,text,active}:CTA2ButtonI){
     return(
         <>
         <button onClick={onClick}>
@@ -121,28 +91,13 @@ export function CTA2ButtonOn({onClick,text}:CTA2ButtonI){
         <style jsx>{`
         button {
             ${CTA2Source}
-            background: ${colors.mainOrange};
+            background: ${active ? colors.mainOrange : colors.grayBackgroundSub};
         }
         `}</style>
         </>
     )
 }
 
-export function CTA2ButtonOff({onClick,text}:CTA2ButtonI){
-    return(
-        <>
-        <button onClick={onClick}>
-        {text}
-        </button>
-        <style jsx>{`
-        button {
-            ${CTA2Source}
-            background: ${colors.grayBackgroundSub};
-        }
-        `}</style>
-        </>
-    )
-}
 
 export function TextBoxOn({text, onChange, value} : TextBoxI){
     return(
@@ -166,11 +121,8 @@ export function TextBoxOn({text, onChange, value} : TextBoxI){
 }
 
 export default {
-    CTA1ButtonOff, 
-    CTA1ButtonOn, 
-    CTA1ButtonOnSmall, 
-    CTA1ButtonOffSmall, 
-    CTA2ButtonOff, 
-    CTA2ButtonOn,
+    CTA1Button, 
+    CTA1ButtonSmall, 
+    CTA2Button, 
     TextBoxOn
 };
