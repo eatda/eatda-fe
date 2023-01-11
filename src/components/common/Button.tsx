@@ -2,7 +2,7 @@ import colors from "../../../styles";
 interface CTA1ButtonI {
     text?: string;
     onClick?: React.MouseEventHandler<HTMLButtonElement>;
-    active?: boolean;
+    active?: boolean | null;
     value?: string;
 }
 
@@ -24,6 +24,8 @@ interface TextBoxI {
     text?: string;
     onChange?: (e:React.ChangeEvent<HTMLInputElement>) => void;
     value?: string;
+    active?: boolean;
+    unit?: string;
 }
 
 const CTA1Source = `
@@ -53,6 +55,25 @@ export function CTA1Button({onClick,text,active,value}:CTA1ButtonI){
             ${CTA1Source}
             width: 350px;
             background: ${active ? colors.mainOrange : colors.grayBackgroundSub};
+        }
+        `}</style>
+        </>
+    )
+}
+
+export function CTA1ButtonSelect({onClick,text,active,value}:CTA1ButtonI){
+    return(
+        <>
+        <button onClick={onClick} value={value}>
+            {text}
+        </button>
+        <style jsx>{`
+        button {
+            ${CTA1Source}
+            width: 350px;
+            background: ${active ? colors.mainOrange : colors.grayWhite};
+            border: 1px solid ${active ? "none" : colors.grayBackgroundSub};
+            color: ${active ? colors.grayWhite : colors.graySubTitle};
         }
         `}</style>
         </>
@@ -101,7 +122,7 @@ export function CTA2Button({onClick,text,active}:CTA2ButtonI){
 }
 
 
-export function TextBoxOn({text, onChange, value} : TextBoxI){
+export function TextBox2({text, onChange, value, active, unit} : TextBoxI){
     return(
         <>
         <input
@@ -109,11 +130,13 @@ export function TextBoxOn({text, onChange, value} : TextBoxI){
         onChange={onChange}
         value={value}
         />
+        {unit}
         <style jsx>{`
         input {
-            width: 350px;
+            width: ${unit ? "320px" : "350px"};
             border: none;
-            border-bottom: 2px solid ${colors.mainOrange};
+            color: ${active ? colors.grayMainTitle : colors.grayBackgroundSub};
+            border-bottom: 2px solid ${active ? colors.mainOrange : colors.grayBackgroundSub};
             background: none;
             text-align: center;
         }
@@ -126,5 +149,6 @@ export default {
     CTA1Button, 
     CTA1ButtonSmall, 
     CTA2Button, 
-    TextBoxOn
+    CTA1ButtonSelect,
+    TextBox2
 };

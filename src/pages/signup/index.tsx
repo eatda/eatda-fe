@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import React, { useEffect, useState, useRef } from "react"
-import { CTA1Button,TextBoxOn } from "../../components/common/Button";
+import { CTA1Button, TextBox2, CTA1ButtonSelect } from "../../components/common/Button";
 import Navigation from "../../components/common/Navigation";
 
 
@@ -8,7 +8,7 @@ export default function Signup(){
   const [page,setPage] = useState(0);
   const [name, setName] = useState('');
   const [character,setCharacter] = useState(0);
-  const [sugar,setSugar] = useState(true);
+  const [sugar,setSugar] = useState<boolean | null>(null);
   const router = useRouter();
   
   const characters = [
@@ -80,7 +80,7 @@ export default function Signup(){
         return (
           <>
           닉네임 설정해주세요
-          <TextBoxOn text="맘스터치" onChange={handleChange} value={name}/>
+          <TextBox2 text="맘스터치" onChange={handleChange} value={name}/>
           <br/><br/>
           </>
         )
@@ -105,8 +105,8 @@ export default function Signup(){
         return(
           <>
           당뇨인이신가요?
-          <CTA1Button active={true} value="true" text="네, 당뇨인이에요" onClick={handleClick}/>
-          <CTA1Button active={true} value="false" text="아니요, 당뇨인 가족이에요" onClick={handleClick}/>
+          <CTA1ButtonSelect active={sugar === null ? false : sugar} value="true" text="네, 당뇨인이에요" onClick={handleClick}/>
+          <CTA1ButtonSelect active={sugar === null ? false : !sugar} value="false" text="아니요, 당뇨인 가족이에요" onClick={handleClick}/>
           </>
         )
     }
