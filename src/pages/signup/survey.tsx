@@ -186,13 +186,26 @@ export default function Survey(){
         <div className="container">
         {getPage(page)}
         <br/>
+        <div className="buttonItem">
         <CTA1Button text="다음" active={true} onClick={handleClickNext}/>
+        </div>
         </div>
         <style jsx>{`
         .container {
-          width: 390px;
-          padding-top: 60px;
+            width: 390px;
+            min-height: 800px;
+            padding-top: 60px;
         }
+        .buttonItem {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 60px;
+            position: fixed;
+            bottom: 36px;
+            left: 0;
+            right: 0;
+          }
         `}</style>
         </>
     )

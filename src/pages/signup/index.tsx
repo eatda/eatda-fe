@@ -117,13 +117,26 @@ export default function Signup(){
     <Navigation text="프로필 설정"/>
     <div className="container">
       {getPage(page)}
+      <div className="buttonItem">
       {
         page !== 0 && <CTA1Button active={true} text="다음" onClick={handleClickNext}/>
       }
+      </div>
       <style jsx>{`
         .container {
           width: 390px;
+          min-height: 800px;
           padding-top: 60px;
+        }
+        .buttonItem {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 60px;
+          position: fixed;
+          bottom: 36px;
+          left: 0;
+          right: 0;
         }
       `}</style>
     </div>
