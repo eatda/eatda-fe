@@ -1,3 +1,4 @@
+import { ValueOf } from "next/dist/shared/lib/constants";
 import colors from "../../../styles";
 interface CTA1ButtonI {
     text?: string;
@@ -26,6 +27,23 @@ interface TextBoxI {
     value?: string;
     active?: boolean;
     unit?: string;
+}
+
+interface RadioBoxI {
+    name?: string;
+    value?: number;
+    mainText?: string;
+    subText?: string;
+    select?: boolean;
+    onChange?: (e:React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+interface CheckBoxI {
+    name?: string;
+    value?: number;
+    text?: string;
+    select?: boolean;
+    onChange?: (e:React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const CTA1Source = `
@@ -135,13 +153,65 @@ export function TextBox2({text, onChange, value, active, unit} : TextBoxI){
         input {
             width: ${unit ? "320px" : "350px"};
             border: none;
-            color: ${active ? colors.grayMainTitle : colors.grayBackgroundSub};
-            border-bottom: 2px solid ${active ? colors.mainOrange : colors.grayBackgroundSub};
+            color: ${ value === "" ? colors.grayBackgroundSub : colors.grayMainTitle};
+            border-bottom: 2px solid ${colors.grayBackgroundSub};
             background: none;
             text-align: center;
+            outline: none;
+        }
+        input:focus {
+            border-bottom: 2px solid ${colors.mainOrange};
         }
         `}</style>
         </>
+    )
+}
+
+export function RadioBox({name, value, mainText, subText, select, onChange}:RadioBoxI){
+    return(
+        <div className="container">
+        {mainText}
+        {subText}
+        <input 
+        type="radio"
+        name={name}
+        value={value}
+        onChange={onChange}
+        />
+        <style jsx>{`
+        .container {
+            width: 350px;
+            height: 80px;
+            background: ${ select ? colors.mainOrange : "none"};
+            color: ${ select ? colors.grayWhite : colors.graySubTitle};
+            border: 1px solid ${colors.grayBackgroundSub};
+            border-radius: 4px;
+        }
+        `}</style>
+        </div>
+    )
+}
+
+export function CheckBox({name, text, value, select, onChange}:CheckBoxI){
+    return(
+        <div className="container">
+        {text}
+        <input
+        type="checkbox"
+        name={name}
+        value={value}
+        onChange={onChange}
+        />
+        <style jsx>{`
+        .container {
+            width: 350px;
+            height: 54px;
+            background: ${ select ? colors.mainOrange : "none"};
+            color: ${ select ? colors.grayWhite : colors.graySubTitle};
+            border: 1px solid ${colors.grayBackgroundSub};
+        }
+        `}</style>
+        </div>
     )
 }
 
@@ -150,5 +220,6 @@ export default {
     CTA1ButtonSmall, 
     CTA2Button, 
     CTA1ButtonSelect,
-    TextBox2
+    TextBox2,
+    RadioBox
 };
