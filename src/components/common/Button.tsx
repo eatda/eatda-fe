@@ -3,8 +3,8 @@ import colors from "../../../styles";
 interface CTA1ButtonI {
     text?: string;
     onClick?: React.MouseEventHandler<HTMLButtonElement>;
-    active?: boolean | null;
-    value?: string;
+    active?: boolean;
+    value?: string | number;
 }
 
 interface CTA1ButtonSmallI {
@@ -65,9 +65,16 @@ const CTA2Source = `
 export function CTA1Button({onClick,text,active,value}:CTA1ButtonI){
     return(
         <>
-        <button onClick={onClick} value={value}>
-            {text}
-        </button>
+        {
+            active ?
+            <button onClick={onClick} value={value} >
+                {text}
+            </button>
+            :
+            <button onClick={onClick} value={value} disabled>
+                {text}
+            </button>
+        }
         <style jsx>{`
         button {
             ${CTA1Source}

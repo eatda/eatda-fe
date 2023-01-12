@@ -3,37 +3,53 @@ import React, { useEffect, useState, useRef } from "react"
 import { CTA1Button, TextBox2, CTA1ButtonSelect } from "../../components/common/Button";
 import Navigation from "../../components/common/Navigation";
 
+const characters = [
+  {
+    id: 1,
+    name:'11'
+  },
+  {
+    id: 2,
+    name: '22'
+  },
+  {
+    id: 3,
+    name: '33'
+  },
+  {
+    id: 4,
+    name: '44'
+  }
+]
+
+interface formI {
+  name: string;
+  character: number;
+  sugar: null | boolean;
+}
 
 export default function Signup(){
-  const [page,setPage] = useState(0);
-  const [name, setName] = useState('');
-  const [character,setCharacter] = useState(0);
-  const [sugar,setSugar] = useState<boolean | null>(null);
   const router = useRouter();
+  const [page,setPage] = useState(0);
   
-  const characters = [
-    {
-      id: 1,
+  const [form, setForm] = useState<formI>({
+    name: '',
+    character: -1,
+    sugar: null
+  })
 
-    },
-    {
-      id: 2,
-
-    },
-    {
-      id: 3,
-
-    },
-    {
-      id: 4,
-
-    }
-  ]
+  // 유효성 검사
+  const [isValid, setIsValid] = useState({
+    nameValid: false,
+    characterValid: false,
+    sugarValid: false
+  })
 
   const handleClickNext = () => {
     setPage(prevNumber => prevNumber + 1);
     if(page>=3){
-      sugar ?
+      console.log(form.name, form.character, form.sugar)
+      form.sugar ?
       router.replace('/signup/survey')
       :
       router.replace('/signup/loading');
@@ -47,18 +63,41 @@ export default function Signup(){
       case 1 :
         break;
       case 2 :
-        setCharacter(Number(e.currentTarget.value));
+        const valueCharacter = Number(e.currentTarget.value);
+        setForm({...form, character: valueCharacter});
+
+        // 유효성 검사
+        if(valueCharacter <0){
+          setIsValid({...isValid, characterValid: false})
+        }else{
+          setIsValid({...isValid, characterValid: true})
+        }
         break;
       case 3 :
-        const value = e.currentTarget.value === 'true' ? true : false;
-        setSugar(value);
+        const valueSugar = e.currentTarget.value === 'true' ? true : false;
+        setForm({...form, sugar: valueSugar});
+
+        // 유효성 검사
+        if(valueSugar === null){
+          setIsValid({...isValid, sugarValid: false});
+        }else{
+          setIsValid({...isValid, sugarValid: true});
+        }
         break;
     }
   }
 
   const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-    setName(e.target.value);
+    const value = e.target.value;
+    setForm({...form, name: value});
+
+    //유효성 검사
+    if(value.length < 1 || value.length > 12) {
+      setIsValid({...isValid, nameValid: false});
+    }else{
+      setIsValid({...isValid, nameValid: true});
+    }
   }
 
   if (page === 0){
@@ -80,7 +119,9 @@ export default function Signup(){
         return (
           <>
           닉네임 설정해주세요
-          <TextBox2 text="맘스터치" onChange={handleChange} value={name}/>
+          <TextBox2 text="맘스터치" onChange={handleChange} value={form.name}/>
+          <br/>
+          최대 12자
           <br/><br/>
           </>
         )
@@ -92,9 +133,12 @@ export default function Signup(){
             characters.map((v,idx)=>{
               return(
                 <div key = {idx}>
-                <button onClick={handleClick} value={v.id}>
-                  {v.id}
-                </button>
+                <CTA1ButtonSelect
+                active={form.character === v.id ? true : false}
+                onClick={handleClick}
+                text={v.name}
+                value={v.id}
+                />
                 </div>
               )
             })
@@ -105,8 +149,8 @@ export default function Signup(){
         return(
           <>
           당뇨인이신가요?
-          <CTA1ButtonSelect active={sugar === null ? false : sugar} value="true" text="네, 당뇨인이에요" onClick={handleClick}/>
-          <CTA1ButtonSelect active={sugar === null ? false : !sugar} value="false" text="아니요, 당뇨인 가족이에요" onClick={handleClick}/>
+          <CTA1ButtonSelect active={form.sugar === null ? false : form.sugar} value="true" text="네, 당뇨인이에요" onClick={handleClick}/>
+          <CTA1ButtonSelect active={form.sugar === null ? false : !form.sugar} value="false" text="아니요, 당뇨인 가족이에요" onClick={handleClick}/>
           </>
         )
     }
@@ -119,7 +163,11 @@ export default function Signup(){
       {getPage(page)}
       <div className="buttonItem">
       {
-        page !== 0 && <CTA1Button active={true} text="다음" onClick={handleClickNext}/>
+        page !== 0 && 
+        <CTA1Button 
+        active={(page === 1 && isValid.nameValid) || (page ===2 && isValid.characterValid) || (page === 3 && isValid.sugarValid)} 
+        text="다음" 
+        onClick={handleClickNext}/>
       }
       </div>
       <style jsx>{`
