@@ -27,6 +27,7 @@ interface TextBoxI {
     value?: string;
     active?: boolean;
     unit?: string;
+    type?: string;
 }
 
 interface RadioBoxI {
@@ -147,10 +148,11 @@ export function CTA2Button({onClick,text,active}:CTA2ButtonI){
 }
 
 
-export function TextBox2({text, onChange, value, active, unit} : TextBoxI){
+export function TextBox2({text, onChange, value, active, unit, type} : TextBoxI){
     return(
         <>
         <input
+        type={type}
         placeholder={text}
         onChange={onChange}
         value={value}

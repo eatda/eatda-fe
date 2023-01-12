@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import React, { useState, useCallback } from "react"
+import { formatDiagnostic } from "typescript";
 import { CTA1Button, TextBox2, CTA1ButtonSelect, RadioBox, CheckBox } from "../../components/common/Button";
 import Navigation from "../../components/common/Navigation";
 
@@ -36,35 +37,57 @@ const allergyData = [
     },
 ]
 
+interface formI{
+    height: number;
+    weight: number;
+    gender: boolean | null;
+    activity: number | null;
+}
+
 export default function Survey(){
     const [page,setPage] = useState<number>(0);
-    const [height, setHeight] = useState<number>(0);
-    const [weight, setWeight] = useState<number>(0);
-    const [gender,setGender] = useState<boolean | null>(null);
-    const [activity,setActivity] = useState<number | null>(null);
-    const [allergy, setAllergy] = useState<Array<number>>([]);
     const router = useRouter();
+    
+    const [form, setForm] = useState<formI>({
+        height: -1,
+        weight: -1,
+        gender: null,
+        activity: null,
+    })
+    const [allergy, setAllergy] = useState<Array<number>>([]);
+
+    // 유효성 검사
+    const [isValid, setIsValid] = useState({
+        isHeight: false,
+        isWeight: false,
+        isGender: false,
+        isActivity: false,
+        isAllergy: false
+    })
 
     const handleClickNext = () => {
         let num = page;
         setPage(++num);
         if(page >= 5){
-            console.log(height, weight, gender, activity, allergy)
+            console.log(form.height, form.weight, form.gender, form.activity, allergy)
             router.replace('/signup/loading');
         }
     }
 
     const handleClickGender = (e:React.MouseEvent<HTMLButtonElement>) => {
         const value = e.currentTarget.value;
+        setIsValid({...isValid, isGender: true});
+
         if(value === "f"){
-            setGender(true);
+            setForm({...form, gender: true});
         }else if(value === "m"){
-            setGender(false);
+            setForm({...form, gender: false});
         }
     }
 
     const handleChangeActivity = (e:React.ChangeEvent<HTMLInputElement>) => {
-        setActivity(Number(e.target.value));
+        setForm({...form, activity:Number(e.target.value)});
+        setIsValid({...isValid, isActivity: true});
     }
 
     const handleChangeAllergy = useCallback(
@@ -82,10 +105,27 @@ export default function Survey(){
         e.preventDefault();
         switch (idx) {
             case 0:
-                setHeight(Number(e.target.value));
+                const heightValue = e.target.value;
+                setForm({...form, height: Number(heightValue)});
+                const regexH = /^\d{3}[.]\d{1}$/;
+
+                if(regexH.test(heightValue)){
+                    setIsValid({...isValid, isHeight: true});
+                }else{
+                    setIsValid({...isValid, isHeight: false});
+                }
                 break;
+
             case 1:
-                setWeight(Number(e.target.value));
+                const weightValue = e.target.value;
+                setForm({...form, weight: Number(weightValue)});
+                const regexW = /^\d{2}[.]\d{1}$/;
+
+                if(regexW.test(weightValue)){
+                    setIsValid({...isValid, isWeight: true});
+                }else{
+                    setIsValid({...isValid, isWeight: false});
+                }
                 break;
             default:
                 break;
@@ -98,8 +138,15 @@ export default function Survey(){
                 return(
                     <>
                     맘스터치님, <br/>
-                    키를 알려주세요.   
-                    <TextBox2 text="000.0" value={String(height)} active={false} unit="CM" onChange={e=>handleChange(e,current)}/>   
+                    키를 알려주세요. 
+                    <TextBox2 
+                    text="000.0" 
+                    value={ form.height === -1 ? '' : String(form.height)} 
+                    active={false} 
+                    unit="CM" 
+                    onChange={e=>handleChange(e,current)}
+                    type="number"
+                    />   
                     <br/>  
                     </>
                 )
@@ -108,7 +155,13 @@ export default function Survey(){
                     <>
                     맘스터치님, <br/>
                     몸무게를 알려주세요.
-                    <TextBox2 text="00.0" value={String(weight)} active={false} unit="KG" onChange={e=>handleChange(e,current)}/>   
+                    <TextBox2 text="00.0" 
+                    value={ form.weight === -1 ? '' : String(form.weight)} 
+                    active={false} 
+                    unit="KG" 
+                    onChange={e=>handleChange(e,current)}
+                    type="number"  
+                    /> 
                     <br/> 
                     </>
                 )
@@ -117,8 +170,8 @@ export default function Survey(){
                     <>
                     맘스터치님, <br/>
                     성별은 무엇인가요?
-                    <CTA1ButtonSelect text="여성" value="f" active={gender === null ? false : gender} onClick={handleClickGender}/> <br/>
-                    <CTA1ButtonSelect text="남성" value="m" active={gender === null ? false : !gender} onClick={handleClickGender}/>
+                    <CTA1ButtonSelect text="여성" value="f" active={form.gender === null ? false : form.gender} onClick={handleClickGender}/> <br/>
+                    <CTA1ButtonSelect text="남성" value="m" active={form.gender === null ? false : !form.gender} onClick={handleClickGender}/>
                     <br/>
                     </>
                 )
@@ -143,7 +196,7 @@ export default function Survey(){
                                     value={i}
                                     mainText={v.main}
                                     subText={v.sub}
-                                    select={i === activity}
+                                    select={i === form.activity}
                                     onChange={handleChangeActivity}
                                     />
                                 </div>
@@ -187,7 +240,9 @@ export default function Survey(){
         {getPage(page)}
         <br/>
         <div className="buttonItem">
-        <CTA1Button text="다음" active={true} onClick={handleClickNext}/>
+        <CTA1Button text="다음" 
+        active={page === 0 && isValid.isHeight || page===1 && isValid.isWeight || page===2 && isValid.isGender || page===3 || page===4 && isValid.isActivity || page===5} 
+        onClick={handleClickNext}/>
         </div>
         </div>
         <style jsx>{`
