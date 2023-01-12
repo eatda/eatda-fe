@@ -1,27 +1,43 @@
+import { useRouter } from "next/router";
 import React, { useEffect, useRef, useState } from "react";
 import colors from "../../../styles";
 import { CTA1Button } from "../../components/common/Button";
 
 export default function EnterPlace(){
+    const router = useRouter();
     const codeLength = 6;
     const inputRef = useRef<null[] | HTMLDivElement[]>([]);
     const idxArray = Array.from({length: codeLength}, (v,i) => i);
 
-    const [test, setTest] = useState(()=>Array(codeLength).fill(0));
+    const [code, setCode] = useState(()=>Array(codeLength).fill(''));
+
+    const [test, setTest] = useState(0);
 
     useEffect(()=>{
         inputRef.current[0]?.focus()
     },[])
 
-    const handleFocus = (e:React.ChangeEvent<HTMLInputElement>,idx:number) => {
-        let arr = test;
-        arr.splice(idx,1,e.target.value);
-        setTest(arr);
-        inputRef.current[++idx]?.focus();
-    }
+    useEffect(()=>{
+        let flag = true;
+        code.map((v,i)=>{
+            if(v===''){
+                flag = false;
+            }
+        })
 
-    const handleClick = () => {
-        console.log(test);
+        if(flag){
+            console.log(code);
+            router.replace('/signup');
+        }
+    },[test])
+
+    const handleFocus = (e:React.ChangeEvent<HTMLInputElement>,idx:number) => {
+        let arr = code;
+        arr.splice(idx,1,e.target.value);
+        setCode(arr);
+        inputRef.current[++idx]?.focus();
+
+        setTest(prev => prev +1);
     }
 
 
@@ -45,7 +61,6 @@ export default function EnterPlace(){
                 })
             }
             <br/>
-            <CTA1Button text="입장" active={true} onClick={handleClick}/>
             <style jsx>{`
             .container {
                 width: 390px;
