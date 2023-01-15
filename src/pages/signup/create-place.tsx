@@ -4,6 +4,7 @@ import { CTA1ButtonSmall, CTA1Button } from "../../components/common/Button"
 import Navigation from "../../components/common/Navigation"
 import colors from "../../../styles";
 
+import { login } from "../../store/userSlice";
 import { selectUser } from "../../store/userSlice";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -36,7 +37,7 @@ export default function CreatePlace(){
             const URL = `${process.env.NEXT_PUBLIC_API_ROOT}/users/group/code/`;
             const response = await ( await fetch(URL)).json();
             setCode(response.code);
-            console.log(user)
+            dispatch(login({group_id : response.id}));
         }
         if(page===1){
             fetchCode();
