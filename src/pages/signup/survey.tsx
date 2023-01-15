@@ -7,33 +7,28 @@ import Navigation from "../../components/common/Navigation";
 const activityData = [
     {
         id: 0,
-        main : "1번째",
-        sub : "1sub",
+        main : "활동이 적거나 운동을 안하는 경우",
+        sub : "0~1일",
     },
     {
         id: 1,
-        main : "2번째",
-        sub : "2sub",
+        main : "가벼운 활동 및 운동",
+        sub : "1~3일 / 1주",
     },
     {
         id: 2,
-        main : "3번째",
-        sub : "3sub",
-    },
-]
-
-const allergyData = [
-    {
-        id: 0,
-        name: "유당"
+        main : "보통의 활동 및 운동",
+        sub : "3~5일 / 1주",
     },
     {
-        id: 1,
-        name: "글루텐"
+        id: 3,
+        main : "적극적인 활동 및 운동",
+        sub : "6~7일 / 1주",
     },
     {
-        id: 2,
-        name: "갑각류"
+        id: 4,
+        main : "매우 적극적인 활동 및 운동",
+        sub : "6~7일 적극적인 활동과 운동을 함",
     },
 ]
 
@@ -44,7 +39,19 @@ interface formI{
     activity: number | null;
 }
 
-export default function Survey(){
+interface allergyI {
+    id: number;
+    name: string;
+}
+
+interface surveyI {
+    allergyResponse: allergyI[];
+}
+
+export default function Survey({
+    allergyResponse
+} : surveyI){
+
     const [page,setPage] = useState<number>(0);
     const router = useRouter();
     
@@ -211,7 +218,7 @@ export default function Survey(){
                     맘스터치님, 못드시는 음식을<br/>
                     모두 선택해주세요.
                     {
-                        allergyData.map((v,i)=>{
+                        allergyResponse.map((v,i)=>{
                             return(
                                 <div key={i}>
                                     <CheckBox
@@ -265,3 +272,14 @@ export default function Survey(){
         </>
     )
 }
+
+export const getServerSideProps = async () => {
+    const URL = 'https://server.eat-da.co.kr/diets/allergy';
+    const allergyResponse = await ( await fetch(URL)).json();
+
+    return{
+        props: {
+            allergyResponse
+        }
+    };
+};
