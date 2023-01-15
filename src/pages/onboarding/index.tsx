@@ -13,7 +13,7 @@ export default function SignIn({token}:any) {
 
   useEffect(() => {
     if (session.status == "authenticated") {
-      router.replace("/signup/create-place", undefined, { shallow: true });
+      // router.replace("/signup/create-place", undefined, { shallow: true });
     }
   },[session.status]);
 

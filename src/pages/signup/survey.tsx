@@ -274,7 +274,7 @@ export default function Survey({
 }
 
 export const getServerSideProps = async () => {
-    const URL = 'https://server.eat-da.co.kr/diets/allergy';
+    const URL = `${process.env.NEXT_PUBLIC_API_ROOT}/diets/allergy`;
     const allergyResponse = await ( await fetch(URL)).json();
 
     return{

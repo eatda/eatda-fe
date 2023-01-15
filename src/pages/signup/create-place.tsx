@@ -1,12 +1,19 @@
 import { useRouter } from "next/router"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CTA1ButtonSmall, CTA1Button } from "../../components/common/Button"
 import Navigation from "../../components/common/Navigation"
 import colors from "../../../styles";
 
+import { selectUser } from "../../store/userSlice";
+import { useSelector, useDispatch } from "react-redux";
+
 export default function CreatePlace(){
     const router = useRouter();
     const [page,setPage] = useState(0);
+    const [code, setCode] = useState('');
+
+    const dispatch = useDispatch();
+    const user = useSelector(selectUser);
 
     const handleClick = (e:React.MouseEvent<HTMLButtonElement>) => {
         switch (e.currentTarget.value) {
@@ -23,6 +30,19 @@ export default function CreatePlace(){
                 break;
         }
     }
+
+    useEffect(()=>{
+        async function fetchCode() {
+            const URL = `${process.env.NEXT_PUBLIC_API_ROOT}/users/group/code/`;
+            const response = await ( await fetch(URL)).json();
+            setCode(response.code);
+            console.log(user)
+        }
+        if(page===1){
+            fetchCode();
+        }
+    },[page])
+
 
     return (
         <>
@@ -43,7 +63,8 @@ export default function CreatePlace(){
                     새로 만들었어요!
                     <br/>
                     <div className="groudId">
-                        초대 코드를 복사하여 가족에게 공유하세요!
+                        초대 코드를 복사하여 가족에게 공유하세요! <br/>
+                        {code}
                     </div>
                     <button>링크 복사하기</button>
                     <div className="buttonItem">
