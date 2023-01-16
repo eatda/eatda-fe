@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Navigation from "../../components/common/Navigation";
 import FilterButton from "../../components/filter/FilterButton";
 
-interface FilterType {
+export interface FilterType {
   id: number;
   name: string;
   category: number;
@@ -49,6 +49,7 @@ export default function Filter({ filterData }: FilterProps) {
                   />
                 ))}
               </div>
+              <hr />
             </div>
           ))}
         </div>

@@ -12,7 +12,6 @@ export default function FilterButton({
   clickFilter,
 }: FilterButtonProps) {
   const [selected, setSelected] = useState(filter.selected);
-
   return (
     <>
       <div className="container">
@@ -25,12 +24,7 @@ export default function FilterButton({
           className={selected ? "selected" : "not-selected"}
         >
           <div className="icon">
-            <Image
-              src={"/tabbar/home_empty.svg"}
-              alt={"icon"}
-              width={48}
-              height={48}
-            />
+            <Image src={filter.image} alt={"icon"} width={48} height={48} />
           </div>
           <div className="name-text">{filter.name}</div>
         </div>
