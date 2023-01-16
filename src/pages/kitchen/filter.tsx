@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Navigation from "../../components/common/Navigation";
 import FilterButton from "../../components/filter/FilterButton";
 
@@ -28,6 +28,7 @@ export default function Filter({ filterData }: FilterProps) {
     } else {
       setSelectedFilter(selectedFilter.add(filter));
     }
+    console.log(selectedFilter);
   };
 
   const setFilter = () => {
