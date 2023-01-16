@@ -11,7 +11,7 @@ export default function FilterButton({
   filter,
   clickFilter,
 }: FilterButtonProps) {
-  const [selected, setSelected] = useState(filter.selected);
+  const [selected, setSelected] = useState(false);
   return (
     <>
       <div className="container">
