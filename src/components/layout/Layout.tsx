@@ -13,7 +13,8 @@ export default function Layout({ children }: LayoutProps) {
     pathname === "/record/add" ||
     pathname.includes("/detail") ||
     pathname.includes("/signup") ||
-    pathname.includes("/filter")
+    pathname.includes("/filter") ||
+    pathname.includes("/onboarding")
       ? "sub"
       : "main";
   const screenWidth = GetScreenWidth();
