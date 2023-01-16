@@ -31,7 +31,7 @@ export default function Loading(){
     }
 
     const fetchSignup = async () => {
-        const URL = `${process.env.NEXT_PUBLIC_API_ROOT}/accounts/register/`;
+        const URL = `${process.env.NEXT_PUBLIC_API_ROOT}accounts/register/`;
         let bodyData : bodyDataI = {
             social_id: user.usersocial_id,
             email: user.useremail,
