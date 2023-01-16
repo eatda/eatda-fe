@@ -7,7 +7,6 @@ export interface FilterType {
   name: string;
   category: number;
   image: string;
-  selected?: boolean;
 }
 interface FilterDataType {
   category: { id: number; name: string };
@@ -29,7 +28,33 @@ export default function Filter({ filterData }: FilterProps) {
     } else {
       setSelectedFilter(selectedFilter.add(filter));
     }
-    console.log(selectedFilter);
+  };
+
+  const setFilter = () => {
+    // 선택된 필터 데이터 requestMap에 맵으로 정리
+    let requestMap = new Map<number, number[]>();
+    selectedFilter.forEach((filter) => {
+      const category = filter.category;
+      const prevList = requestMap.get(category);
+      if (typeof prevList == "undefined") {
+        requestMap.set(category, [filter.id]);
+      } else {
+        requestMap.set(category, prevList.concat(filter.id));
+      }
+    });
+
+    // requestMap -> requestQuery 문자열로 바꾸기
+    let requestQuery: string = "";
+    requestMap.forEach((filters, category) => {
+      requestQuery += category + "=";
+      filters.forEach((filter) => {
+        requestQuery += filter + ",";
+      });
+      requestQuery = requestQuery.slice(0, -1);
+      requestQuery += "&";
+    });
+    requestQuery = requestQuery.slice(0, -1);
+    console.log(requestQuery);
   };
 
   return (
@@ -53,6 +78,7 @@ export default function Filter({ filterData }: FilterProps) {
             </div>
           ))}
         </div>
+        <button onClick={setFilter}>필터를설정해요</button>
       </div>
       <style jsx>{`
         .filters {
