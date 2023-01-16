@@ -4,7 +4,6 @@ import { selectUser } from "../../store/userSlice";
 import { selectSurvey } from "../../store/surveySlice";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { type } from "os";
 
 interface bodyDataI {
     social_id: string;
@@ -52,17 +51,27 @@ export default function Loading(){
 
         }
         try {
-            console.log(bodyData);
-            const data = await (await fetch(URL,{
+            console.log('bodyData:',JSON.stringify(bodyData));
+            // const data = await (await fetch(URL,{
+            //     method: 'POST',
+            //     // mode: 'cors',
+            //     headers:{
+            //         "Content-Type": "application/json",
+            //     },
+            //     body: JSON.stringify(bodyData)
+            // }))
+
+            const data2 = await (await fetch(URL,{
                 method: 'POST',
+                credentials: 'include',
                 mode: 'cors',
-                headers:{
+                headers: {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify(bodyData)
-            }))
+            })).json();
 
-            return data;
+            return data2;
 
         } catch (error) {
             return error;

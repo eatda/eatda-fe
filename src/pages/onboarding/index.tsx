@@ -19,7 +19,6 @@ export default function SignIn({token}:any) {
 
   useEffect(() => {
     if (session.status == "authenticated") {
-      // router.replace("/signup/create-place", undefined, { shallow: true });
       const reduxData = {
         usersocial_id: session.data.user?.userId,
         useremail: session.data.user?.email,
@@ -29,6 +28,7 @@ export default function SignIn({token}:any) {
         group_id: user.group_id,
       }
       dispatch(login(reduxData));
+      // router.replace("/signup/create-place", undefined, { shallow: true });
     }
   },[session.status]);
 
