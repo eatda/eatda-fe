@@ -61,7 +61,7 @@ export default function Signup(){
   useEffect(()=>{
     async function fetchCharacter(){
       const groupId = user.group_id;
-      const URL = `${process.env.NEXT_PUBLIC_API_ROOT}/users/character?groupid=${groupId}`;
+      const URL = `${process.env.NEXT_PUBLIC_API_ROOT}users/character?groupid=${groupId}`;
       const response = await ( await fetch(URL)).json();
       setCharacterData(response);
     }

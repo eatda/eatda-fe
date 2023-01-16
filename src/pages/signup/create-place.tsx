@@ -34,7 +34,7 @@ export default function CreatePlace(){
 
     useEffect(()=>{
         async function fetchCode() {
-            const URL = `${process.env.NEXT_PUBLIC_API_ROOT}/users/group/code/`;
+            const URL = `${process.env.NEXT_PUBLIC_API_ROOT}users/group/code/`;
             const response = await ( await fetch(URL)).json();
             setCode(response.code);
             const reduxData = {
