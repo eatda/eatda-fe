@@ -16,7 +16,7 @@ export default function RecipeCard({ type }: RecipeCardType) {
       : "none";
 
   const handleClick = () => {
-    router.push("/detail/1");
+    router.push("/kitchen/detail/1");
   };
 
   const handleLike = () => {
