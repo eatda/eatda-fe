@@ -1,39 +1,37 @@
-import { useRouter } from "next/router";
+import Router, { useRouter } from "next/router";
 import React, { useState, useCallback } from "react"
-import { formatDiagnostic } from "typescript";
 import { CTA1Button, TextBox2, CTA1ButtonSelect, RadioBox, CheckBox } from "../../components/common/Button";
 import Navigation from "../../components/common/Navigation";
+
+import { putSurvey } from "../../store/surveySlice";
+import { selectSurvey } from "../../store/surveySlice";
+import { useSelector, useDispatch } from "react-redux";
 
 const activityData = [
     {
         id: 0,
-        main : "1번째",
-        sub : "1sub",
+        main : "활동이 적거나 운동을 안하는 경우",
+        sub : "0~1일",
     },
     {
         id: 1,
-        main : "2번째",
-        sub : "2sub",
+        main : "가벼운 활동 및 운동",
+        sub : "1~3일 / 1주",
     },
     {
         id: 2,
-        main : "3번째",
-        sub : "3sub",
-    },
-]
-
-const allergyData = [
-    {
-        id: 0,
-        name: "유당"
+        main : "보통의 활동 및 운동",
+        sub : "3~5일 / 1주",
     },
     {
-        id: 1,
-        name: "글루텐"
+        id: 3,
+        main : "적극적인 활동 및 운동",
+        sub : "6~7일 / 1주",
     },
     {
-        id: 2,
-        name: "갑각류"
+        id: 4,
+        main : "매우 적극적인 활동 및 운동",
+        sub : "6~7일 적극적인 활동과 운동을 함",
     },
 ]
 
@@ -44,7 +42,22 @@ interface formI{
     activity: number | null;
 }
 
-export default function Survey(){
+interface allergyI {
+    id: number;
+    name: string;
+}
+
+interface surveyI {
+    allergyResponse: allergyI[];
+}
+
+export default function Survey({
+    allergyResponse,
+} : surveyI){
+
+    const dispatch = useDispatch();
+    const survey = useSelector(selectSurvey); 
+
     const [page,setPage] = useState<number>(0);
     const router = useRouter();
     
@@ -70,6 +83,20 @@ export default function Survey(){
         setPage(++num);
         if(page >= 5){
             console.log(form.height, form.weight, form.gender, form.activity, allergy)
+            let genderQuery = form.gender ? 'f' : 'm';
+            let allergyQuery : any[] = [];
+            allergy.forEach((v,i)=>{
+                allergyQuery.push({"id":Number(v)})
+            })
+            console.log(allergyQuery);
+            const reduxData = {
+                height: form.height,
+                weight: form.weight,
+                gender: genderQuery,
+                activity: form.activity,
+                allergy: allergyQuery
+            }
+            dispatch(putSurvey(reduxData));
             router.replace('/signup/loading');
         }
     }
@@ -211,7 +238,7 @@ export default function Survey(){
                     맘스터치님, 못드시는 음식을<br/>
                     모두 선택해주세요.
                     {
-                        allergyData.map((v,i)=>{
+                        allergyResponse.map((v,i)=>{
                             return(
                                 <div key={i}>
                                     <CheckBox
@@ -265,3 +292,14 @@ export default function Survey(){
         </>
     )
 }
+
+export const getServerSideProps = async () => {
+    const URL = `${process.env.NEXT_PUBLIC_API_ROOT}/diets/allergy`;
+    const allergyResponse = await ( await fetch(URL)).json();
+
+    return{
+        props: {
+            allergyResponse,
+        }
+    };
+};

@@ -1,5 +1,7 @@
 import { ValueOf } from "next/dist/shared/lib/constants";
 import colors from "../../../styles";
+import Image from "next/image";
+
 interface CTA1ButtonI {
     text?: string;
     onClick?: React.MouseEventHandler<HTMLButtonElement>;
@@ -7,6 +9,13 @@ interface CTA1ButtonI {
     value?: string | number;
 }
 
+interface CTA1ButtonSelectI {
+    text?: string;
+    onClick?: React.MouseEventHandler<HTMLButtonElement>;
+    active?: boolean;
+    value?: string | number;
+    image?: string;
+}
 interface CTA1ButtonSmallI {
     textMain?: string;
     textSub?: string;
@@ -87,11 +96,17 @@ export function CTA1Button({onClick,text,active,value}:CTA1ButtonI){
     )
 }
 
-export function CTA1ButtonSelect({onClick,text,active,value}:CTA1ButtonI){
+export function CTA1ButtonSelect({onClick,text,active,value,image}:CTA1ButtonSelectI){
     return(
         <>
         <button onClick={onClick} value={value}>
             {text}
+            {
+                image?
+                <Image src={image} alt="ch" width={30} height={30} priority/>
+                :
+                null
+            }
         </button>
         <style jsx>{`
         button {

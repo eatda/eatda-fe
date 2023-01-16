@@ -3,6 +3,10 @@ import React, { useEffect, useState, useRef } from "react"
 import { CTA1Button, TextBox2, CTA1ButtonSelect } from "../../components/common/Button";
 import Navigation from "../../components/common/Navigation";
 
+import { login } from "../../store/userSlice";
+import { selectUser } from "../../store/userSlice";
+import { useSelector, useDispatch } from "react-redux";
+
 const characters = [
   {
     id: 1,
@@ -28,9 +32,18 @@ interface formI {
   sugar: null | boolean;
 }
 
+interface characterI {
+  id: number;
+  image: string;
+}
+
 export default function Signup(){
   const router = useRouter();
+  const dispatch = useDispatch();
+  const user = useSelector(selectUser);
+  const [characterData, setCharacterData] = useState<characterI[]>();
   const [page,setPage] = useState(0);
+
   
   const [form, setForm] = useState<formI>({
     name: '',
@@ -45,10 +58,32 @@ export default function Signup(){
     sugarValid: false
   })
 
+  useEffect(()=>{
+    async function fetchCharacter(){
+      const groupId = user.group_id;
+      const URL = `${process.env.NEXT_PUBLIC_API_ROOT}/users/character?groupid=${groupId}`;
+      const response = await ( await fetch(URL)).json();
+      setCharacterData(response);
+    }
+
+    if(page === 2){
+      fetchCharacter();
+    }
+  },[page])
+
   const handleClickNext = () => {
     setPage(prevNumber => prevNumber + 1);
     if(page>=3){
       console.log(form.name, form.character, form.sugar)
+      const reduxData = {
+        usersocial_id: user.usersocial_id,
+        useremail: user.useremail,
+        username: form.name,
+        usercharacter: form.character,
+        isDiabetes: form.sugar,
+        group_id: user.group_id,
+      }
+      dispatch(login(reduxData));
       form.sugar ?
       router.replace('/signup/survey')
       :
@@ -130,14 +165,14 @@ export default function Signup(){
           <>
           활동 캐릭터를 설정해주세요.
           {
-            characters.map((v,idx)=>{
+            characterData?.map((v:characterI,idx:number)=>{
               return(
                 <div key = {idx}>
                 <CTA1ButtonSelect
                 active={form.character === v.id ? true : false}
                 onClick={handleClick}
-                text={v.name}
                 value={v.id}
+                image={v.image}
                 />
                 </div>
               )

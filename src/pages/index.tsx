@@ -10,9 +10,9 @@ export default function Home() {
     if (session.status == "authenticated") {
       router.replace("/home", undefined, { shallow: true });
     } else {
-      router.replace("/signup", undefined, { shallow: true });
+      router.replace("/onboarding", undefined, { shallow: true });
     }
-  });
+  },[]);
 
   return <>home</>;
 }

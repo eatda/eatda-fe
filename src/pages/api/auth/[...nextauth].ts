@@ -1,6 +1,13 @@
-import NextAuth from "next-auth/next";
-import KakaoProvider from "next-auth/providers/kakao"
+import NextAuth, {DefaultSession} from "next-auth";
+import KakaoProvider from "next-auth/providers/kakao";
 
+declare module "next-auth" {
+    interface Session {
+        user:{
+            userId?: string
+        }& DefaultSession["user"]
+    }
+}
 export default NextAuth({
     providers: [
         KakaoProvider({
@@ -8,4 +15,10 @@ export default NextAuth({
             clientSecret: process.env.KAKAO_CLIENT_SECRET!,
         })
     ],
+    callbacks: {
+        session({session, token}){
+            session.user.userId = token.sub
+            return session
+        }
+    }
 })
