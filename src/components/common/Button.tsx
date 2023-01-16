@@ -103,7 +103,7 @@ export function CTA1ButtonSelect({onClick,text,active,value,image}:CTA1ButtonSel
             {text}
             {
                 image?
-                <Image src="http://server.eat-da.co.kr/media/default.jpg" alt="ch" width={30} height={30} priority/>
+                <Image src={image} alt="ch" width={30} height={30} priority/>
                 :
                 null
             }

@@ -37,7 +37,15 @@ export default function CreatePlace(){
             const URL = `${process.env.NEXT_PUBLIC_API_ROOT}/users/group/code/`;
             const response = await ( await fetch(URL)).json();
             setCode(response.code);
-            dispatch(login({group_id : response.id}));
+            const reduxData = {
+                usersocial_id: user.usersocial_id,
+                useremail: user.useremail,
+                username: user.username,
+                usercharacter: user.usercharacter,
+                isDiabetes: user.isDiabetes,
+                group_id: response.id
+            }
+            dispatch(login(reduxData));
         }
         if(page===1){
             fetchCode();

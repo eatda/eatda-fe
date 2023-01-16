@@ -3,6 +3,7 @@ import React, { useEffect, useState, useRef } from "react"
 import { CTA1Button, TextBox2, CTA1ButtonSelect } from "../../components/common/Button";
 import Navigation from "../../components/common/Navigation";
 
+import { login } from "../../store/userSlice";
 import { selectUser } from "../../store/userSlice";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -74,6 +75,15 @@ export default function Signup(){
     setPage(prevNumber => prevNumber + 1);
     if(page>=3){
       console.log(form.name, form.character, form.sugar)
+      const reduxData = {
+        usersocial_id: user.usersocial_id,
+        useremail: user.useremail,
+        username: form.name,
+        usercharacter: form.character,
+        isDiabetes: form.sugar,
+        group_id: user.group_id,
+      }
+      dispatch(login(reduxData));
       form.sugar ?
       router.replace('/signup/survey')
       :

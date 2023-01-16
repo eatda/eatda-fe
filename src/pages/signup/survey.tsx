@@ -1,8 +1,11 @@
-import { useRouter } from "next/router";
+import Router, { useRouter } from "next/router";
 import React, { useState, useCallback } from "react"
-import { formatDiagnostic } from "typescript";
 import { CTA1Button, TextBox2, CTA1ButtonSelect, RadioBox, CheckBox } from "../../components/common/Button";
 import Navigation from "../../components/common/Navigation";
+
+import { putSurvey } from "../../store/surveySlice";
+import { selectSurvey } from "../../store/surveySlice";
+import { useSelector, useDispatch } from "react-redux";
 
 const activityData = [
     {
@@ -49,8 +52,11 @@ interface surveyI {
 }
 
 export default function Survey({
-    allergyResponse
+    allergyResponse,
 } : surveyI){
+
+    const dispatch = useDispatch();
+    const survey = useSelector(selectSurvey); 
 
     const [page,setPage] = useState<number>(0);
     const router = useRouter();
@@ -77,6 +83,20 @@ export default function Survey({
         setPage(++num);
         if(page >= 5){
             console.log(form.height, form.weight, form.gender, form.activity, allergy)
+            let genderQuery = form.gender ? 'f' : 'm';
+            let allergyQuery : any[] = [];
+            allergy.forEach((v,i)=>{
+                allergyQuery.push({"id":Number(v)})
+            })
+            console.log(allergyQuery);
+            const reduxData = {
+                height: form.height,
+                weight: form.weight,
+                gender: genderQuery,
+                activity: form.activity,
+                allergy: allergyQuery
+            }
+            dispatch(putSurvey(reduxData));
             router.replace('/signup/loading');
         }
     }
@@ -279,7 +299,7 @@ export const getServerSideProps = async () => {
 
     return{
         props: {
-            allergyResponse
+            allergyResponse,
         }
     };
 };

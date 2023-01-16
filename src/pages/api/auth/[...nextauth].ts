@@ -1,6 +1,13 @@
-import NextAuth from "next-auth/next";
+import NextAuth, {DefaultSession} from "next-auth";
 import KakaoProvider from "next-auth/providers/kakao";
 
+declare module "next-auth" {
+    interface Session {
+        user:{
+            userId?: string
+        }& DefaultSession["user"]
+    }
+}
 export default NextAuth({
     providers: [
         KakaoProvider({
@@ -8,20 +15,10 @@ export default NextAuth({
             clientSecret: process.env.KAKAO_CLIENT_SECRET!,
         })
     ],
-    // callbacks: {
-    //     async jwt({ token }) {
-    //       token.userRole = "admin"
-    //       console.log('?:',token);
-    //       return token
-    //     },
-    //     async session({ session, token, user }) {
-    //       // Send properties to the client, like an access_token and user id from a provider.
-    //       // session.accessToken = token.accessToken
-    //       // session.user.id = token.id
-    //       // console.log(user.id)
-    //       console.log('!',session,'!')
-          
-    //       return session
-    //     }
-    //   },
+    callbacks: {
+        session({session, token}){
+            session.user.userId = token.sub
+            return session
+        }
+    }
 })
