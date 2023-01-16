@@ -12,7 +12,8 @@ export default function Layout({ children }: LayoutProps) {
   const viewType =
     pathname === "/record/add" ||
     pathname.includes("/detail") ||
-    pathname.includes("/signup")
+    pathname.includes("/signup") ||
+    pathname.includes("/filter")
       ? "sub"
       : "main";
   const screenWidth = GetScreenWidth();
