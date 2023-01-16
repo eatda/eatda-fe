@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import colors from "../../../styles";
 
 export default function TabBar() {
@@ -10,8 +10,9 @@ export default function TabBar() {
 
   const handleRouting = (src: string) => {
     setCurrentPath(`/${src}`);
-    router.push(`/${src}`);
+    router.replace(`/${src}`);
   };
+
   const TabBarItems = [
     {
       id: 1,
