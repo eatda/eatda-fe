@@ -3,13 +3,13 @@ import { CTA1Button } from "../../components/common/Button"
 import { selectUser } from "../../store/userSlice";
 import { selectSurvey } from "../../store/surveySlice";
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 interface bodyDataI {
     social_id: string;
     email: string;
     name: string;
-    character_id: number;
+    character: number;
     group_id: number;
     is_diabetes: boolean | null;
 
@@ -26,6 +26,8 @@ export default function Loading(){
     const user = useSelector(selectUser);
     const survey = useSelector(selectSurvey);
 
+    const [page, setPage] = useState<number>(0);
+
     const handleClick = () => {
         router.push('/home')
     }
@@ -34,9 +36,11 @@ export default function Loading(){
         const URL = `${process.env.NEXT_PUBLIC_API_ROOT}accounts/register/`;
         let bodyData : bodyDataI = {
             social_id: user.usersocial_id,
+            // social_id: '262d21s28257',
             email: user.useremail,
+            // email: 'ft2sd2@gmail.com',
             name: user.username,
-            character_id: user.usercharacter,
+            character: user.usercharacter,
             group_id: user.group_id,
             is_diabetes: user.isDiabetes
         }
@@ -52,41 +56,52 @@ export default function Loading(){
         }
         try {
             console.log('bodyData:',JSON.stringify(bodyData));
-            // const data = await (await fetch(URL,{
-            //     method: 'POST',
-            //     // mode: 'cors',
-            //     headers:{
-            //         "Content-Type": "application/json",
-            //     },
-            //     body: JSON.stringify(bodyData)
-            // }))
 
-            const data2 = await (await fetch(URL,{
+            const data =  (await fetch(URL,{
                 method: 'POST',
                 credentials: 'include',
-                mode: 'cors',
+                // mode: 'cors',
                 headers: {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify(bodyData)
-            })).json();
+            }));
 
-            return data2;
+            const res = await data.json();
+            
+            return {data, res};
 
         } catch (error) {
             return error;
         }
     }
 
-    useEffect(()=>{
-        const response = fetchSignup();
-        console.log(response);
+    useEffect( ()=>{
+        async function fetchData(){
+            const {data, res} : any = await fetchSignup();
+            if(data.ok){
+                setPage(1);
+                console.log('회원가입 완료');
+                console.log(res);
+            }else{
+                console.log('회원가입 실패');
+                console.log(res);
+            }
+        }
+        fetchData();
     },[])
 
     return(
         <>
-        Loading page
-        <CTA1Button active={true} text="식단 만들러 가기" onClick={handleClick}/>
+        {
+            page === 0 ?
+            <>
+            loading page
+            </>
+            :
+            <CTA1Button active={true} text="식단 만들러 가기" onClick={handleClick}/>
+
+        }
         </>
     )
 }
