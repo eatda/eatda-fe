@@ -7,25 +7,6 @@ import { login } from "../../store/userSlice";
 import { selectUser } from "../../store/userSlice";
 import { useSelector, useDispatch } from "react-redux";
 
-const characters = [
-  {
-    id: 1,
-    name:'11'
-  },
-  {
-    id: 2,
-    name: '22'
-  },
-  {
-    id: 3,
-    name: '33'
-  },
-  {
-    id: 4,
-    name: '44'
-  }
-]
-
 interface formI {
   name: string;
   character: number;
@@ -64,6 +45,7 @@ export default function Signup(){
       const URL = `${process.env.NEXT_PUBLIC_API_ROOT}users/character?groupid=${groupId}`;
       const response = await ( await fetch(URL)).json();
       setCharacterData(response);
+      console.log(response)
     }
 
     if(page === 2){
@@ -172,7 +154,7 @@ export default function Signup(){
                 active={form.character === v.id ? true : false}
                 onClick={handleClick}
                 value={v.id}
-                image={v.image}
+                image={`/character/ch_${v.id}.svg`}
                 />
                 </div>
               )
