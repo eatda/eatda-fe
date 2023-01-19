@@ -15,7 +15,9 @@ export default function RecipeCard({ type }: RecipeCardType) {
       ? "visible"
       : "none";
 
-  const handleClick = () => {
+  const handleClick = (e:React.MouseEvent<HTMLDivElement>) => {
+    console.log('target:',e.target);
+    console.log('cur:',e.currentTarget);
     router.push("/kitchen/detail/1");
   };
 
@@ -25,10 +27,10 @@ export default function RecipeCard({ type }: RecipeCardType) {
   return (
     <>
       <div className="container">
-        <div className="itemImg">
-          <div onClick={handleLike} className="buttonImg">
+        <div onClick={handleClick} className="itemImg">
+          <button onClick={handleLike} className="buttonImg" value="heart">
             <img src={heart_full} alt="heart" />
-          </div>
+          </button>
         </div>
         <div onClick={handleClick} className="itemText">
           text
@@ -44,6 +46,7 @@ export default function RecipeCard({ type }: RecipeCardType) {
           height: 196px;
           width: 170px;
           border-radius: 4px;
+          border: solid ${colors.grayBackgroundSub} 1px;
         }
 
         .itemImg {

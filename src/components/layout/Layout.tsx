@@ -28,6 +28,7 @@ export default function Layout({ children }: LayoutProps) {
       <style jsx>{`
         .container {
           background: ${colors.grayWhite};
+          // background: ${colors.grayBackgroundSub};
           // width: ${screenWidth}px;
           width: 390px;
         }

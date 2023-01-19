@@ -65,6 +65,7 @@ export default function TabBar() {
           bottom: 0;
           left: 0;
           right: 0;
+          background: ${colors.grayWhite};
         }
         .select {
           color: ${colors.mainOrange};
