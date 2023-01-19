@@ -1,6 +1,7 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import userSlice from './userSlice';
 import surveySlice from './surveySlice';
+import tokenSlice from './tokenSlice';
 
 import storage from 'redux-persist/lib/storage'
 import { persistReducer, persistStore } from 'redux-persist'
@@ -13,7 +14,8 @@ const persistConfig = {
 
 const reducer = combineReducers({
   user: userSlice.reducer,
-  survey: surveySlice.reducer
+  survey: surveySlice.reducer,
+  token: tokenSlice.reducer
 })
 
 const persistedReducer = persistReducer(persistConfig, reducer);
