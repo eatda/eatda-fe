@@ -27,7 +27,8 @@ export default function EnterPlace(){
 
         if(flag){
             console.log(code);
-            router.replace('/signup');
+            console.log('확인')
+            // router.replace('/signup');
         }
     },[test])
 

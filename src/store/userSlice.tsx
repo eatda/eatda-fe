@@ -10,7 +10,7 @@ const userSlice = createSlice({
         username: '',
         usercharacter: -1,
         isDiabetes: null,
-        group_id: -1,
+        usergroup: '',
 
     },
     reducers: {
@@ -21,7 +21,7 @@ const userSlice = createSlice({
             state.username = action.payload.username;
             state.usercharacter = action.payload.usercharacter;
             state.isDiabetes = action.payload.isDiabetes;
-            state.group_id = action.payload.group_id;
+            state.usergroup = action.payload.usergroup;
         },
         logout:(state,action) => {
             state.isLogged = false;
@@ -30,7 +30,7 @@ const userSlice = createSlice({
             state.username = '';
             state.usercharacter = -1;
             state.isDiabetes = null;
-            state.group_id = -1;
+            state.usergroup = '';
         }
     }
 })

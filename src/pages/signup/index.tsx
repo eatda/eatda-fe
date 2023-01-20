@@ -7,25 +7,6 @@ import { login } from "../../store/userSlice";
 import { selectUser } from "../../store/userSlice";
 import { useSelector, useDispatch } from "react-redux";
 
-const characters = [
-  {
-    id: 1,
-    name:'11'
-  },
-  {
-    id: 2,
-    name: '22'
-  },
-  {
-    id: 3,
-    name: '33'
-  },
-  {
-    id: 4,
-    name: '44'
-  }
-]
-
 interface formI {
   name: string;
   character: number;
@@ -60,8 +41,7 @@ export default function Signup(){
 
   useEffect(()=>{
     async function fetchCharacter(){
-      const groupId = user.group_id;
-      const URL = `${process.env.NEXT_PUBLIC_API_ROOT}users/character?groupid=${groupId}`;
+      const URL = `${process.env.NEXT_PUBLIC_API_ROOT}users/character?group=${user.usergroup}`;
       const response = await ( await fetch(URL)).json();
       setCharacterData(response);
     }
@@ -81,7 +61,7 @@ export default function Signup(){
         username: form.name,
         usercharacter: form.character,
         isDiabetes: form.sugar,
-        group_id: user.group_id,
+        usergroup: user.usergroup,
       }
       dispatch(login(reduxData));
       form.sugar ?
@@ -172,7 +152,7 @@ export default function Signup(){
                 active={form.character === v.id ? true : false}
                 onClick={handleClick}
                 value={v.id}
-                image={v.image}
+                image={`/character/ch_${v.id}.svg`}
                 />
                 </div>
               )

@@ -13,7 +13,8 @@ export default function Layout({ children }: LayoutProps) {
     pathname === "/record/add" ||
     pathname.includes("/detail") ||
     pathname.includes("/signup") ||
-    pathname.includes("/filter")
+    pathname.includes("/filter") ||
+    pathname.includes("/onboarding")
       ? "sub"
       : "main";
   const screenWidth = GetScreenWidth();
@@ -26,7 +27,8 @@ export default function Layout({ children }: LayoutProps) {
       </div>
       <style jsx>{`
         .container {
-          background: ${colors.grayBackground};
+          background: ${colors.grayWhite};
+          // background: ${colors.grayBackgroundSub};
           // width: ${screenWidth}px;
           width: 390px;
         }

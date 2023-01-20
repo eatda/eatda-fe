@@ -5,19 +5,64 @@ import { useEffect } from "react";
 
 import { login } from "../../store/userSlice";
 import { selectUser } from "../../store/userSlice";
+import { delToken, putToken } from "../../store/tokenSlice";
+import { selectToken } from "../../store/tokenSlice";
 import { useSelector, useDispatch } from "react-redux";
 
-export default function SignIn({token}:any) {
+export default function SignIn() {
   const router = useRouter();
   const session = useSession();
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
+  const token = useSelector(selectToken);
 
   console.log('session:',session);
-  // console.log(token);
-  // console.log('next-auth.session-token:',token['next-auth.session-token']);
+
+  const fetchLogin = async () =>{
+    const URL = `${process.env.NEXT_PUBLIC_API_ROOT}accounts/login/`;
+    let bodyData = {
+      social_id: user.usersocial_id,
+      email: user.useremail
+    }
+
+    try {
+      const data = await fetch(URL, {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(bodyData)
+      });
+
+      const res = await data.json();
+      return {data, res}
+    } catch (error) {
+      return error;
+    }
+  }
 
   useEffect(() => {
+    async function fetchData(){
+      const {data, res} : any = await fetchLogin();
+      if(data.ok){
+        const reduxData = {
+          usersocial_id: user.usersocial_id,
+          useremail: user.useremail,
+          username: user.username,
+          usercharacter: res.user_info.character,
+          isDiabetes: res.user_info.is_diabetes,
+          usergroup: user.usergroup,
+        }
+        dispatch(login(reduxData));
+        dispatch(putToken({access_token: res.access_token}));
+        console.log('로그인 완료');
+        router.replace('/home', undefined, { shallow: true });
+      }else{
+        console.log('회원가입하기')
+        router.replace("/signup/create-place", undefined, { shallow: true });
+      }
+    }
     if (session.status == "authenticated") {
       const reduxData = {
         usersocial_id: session.data.user?.userId,
@@ -25,10 +70,10 @@ export default function SignIn({token}:any) {
         username: user.username,
         usercharacter: user.usercharacter,
         isDiabetes: user.isDiabetes,
-        group_id: user.group_id,
+        usergroup: user.usergroup,
       }
       dispatch(login(reduxData));
-      // router.replace("/signup/create-place", undefined, { shallow: true });
+      fetchData();
     }
   },[session.status]);
 
@@ -38,8 +83,4 @@ export default function SignIn({token}:any) {
       <button onClick={() => signOut()}>로그아웃</button>
     </>
   );
-}
-
-export function getServerSideProps({req,res}:any){
-  return { props: {token : req.cookies}}
 }

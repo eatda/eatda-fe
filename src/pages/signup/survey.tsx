@@ -5,6 +5,7 @@ import Navigation from "../../components/common/Navigation";
 
 import { putSurvey } from "../../store/surveySlice";
 import { selectSurvey } from "../../store/surveySlice";
+import { selectUser } from "../../store/userSlice";
 import { useSelector, useDispatch } from "react-redux";
 
 const activityData = [
@@ -38,6 +39,7 @@ const activityData = [
 interface formI{
     height: number;
     weight: number;
+    age: number;
     gender: boolean | null;
     activity: number | null;
 }
@@ -54,9 +56,9 @@ interface surveyI {
 export default function Survey({
     allergyResponse,
 } : surveyI){
-
     const dispatch = useDispatch();
     const survey = useSelector(selectSurvey); 
+    const user = useSelector(selectUser);
 
     const [page,setPage] = useState<number>(0);
     const router = useRouter();
@@ -64,6 +66,7 @@ export default function Survey({
     const [form, setForm] = useState<formI>({
         height: -1,
         weight: -1,
+        age: -1,
         gender: null,
         activity: null,
     })
@@ -73,6 +76,7 @@ export default function Survey({
     const [isValid, setIsValid] = useState({
         isHeight: false,
         isWeight: false,
+        isAge: false,
         isGender: false,
         isActivity: false,
         isAllergy: false
@@ -81,8 +85,8 @@ export default function Survey({
     const handleClickNext = () => {
         let num = page;
         setPage(++num);
-        if(page >= 5){
-            console.log(form.height, form.weight, form.gender, form.activity, allergy)
+        if(page >= 6){
+            console.log(form.height, form.weight, form.age, form.gender, form.activity, allergy)
             let genderQuery = form.gender ? 'f' : 'm';
             let allergyQuery : any[] = [];
             allergy.forEach((v,i)=>{
@@ -92,6 +96,7 @@ export default function Survey({
             const reduxData = {
                 height: form.height,
                 weight: form.weight,
+                age: form.age,
                 gender: genderQuery,
                 activity: form.activity,
                 allergy: allergyQuery
@@ -124,9 +129,18 @@ export default function Survey({
           } else if (!checked) {
             setAllergy(allergy.filter((el) => el !== value));
           }
+          console.log(allergy);
         },
         [allergy]
-      );
+    );
+
+    const handleAll = (checked : boolean) => {
+        console.log('해당없음',checked);
+        if(checked){
+            setAllergy([]);
+        }
+        console.log(allergy)
+    }
 
     const handleChange = (e:React.ChangeEvent<HTMLInputElement>,idx:number) => {
         e.preventDefault();
@@ -154,6 +168,17 @@ export default function Survey({
                     setIsValid({...isValid, isWeight: false});
                 }
                 break;
+            case 2:
+                const ageValue = e.target.value;
+                setForm({...form, age: Number(ageValue)});
+                const regexA = /^\d{1,3}$/;
+
+                if(regexA.test(ageValue)){
+                    setIsValid({...isValid, isAge: true});
+                }else{
+                    setIsValid({...isValid, isAge: false});
+                }
+                break;
             default:
                 break;
         }
@@ -164,7 +189,7 @@ export default function Survey({
             case 0:
                 return(
                     <>
-                    맘스터치님, <br/>
+                    {user.username}님, <br/>
                     키를 알려주세요. 
                     <TextBox2 
                     text="000.0" 
@@ -180,7 +205,7 @@ export default function Survey({
             case 1:
                 return(
                     <>
-                    맘스터치님, <br/>
+                    {user.username}님, <br/>
                     몸무게를 알려주세요.
                     <TextBox2 text="00.0" 
                     value={ form.weight === -1 ? '' : String(form.weight)} 
@@ -195,24 +220,39 @@ export default function Survey({
             case 2:
                 return(
                     <>
-                    맘스터치님, <br/>
+                    {user.username}님, <br/>
+                    나이를 알려주세요.
+                    <TextBox2 text="00" 
+                    value={ form.age === -1 ? '' : String(form.age)} 
+                    active={false} 
+                    unit="세" 
+                    onChange={e=>handleChange(e,current)}
+                    type="number"  
+                    /> 
+                    <br/> 
+                    </>
+                )
+            case 3:
+                return(
+                    <>
+                    {user.username}님, <br/>
                     성별은 무엇인가요?
                     <CTA1ButtonSelect text="여성" value="f" active={form.gender === null ? false : form.gender} onClick={handleClickGender}/> <br/>
                     <CTA1ButtonSelect text="남성" value="m" active={form.gender === null ? false : !form.gender} onClick={handleClickGender}/>
                     <br/>
                     </>
                 )
-            case 3:
+            case 4:
                 return(
                     <>
                     이제 습관 관련 <br/>
                     추가 질문을 드리겠습니다.
                     </>
                 )
-            case 4:
+            case 5:
                 return(
                     <>
-                    맘스터치님, 평균적인 <br/>
+                    {user.username}님, 평균적인 <br/>
                     일주일 활동량이 어떤가요?
                     {
                         activityData.map((v,i)=>{
@@ -232,10 +272,10 @@ export default function Survey({
                     }
                     </>
                 )
-            case 5:
+            case 6:
                 return(
                     <>
-                    맘스터치님, 못드시는 음식을<br/>
+                    {user.username}님, 못드시는 음식을<br/>
                     모두 선택해주세요.
                     {
                         allergyResponse.map((v,i)=>{
@@ -245,6 +285,7 @@ export default function Survey({
                                     name="allergy"
                                     value={v.id}
                                     text={v.name}
+                                    select = {allergy.includes(v.id) ? true : false}
                                     onChange={(e) => {
                                         handleChangeAllergy(e.target.checked, Number(e.target.value));
                                       }}
@@ -253,6 +294,12 @@ export default function Survey({
                             )
                         })
                     }
+                    <CheckBox 
+                    name="allergy" 
+                    value={allergyResponse.length + 1} 
+                    text="해당 없음" 
+                    select={allergy.length === 0 ? true : false} 
+                    onChange={(e)=>{handleAll(e.target.checked)}}/>
                     </>
                 )
             default:
@@ -268,7 +315,13 @@ export default function Survey({
         <br/>
         <div className="buttonItem">
         <CTA1Button text="다음" 
-        active={page === 0 && isValid.isHeight || page===1 && isValid.isWeight || page===2 && isValid.isGender || page===3 || page===4 && isValid.isActivity || page===5} 
+        active={page === 0 && isValid.isHeight 
+            || page===1 && isValid.isWeight 
+            || page===2 && isValid.isAge
+            || page===3 && isValid.isGender 
+            || page===4 
+            || page===5 && isValid.isActivity 
+            || page===6} 
         onClick={handleClickNext}/>
         </div>
         </div>
