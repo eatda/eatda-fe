@@ -64,7 +64,10 @@ export default function MyPage(){
         <Navigation text="마이페이지"/>
         <div className="container">
         <div className="profile">
+            {
+            myData?.character &&
             <Image alt="character" width={80} height={80} src={`/character/ch_${myData?.character}.svg`} priority/>
+            }
             <br/>
             <div className="profile_dia">
             {myData?.is_diabetes ? "당뇨인" : "당뇨인 가족"}
