@@ -2,6 +2,9 @@ import { useRouter } from "next/router"
 import { CTA1Button } from "../../components/common/Button"
 import { selectUser } from "../../store/userSlice";
 import { selectSurvey } from "../../store/surveySlice";
+import { selectToken } from "../../store/tokenSlice";
+import { putToken } from "../../store/tokenSlice";
+import { login } from "../../store/userSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 
@@ -36,10 +39,10 @@ export default function Loading(){
     const fetchSignup = async () => {
         const URL = `${process.env.NEXT_PUBLIC_API_ROOT}accounts/register/`;
         let bodyData : bodyDataI = {
-            social_id: user.usersocial_id,
-            // social_id: 'testd21s28257',
-            email: user.useremail,
-            // email: 'testnotdia@gmail.com',
+            // social_id: user.usersocial_id,
+            social_id: 'testtdt21s28257',
+            // email: user.useremail,
+            email: 'testntotdita@gmail.com',
             name: user.username,
             character: user.usercharacter,
             group: user.usergroup,
@@ -83,8 +86,18 @@ export default function Loading(){
             const {data, res} : any = await fetchSignup();
             if(data.ok){
                 setPage(1);
-                console.log('회원가입 완료');
                 console.log(res);
+                const reduxData = {
+                    usersocial_id: user.usersocial_id,
+                    useremail: user.useremail,
+                    username: user.username,
+                    usercharacter: res.user_info.character,
+                    isDiabetes: res.user_info.is_diabetes,
+                    usergroup: user.usergroup,
+                }
+                dispatch(login(reduxData));
+                dispatch(putToken({access_token: res.access_token}));
+                console.log('회원가입 완료');
             }else{
                 console.log('회원가입 실패');
                 console.log(res);
