@@ -57,10 +57,10 @@ export default function SignIn() {
         }
         dispatch(login(reduxData));
         dispatch(putToken({access_token: res.access_token}));
-        // router.replace('/home', undefined, { shallow: true });
+        router.replace('/home', undefined, { shallow: true });
       }else{
         console.log('회원가입하기')
-        // router.replace("/signup/create-place", undefined, { shallow: true });
+        router.replace("/signup/create-place", undefined, { shallow: true });
       }
     }
     if (session.status == "authenticated") {
