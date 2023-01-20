@@ -1,6 +1,8 @@
 import { useRouter } from "next/router";
+import { useState } from "react";
 import colors from "../../../styles";
 import { heart_full } from "../../assets/imagePath";
+import { heart_empty } from "../../assets/imagePath";
 
 interface RecipeCardType {
   type: string;
@@ -14,22 +16,25 @@ export default function RecipeCard({ type }: RecipeCardType) {
     type === "bottom" && router.pathname === "/recipe/ourpick"
       ? "visible"
       : "none";
+  const [like, setLike] = useState(true);
 
   const handleClick = (e:React.MouseEvent<HTMLDivElement>) => {
-    console.log('target:',e.target);
-    console.log('cur:',e.currentTarget);
-    router.push("/kitchen/detail/1");
+    const target = e.target as HTMLInputElement;
+    console.log(target.alt);
+    if(target.value === 'like' || target.alt === 'like'){
+      console.log('like');
+      setLike(prev => !prev);
+    }else{
+      router.push("/kitchen/detail/1");
+    }
   };
 
-  const handleLike = () => {
-    console.log("like");
-  };
   return (
     <>
       <div className="container">
         <div onClick={handleClick} className="itemImg">
-          <button onClick={handleLike} className="buttonImg" value="heart">
-            <img src={heart_full} alt="heart" />
+          <button className="buttonImg" value="like">
+            <img src={like ? heart_full : heart_empty} alt="like" />
           </button>
         </div>
         <div onClick={handleClick} className="itemText">
@@ -64,6 +69,9 @@ export default function RecipeCard({ type }: RecipeCardType) {
         .buttonImg {
           margin-right: 12px;
           margin-top: 10px;
+          border: none;
+          background: none;
+          height: 40px;
         }
 
         .like {
