@@ -41,11 +41,9 @@ export default function Signup(){
 
   useEffect(()=>{
     async function fetchCharacter(){
-      const groupId = user.group_id;
-      const URL = `${process.env.NEXT_PUBLIC_API_ROOT}users/character?groupid=${groupId}`;
+      const URL = `${process.env.NEXT_PUBLIC_API_ROOT}users/character?group=${user.usergroup}`;
       const response = await ( await fetch(URL)).json();
       setCharacterData(response);
-      console.log(response)
     }
 
     if(page === 2){
@@ -63,7 +61,7 @@ export default function Signup(){
         username: form.name,
         usercharacter: form.character,
         isDiabetes: form.sugar,
-        group_id: user.group_id,
+        usergroup: user.usergroup,
       }
       dispatch(login(reduxData));
       form.sugar ?

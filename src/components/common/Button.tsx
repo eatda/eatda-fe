@@ -225,6 +225,7 @@ export function CheckBox({name, text, value, select, onChange}:CheckBoxI){
         name={name}
         value={value}
         onChange={onChange}
+        checked={select}
         />
         <style jsx>{`
         .container {

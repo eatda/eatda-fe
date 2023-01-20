@@ -46,17 +46,17 @@ export default function SignIn() {
     async function fetchData(){
       const {data, res} : any = await fetchLogin();
       if(data.ok){
-        console.log('로그인 완료')
         const reduxData = {
           usersocial_id: user.usersocial_id,
           useremail: user.useremail,
           username: user.username,
           usercharacter: res.user_info.character,
           isDiabetes: res.user_info.is_diabetes,
-          group_id: user.group_id,
+          usergroup: user.usergroup,
         }
         dispatch(login(reduxData));
         dispatch(putToken({access_token: res.access_token}));
+        console.log('로그인 완료');
         router.replace('/home', undefined, { shallow: true });
       }else{
         console.log('회원가입하기')
@@ -70,7 +70,7 @@ export default function SignIn() {
         username: user.username,
         usercharacter: user.usercharacter,
         isDiabetes: user.isDiabetes,
-        group_id: user.group_id,
+        usergroup: user.usergroup,
       }
       dispatch(login(reduxData));
       fetchData();

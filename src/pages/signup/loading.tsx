@@ -10,11 +10,12 @@ interface bodyDataI {
     email: string;
     name: string;
     character: number;
-    group_id: number;
+    group: string;
     is_diabetes: boolean | null;
 
     height?: number;
     weight?: number;
+    age?: number;
     gender?: string | null;
     activity?: number | null;
     allergy?: string[] | null;
@@ -36,12 +37,12 @@ export default function Loading(){
         const URL = `${process.env.NEXT_PUBLIC_API_ROOT}accounts/register/`;
         let bodyData : bodyDataI = {
             social_id: user.usersocial_id,
-            // social_id: '262d21s28257',
+            // social_id: 'testd21s28257',
             email: user.useremail,
-            // email: 'ft2sd2@gmail.com',
+            // email: 'testnotdia@gmail.com',
             name: user.username,
             character: user.usercharacter,
-            group_id: user.group_id,
+            group: user.usergroup,
             is_diabetes: user.isDiabetes
         }
         if(user.isDiabetes){
@@ -49,6 +50,7 @@ export default function Loading(){
             console.log('survey:',survey);
             bodyData.height = survey.height;
             bodyData.weight = survey.weight;
+            bodyData.age = survey.age;
             bodyData.gender = survey.gender;
             bodyData.activity = survey.activity;
             bodyData.allergy = survey.allergy;

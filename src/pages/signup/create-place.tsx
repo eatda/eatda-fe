@@ -43,7 +43,7 @@ export default function CreatePlace(){
                 username: user.username,
                 usercharacter: user.usercharacter,
                 isDiabetes: user.isDiabetes,
-                group_id: response.id
+                usergroup: response.code
             }
             dispatch(login(reduxData));
         }

@@ -1,18 +1,62 @@
 import Navigation from "../../components/common/Navigation";
 import colors from "../../../styles";
-import { selectUser } from "../../store/userSlice";
-import { selectSurvey } from "../../store/surveySlice";
+import { selectToken } from "../../store/tokenSlice";
 import { useSelector, useDispatch } from "react-redux";
 import Image from "next/image";
+import { useEffect, useState } from "react";
+
+interface myDataI {
+    name: string;
+    character: number;
+    group: string;
+    is_diabetes: boolean;
+
+    age?: number;
+    gender?: string;
+    height?: number;
+    weight?: number;
+    allergy?: any;
+}
 
 export default function MyPage(){
-    const survey = useSelector(selectSurvey);
-    const user = useSelector(selectUser);
+    const [myData, setMyData] = useState<myDataI>();
+    const token = useSelector(selectToken);
 
-    console.log(user)
+    const fetchMyPage = async () => {
+        const URL = `${process.env.NEXT_PUBLIC_API_ROOT}users/info`;
+        try {
+            const data = await fetch(URL,{
+                method:'GET',
+                credentials: 'include',
+                headers: {
+                    Authorization : token.access_token
+                    // Authorization : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjc0MjExMjA3LCJpYXQiOjE2NzQyMDc2MDcsImp0aSI6IjQzYWYyMGVhNTNiMTQ1YjlhMzZkMjM0YmVhNjM1M2YzIiwidXNlcl9pZCI6ImEyYjhmZjlkLTBkMDUtNDU0Zi1iNmVhLThhMjFkNGJlZDk1NyJ9.cNB5DdU_FAluR73YEqOG2Zq_Emj16YCjZ7cee14JIrE"
+                }
+            })
+
+            const res = await data.json();
+            
+            return {data, res};
+
+        } catch (error) {
+            
+        }
+    }
+
+    useEffect(()=>{
+        async function fetchData(){
+            const {data, res} :any = await fetchMyPage();
+            if(data.ok){
+                setMyData(res);
+            }else{
+                console.log('error');
+            }
+        }
+        fetchData();
+    })
 
     const handleClick = () => {
-        
+        console.log('click');
     }
 
     return(
@@ -20,29 +64,42 @@ export default function MyPage(){
         <Navigation text="마이페이지"/>
         <div className="container">
         <div className="profile">
-            <Image alt="character" width={80} height={80} src={`/character/ch_${user.usercharacter}.svg`}/>
+            <Image alt="character" width={80} height={80} src={`/character/ch_${myData?.character}.svg`} priority/>
             <br/>
             <div className="profile_dia">
-            {user.isDiabetes ? "당뇨인" : "당뇨인 가족"}
+            {myData?.is_diabetes ? "당뇨인" : "당뇨인 가족"}
             </div>
             <br/>
-            {user.username}
+            {myData?.name}
+            {myData?.is_diabetes ? 
+            <>
             <br/>
-            {survey.height}cm {survey.weight}kg {survey.gender}
+            {myData?.height}cm {myData?.weight}kg {myData?.gender}
+            </>
+            :
+            <></>    
+            }
         </div>
         <br/>
-        <div className="info">
-            <div className="infoItem">
-            활동량 {survey.activity}
-            </div>
-            <br/>
-            <div className="line"></div>
-            <div className="infoItem">
-            알레르기
-            </div>
-        </div>
+            {
+                myData?.is_diabetes ?
+                <>
+                <div className="info">
+                <div className="infoItem">
+                활동량 
+                </div>
+                <br/>
+                <div className="line"></div>
+                <div className="infoItem">
+                알레르기 {myData?.allergy}
+                </div>
+                </div>
+                </>
+                :
+                <></>
+            }
         <br/>
-        <button>
+        <button onClick={handleClick}>
             초대코드 복사하기
         </button>
         <button>
@@ -73,7 +130,7 @@ export default function MyPage(){
         .profile_dia {
             background: ${colors.mainOrange};
             color: ${colors.grayWhite};
-            width: ${user.isDiabetes ? "60px" : "80px"};
+            width: ${myData?.is_diabetes ? "60px" : "80px"};
             border-radius: 2px;
         }
 
