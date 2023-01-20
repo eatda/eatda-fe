@@ -54,7 +54,6 @@ interface surveyI {
 export default function Survey({
     allergyResponse,
 } : surveyI){
-
     const dispatch = useDispatch();
     const survey = useSelector(selectSurvey); 
 
@@ -253,6 +252,7 @@ export default function Survey({
                             )
                         })
                     }
+                    <CheckBox name="allergy" value={allergyResponse.length + 1} text="해당 없음"/>
                     </>
                 )
             default:
