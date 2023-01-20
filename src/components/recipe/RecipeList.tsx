@@ -2,13 +2,14 @@ import RecipeCard from "./RecipeCard"
 
 interface RecipeListType {
     type: string;
+    data?: any;
+    name?: string;
 }
 
-export default function RecipeList({type} : RecipeListType){
+export default function RecipeList({type, data, name} : RecipeListType){
 
     const overflow_container = type === 'right' ? 'auto' : 'visible'
     const item_wrap = type === 'right' ? 'nowrap' : 'wrap'
-
 
     const dummyData = [
         {
@@ -42,6 +43,24 @@ export default function RecipeList({type} : RecipeListType){
         <div className="container">
             <div className="item">
             {
+                data ?
+                data.map((v:any,i:number)=>{
+                    // console.log('RL:',name,':',v)
+                    return(
+                        <RecipeCard
+                        key={i}
+                        type={type}
+                        name={name}
+
+                        image={v.diet.image}
+                        comment={v.diet.name.comment}
+                        title={v.diet.name.title}
+                        is_me_liked={v.is_me_liked}
+                        who_liked={v.who_liked}
+                        />
+                    )
+                })
+                :
                 dummyData.map((data,idx)=>{
                     return(
                         <RecipeCard
