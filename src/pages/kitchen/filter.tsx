@@ -10,9 +10,10 @@ export interface FilterType {
   name: string;
   category: number;
   image: string;
+  image_selected: string;
 }
 interface FilterDataType {
-  category: { id: number; name: string };
+  category: { id: number; name: string; query_name: string };
   filter: FilterType[];
 }
 interface FilterProps {
