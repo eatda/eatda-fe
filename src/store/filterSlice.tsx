@@ -9,12 +9,8 @@ const filterSlice = createSlice({
     addFilter: (state, action: PayloadAction<number>) => {
       state.push(action.payload);
     },
-    deleteFilter: (state, action) => {
-      state.filter((id) => id !== action.payload);
-    },
-    reset(state) {
-      return initialState;
-    },
+    deleteFilter: (state, action) =>
+      state.filter((id) => id !== action.payload),
   },
 });
 

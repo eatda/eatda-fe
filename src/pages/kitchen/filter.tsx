@@ -54,9 +54,7 @@ export default function Filter({ filterData }: FilterProps) {
     }
   };
 
-  const setFilter = () => {
-    dispatch(filterSlice.actions.reset());
-  };
+  const setFilter = () => {};
 
   // const clickFilter = (selected: boolean, filter: FilterType) => {
   //   if (selected) {
