@@ -1,36 +1,30 @@
-import { combineReducers, configureStore } from '@reduxjs/toolkit'
-import userSlice from './userSlice';
-import surveySlice from './surveySlice';
-import tokenSlice from './tokenSlice';
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import userSlice from "./userSlice";
+import surveySlice from "./surveySlice";
+import tokenSlice from "./tokenSlice";
 
-import storage from 'redux-persist/lib/storage'
-import { persistReducer, persistStore } from 'redux-persist'
-import thunk from 'redux-thunk';
+import storage from "redux-persist/lib/storage";
+import { persistReducer, persistStore } from "redux-persist";
+import thunk from "redux-thunk";
 
 const persistConfig = {
-  key: 'root',
+  key: "root",
   storage,
-}
+};
 
-const reducer = combineReducers({
-  user: userSlice.reducer,
-  survey: surveySlice.reducer,
-  token: tokenSlice.reducer
-})
-
-const persistedReducer = persistReducer(persistConfig, reducer);
-
-export function makeStore(){
-  return configureStore({
-    reducer: persistedReducer,
-    middleware: [thunk]
-  })
-}
-
-const store = makeStore();
-
-export type AppState = ReturnType<typeof store.getState>
-
+const store = configureStore({
+  reducer: persistReducer(
+    persistConfig,
+    combineReducers({
+      user: userSlice.reducer,
+      survey: surveySlice.reducer,
+      token: tokenSlice.reducer,
+    })
+  ),
+  middleware: [thunk],
+});
 export default store;
+
+export type AppState = ReturnType<typeof store.getState>;
 
 export const persistor = persistStore(store);
