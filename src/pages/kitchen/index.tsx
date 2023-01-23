@@ -5,7 +5,8 @@ import Header from "../../components/common/Header"
 import { useRouter } from "next/router"
 import { selectToken } from "../../store/tokenSlice";
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
+import Image from "next/image"
 
 const dummyData = [
 	{
@@ -100,7 +101,9 @@ export default function Recipe(){
         <Header text="주방"/>
         <MiniHeader left="추천 식사" right="Our Pick!" leftURL="/kitchen" rightURL="/kitchen/ourpick"/>
         <div className="container">
-            나에게 딱 맞는 레시피! <br/>
+            <div className="textHeader">
+            나에게 딱 맞는 레시피!
+            </div>
             <div className="margin">
                 {
                     mineList ?
@@ -110,15 +113,18 @@ export default function Recipe(){
                     data={mineList}
                     />
                     :
-                    "없을 때 이미지"
+                    <Image alt="character" width={361} height={152} src={`/img/mineEmpty.svg`} priority/>
                 }
             </div>
         </div>
         <div className="bar" />
         <div className="container">
+            <div className="textHeader">
             오늘 이 레시피는 어때요?
-            <br/>
-            <button onClick={handleClick}>필터</button>
+            </div>
+            <button onClick={handleClick}>
+                <Image alt="character" width={56} height={24} src={`/button/filter.svg`} priority/>
+            </button>
             <RecipeList 
             type="recommend"
             data={filterList}
@@ -134,23 +140,29 @@ export default function Recipe(){
                 background: black;
             }
             .bar {
-                background: ${colors.grayBackgroundSub};
-                height: 8px;
+                background: #F8F8F8;
+                height: 4px;
                 width: 390px;
-
+                margin-top: 12px;
                 margin-bottom: 18px;
             }
             .margin {
                 margin-right: 20px
             }
             button {
+                color: ${colors.graySubTitle};
                 width: 350px;
                 height: 34px;
                 background: ${colors.grayWhite};
                 margin-top: 12px;
                 margin-bottom: 8px;
-                border: solid ${colors.grayBackgroundSub} 2px;
+                border: solid ${colors.grayBackgroundSub} 1.5px;
                 border-radius: 20px;
+            }
+
+            .textHeader {
+                font-size: 20px;
+                font-weight: 700;
             }
         `}</style>
         </div>

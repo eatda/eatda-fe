@@ -65,10 +65,8 @@ export default function RecipeCard({ id, type, popular, image, comment, title, i
     const target = e.target as HTMLInputElement;
     if(target.value === 'like' || target.alt === 'like'){
       if(like){ // like 삭제
-        console.log('delete~');
         fetchData('DELETE');
       }else{
-        console.log('post~')
         fetchData('POST');
       }
       setLike(!like);
@@ -104,7 +102,7 @@ export default function RecipeCard({ id, type, popular, image, comment, title, i
               who_liked?.map((v:number,i:number)=>{
                 return(
                   <div key={v}>
-                    <Image alt="character" width={20} height={20} src={`/character/ch_${v}.svg`} priority/>
+                    <Image alt="character" width={20} height={20} src={`/character/like_${v}.svg`} priority/>
                   </div>
                 )
               })
@@ -112,8 +110,12 @@ export default function RecipeCard({ id, type, popular, image, comment, title, i
           </div>
         </div>
         <div onClick={handleClick} className="itemText">
+          <div className="textComment">
           {comment}
+          </div>
+          <div className="textTitle">
           {title}
+          </div>
         </div>
       </div>
       <style jsx>{`
@@ -155,16 +157,34 @@ export default function RecipeCard({ id, type, popular, image, comment, title, i
         .like {
           display: ${display};
           flex-direction: row-reverse;
-          width: 107px;
-          height: 30px;
+          align-items: center;
+          justify-content: center;
+          width: ${who_liked?.length * 20 + 16}px;
+          height: 32px;
+          line-height: 13px;
           border-radius: 15px;
           margin-top: 6px;
           margin-right: 8px;
           margin-bottom: 8px;
-          background: ${colors.grayBackgroundSub};
           float: right;
           color: ${colors.graySubTitle};
+          background: ${colors.grayBackgroundSub};
+          background-color: rgba( 255, 255, 255, 0.5 );
         }
+
+        .textComment {
+          margin-left: 6px;
+          font-size: 14px;
+          font-weight: 600;
+          color: ${colors.graySubTitle2};
+        }
+        .textTitle {
+          margin-left: 6px;
+          font-size: 16px;
+          font-weight: 600;
+          color: black;
+        }
+
       `}</style>
     </>
   );
