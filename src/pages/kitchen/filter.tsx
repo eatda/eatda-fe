@@ -53,7 +53,7 @@ export default function Filter({ filterData }: FilterProps) {
     // requestMap -> requestQuery 문자열로 바꾸기
     let requestQuery: string = "";
     requestMap.forEach((filters, category) => {
-      requestQuery += category + "=";
+      requestQuery += filterData[category - 1].category.query_name + "=";
       filters.forEach((filter) => {
         requestQuery += filter + ",";
       });

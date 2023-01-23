@@ -39,7 +39,7 @@ export default function Recipe() {
   };
 
   const fetchFilter = async () => {
-    const URL = `${process.env.NEXT_PUBLIC_API_ROOT}diets?category&flavor&carbo&meat&veget`;
+    const URL = `${process.env.NEXT_PUBLIC_API_ROOT}diets?${filter}`;
     try {
       const data = await fetch(URL, {
         method: "GET",
