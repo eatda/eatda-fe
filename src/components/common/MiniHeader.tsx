@@ -17,35 +17,27 @@ export default function MiniHeader({left,right,leftURL,rightURL,button,buttonURL
 
   const handleClick = () => {
     if (buttonURL){
-      router.push(buttonURL)
+      router.replace(buttonURL)
+    }
+  }
+
+  const handleButtonClick = () => {
+    if(router.pathname === leftURL){
+      router.replace(rightURL);
+    }else{
+      router.replace(leftURL);
     }
   }
 
   return (
     <>
       <div className='container'>
-        <div className='item'>
-          <Link
-            href={{
-              pathname: leftURL,
-            }}
-          >
-            <div className='text'>
-            {left}
-            </div>
-          </Link>
-          <div className={router.pathname === leftURL ? 'true' : 'false'}></div>
-        </div>
-        <div className='item'>
-          <Link
-            href={{
-              pathname: rightURL,
-            }}
-          >
-            {right}
-          </Link>
-          <div className={router.pathname === rightURL ? 'true' : 'false'}></div>
-        </div>
+        <button 
+        onClick={handleButtonClick} 
+        className={router.pathname === rightURL ? 'trueButton' : 'falseButton'}>{left}</button>
+        <button 
+        onClick={handleButtonClick} 
+        className={router.pathname === leftURL ? 'trueButton' : 'falseButton'}>{right}</button>
       </div>
       {
         button?
@@ -60,27 +52,6 @@ export default function MiniHeader({left,right,leftURL,rightURL,button,buttonURL
           justify-content: center;
           margin-top: 25px;
         }
-        .item {
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-        }
-        .text {
-          // color: white;
-          text-decoration: none;
-        }
-
-        .true {
-          height: 2px;
-          background: ${colors.mainOrange};
-          width: 178px;
-        }
-        .false {
-          height: 2px;
-          background: ${colors.graySubTitle2};
-          width: 178px;
-        }
 
         .buttonStyle {
           width: 350px;
@@ -92,6 +63,25 @@ export default function MiniHeader({left,right,leftURL,rightURL,button,buttonURL
           margin-bottom: 8px;
           border: none;
           border-radius: 20px;
+        }
+
+        .trueButton {
+          border: none;
+          border-bottom: 2px solid ${colors.graySubTitle2};
+          color: ${colors.graySubTitle2};
+          background: none;
+          width: 178px;
+          font-size: 16px;
+          font-weight: 700;
+        }
+        .falseButton {
+          border: none;
+          border-bottom: 2px solid ${colors.mainOrange};
+          color: ${colors.mainOrange};
+          background: none;
+          width: 178px;
+          font-size: 16px;
+          font-weight: 700;
         }
       `}</style>
     </>

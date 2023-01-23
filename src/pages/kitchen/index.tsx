@@ -3,28 +3,132 @@ import colors from "../../../styles"
 import MiniHeader from "../../components/common/MiniHeader"
 import Header from "../../components/common/Header"
 import { useRouter } from "next/router"
+import { selectToken } from "../../store/tokenSlice";
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import Image from "next/image"
+
+const dummyData = [
+	{
+        "id": 1,
+        "name": {
+            "title": "미니채소오믈렛",
+            "comment": "식탁에 다채로운 재미를"
+        },
+        "image": "https://server.eat-da.co.kr/media/default.jpg"
+    },
+    {
+        "id": 2,
+        "name": {
+            "title": "참치마요덮밥",
+            "comment": "맛있는거 참지마요"
+        },
+        "image": "https://server.eat-da.co.kr/media/default.jpg"
+    }
+]
 
 export default function Recipe(){
     const router =useRouter();
+    const token = useSelector(selectToken);
+    const [filterList, setFilterList] = useState();
+    const [mineList, setMineList] = useState();
+
     const handleClick = () => {
         router.push('/kitchen/filter');
     }
+
+    const fetchMine = async () => {
+        const URL = `${process.env.NEXT_PUBLIC_API_ROOT}users/diet/fit/`;
+        try {
+            const data =await fetch(URL,{
+                method: 'GET',
+                credentials: 'include',
+                headers: {
+                    Authorization : token.access_token
+                }
+            })
+
+            const res = data.json();
+            return {data, res};
+        } catch (error) {
+            return error;
+        }   
+    }
+
+    const fetchFilter = async () => {
+        const URL = `${process.env.NEXT_PUBLIC_API_ROOT}diets?category&flavor&carbo&meat&veget`;
+        try {
+            const data = await fetch(URL,{
+                method:'GET',
+                credentials:'include',
+                headers: {
+                    Authorization : token.access_token
+                }
+            })
+
+            const res = await data.json();
+
+            return {data, res};
+
+        } catch (error) {
+            return error;
+        }
+    }
+
+    useEffect(()=>{
+        async function fetchDataFilter(){
+            const {data, res} : any = await fetchFilter();
+            if(data.ok){
+                setFilterList(res);
+            }else{
+                console.log('filter error');
+            }
+        }
+        async function fetchDataMine(){
+            const {data,res} : any = await fetchMine();
+            if(data.ok){
+                setMineList(res);
+            }else{
+                console.log('mine error');
+            }
+        }
+        fetchDataFilter();
+        fetchDataMine();
+    },[])
+
     return(
         <div className="box">
         <Header text="주방"/>
         <MiniHeader left="추천 식사" right="Our Pick!" leftURL="/kitchen" rightURL="/kitchen/ourpick"/>
         <div className="container">
-            나에게 딱 맞는 레시피! <br/>
+            <div className="textHeader">
+            나에게 딱 맞는 레시피!
+            </div>
             <div className="margin">
-                <RecipeList type="right"/>
+                {
+                    mineList ?
+                    <RecipeList 
+                    type="recommend"
+                    mine={true}
+                    data={mineList}
+                    />
+                    :
+                    <Image alt="character" width={361} height={152} src={`/img/mineEmpty.svg`} priority/>
+                }
             </div>
         </div>
         <div className="bar" />
         <div className="container">
+            <div className="textHeader">
             오늘 이 레시피는 어때요?
-            <br/>
-            <button onClick={handleClick}>필터</button>
-            <RecipeList type="bottom"/>
+            </div>
+            <button onClick={handleClick}>
+                <Image alt="character" width={56} height={24} src={`/button/filter.svg`} priority/>
+            </button>
+            <RecipeList 
+            type="recommend"
+            data={filterList}
+            />
         </div>
         <style jsx>{`
             .box {
@@ -36,23 +140,29 @@ export default function Recipe(){
                 background: black;
             }
             .bar {
-                background: ${colors.grayBackgroundSub};
-                height: 8px;
+                background: #F8F8F8;
+                height: 4px;
                 width: 390px;
-
+                margin-top: 12px;
                 margin-bottom: 18px;
             }
             .margin {
                 margin-right: 20px
             }
             button {
+                color: ${colors.graySubTitle};
                 width: 350px;
                 height: 34px;
                 background: ${colors.grayWhite};
                 margin-top: 12px;
                 margin-bottom: 8px;
-                border: solid ${colors.grayBackgroundSub} 2px;
+                border: solid ${colors.grayBackgroundSub} 1.5px;
                 border-radius: 20px;
+            }
+
+            .textHeader {
+                font-size: 20px;
+                font-weight: 700;
             }
         `}</style>
         </div>

@@ -1,3 +1,10 @@
 export const pasta = "/img/pasta.png";
 export const back_button = "/button/back.svg";
 export const heart_full = "/button/heart_full.svg";
+export const heart_empty = "/button/heart_empty.svg";
+export const ch_0 = "/character/ch_0.svg";
+export const ch_1 = "/character/ch_1.svg";
+export const ch_2 = "/character/ch_2.svg";
+export const ch_3 = "/character/ch_3.svg";
+export const ch_4 = "/character/ch_4.svg";
+export const ch_5 = "/character/ch_5.svg";

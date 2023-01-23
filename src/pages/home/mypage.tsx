@@ -39,8 +39,8 @@ export default function MyPage(){
             return {data, res};
 
         } catch (error) {
-            
-        }
+            return error;
+        }   
     }
 
     useEffect(()=>{
@@ -64,7 +64,10 @@ export default function MyPage(){
         <Navigation text="마이페이지"/>
         <div className="container">
         <div className="profile">
+            {
+            myData?.character &&
             <Image alt="character" width={80} height={80} src={`/character/ch_${myData?.character}.svg`} priority/>
+            }
             <br/>
             <div className="profile_dia">
             {myData?.is_diabetes ? "당뇨인" : "당뇨인 가족"}
@@ -100,7 +103,7 @@ export default function MyPage(){
             }
         <br/>
         <button onClick={handleClick}>
-            초대코드 복사하기
+            초대코드 복사하기 {myData?.group}
         </button>
         <button>
             서비스 평가 및 정식 출시 알림 받기

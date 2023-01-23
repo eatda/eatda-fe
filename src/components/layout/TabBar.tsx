@@ -42,14 +42,14 @@ export default function TabBar() {
               <Image
                 src={`/tabbar/${item.src}${isSelected ? "" : "_empty"}.svg`}
                 alt={item.title}
-                width={26}
-                height={26}
+                width={30}
+                height={45}
                 priority
               />
               <br />
-              <div className={isSelected ? "select" : "empty"}>
+              {/* <div className={isSelected ? "select" : "empty"}>
                 {item.title}
-              </div>
+              </div> */}
             </div>
           );
         })}

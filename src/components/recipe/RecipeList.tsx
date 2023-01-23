@@ -1,52 +1,62 @@
-import RecipeCard from "./RecipeCard"
+import RecipeCard from "./RecipeCard";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
+
+const sliderSettings = {
+    dots: true,
+    infinite: true,
+    spped: 500,
+    slideToShow: 1,
+    slideToScroll: 1,
+};
 
 interface RecipeListType {
     type: string;
+    data?: any;
+    popular?: boolean;
+    mine?: boolean;
 }
 
-export default function RecipeList({type} : RecipeListType){
+export default function RecipeList({type, data, popular, mine} : RecipeListType){
 
-    const overflow_container = type === 'right' ? 'auto' : 'visible'
-    const item_wrap = type === 'right' ? 'nowrap' : 'wrap'
-
-
-    const dummyData = [
-        {
-            id:1,
-            name: '11'
-        },
-        {
-            id:2,
-            name: '22'
-        },
-        {
-            id:3,
-            name: '33'
-        },
-        {
-            id:4,
-            name: '44'
-        },
-        {
-            id:5,
-            name: '55'
-        },
-        {
-            id:6,
-            name: '66'
-        },
-    ]
+    const overflow_container = type === 'pick' || mine ? 'auto' : 'visible'
+    const item_wrap = type === 'pick' || mine ? 'nowrap' : 'wrap'
 
     return(
         <>
         <div className="container">
             <div className="item">
             {
-                dummyData.map((data,idx)=>{
+                type === 'pick' ?
+                data?.map((v:any,i:number)=>{
                     return(
                         <RecipeCard
-                        key={idx}
+                        key={i}
+                        id={v.diet.id}
                         type={type}
+                        popular={popular}
+
+                        image={v.diet.image}
+                        comment={v.diet.name.comment}
+                        title={v.diet.name.title}
+                        is_me_liked={v.is_me_liked}
+                        who_liked={v.who_liked}
+                        />
+                    )
+                })
+                :
+                data?.map((v:any,i:number)=>{
+                    return(
+                        <RecipeCard
+                        key={v.id}
+                        id={v.id}
+                        type={type}
+
+                        image={v.image}
+                        title={v.name.title}
+                        comment={v.name.comment}
+                        is_me_liked={v.is_me_liked}
                         />
                     )
                 })
@@ -59,7 +69,7 @@ export default function RecipeList({type} : RecipeListType){
                 flex-direction: column;
                 
                 height: auto;
-                margin-bottom: 24px;
+                // margin-bottom: 24px;
 
                 overflow: ${overflow_container};
                 -ms-overflow-style: none; /* 인터넷 익스플로러 */
