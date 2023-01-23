@@ -1,6 +1,9 @@
+import { useRouter } from "next/router";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import Navigation from "../../components/common/Navigation";
 import FilterButton from "../../components/filter/FilterButton";
+import filterSlice from "../../store/filterSlice";
 
 export interface FilterType {
   id: number;
@@ -17,6 +20,9 @@ interface FilterProps {
 }
 
 export default function Filter({ filterData }: FilterProps) {
+  const dispatch = useDispatch();
+  const router = useRouter();
+
   const [selectedFilter, setSelectedFilter] = useState<Set<FilterType>>(
     new Set()
   );
@@ -28,7 +34,6 @@ export default function Filter({ filterData }: FilterProps) {
     } else {
       setSelectedFilter(selectedFilter.add(filter));
     }
-    console.log(selectedFilter);
   };
 
   const setFilter = () => {
@@ -55,7 +60,10 @@ export default function Filter({ filterData }: FilterProps) {
       requestQuery += "&";
     });
     requestQuery = requestQuery.slice(0, -1);
-    console.log(requestQuery);
+
+    // 리덕스로 관리
+    dispatch(filterSlice.actions.setFilterQuery(requestQuery));
+    router.back();
   };
 
   return (
