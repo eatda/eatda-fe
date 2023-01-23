@@ -39,8 +39,8 @@ export default function MyPage(){
             return {data, res};
 
         } catch (error) {
-            
-        }
+            return error;
+        }   
     }
 
     useEffect(()=>{
@@ -103,7 +103,7 @@ export default function MyPage(){
             }
         <br/>
         <button onClick={handleClick}>
-            초대코드 복사하기
+            초대코드 복사하기 {myData?.group}
         </button>
         <button>
             서비스 평가 및 정식 출시 알림 받기

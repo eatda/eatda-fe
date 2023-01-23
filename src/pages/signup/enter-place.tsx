@@ -1,10 +1,16 @@
 import { useRouter } from "next/router";
 import React, { useEffect, useRef, useState } from "react";
 import colors from "../../../styles";
+import { login } from "../../store/userSlice";
+import { selectUser } from "../../store/userSlice";
+import { useSelector, useDispatch } from "react-redux";
+
 import { CTA1Button } from "../../components/common/Button";
 
 export default function EnterPlace(){
     const router = useRouter();
+    const dispatch = useDispatch();
+    const user = useSelector(selectUser);
     const codeLength = 6;
     const inputRef = useRef<null[] | HTMLDivElement[]>([]);
     const idxArray = Array.from({length: codeLength}, (v,i) => i);
@@ -28,6 +34,15 @@ export default function EnterPlace(){
         if(flag){
             console.log(code);
             console.log('확인')
+            const reduxData = {
+                usersocial_id: user.usersocial_id,
+                useremail: user.useremail,
+                username: user.username,
+                usercharacter: user.usercharacter,
+                isDiabetes: user.isDiabetes,
+                usergroup: code.join(''),
+            }
+            dispatch(login(reduxData));
             // router.replace('/signup');
         }
     },[test])

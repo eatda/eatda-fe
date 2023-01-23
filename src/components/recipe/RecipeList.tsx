@@ -3,13 +3,14 @@ import RecipeCard from "./RecipeCard"
 interface RecipeListType {
     type: string;
     data?: any;
-    name?: string;
+    popular?: boolean;
+    mine?: boolean;
 }
 
-export default function RecipeList({type, data, name} : RecipeListType){
+export default function RecipeList({type, data, popular, mine} : RecipeListType){
 
-    const overflow_container = type === 'right' ? 'auto' : 'visible'
-    const item_wrap = type === 'right' ? 'nowrap' : 'wrap'
+    const overflow_container = type === 'pick' || mine ? 'auto' : 'visible'
+    const item_wrap = type === 'pick' || mine ? 'nowrap' : 'wrap'
 
     const dummyData = [
         {
@@ -43,14 +44,15 @@ export default function RecipeList({type, data, name} : RecipeListType){
         <div className="container">
             <div className="item">
             {
-                data ?
-                data.map((v:any,i:number)=>{
+                type === 'pick' ?
+                data?.map((v:any,i:number)=>{
                     // console.log('RL:',name,':',v)
                     return(
                         <RecipeCard
                         key={i}
+                        id={v.diet.id}
                         type={type}
-                        name={name}
+                        popular={popular}
 
                         image={v.diet.image}
                         comment={v.diet.name.comment}
@@ -61,11 +63,17 @@ export default function RecipeList({type, data, name} : RecipeListType){
                     )
                 })
                 :
-                dummyData.map((data,idx)=>{
+                data?.map((v:any,i:number)=>{
                     return(
                         <RecipeCard
-                        key={idx}
+                        key={v.id}
+                        id={v.id}
                         type={type}
+
+                        image={v.image}
+                        title={v.name.title}
+                        comment={v.name.comment}
+                        is_me_liked={v.is_me_liked}
                         />
                     )
                 })

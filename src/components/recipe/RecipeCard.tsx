@@ -5,10 +5,13 @@ import { heart_full } from "../../assets/imagePath";
 import { heart_empty } from "../../assets/imagePath";
 import { ch_0, ch_1, ch_2, ch_3, ch_4, ch_5 } from "../../assets/imagePath";
 import Image from "next/image";
+import { selectToken } from "../../store/tokenSlice";
+import { useSelector, useDispatch } from "react-redux";
 
 interface RecipeCardType {
+  id: number;
   type: string;
-  name?: string;
+  popular?: boolean;
 
   image?: string;
   comment?: string;
@@ -18,29 +21,76 @@ interface RecipeCardType {
   who_liked?: any;
 }
 
-export default function RecipeCard({ type, name, image, comment, title, is_me_liked, who_liked }: RecipeCardType) {
+export default function RecipeCard({ id, type, popular, image, comment, title, is_me_liked, who_liked }: RecipeCardType) {
   const router = useRouter();
+  const token = useSelector(selectToken);
   const marginBottom =
-    name === "popular" && router.pathname === "/kitchen/ourpick" ? "45px" : "9px";
+    popular === true && router.pathname === "/kitchen/ourpick" ? "45px" : "9px";
   const display =
-    name === "popular" && router.pathname === "/kitchen/ourpick"
+    popular === true && router.pathname === "/kitchen/ourpick"
       ? "flex"
       : "none";
   const [like, setLike] = useState<boolean | undefined>(()=>is_me_liked);
 
-  console.log(type, name, image, comment, title, is_me_liked, who_liked, like)
-  useEffect(()=>{
-    setLike(()=>is_me_liked);
-  },[like])
+  // console.log(id,type, name, image, comment, title, is_me_liked, who_liked, like)
+
+  const fetchLike = async (method:string) => {
+    const URL = `${process.env.NEXT_PUBLIC_API_ROOT}users/diet/like/`;
+    let bodyData = {
+      diet_id: id
+    }
+    try {
+      const data = await fetch(URL, {
+        method: method,
+        credentials: 'include',
+        headers: {
+          "Content-Type": "application/json",
+          Authorization : token.access_token
+        },
+        body: JSON.stringify(bodyData)
+      })
+
+      const res = await data.json();
+
+      return {data, res};
+    } catch (error) {
+      return error;
+    }
+  }
 
   const handleClick = (e:React.MouseEvent<HTMLDivElement>) => {
+    async function fetchData(method: string){
+      const {data, res} : any = await fetchLike(method);
+    }
     const target = e.target as HTMLInputElement;
     if(target.value === 'like' || target.alt === 'like'){
-      setLike(prev => !prev);
+      if(like){ // like 삭제
+        console.log('delete~');
+        fetchData('DELETE');
+      }else{
+        console.log('post~')
+        fetchData('POST');
+      }
+      setLike(!like);
     }else{
       router.push("/kitchen/detail/1");
     }
   };
+
+//   useEffect(() => {
+//     router.events.on('routeChangeStart', (url, { shallow }) => {
+//           console.log(`routing to ${url}`, `is shallow routing: ${shallow}`);
+//           if(router.pathname === '/kitchen'){
+//             console.log('yes');
+//           }
+//     });
+
+//     return () => {
+//         router.events.off('routeChangeStart', () => {
+//         console.log('unsubscribed');
+//         });
+//     };
+// }, []);
 
   return (
     <>
@@ -86,6 +136,7 @@ export default function RecipeCard({ type, name, image, comment, title, is_me_li
           flex-direction: column;
           align-items: flex-end;
           justify-content: space-between;
+          background-image: url(${image});
         }
         .itemText {
           height: 65px;

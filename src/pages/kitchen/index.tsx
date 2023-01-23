@@ -3,12 +3,98 @@ import colors from "../../../styles"
 import MiniHeader from "../../components/common/MiniHeader"
 import Header from "../../components/common/Header"
 import { useRouter } from "next/router"
+import { selectToken } from "../../store/tokenSlice";
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect, useState } from "react"
+
+const dummyData = [
+	{
+        "id": 1,
+        "name": {
+            "title": "미니채소오믈렛",
+            "comment": "식탁에 다채로운 재미를"
+        },
+        "image": "https://server.eat-da.co.kr/media/default.jpg"
+    },
+    {
+        "id": 2,
+        "name": {
+            "title": "참치마요덮밥",
+            "comment": "맛있는거 참지마요"
+        },
+        "image": "https://server.eat-da.co.kr/media/default.jpg"
+    }
+]
 
 export default function Recipe(){
     const router =useRouter();
+    const token = useSelector(selectToken);
+    const [filterList, setFilterList] = useState();
+    const [mineList, setMineList] = useState();
+
     const handleClick = () => {
         router.push('/kitchen/filter');
     }
+
+    const fetchMine = async () => {
+        const URL = `${process.env.NEXT_PUBLIC_API_ROOT}users/diet/fit/`;
+        try {
+            const data =await fetch(URL,{
+                method: 'GET',
+                credentials: 'include',
+                headers: {
+                    Authorization : token.access_token
+                }
+            })
+
+            const res = data.json();
+            return {data, res};
+        } catch (error) {
+            return error;
+        }   
+    }
+
+    const fetchFilter = async () => {
+        const URL = `${process.env.NEXT_PUBLIC_API_ROOT}diets?category&flavor&carbo&meat&veget`;
+        try {
+            const data = await fetch(URL,{
+                method:'GET',
+                credentials:'include',
+                headers: {
+                    Authorization : token.access_token
+                }
+            })
+
+            const res = await data.json();
+
+            return {data, res};
+
+        } catch (error) {
+            return error;
+        }
+    }
+
+    useEffect(()=>{
+        async function fetchDataFilter(){
+            const {data, res} : any = await fetchFilter();
+            if(data.ok){
+                setFilterList(res);
+            }else{
+                console.log('filter error');
+            }
+        }
+        async function fetchDataMine(){
+            const {data,res} : any = await fetchMine();
+            if(data.ok){
+                setMineList(res);
+            }else{
+                console.log('mine error');
+            }
+        }
+        fetchDataFilter();
+        fetchDataMine();
+    },[])
+
     return(
         <div className="box">
         <Header text="주방"/>
@@ -16,7 +102,16 @@ export default function Recipe(){
         <div className="container">
             나에게 딱 맞는 레시피! <br/>
             <div className="margin">
-                <RecipeList type="right"/>
+                {
+                    mineList ?
+                    <RecipeList 
+                    type="recommend"
+                    mine={true}
+                    data={mineList}
+                    />
+                    :
+                    "없을 때 이미지"
+                }
             </div>
         </div>
         <div className="bar" />
@@ -24,7 +119,10 @@ export default function Recipe(){
             오늘 이 레시피는 어때요?
             <br/>
             <button onClick={handleClick}>필터</button>
-            <RecipeList type="bottom"/>
+            <RecipeList 
+            type="recommend"
+            data={filterList}
+            />
         </div>
         <style jsx>{`
             .box {
