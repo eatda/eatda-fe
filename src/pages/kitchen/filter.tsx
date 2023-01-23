@@ -1,9 +1,13 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Navigation from "../../components/common/Navigation";
 import FilterButton from "../../components/filter/FilterButton";
-import filterSlice from "../../store/filterSlice";
+import filterSlice, {
+  addFilter,
+  deleteFilter,
+  selectFilter,
+} from "../../store/filterSlice";
 
 export interface FilterType {
   id: number;
@@ -11,6 +15,7 @@ export interface FilterType {
   category: number;
   image: string;
   image_selected: string;
+  selected?: boolean;
 }
 interface FilterDataType {
   category: { id: number; name: string; query_name: string };
@@ -22,50 +27,76 @@ interface FilterProps {
 
 export default function Filter({ filterData }: FilterProps) {
   const dispatch = useDispatch();
+  const selector = useSelector(selectFilter);
   const router = useRouter();
 
-  const [selectedFilter, setSelectedFilter] = useState<Set<FilterType>>(
-    new Set()
-  );
+  let selectedFilter: number[] = selector;
+  console.log(selectedFilter);
 
+  // 필터 데이터 선택여부 초기화
+  filterData.forEach((item) => {
+    item.filter.forEach((filter) => {
+      filter.selected =
+        selectedFilter.find(
+          (selectedFilterId) => selectedFilterId == filter.id
+        ) != undefined;
+    });
+  });
+
+  // 필터 클릭 시
   const clickFilter = (selected: boolean, filter: FilterType) => {
     if (selected) {
-      selectedFilter.delete(filter);
-      setSelectedFilter(selectedFilter);
+      filter.selected = false;
+      dispatch(deleteFilter(filter.id));
     } else {
-      setSelectedFilter(selectedFilter.add(filter));
+      filter.selected = true;
+      dispatch(addFilter(filter.id));
     }
   };
 
   const setFilter = () => {
-    // 선택된 필터 데이터 requestMap에 맵으로 정리
-    let requestMap = new Map<number, number[]>();
-    selectedFilter.forEach((filter) => {
-      const category = filter.category;
-      const prevList = requestMap.get(category);
-      if (typeof prevList == "undefined") {
-        requestMap.set(category, [filter.id]);
-      } else {
-        requestMap.set(category, prevList.concat(filter.id));
-      }
-    });
-
-    // requestMap -> requestQuery 문자열로 바꾸기
-    let requestQuery: string = "";
-    requestMap.forEach((filters, category) => {
-      requestQuery += filterData[category - 1].category.query_name + "=";
-      filters.forEach((filter) => {
-        requestQuery += filter + ",";
-      });
-      requestQuery = requestQuery.slice(0, -1);
-      requestQuery += "&";
-    });
-    requestQuery = requestQuery.slice(0, -1);
-
-    // 리덕스로 관리
-    dispatch(filterSlice.actions.setFilterQuery(requestQuery));
-    router.back();
+    dispatch(filterSlice.actions.reset());
   };
+
+  // const clickFilter = (selected: boolean, filter: FilterType) => {
+  //   if (selected) {
+  //     selectedFilter.delete(filter);
+  //     setSelectedFilter(selectedFilter);
+  //   } else {
+  //     setSelectedFilter(selectedFilter.add(filter));
+  //   }
+  // };
+
+  // const setFilter = () => {
+  //   // 선택된 필터 데이터 requestMap에 맵으로 정리
+  //   let requestMap = new Map<number, number[]>();
+  //   selectedFilter.forEach((filter) => {
+  //     const category = filter.category;
+  //     const prevList = requestMap.get(category);
+  //     if (typeof prevList == "undefined") {
+  //       requestMap.set(category, [filter.id]);
+  //     } else {
+  //       requestMap.set(category, prevList.concat(filter.id));
+  //     }
+  //   });
+
+  //   console.log(requestMap);
+  //   // requestMap -> requestQuery 문자열로 바꾸기
+  //   let requestQuery: string = "";
+  //   requestMap.forEach((filters, category) => {
+  //     requestQuery += filterData[category - 1].category.query_name + "=";
+  //     filters.forEach((filter) => {
+  //       requestQuery += filter + ",";
+  //     });
+  //     requestQuery = requestQuery.slice(0, -1);
+  //     requestQuery += "&";
+  //   });
+  //   requestQuery = requestQuery.slice(0, -1);
+
+  //   // 리덕스로 관리
+  //   dispatch(filterSlice.actions.setFilterQuery(requestQuery));
+  //   router.back();
+  // };
 
   return (
     <>
@@ -81,6 +112,7 @@ export default function Filter({ filterData }: FilterProps) {
                     key={filter.id}
                     filter={filter}
                     clickFilter={clickFilter}
+                    clicked={filter.selected}
                   />
                 ))}
               </div>

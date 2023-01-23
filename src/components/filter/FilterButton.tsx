@@ -6,12 +6,14 @@ import { FilterType } from "../../pages/kitchen/filter";
 interface FilterButtonProps {
   filter: FilterType;
   clickFilter: any;
+  clicked: boolean | undefined;
 }
 export default function FilterButton({
   filter,
   clickFilter,
+  clicked,
 }: FilterButtonProps) {
-  const [selected, setSelected] = useState(false);
+  const [selected, setSelected] = useState(clicked);
   return (
     <>
       <div className="container">
