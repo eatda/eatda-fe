@@ -11,6 +11,7 @@ export default function Header({text}:HeaderType) {
       .container {
         margin-left: 20px;
         padding-top: 27px;
+        font-weight: 900;
       }
     `}</style>
     </>
