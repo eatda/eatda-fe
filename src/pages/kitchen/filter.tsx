@@ -27,11 +27,8 @@ interface FilterProps {
 
 export default function Filter({ filterData }: FilterProps) {
   const dispatch = useDispatch();
-  const selector = useSelector(selectFilter);
+  const selectedFilter = useSelector(selectFilter);
   const router = useRouter();
-
-  let selectedFilter: number[] = selector;
-  console.log(selectedFilter);
 
   // 필터 데이터 선택여부 초기화
   filterData.forEach((item) => {
@@ -54,7 +51,9 @@ export default function Filter({ filterData }: FilterProps) {
     }
   };
 
-  const setFilter = () => {};
+  const setFilter = () => {
+    console.log(selectedFilter);
+  };
 
   // const clickFilter = (selected: boolean, filter: FilterType) => {
   //   if (selected) {
