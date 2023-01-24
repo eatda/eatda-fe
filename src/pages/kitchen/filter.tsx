@@ -52,17 +52,27 @@ export default function Filter({ filterData }: FilterProps) {
   };
 
   const setFilter = () => {
-    console.log(selectedFilter);
+    let requestQuery: string = "";
+    filterData.forEach((item) => {
+      requestQuery += item.category.query_name + "=";
+      item.filter.forEach((filter) => {
+        if (
+          selectedFilter.find(
+            (selectedFilterId) => selectedFilterId == filter.id
+          ) != undefined
+        ) {
+          requestQuery += filter.id + ",";
+        }
+      });
+      requestQuery = requestQuery.slice(0, -1);
+      requestQuery += "&";
+    });
+    requestQuery = requestQuery.slice(0, -1);
+    console.log(
+      "🚀 ~ file: filter.tsx:73 ~ setFilter ~ requestQuery",
+      requestQuery
+    );
   };
-
-  // const clickFilter = (selected: boolean, filter: FilterType) => {
-  //   if (selected) {
-  //     selectedFilter.delete(filter);
-  //     setSelectedFilter(selectedFilter);
-  //   } else {
-  //     setSelectedFilter(selectedFilter.add(filter));
-  //   }
-  // };
 
   // const setFilter = () => {
   //   // 선택된 필터 데이터 requestMap에 맵으로 정리
