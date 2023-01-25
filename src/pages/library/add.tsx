@@ -3,6 +3,7 @@ import colors from "../../../styles";
 import { useState } from "react";
 import { pasta } from "../../assets/imagePath";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 const dummyData = [
   {
@@ -44,6 +45,7 @@ interface SelectedMealType {
 }
 
 export default function Add() {
+  const router = useRouter();
   const [mealOpened, setMealOpened] = useState(false);
   const [selectedMeal, setSelectedMeal] = useState<SelectedMealType>();
   const [time, setTime] = useState(today.toISOString().slice(11, 16));
@@ -69,7 +71,7 @@ export default function Add() {
 
   function handleSubmit() {
     if (typeof selectedMeal?.id == "undefined") {
-      alert("'내 식단'에서 혈당을 기록할 식단을 선택해 주세요");
+      alert("'내 식단'에서 식단을 선택해 주세요");
     } else if (typeof sugar === "undefined") {
       alert("혈당을 기록해 주세요");
     } else {
@@ -79,6 +81,7 @@ export default function Add() {
         time: time,
       };
       console.log(data);
+      router.back();
     }
   }
 

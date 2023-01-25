@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { selectFilterQuery } from "../../store/filterSlice";
+import PushPageButton from "../../components/common/PushPageButton";
 
 export default function Recipe() {
   const router = useRouter();
@@ -15,10 +16,6 @@ export default function Recipe() {
   const filterQuery = useSelector(selectFilterQuery);
   const [filterList, setFilterList] = useState();
   const [mineList, setMineList] = useState();
-
-  const handleClick = () => {
-    router.push("/kitchen/filter");
-  };
 
   const fetchMine = async () => {
     const URL = `${process.env.NEXT_PUBLIC_API_ROOT}users/diet/fit/`;
@@ -106,15 +103,11 @@ export default function Recipe() {
       <div className="bar" />
       <div className="container">
         <div className="textHeader">오늘 이 레시피는 어때요?</div>
-        <button onClick={handleClick}>
-          <Image
-            alt="character"
-            width={56}
-            height={24}
-            src={`/button/filter.svg`}
-            priority
-          />
-        </button>
+        <PushPageButton
+          name="필터"
+          src="/button/filter.svg"
+          page="/kitchen/filter"
+        />
         <RecipeList type="recommend" data={filterList} />
       </div>
       <style jsx>{`
@@ -136,20 +129,10 @@ export default function Recipe() {
             .margin {
                 margin-right: 20px
             }
-            button {
-                color: ${colors.graySubTitle};
-                width: 350px;
-                height: 34px;
-                background: ${colors.grayWhite};
-                margin-top: 12px;
-                margin-bottom: 8px;
-                border: solid ${colors.grayBackgroundSub} 1.5px;
-                border-radius: 20px;
-            }
-
             .textHeader {
-                font-size: 20px;
-                font-weight: 700;
+              margin-top: 18px;
+              font-size: 20px;
+              font-weight: 700;
             }
         `}</style>
     </div>

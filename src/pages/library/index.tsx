@@ -2,6 +2,7 @@ import MiniHeader from "../../components/common/MiniHeader";
 import Header from "../../components/common/Header";
 import RecordCard from "../../components/record/RecordCard";
 import colors from "../../../styles";
+import PushPageButton from "../../components/common/PushPageButton";
 
 const testData = [
   {
@@ -51,8 +52,11 @@ export default function Library() {
         right="주간레포트"
         leftURL="/library"
         rightURL="/library/report"
-        button="추가"
-        buttonURL="/library/add"
+      />
+      <PushPageButton
+        name="필터"
+        src="/button/filter.svg"
+        page="/kitchen/filter"
       />
       <div className="container">
         {testData.length === 0 ? (
