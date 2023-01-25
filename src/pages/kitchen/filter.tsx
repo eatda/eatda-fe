@@ -1,12 +1,12 @@
 import { useRouter } from "next/router";
-import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Navigation from "../../components/common/Navigation";
 import FilterButton from "../../components/filter/FilterButton";
-import filterSlice, {
+import {
   addFilter,
   deleteFilter,
   selectFilter,
+  setFilterQuery,
 } from "../../store/filterSlice";
 
 export interface FilterType {
@@ -40,7 +40,7 @@ export default function Filter({ filterData }: FilterProps) {
     });
   });
 
-  // 필터 클릭 시
+  // 각 필터 클릭 시
   const clickFilter = (selected: boolean, filter: FilterType) => {
     if (selected) {
       filter.selected = false;
@@ -51,7 +51,9 @@ export default function Filter({ filterData }: FilterProps) {
     }
   };
 
+  // 필터 결정하기
   const setFilter = () => {
+    // 서버통신에 사용할 쿼리스트링으로 변환
     let requestQuery: string = "";
     filterData.forEach((item) => {
       requestQuery += item.category.query_name + "=";
@@ -68,10 +70,12 @@ export default function Filter({ filterData }: FilterProps) {
       requestQuery += "&";
     });
     requestQuery = requestQuery.slice(0, -1);
-    console.log(
-      "🚀 ~ file: filter.tsx:73 ~ setFilter ~ requestQuery",
-      requestQuery
-    );
+
+    // 쿼리스트링 전역상태 설정
+    dispatch(setFilterQuery(requestQuery));
+
+    // 화면 이동
+    router.back();
   };
 
   // const setFilter = () => {

@@ -7,12 +7,12 @@ import { selectToken } from "../../store/tokenSlice";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { selectFilter } from "../../store/filterSlice";
+import { selectFilterQuery } from "../../store/filterSlice";
 
 export default function Recipe() {
   const router = useRouter();
   const token = useSelector(selectToken);
-  const filter = useSelector(selectFilter);
+  const filterQuery = useSelector(selectFilterQuery);
   const [filterList, setFilterList] = useState();
   const [mineList, setMineList] = useState();
 
@@ -39,7 +39,7 @@ export default function Recipe() {
   };
 
   const fetchFilter = async () => {
-    const URL = `${process.env.NEXT_PUBLIC_API_ROOT}diets?${filter}`;
+    const URL = `${process.env.NEXT_PUBLIC_API_ROOT}diets?${filterQuery}`;
     try {
       const data = await fetch(URL, {
         method: "GET",
