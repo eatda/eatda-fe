@@ -6,7 +6,7 @@ import Image from "next/image";
 
 const dummyData = [
   {
-    id: 14,
+    id: 13,
     diet: {
       id: 15,
       name: {
@@ -28,23 +28,40 @@ const dummyData = [
       },
       image: "http://localhost:8000/media/default.jpg",
     },
-    date: "23.01.20",
+    date: "24.09.01",
     timeline: 1,
   },
 ];
 
+const offset = new Date().getTimezoneOffset() * 60000;
+const today = new Date(Date.now() - offset);
+
+interface SelectedMealType {
+  id: number;
+  name: string;
+  date: string;
+  timeline: number;
+}
+
 export default function Add() {
   const [mealOpened, setMealOpened] = useState(false);
-
-  const offset = new Date().getTimezoneOffset() * 60000;
-  const today = new Date(Date.now() - offset);
+  const [selectedMeal, setSelectedMeal] = useState<SelectedMealType>();
   const [time, setTime] = useState(today.toISOString().slice(11, 16));
-
   const handleTimeChange = (e: React.FormEvent<HTMLInputElement>) => {
     const newValue = (e.target as HTMLInputElement).value;
     setTime(newValue);
-    console.log(time);
   };
+
+  function handleClickMeal(id: number) {
+    const clicked = dummyData.filter((item) => item.id === id)[0];
+    const clickedData: SelectedMealType = {
+      id: clicked.id,
+      name: clicked.diet.name.title,
+      date: clicked.date,
+      timeline: clicked.timeline,
+    };
+    setSelectedMeal(clickedData);
+  }
 
   return (
     <>
@@ -55,7 +72,7 @@ export default function Add() {
             오늘의 혈당
             <div>170 mg/dl</div>
           </div>
-          <Image src={pasta} width={320} height={56} alt={"그래프"} />
+          <Image src={pasta} width={320} height={56} alt={"그래프"} priority />
         </div>
         <div className="input-list">
           <div className="item" onClick={() => setMealOpened(!mealOpened)}>
@@ -68,7 +85,15 @@ export default function Add() {
                 해당하는 식단을 골라주세요.
               </span>
               {dummyData.map((meal) => (
-                <div key={meal.id} className="mymeal-item">
+                <div
+                  key={meal.id}
+                  className={
+                    meal.id !== selectedMeal?.id
+                      ? "mymeal-item"
+                      : "mymeal-item clicked"
+                  }
+                  onClick={() => handleClickMeal(meal.id)}
+                >
                   <div>{meal.diet.name.title}</div>
                   <div>
                     <span>{meal.date}</span>{" "}
@@ -84,7 +109,14 @@ export default function Add() {
           )}
           <div className="item date">
             날짜
-            <span>22.02.09</span>
+            <div>
+              <span>{selectedMeal?.date}</span>{" "}
+              <span>
+                {selectedMeal?.timeline == 0 && "아침"}
+                {selectedMeal?.timeline == 1 && "점심"}
+                {selectedMeal?.timeline == 2 && "저녁"}
+              </span>
+            </div>
           </div>
           <div className="item">
             시간
@@ -152,6 +184,10 @@ export default function Add() {
           padding: 0px 12px;
           box-sizing: border-box;
           background-color: ${colors.grayWhite};
+        }
+        .clicked {
+          background-color: ${colors.mainOrange};
+          color: white;
         }
 
         input[type="time"] {
