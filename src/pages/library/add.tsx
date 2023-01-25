@@ -47,12 +47,9 @@ export default function Add() {
   const [mealOpened, setMealOpened] = useState(false);
   const [selectedMeal, setSelectedMeal] = useState<SelectedMealType>();
   const [time, setTime] = useState(today.toISOString().slice(11, 16));
-  const handleTimeChange = (e: React.FormEvent<HTMLInputElement>) => {
-    const newValue = (e.target as HTMLInputElement).value;
-    setTime(newValue);
-  };
+  const [sugar, setSugar] = useState<number>();
 
-  function handleClickMeal(id: number) {
+  function handleMealChange(id: number) {
     const clicked = dummyData.filter((item) => item.id === id)[0];
     const clickedData: SelectedMealType = {
       id: clicked.id,
@@ -61,6 +58,28 @@ export default function Add() {
       timeline: clicked.timeline,
     };
     setSelectedMeal(clickedData);
+  }
+  function handleTimeChange(e: React.FormEvent<HTMLInputElement>) {
+    const newValue = (e.target as HTMLInputElement).value;
+    setTime(newValue);
+  }
+  function handleSugarChange(value: string) {
+    setSugar(parseInt(value));
+  }
+
+  function handleSubmit() {
+    if (typeof selectedMeal?.id == "undefined") {
+      alert("'내 식단'에서 혈당을 기록할 식단을 선택해 주세요");
+    } else if (typeof sugar === "undefined") {
+      alert("혈당을 기록해 주세요");
+    } else {
+      const data = {
+        id: selectedMeal.id,
+        level: sugar,
+        time: time,
+      };
+      console.log(data);
+    }
   }
 
   return (
@@ -92,7 +111,7 @@ export default function Add() {
                       ? "mymeal-item"
                       : "mymeal-item clicked"
                   }
-                  onClick={() => handleClickMeal(meal.id)}
+                  onClick={() => handleMealChange(meal.id)}
                 >
                   <div>{meal.diet.name.title}</div>
                   <div>
@@ -123,11 +142,15 @@ export default function Add() {
             <input type="time" onChange={handleTimeChange} value={time} />
           </div>
           <div className="item">
-            혈당 <input type="number" />
+            혈당{" "}
+            <input
+              type="number"
+              onChange={(e) => handleSugarChange(e.target.value)}
+            />
           </div>
         </div>
       </div>
-      <button>혈당 기록 완료</button>
+      <button onClick={handleSubmit}>혈당 기록 완료</button>
       <style jsx>{`
         .container {
           display: flex;
