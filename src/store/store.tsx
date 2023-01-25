@@ -2,11 +2,11 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import userSlice from "./userSlice";
 import surveySlice from "./surveySlice";
 import tokenSlice from "./tokenSlice";
-import filterSlice from "./filterSlice";
 
 import storage from "redux-persist/lib/storage";
 import { persistReducer, persistStore } from "redux-persist";
 import thunk from "redux-thunk";
+import { filterQuerySlice, filterSlice } from "./filterSlice";
 
 const persistConfig = {
   key: "root",
@@ -21,6 +21,7 @@ const store = configureStore({
       survey: surveySlice.reducer,
       token: tokenSlice.reducer,
       filter: filterSlice.reducer,
+      filterQuery: filterQuerySlice.reducer,
     })
   ),
   middleware: [thunk],

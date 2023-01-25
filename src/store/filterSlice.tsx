@@ -1,8 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AppState } from "./store";
 
+// 유저가 선택한 필터 정보 관리
 const initialState: number[] = [];
-const filterSlice = createSlice({
+export const filterSlice = createSlice({
   name: "filterSlice",
   initialState: initialState,
   reducers: {
@@ -13,7 +14,16 @@ const filterSlice = createSlice({
       state.filter((id) => id !== action.payload),
   },
 });
-
 export const selectFilter = (state: AppState) => state.filter;
 export const { addFilter, deleteFilter } = filterSlice.actions;
-export default filterSlice;
+
+// 필터 쿼리스트링 관리
+export const filterQuerySlice = createSlice({
+  name: "filterQuerySlice",
+  initialState: "",
+  reducers: {
+    setFilterQuery: (state, action) => action.payload,
+  },
+});
+export const selectFilterQuery = (state: AppState) => state.filterQuery;
+export const { setFilterQuery } = filterQuerySlice.actions;
