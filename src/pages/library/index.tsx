@@ -142,8 +142,8 @@ export default function Library() {
           <div key={idx}>
             <div className="date">{day.date}</div>
             <div className="record-list">
-              {day.data.map((data) => (
-                <div className="record-card">
+              {day.data.map((data, idx) => (
+                <div key={idx} className="record-card">
                   <div className={`timeline timeline${data.timeline}`}>
                     {data.timeline === 0 && "아침"}
                     {data.timeline === 1 && "점심"}
