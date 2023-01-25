@@ -15,6 +15,7 @@ const colors = {
   subPink: "#F2A9A7",
 
   blackSub: "#E6E6E6",
+  subTitle: "#878787",
 };
 
 export default colors;
