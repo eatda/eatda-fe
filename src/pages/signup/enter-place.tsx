@@ -7,6 +7,24 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { CTA1Button } from "../../components/common/Button";
 
+interface testI {
+    data:any;
+    res:any;
+}
+
+type JSONValue =
+    | string
+    | number
+    | boolean
+    | JSONObject
+    | JSONArray;
+
+interface JSONObject {
+    [x: string]: JSONValue;
+}
+
+interface JSONArray extends Array<JSONValue> { }
+
 export default function EnterPlace(){
     const router = useRouter();
     const dispatch = useDispatch();
@@ -19,11 +37,54 @@ export default function EnterPlace(){
 
     const [test, setTest] = useState(0);
 
+    const fetchGroup =async (code: string) => {
+        const URL = `${process.env.NEXT_PUBLIC_API_ROOT}users/group/code/`;
+        let bodyData = {
+            code: code
+        }
+
+        try {
+        const data : Response = await fetch(URL, {
+            method: 'POST',
+            credentials: 'include',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(bodyData)
+        });
+
+        const res = await data.json();
+        return {data, res}
+        } catch (error) {
+        return error;
+        }
+    }
+
     useEffect(()=>{
         inputRef.current[0]?.focus()
     },[])
 
     useEffect(()=>{
+        async function fetchData(){
+            const {data , res} : any = await fetchGroup(code.join(''));
+            console.log(data);
+            console.log(res);
+            if(data.ok){
+                const reduxData = {
+                    usersocial_id: user.usersocial_id,
+                    useremail: user.useremail,
+                    username: user.username,
+                    usercharacter: user.usercharacter,
+                    isDiabetes: res.is_diabetes,
+                    usergroup: code.join(''),
+                }
+                dispatch(login(reduxData));
+                router.replace('/signup');
+            }else{
+                alert(res.error);
+            }
+        }
+
         let flag = true;
         code.map((v,i)=>{
             if(v===''){
@@ -43,7 +104,7 @@ export default function EnterPlace(){
                 usergroup: code.join(''),
             }
             dispatch(login(reduxData));
-            // router.replace('/signup');
+            fetchData();
         }
     },[test])
 
@@ -51,7 +112,9 @@ export default function EnterPlace(){
         let arr = code;
         arr.splice(idx,1,e.target.value);
         setCode(arr);
-        inputRef.current[++idx]?.focus();
+        if(e.target.value != ''){
+            inputRef.current[++idx]?.focus();
+        }
 
         setTest(prev => prev +1);
     }
@@ -62,8 +125,11 @@ export default function EnterPlace(){
         <div className="subText">
             가족 구성원이 이미 가입하셨군요!
         </div>
-            초대 코드를 입력해주세요 
+        <div className="mainText">
+            초대코드를 입력해주세요 
+        </div>
             <br/>
+            <div>
             {
                 idxArray.map((v,i)=>{
                     return (
@@ -76,19 +142,45 @@ export default function EnterPlace(){
                     )
                 })
             }
+            </div>
+            초대코드는 먼저 가입한 가족 구성원에게 문의하세요.
             <br/>
             <style jsx>{`
             .container {
-                width: 390px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                // width: 390px;
                 padding-top: 60px;
                 height: 100vh;
             } 
             .subText {
                 color: ${colors.graySubTitle};
+                font-size: 14px;
+                font-weight: 500;
+            }
+            .mainText {
+                margin-bottom: 72px;
+                font-weight: 600;
+                font-size: 24px;
             }
 
             input {
-                width: 30px;
+                width: 50px;
+                height: 72px;
+                font-weight: 700;
+                font-size: 48px;
+                text-align: center;
+                background: ${colors.grayBackgroundSub};
+                border: none;
+                margin-left: 5px;
+                margin-right: 5px;
+                border-radius: 4px;
+            }
+            input:focus { 
+                outline: none; 
+                border: 1px solid ${colors.mainOrange}; 
+                background: ${colors.grayWhite};
             }
         `}</style>
         </div>

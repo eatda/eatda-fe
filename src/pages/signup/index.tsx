@@ -187,7 +187,7 @@ export default function Signup(){
       </div>
       <style jsx>{`
         .container {
-          width: 390px;
+          // width: 390px;
           min-height: 800px;
           padding-top: 60px;
         }

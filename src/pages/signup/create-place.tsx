@@ -8,6 +8,8 @@ import { login } from "../../store/userSlice";
 import { selectUser } from "../../store/userSlice";
 import { useSelector, useDispatch } from "react-redux";
 
+import { GetScreenWidth } from "../../assets/getScreenWidth";
+
 export default function CreatePlace(){
     const router = useRouter();
     const [page,setPage] = useState(0);

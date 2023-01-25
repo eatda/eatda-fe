@@ -22,4 +22,5 @@ export function GetScreenWidth() {
   }, [windowWidth]);
 
   return windowWidth < 390 ? windowWidth : 390;
+  // return windowWidth;
 }
