@@ -4,6 +4,8 @@ import { useState } from "react";
 import { pasta } from "../../assets/imagePath";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
+import { selectToken } from "../../store/tokenSlice";
 
 const dummyData = [
   {
@@ -46,6 +48,9 @@ interface SelectedMealType {
 
 export default function Add() {
   const router = useRouter();
+  const token = useSelector(selectToken);
+  console.log("🚀 ~ file: add.tsx:52 ~ Add ~ token", token.access_token);
+
   const [mealOpened, setMealOpened] = useState(false);
   const [selectedMeal, setSelectedMeal] = useState<SelectedMealType>();
   const [time, setTime] = useState(today.toISOString().slice(11, 16));

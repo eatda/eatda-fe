@@ -129,7 +129,7 @@ export default function Library() {
       <PushPageButton
         name="필터"
         src="/button/filter.svg"
-        page="/kitchen/filter"
+        page="/library/add"
       />
       <div className="container">
         {testData.length === 0 && (
