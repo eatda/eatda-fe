@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import colors from "../../../styles";
 import { GetScreenWidth } from "../../assets/getScreenWidth";
 import TabBar from "./TabBar";
@@ -17,6 +18,18 @@ export default function Layout({ children }: LayoutProps) {
     pathname.includes("/onboarding")
       ? "sub"
       : "main";
+  
+  // const [screenWidth, setScreenWidth] = useState(390);
+  // const [isInitialRender, setIsInitialRender] = useState(true);
+  // useEffect(() => {
+  //   if (isInitialRender) {
+  //     setIsInitialRender(false);
+  //     setScreenWidth(GetScreenWidth());
+  //   }
+  // }, [screenWidth, isInitialRender]);
+  // useEffect(()=>{
+  //   setScreenWidth(GetScreenWidth());
+  // },[])
   const screenWidth = GetScreenWidth();
 
   return (

@@ -1,7 +1,9 @@
 import { useRouter } from "next/router";
 import React, { useEffect, useState, useRef } from "react"
-import { CTA1Button, TextBox2, CTA1ButtonSelect } from "../../components/common/Button";
+import { CTA1Button, TextBox2, CTA1ButtonSelect,CTA1ButtonSelect2 } from "../../components/common/Button";
 import Navigation from "../../components/common/Navigation";
+import Image from "next/image";
+import colors from "../../../styles";
 
 import { login } from "../../store/userSlice";
 import { selectUser } from "../../store/userSlice";
@@ -125,48 +127,161 @@ export default function Signup(){
     switch(current){
       case 0 :
         return (
-          <>
+          <div className="item">
+          <Image alt="character" width={184} height={194} src={`/img/signup.svg`} priority/> 
+          <div className="text">
           반갑습니다!<br/>
           프로필을 완성해봐요
-          </>
+          </div>
+          <style jsx>{`
+            .item{
+              margin-top: 150px;
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
+              text-align: center;
+            }
+            .text {
+              margin-top: 36px;
+              font-size: 24px;
+              font-weight: 600;
+            }
+          `}</style>
+          </div>
         )
       case 1 :
         return (
-          <>
-          닉네임 설정해주세요
+          <div className="item">
+          <div className="textMain">
+          닉네임을 설정해주세요.
+          </div>
+          <div className="textSub">
+            가족 공간 내에서는 닉네임으로 활동해요.
+          </div>
           <TextBox2 text="맘스터치" onChange={handleChange} value={form.name}/>
           <br/>
+          <div className="textSub2">
           최대 12자
+          </div>
           <br/><br/>
-          </>
+          <style jsx>{`
+            .item {
+              margin-left: 20px;
+            }
+            .textMain {
+              font-size: 24px;
+              font-weight: 700;
+            }
+            .textSub {
+              font-size: 14px;
+              color: ${colors.graySubTitle};
+              margin-bottom: 90px;
+            }
+            .textSub2 {
+              display: flex;
+              flex-direction: row-reverse;
+              margin-right: 20px;
+              margin-top: 12px;
+              font-size: 12px;
+              color: ${colors.graySubTitle2};
+            }
+          `}</style>
+          </div>
         )
       case 2 :
         return (
-          <>
+          <div className="item">
+          <div className="textMain">
           활동 캐릭터를 설정해주세요.
+          </div>
+          <div className="character">
           {
             characterData?.map((v:characterI,idx:number)=>{
               return(
-                <div key = {idx}>
-                <CTA1ButtonSelect
+                <CTA1ButtonSelect2
+                key={idx}
                 active={form.character === v.id ? true : false}
                 onClick={handleClick}
                 value={v.id}
                 image={`/character/ch_${v.id}.svg`}
                 />
-                </div>
-              )
-            })
-          }
-          </>
+                )
+              })
+            }
+          </div>
+          <style jsx>{`
+            .item {
+              display: flex;
+              flex-direction: column;
+              // align-items: center;
+              // margin-left: 20px;
+            }
+            .textMain {
+              margin-bottom: 50px;
+              margin-right: auto;
+              margin-left: 20px;
+              font-size: 24px;
+              font-weight: 700;
+            }
+            .character {
+              display: flex;
+              justify-content: center;
+              flex-wrap: wrap;
+            }
+          `}</style>
+          </div>
         )
       case 3 :
         return(
-          <>
+          <div className="item">
+          <div className="textMain">
           당뇨인이신가요?
+          </div>
+          <div className="textSub">
+            당뇨병 환자 &nbsp;
+            <div className="textOrange">
+            맞춤형 식단 추천
+            </div>
+            을 위한 
+          </div>
+          <div className="textSub">
+            기본 설문 조사가 이루어집니다.
+          </div>
+          <div className="bar"/>
           <CTA1ButtonSelect active={form.sugar === null ? false : form.sugar} value="true" text="네, 당뇨인이에요" onClick={handleClick}/>
+          <div className="bar2"/>
           <CTA1ButtonSelect active={form.sugar === null ? false : !form.sugar} value="false" text="아니요, 당뇨인 가족이에요" onClick={handleClick}/>
-          </>
+          <style jsx>{`
+            .item {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+            }
+            .textMain {
+              margin-right: auto;
+              margin-left: 20px;
+              font-size: 24px;
+              font-weight: 700;
+            }
+            .textOrange {
+              color: ${colors.mainOrange};
+            }
+            .textSub {
+              display: flex;
+              margin-right: auto;
+              margin-left: 20px;
+              font-size: 14px;
+              color: ${colors.graySubTitle};
+            }
+            .bar {
+              height: 60px;
+            }
+            .bar2 {
+              height: 12px;
+            }
+          `}</style>
+          </div>
         )
     }
   }
@@ -187,7 +302,7 @@ export default function Signup(){
       </div>
       <style jsx>{`
         .container {
-          width: 390px;
+          // width: 390px;
           min-height: 800px;
           padding-top: 60px;
         }
