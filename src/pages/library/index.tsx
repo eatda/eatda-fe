@@ -7,122 +7,24 @@ import { Get } from "../../hooks/Fetch";
 import { useSelector } from "react-redux";
 import { selectToken } from "../../store/tokenSlice";
 
-const recordData = [
-  {
-    date: "01.20",
-    data: [
-      {
-        id: 11,
-        diet: {
-          id: 12,
-          name: {
-            title: "미니채소오믈렛",
-            comment: "식탁에 다채로운 재미를",
-          },
-          image: "http://localhost:8000/media/default.jpg",
-        },
-        date: "23.01.20",
-        time: "18:04",
-        level: 150,
-        timeline: 2,
-      },
-    ],
-  },
-  {
-    date: "01.19",
-    data: [
-      {
-        id: 9,
-        diet: {
-          id: 1,
-          name: {
-            title: "미니채소오믈렛",
-            comment: "식탁에 다채로운 재미를",
-          },
-          image: "http://localhost:8000/media/default.jpg",
-        },
-        date: "23.01.19",
-        time: "11:04",
-        level: 270,
-        timeline: 1,
-      },
-      {
-        id: 10,
-        diet: {
-          id: 1,
-          name: {
-            title: "미니채소오믈렛",
-            comment: "식탁에 다채로운 재미를",
-          },
-          image: "http://localhost:8000/media/default.jpg",
-        },
-        date: "23.01.19",
-        time: "18:04",
-        level: 120,
-        timeline: 2,
-      },
-    ],
-  },
-  {
-    date: "01.18",
-    data: [
-      {
-        id: 4,
-        diet: {
-          id: 1,
-          name: {
-            title: "미니채소오믈렛",
-            comment: "식탁에 다채로운 재미를",
-          },
-          image: "http://localhost:8000/media/default.jpg",
-        },
-        date: "23.01.18",
-        time: "13:04",
-        level: 200,
-        timeline: 0,
-      },
-      {
-        id: 8,
-        diet: {
-          id: 1,
-          name: {
-            title: "미니채소오믈렛",
-            comment: "식탁에 다채로운 재미를",
-          },
-          image: "http://localhost:8000/media/default.jpg",
-        },
-        date: "23.01.18",
-        time: "13:04",
-        level: 200,
-        timeline: 1,
-      },
-    ],
-  },
-  {
-    date: "01.17",
-    data: [
-      {
-        id: 3,
-        diet: {
-          id: 1,
-          name: {
-            title: "미니채소오믈렛",
-            comment: "식탁에 다채로운 재미를",
-          },
-          image: "http://localhost:8000/media/default.jpg",
-        },
-        date: "23.01.17",
-        time: "11:04",
-        level: 300,
-        timeline: 2,
-      },
-    ],
-  },
-];
+interface RecordDataType {
+  date: string;
+  data: {
+    id: number;
+    diet: {
+      id: number;
+      image: string;
+      name: { title: string; comment: string };
+    };
+    time: string;
+    level: number;
+    timeline: number;
+  }[];
+}
 
 export default function Library() {
   const token = useSelector(selectToken);
-  const [recordData, setRecordData] = useState([]);
+  const [recordData, setRecordData] = useState<RecordDataType[]>([]);
 
   useEffect(() => {
     async function fetchMyMealData() {
@@ -132,7 +34,6 @@ export default function Library() {
       });
       if (data.ok) {
         setRecordData(res);
-        console.log(recordData);
       } else {
         console.log("myMealData error");
       }
