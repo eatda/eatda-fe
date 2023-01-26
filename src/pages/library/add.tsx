@@ -1,44 +1,54 @@
 import Navigation from "../../components/common/Navigation";
 import colors from "../../../styles";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { pasta } from "../../assets/imagePath";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import { selectToken } from "../../store/tokenSlice";
 
-const dummyData = [
-  {
-    id: 13,
-    diet: {
-      id: 15,
-      name: {
-        title: "치아바타샌드위치",
-        comment: "햄과 치아바타의 치정극",
-      },
-      image: "http://localhost:8000/media/default.jpg",
-    },
-    date: "23.01.20",
-    timeline: 1,
-  },
-  {
-    id: 14,
-    diet: {
-      id: 15,
-      name: {
-        title: "치아바타샌드위치",
-        comment: "햄과 치아바타의 치정극",
-      },
-      image: "http://localhost:8000/media/default.jpg",
-    },
-    date: "24.09.01",
-    timeline: 1,
-  },
-];
+// const myMealData: MyMealDataType[] = [
+//   {
+//     id: 13,
+//     diet: {
+//       id: 15,
+//       name: {
+//         title: "치아바타샌드위치",
+//         comment: "햄과 치아바타의 치정극",
+//       },
+//       image: "http://localhost:8000/media/default.jpg",
+//     },
+//     date: "23.01.20",
+//     timeline: 1,
+//   },
+//   {
+//     id: 14,
+//     diet: {
+//       id: 15,
+//       name: {
+//         title: "치아바타샌드위치",
+//         comment: "햄과 치아바타의 치정극",
+//       },
+//       image: "http://localhost:8000/media/default.jpg",
+//     },
+//     date: "24.09.01",
+//     timeline: 1,
+//   },
+// ];
 
 const offset = new Date().getTimezoneOffset() * 60000;
 const today = new Date(Date.now() - offset);
 
+interface MyMealDataType {
+  id: number;
+  diet: {
+    id: number;
+    name: { title: string; comment: string };
+    image: string;
+  };
+  date: string;
+  timeline: number;
+}
 interface SelectedMealType {
   id: number;
   name: string;
@@ -49,7 +59,35 @@ interface SelectedMealType {
 export default function Add() {
   const router = useRouter();
   const token = useSelector(selectToken);
-  console.log("🚀 ~ file: add.tsx:52 ~ Add ~ token", token.access_token);
+  const [myMealData, setMyMealData] = useState<MyMealDataType[]>([]);
+
+  const fetchUsersDiet = async () => {
+    try {
+      const data = await fetch(
+        `${process.env.NEXT_PUBLIC_API_ROOT}users/diet/`,
+        {
+          method: "GET",
+          credentials: "include",
+          headers: { Authorization: token.access_token },
+        }
+      );
+      const res = await data.json();
+      return { data, res };
+    } catch (error) {
+      return error;
+    }
+  };
+  useEffect(() => {
+    async function fetchMyMealData() {
+      const { data, res }: any = await fetchUsersDiet();
+      if (data.ok) {
+        setMyMealData(res);
+      } else {
+        console.log("myMealData error");
+      }
+    }
+    fetchMyMealData();
+  }, []);
 
   const [mealOpened, setMealOpened] = useState(false);
   const [selectedMeal, setSelectedMeal] = useState<SelectedMealType>();
@@ -57,7 +95,7 @@ export default function Add() {
   const [sugar, setSugar] = useState<number>();
 
   function handleMealChange(id: number) {
-    const clicked = dummyData.filter((item) => item.id === id)[0];
+    const clicked = myMealData.filter((item) => item.id === id)[0];
     const clickedData: SelectedMealType = {
       id: clicked.id,
       name: clicked.diet.name.title,
@@ -111,7 +149,7 @@ export default function Add() {
               <span style={{ fontSize: "12px" }}>
                 해당하는 식단을 골라주세요.
               </span>
-              {dummyData.map((meal) => (
+              {myMealData.map((meal) => (
                 <div
                   key={meal.id}
                   className={
