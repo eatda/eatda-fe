@@ -2,8 +2,12 @@ import MiniHeader from "../../components/common/MiniHeader";
 import Header from "../../components/common/Header";
 import colors from "../../../styles";
 import PushPageButton from "../../components/common/PushPageButton";
+import { useEffect, useState } from "react";
+import { Get } from "../../hooks/Fetch";
+import { useSelector } from "react-redux";
+import { selectToken } from "../../store/tokenSlice";
 
-const testData = [
+const recordData = [
   {
     date: "01.20",
     data: [
@@ -117,6 +121,25 @@ const testData = [
 ];
 
 export default function Library() {
+  const token = useSelector(selectToken);
+  const [recordData, setRecordData] = useState([]);
+
+  useEffect(() => {
+    async function fetchMyMealData() {
+      const { data, res }: any = await Get({
+        url: "users/blood-sugar-level/",
+        token: token.access_token,
+      });
+      if (data.ok) {
+        setRecordData(res);
+        console.log(recordData);
+      } else {
+        console.log("myMealData error");
+      }
+    }
+    fetchMyMealData();
+  }, []);
+
   return (
     <>
       <Header text="서재" />
@@ -132,13 +155,13 @@ export default function Library() {
         page="/library/add"
       />
       <div className="container">
-        {testData.length === 0 && (
+        {recordData.length === 0 && (
           <div className="empty">
             새로운 혈당 수치 추가를 위해
             <br />+ 버튼을 눌러주세요!
           </div>
         )}
-        {testData.map((day, idx) => (
+        {recordData.map((day, idx) => (
           <div key={idx}>
             <div className="date">{day.date}</div>
             <div className="record-list">
@@ -167,7 +190,6 @@ export default function Library() {
           align-items: center;
           flex-direction: column;
           width: 390px;
-          min-height: 500px;
           margin-top: 32px;
         }
         .empty {
