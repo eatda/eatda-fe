@@ -6,6 +6,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import { selectToken } from "../../store/tokenSlice";
+import { Get, Post } from "../../hooks/Fetch";
 
 const offset = new Date().getTimezoneOffset() * 60000;
 const today = new Date(Date.now() - offset);
@@ -32,25 +33,12 @@ export default function Add() {
   const token = useSelector(selectToken);
   const [myMealData, setMyMealData] = useState<MyMealDataType[]>([]);
 
-  const fetchUsersDiet = async () => {
-    try {
-      const data = await fetch(
-        `${process.env.NEXT_PUBLIC_API_ROOT}users/diet/`,
-        {
-          method: "GET",
-          credentials: "include",
-          headers: { Authorization: token.access_token },
-        }
-      );
-      const res = await data.json();
-      return { data, res };
-    } catch (error) {
-      return error;
-    }
-  };
   useEffect(() => {
     async function fetchMyMealData() {
-      const { data, res }: any = await fetchUsersDiet();
+      const { data, res }: any = await Get({
+        url: "users/diet/",
+        token: token.access_token,
+      });
       if (data.ok) {
         setMyMealData(res);
       } else {
@@ -83,30 +71,6 @@ export default function Add() {
     setSugar(parseInt(value));
   }
 
-  const fetchPostSugar = async (requestBody: {
-    id: number;
-    level: number;
-    time: string;
-  }) => {
-    try {
-      const data = await fetch(
-        `${process.env.NEXT_PUBLIC_API_ROOT}users/blood-sugar-level/`,
-        {
-          method: "POST",
-          credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: token.access_token,
-          },
-          body: JSON.stringify(requestBody),
-        }
-      );
-      const res = await data.json();
-      return { data, res };
-    } catch (error) {
-      return error;
-    }
-  };
   function handleSubmit() {
     if (typeof selectedMeal?.id == "undefined") {
       alert("'내 식단'에서 식단을 선택해 주세요");
@@ -119,7 +83,11 @@ export default function Add() {
         time: time,
       };
       console.log(data);
-      fetchPostSugar(data);
+      Post({
+        url: "users/blood-sugar-level/",
+        token: token.access_token,
+        requestBody: data,
+      });
       router.back();
     }
   }
