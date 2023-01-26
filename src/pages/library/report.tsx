@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { Get } from "../../hooks/Fetch";
 import { useSelector } from "react-redux";
 import { selectToken } from "../../store/tokenSlice";
+import Image from "next/image";
 
 interface WeeklyDataType {
   start: string;
@@ -16,65 +17,24 @@ interface WeeklyDataType {
   data: { day: string; level: number }[];
 }
 
-const LowHighData = {
-  best: [
-    {
-      id: 1,
-      name: {
-        title: "미니채소오믈렛",
-        comment: "식탁에 다채로운 재미를",
-      },
-      image: "http://localhost:8000/media/default.jpg",
-    },
-    {
-      id: 12,
-      name: {
-        title: "미니채소오믈렛",
-        comment: "식탁에 다채로운 재미를",
-      },
-      image: "http://localhost:8000/media/default.jpg",
-    },
-    {
-      id: 1,
-      name: {
-        title: "미니채소오믈렛",
-        comment: "식탁에 다채로운 재미를",
-      },
-      image: "http://localhost:8000/media/default.jpg",
-    },
-  ],
-  worst: [
-    {
-      id: 1,
-      name: {
-        title: "미니채소오믈렛",
-        comment: "식탁에 다채로운 재미를",
-      },
-      image: "http://localhost:8000/media/default.jpg",
-    },
-    {
-      id: 1,
-      name: {
-        title: "미니채소오믈렛",
-        comment: "식탁에 다채로운 재미를",
-      },
-      image: "http://localhost:8000/media/default.jpg",
-    },
-    {
-      id: 1,
-      name: {
-        title: "미니채소오믈렛",
-        comment: "식탁에 다채로운 재미를",
-      },
-      image: "http://localhost:8000/media/default.jpg",
-    },
-  ],
-};
+interface LowHighDataType {
+  best: {
+    id: number;
+    name: { title: string; comment: string };
+    image: string;
+  }[];
+  worst: {
+    id: number;
+    name: { title: string; comment: string };
+    image: string;
+  }[];
+}
 
 export default function Report() {
   const session = useSession();
   const token = useSelector(selectToken);
   const [weeklyData, setWeeklyData] = useState<WeeklyDataType>();
+  const [lowHighData, setLowHighData] = useState<LowHighDataType>();
 
   useEffect(() => {
     async function fetchWeeklyData() {
@@ -85,10 +45,22 @@ export default function Report() {
       if (data.ok) {
         setWeeklyData(res);
       } else {
-        console.log("myMealData error");
+        console.log("weekly data error");
+      }
+    }
+    async function fetchLowHighData() {
+      const { data, res }: any = await Get({
+        url: "users/diet/rank/",
+        token: token.access_token,
+      });
+      if (data.ok) {
+        setLowHighData(res);
+      } else {
+        console.log("low high data error");
       }
     }
     fetchWeeklyData();
+    fetchLowHighData();
   }, []);
 
   return (
@@ -140,30 +112,50 @@ export default function Report() {
         )}
 
         <hr />
-        <div className="box">
-          <div className="title"> 식후 혈당 낮았던 식단 TOP3</div>
-          <div className="recipe-list">
-            {LowHighData.best.map((meal, idx) => (
-              <div key={idx}>
-                <div>
-                  {meal.name.comment} {meal.name.title}
-                </div>
+        {lowHighData ? (
+          <>
+            <div className="box">
+              <div className="title"> 식후 혈당 낮았던 식단 TOP3</div>
+              <div className="recipe-list">
+                {lowHighData.best.map((meal, idx) => (
+                  <div key={idx}>
+                    <div>
+                      {meal.name.comment} {meal.name.title}
+                      <Image
+                        src={meal.image}
+                        width={112}
+                        height={85}
+                        alt={"이미지"}
+                        priority
+                      />
+                    </div>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-        </div>
-        <div className="box">
-          <div className="title"> 식후 혈당 높았던 식단 TOP3</div>
-          <div className="recipe-list">
-            {LowHighData.worst.map((meal, idx) => (
-              <div key={idx}>
-                <div>
-                  {meal.name.comment} {meal.name.title}
-                </div>
+            </div>
+            <div className="box">
+              <div className="title"> 식후 혈당 높았던 식단 TOP3</div>
+              <div className="recipe-list">
+                {lowHighData.worst.map((meal, idx) => (
+                  <div key={idx}>
+                    <div>
+                      {meal.name.comment} {meal.name.title}
+                      <Image
+                        src={meal.image}
+                        width={112}
+                        height={85}
+                        alt={"이미지"}
+                        priority
+                      />
+                    </div>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-        </div>
+            </div>
+          </>
+        ) : (
+          <></>
+        )}
       </div>
       <style jsx>{`
         .container {
