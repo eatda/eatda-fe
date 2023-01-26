@@ -28,6 +28,61 @@ const WeeklySugarData = {
   ],
 };
 
+const LowHighData = {
+  best: [
+    {
+      id: 1,
+      name: {
+        title: "미니채소오믈렛",
+        comment: "식탁에 다채로운 재미를",
+      },
+      image: "http://localhost:8000/media/default.jpg",
+    },
+    {
+      id: 12,
+      name: {
+        title: "미니채소오믈렛",
+        comment: "식탁에 다채로운 재미를",
+      },
+      image: "http://localhost:8000/media/default.jpg",
+    },
+    {
+      id: 1,
+      name: {
+        title: "미니채소오믈렛",
+        comment: "식탁에 다채로운 재미를",
+      },
+      image: "http://localhost:8000/media/default.jpg",
+    },
+  ],
+  worst: [
+    {
+      id: 1,
+      name: {
+        title: "미니채소오믈렛",
+        comment: "식탁에 다채로운 재미를",
+      },
+      image: "http://localhost:8000/media/default.jpg",
+    },
+    {
+      id: 1,
+      name: {
+        title: "미니채소오믈렛",
+        comment: "식탁에 다채로운 재미를",
+      },
+      image: "http://localhost:8000/media/default.jpg",
+    },
+    {
+      id: 1,
+      name: {
+        title: "미니채소오믈렛",
+        comment: "식탁에 다채로운 재미를",
+      },
+      image: "http://localhost:8000/media/default.jpg",
+    },
+  ],
+};
+
 export default function Report() {
   const session = useSession();
 
@@ -70,9 +125,27 @@ export default function Report() {
         </div>
         <hr />
         <div className="box">
+          식후 혈당 낮았던 식단 TOP3
+          <div className="recipe-list">
+            {LowHighData.best.map((meal, idx) => (
+              <div key={idx}>
+                <div>
+                  {meal.name.comment} {meal.name.title}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="box">
           식후 혈당 높았던 식단 TOP3
           <div className="recipe-list">
-            <div>wow</div>
+            {LowHighData.worst.map((meal, idx) => (
+              <div key={idx}>
+                <div>
+                  {meal.name.comment} {meal.name.title}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
