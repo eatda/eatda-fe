@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { Get } from "../../hooks/Fetch";
 import { useSelector } from "react-redux";
 import { selectToken } from "../../store/tokenSlice";
+import { selectUser } from "../../store/userSlice";
 
 interface RecordDataType {
   date: string;
@@ -23,6 +24,8 @@ interface RecordDataType {
 }
 
 export default function Library() {
+  const user = useSelector(selectUser);
+  console.log("🚀 ~ file: index.tsx:28 ~ Library ~ user", user);
   const token = useSelector(selectToken);
   const [recordData, setRecordData] = useState<RecordDataType[]>([]);
 
@@ -50,11 +53,13 @@ export default function Library() {
         leftURL="/library"
         rightURL="/library/report"
       />
-      <PushPageButton
-        name="필터"
-        src="/button/filter.svg"
-        page="/library/add"
-      />
+      {user.isDiabetes && (
+        <PushPageButton
+          name="필터"
+          src="/button/filter.svg"
+          page="/library/add"
+        />
+      )}
       <div className="container">
         {recordData.length === 0 && (
           <div className="empty">
