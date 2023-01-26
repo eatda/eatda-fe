@@ -7,35 +7,6 @@ import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import { selectToken } from "../../store/tokenSlice";
 
-// const myMealData: MyMealDataType[] = [
-//   {
-//     id: 13,
-//     diet: {
-//       id: 15,
-//       name: {
-//         title: "치아바타샌드위치",
-//         comment: "햄과 치아바타의 치정극",
-//       },
-//       image: "http://localhost:8000/media/default.jpg",
-//     },
-//     date: "23.01.20",
-//     timeline: 1,
-//   },
-//   {
-//     id: 14,
-//     diet: {
-//       id: 15,
-//       name: {
-//         title: "치아바타샌드위치",
-//         comment: "햄과 치아바타의 치정극",
-//       },
-//       image: "http://localhost:8000/media/default.jpg",
-//     },
-//     date: "24.09.01",
-//     timeline: 1,
-//   },
-// ];
-
 const offset = new Date().getTimezoneOffset() * 60000;
 const today = new Date(Date.now() - offset);
 
@@ -112,6 +83,30 @@ export default function Add() {
     setSugar(parseInt(value));
   }
 
+  const fetchPostSugar = async (requestBody: {
+    id: number;
+    level: number;
+    time: string;
+  }) => {
+    try {
+      const data = await fetch(
+        `${process.env.NEXT_PUBLIC_API_ROOT}users/blood-sugar-level/`,
+        {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: token.access_token,
+          },
+          body: JSON.stringify(requestBody),
+        }
+      );
+      const res = await data.json();
+      return { data, res };
+    } catch (error) {
+      return error;
+    }
+  };
   function handleSubmit() {
     if (typeof selectedMeal?.id == "undefined") {
       alert("'내 식단'에서 식단을 선택해 주세요");
@@ -124,6 +119,7 @@ export default function Add() {
         time: time,
       };
       console.log(data);
+      fetchPostSugar(data);
       router.back();
     }
   }
