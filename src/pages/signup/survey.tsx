@@ -2,6 +2,8 @@ import Router, { useRouter } from "next/router";
 import React, { useState, useCallback } from "react"
 import { CTA1Button, TextBox2, CTA1ButtonSelect, RadioBox, CheckBox } from "../../components/common/Button";
 import Navigation from "../../components/common/Navigation";
+import colors from "../../../styles";
+import Image from "next/image";
 
 import { putSurvey } from "../../store/surveySlice";
 import { selectSurvey } from "../../store/surveySlice";
@@ -188,9 +190,17 @@ export default function Survey({
         switch (current) {
             case 0:
                 return(
-                    <>
-                    {user.username}님, <br/>
-                    키를 알려주세요. 
+                    <div className="item">
+                    <div className="textMain">
+                    {user.username}님, 
+                    </div>
+                    <div className="textMain">
+                    <div className="textOrange">
+                    키
+                    </div>
+                    를 알려주세요. 
+                    </div>
+                    <div className="bar"/>
                     <TextBox2 
                     text="000.0" 
                     value={ form.height === -1 ? '' : String(form.height)} 
@@ -199,14 +209,43 @@ export default function Survey({
                     onChange={e=>handleChange(e,current)}
                     type="number"
                     />   
-                    <br/>  
-                    </>
+                    <br/>
+                    <style jsx>{`
+                        .item {
+                            display: flex;
+                            align-items: center;
+                            flex-direction: column;
+                        }
+                        .textMain {
+                            display: flex;
+                            margin-right: auto;
+                            margin-left: 20px;
+                            font-size: 24px;
+                            font-weight: 600;
+                            
+                        }
+                        .textOrange {
+                            color: ${colors.mainOrange};
+                        }
+                        .bar {
+                            height: 60px;
+                        }
+                    `}</style>
+                    </div>
                 )
             case 1:
                 return(
-                    <>
+                    <div className="item">
+                    <div className="textMain">
                     {user.username}님, <br/>
-                    몸무게를 알려주세요.
+                    </div>
+                    <div className="textMain">
+                        <div className="textOrange">
+                            몸무게
+                        </div>
+                        를 알려주세요.
+                    </div>
+                    <div className="bar"/>
                     <TextBox2 text="00.0" 
                     value={ form.weight === -1 ? '' : String(form.weight)} 
                     active={false} 
@@ -215,13 +254,42 @@ export default function Survey({
                     type="number"  
                     /> 
                     <br/> 
-                    </>
+                    <style jsx>{`
+                        .item {
+                            display: flex;
+                            align-items: center;
+                            flex-direction: column;
+                        }
+                        .textMain {
+                            display: flex;
+                            margin-right: auto;
+                            margin-left: 20px;
+                            font-size: 24px;
+                            font-weight: 600;
+                            
+                        }
+                        .textOrange {
+                            color: ${colors.mainOrange};
+                        }
+                        .bar {
+                            height: 60px;
+                        }
+                    `}</style>
+                    </div>
                 )
             case 2:
                 return(
-                    <>
-                    {user.username}님, <br/>
-                    나이를 알려주세요.
+                    <div className="item">
+                    <div className="textMain">
+                    {user.username}님, 
+                    </div>
+                    <div className="textMain">
+                    <div className="textOrange">
+                    나이
+                    </div>
+                    를 알려주세요.
+                    </div>
+                    <div className="bar"/>
                     <TextBox2 text="00" 
                     value={ form.age === -1 ? '' : String(form.age)} 
                     active={false} 
@@ -230,30 +298,124 @@ export default function Survey({
                     type="number"  
                     /> 
                     <br/> 
-                    </>
+                    <style jsx>{`
+                        .item {
+                            display: flex;
+                            align-items: center;
+                            flex-direction: column;
+                        }
+                        .textMain {
+                            display: flex;
+                            margin-right: auto;
+                            margin-left: 20px;
+                            font-size: 24px;
+                            font-weight: 600;
+                            
+                        }
+                        .textOrange {
+                            color: ${colors.mainOrange};
+                        }
+                        .bar {
+                            height: 60px;
+                        }
+                    `}</style>
+                    </div>
                 )
             case 3:
                 return(
-                    <>
+                    <div className="item">
+                    <div className="textMain">
                     {user.username}님, <br/>
-                    성별은 무엇인가요?
-                    <CTA1ButtonSelect text="여성" value="f" active={form.gender === null ? false : form.gender} onClick={handleClickGender}/> <br/>
+                    </div>
+                    <div className="textMain">
+                    <div className="textOrange">
+                    성별
+                    </div>
+                    은 무엇인가요?
+                    </div>
+                    <div className="bar"/>
+                    <CTA1ButtonSelect text="여성" value="f" active={form.gender === null ? false : form.gender} onClick={handleClickGender}/> 
+                    <div className="bar2"/>
                     <CTA1ButtonSelect text="남성" value="m" active={form.gender === null ? false : !form.gender} onClick={handleClickGender}/>
                     <br/>
-                    </>
+                    <style jsx>{`
+                        .item {
+                            display: flex;
+                            align-items: center;
+                            flex-direction: column;
+                        }
+                        .textMain {
+                            display: flex;
+                            margin-right: auto;
+                            margin-left: 20px;
+                            font-size: 24px;
+                            font-weight: 600;
+                            
+                        }
+                        .textOrange {
+                            color: ${colors.mainOrange};
+                        }
+                        .bar {
+                            height: 60px;
+                        }
+                        .bar2 {
+                            height: 12px;
+                        }
+                    `}</style>
+                    </div>
                 )
             case 4:
                 return(
-                    <>
-                    이제 습관 관련 <br/>
+                    <div className="item">
+                    <Image alt="character" width={184} height={194} src={`/img/signup.svg`} priority/>
+                    <div className="bar"/>
+                    <div className="textMain">
+                    이제 습관 관련
+                    </div>
+                    <div className="textMain">
                     추가 질문을 드리겠습니다.
-                    </>
+                    </div>
+                    <div className="textSub">
+                    거의 다 왔어요!!
+                    </div>
+                    <style jsx>{`
+                        .item {
+                            margin-top: 150px;
+                            display: flex;
+                            align-items: center;
+                            flex-direction: column;
+                            text-align: center;
+                        }
+                        .textMain {
+                            display: flex;
+                            font-size: 24px;
+                            font-weight: 600;
+                            
+                        }
+                        .textSub {
+                            font-size: 16px;
+                            color: #878787;
+                        }
+                        .bar {
+                            height: 32px;
+                        }
+                    `}</style>
+                    </div>
                 )
             case 5:
                 return(
-                    <>
+                    <div className="item">
+                    <div className="textMain">
                     {user.username}님, 평균적인 <br/>
+                    </div>
+                    <div className="textMain">
+                    <div className="textOrange">
                     일주일 활동량이 어떤가요?
+                    </div>
+                    </div>
+                    <div className="textSub">
+                    일주일 활동량을 통해 활동대사량을 도출합니다.
+                    </div>
                     {
                         activityData.map((v,i)=>{
                             return(
@@ -270,13 +432,48 @@ export default function Survey({
                             )
                         })
                     }
-                    </>
+                    <style jsx>{`
+                        .item {
+                            display: flex;
+                            align-items: center;
+                            flex-direction: column;
+                        }
+                        .textMain {
+                            display: flex;
+                            margin-right: auto;
+                            margin-left: 20px;
+                            font-size: 24px;
+                            font-weight: 600;
+                            
+                        }
+                        .textOrange {
+                            color: ${colors.mainOrange};
+                        }
+                        .textSub {
+                            font-size: 14px;
+                            color: ${colors.graySubTitle};
+                            margin-right: auto;
+                            margin-left: 20px;
+                            margin-bottom: 55px;
+                        }
+                        .bar {
+                            height: 60px;
+                        }
+                    `}</style>
+                    </div>
                 )
             case 6:
                 return(
-                    <>
+                    <div className="item">
+                    <div className="textMain">
                     {user.username}님, 못드시는 음식을<br/>
+                    </div>
+                    <div className="textMain">
+                    <div className="textOrange">
                     모두 선택해주세요.
+                    </div>
+                    </div>
+                    <div className="bar"/>
                     {
                         allergyResponse.map((v,i)=>{
                             return(
@@ -300,7 +497,35 @@ export default function Survey({
                     text="해당 없음" 
                     select={allergy.length === 0 ? true : false} 
                     onChange={(e)=>{handleAll(e.target.checked)}}/>
-                    </>
+                    <style jsx>{`
+                        .item {
+                            display: flex;
+                            align-items: center;
+                            flex-direction: column;
+                        }
+                        .textMain {
+                            display: flex;
+                            margin-right: auto;
+                            margin-left: 20px;
+                            font-size: 24px;
+                            font-weight: 600;
+                            
+                        }
+                        .textOrange {
+                            color: ${colors.mainOrange};
+                        }
+                        .textSub {
+                            font-size: 14px;
+                            color: ${colors.graySubTitle};
+                            margin-right: auto;
+                            margin-left: 20px;
+                            margin-bottom: 55px;
+                        }
+                        .bar {
+                            height: 60px;
+                        }
+                    `}</style>
+                    </div>
                 )
             default:
                 break;

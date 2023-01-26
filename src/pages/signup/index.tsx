@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import React, { useEffect, useState, useRef } from "react"
-import { CTA1Button, TextBox2, CTA1ButtonSelect } from "../../components/common/Button";
+import { CTA1Button, TextBox2, CTA1ButtonSelect,CTA1ButtonSelect2 } from "../../components/common/Button";
 import Navigation from "../../components/common/Navigation";
 import Image from "next/image";
 import colors from "../../../styles";
@@ -195,52 +195,93 @@ export default function Signup(){
           <div className="textMain">
           활동 캐릭터를 설정해주세요.
           </div>
+          <div className="character">
           {
             characterData?.map((v:characterI,idx:number)=>{
               return(
-                <div key = {idx}>
-                <CTA1ButtonSelect
+                <CTA1ButtonSelect2
+                key={idx}
                 active={form.character === v.id ? true : false}
                 onClick={handleClick}
                 value={v.id}
                 image={`/character/ch_${v.id}.svg`}
                 />
-                </div>
-              )
-            })
-          }
+                )
+              })
+            }
+          </div>
           <style jsx>{`
             .item {
-              margin-left: 20px;
+              display: flex;
+              flex-direction: column;
+              // align-items: center;
+              // margin-left: 20px;
             }
             .textMain {
-              margin-bottom: 100px;
+              margin-bottom: 50px;
+              margin-right: auto;
+              margin-left: 20px;
               font-size: 24px;
               font-weight: 700;
             }
-            .textSub {
-              font-size: 14px;
-              color: ${colors.graySubTitle};
-              margin-bottom: 90px;
-            }
-            .textSub2 {
+            .character {
               display: flex;
-              flex-direction: row-reverse;
-              margin-right: 20px;
-              margin-top: 12px;
-              font-size: 12px;
-              color: ${colors.graySubTitle2};
+              justify-content: center;
+              flex-wrap: wrap;
             }
           `}</style>
           </div>
         )
       case 3 :
         return(
-          <>
+          <div className="item">
+          <div className="textMain">
           당뇨인이신가요?
+          </div>
+          <div className="textSub">
+            당뇨병 환자 &nbsp;
+            <div className="textOrange">
+            맞춤형 식단 추천
+            </div>
+            을 위한 
+          </div>
+          <div className="textSub">
+            기본 설문 조사가 이루어집니다.
+          </div>
+          <div className="bar"/>
           <CTA1ButtonSelect active={form.sugar === null ? false : form.sugar} value="true" text="네, 당뇨인이에요" onClick={handleClick}/>
+          <div className="bar2"/>
           <CTA1ButtonSelect active={form.sugar === null ? false : !form.sugar} value="false" text="아니요, 당뇨인 가족이에요" onClick={handleClick}/>
-          </>
+          <style jsx>{`
+            .item {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+            }
+            .textMain {
+              margin-right: auto;
+              margin-left: 20px;
+              font-size: 24px;
+              font-weight: 700;
+            }
+            .textOrange {
+              color: ${colors.mainOrange};
+            }
+            .textSub {
+              display: flex;
+              margin-right: auto;
+              margin-left: 20px;
+              font-size: 14px;
+              color: ${colors.graySubTitle};
+            }
+            .bar {
+              height: 60px;
+            }
+            .bar2 {
+              height: 12px;
+            }
+          `}</style>
+          </div>
         )
     }
   }
