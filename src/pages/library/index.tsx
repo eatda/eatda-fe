@@ -68,7 +68,7 @@ export default function Library() {
             <div className="record-list">
               {day.data.map((data, idx) => (
                 <div key={idx} className="record-card">
-                  <div className={`timeline timeline${data.timeline}`}>
+                  <div className={`timeline`}>
                     {data.timeline === 0 && "아침"}
                     {data.timeline === 1 && "점심"}
                     {data.timeline === 2 && "저녁"}
@@ -123,15 +123,6 @@ export default function Library() {
           font-size: 12px;
           font-weight: 700;
           color: white;
-        }
-        .timeline0 {
-          background-color: ${colors.subGreen};
-        }
-        .timeline1 {
-          background-color: ${colors.subPink};
-        }
-        .timeline2 {
-          background-color: ${colors.mainOrange};
         }
         .level {
           font-size: 20px;
