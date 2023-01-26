@@ -78,37 +78,6 @@ export default function Filter({ filterData }: FilterProps) {
     router.back();
   };
 
-  // const setFilter = () => {
-  //   // 선택된 필터 데이터 requestMap에 맵으로 정리
-  //   let requestMap = new Map<number, number[]>();
-  //   selectedFilter.forEach((filter) => {
-  //     const category = filter.category;
-  //     const prevList = requestMap.get(category);
-  //     if (typeof prevList == "undefined") {
-  //       requestMap.set(category, [filter.id]);
-  //     } else {
-  //       requestMap.set(category, prevList.concat(filter.id));
-  //     }
-  //   });
-
-  //   console.log(requestMap);
-  //   // requestMap -> requestQuery 문자열로 바꾸기
-  //   let requestQuery: string = "";
-  //   requestMap.forEach((filters, category) => {
-  //     requestQuery += filterData[category - 1].category.query_name + "=";
-  //     filters.forEach((filter) => {
-  //       requestQuery += filter + ",";
-  //     });
-  //     requestQuery = requestQuery.slice(0, -1);
-  //     requestQuery += "&";
-  //   });
-  //   requestQuery = requestQuery.slice(0, -1);
-
-  //   // 리덕스로 관리
-  //   dispatch(filterSlice.actions.setFilterQuery(requestQuery));
-  //   router.back();
-  // };
-
   return (
     <>
       <div className="container">

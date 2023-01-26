@@ -1,8 +1,8 @@
-import {useRouter} from 'next/router'
-import Link from 'next/link'
-import colors from '../../../styles';
+import { useRouter } from "next/router";
+import Link from "next/link";
+import colors from "../../../styles";
 
-interface MiniHeaderType{
+interface MiniHeaderType {
   left: string;
   right: string;
   leftURL: string;
@@ -12,40 +12,53 @@ interface MiniHeaderType{
 }
 
 // 필터 부분 추가해야 함
-export default function MiniHeader({left,right,leftURL,rightURL,button,buttonURL}:MiniHeaderType) {
+export default function MiniHeader({
+  left,
+  right,
+  leftURL,
+  rightURL,
+  button,
+  buttonURL,
+}: MiniHeaderType) {
   const router = useRouter();
 
   const handleClick = () => {
-    if (buttonURL){
-      router.replace(buttonURL)
+    if (buttonURL) {
+      router.push(buttonURL);
     }
-  }
+  };
 
   const handleButtonClick = () => {
-    if(router.pathname === leftURL){
+    if (router.pathname === leftURL) {
       router.replace(rightURL);
-    }else{
+    } else {
       router.replace(leftURL);
     }
-  }
+  };
 
   return (
     <>
-      <div className='container'>
-        <button 
-        onClick={handleButtonClick} 
-        className={router.pathname === rightURL ? 'trueButton' : 'falseButton'}>{left}</button>
-        <button 
-        onClick={handleButtonClick} 
-        className={router.pathname === leftURL ? 'trueButton' : 'falseButton'}>{right}</button>
+      <div className="container">
+        <button
+          onClick={handleButtonClick}
+          className={
+            router.pathname === rightURL ? "trueButton" : "falseButton"
+          }
+        >
+          {left}
+        </button>
+        <button
+          onClick={handleButtonClick}
+          className={router.pathname === leftURL ? "trueButton" : "falseButton"}
+        >
+          {right}
+        </button>
       </div>
-      {
-        button?
-        <button className='buttonStyle' onClick={handleClick}>{button}</button>
-        :
-        null
-      }
-      <br/>
+      {button ? (
+        <button className="buttonStyle" onClick={handleClick}>
+          {button}
+        </button>
+      ) : null}
       <style jsx>{`
         .container {
           display: flex;
