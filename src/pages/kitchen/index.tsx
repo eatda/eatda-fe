@@ -80,7 +80,6 @@ export default function Recipe(){
             const {data, res} : any = await fetchFilter();
             if(data.ok){
                 setFilterList(res);
-                console.log(filterList);
             }else{
                 console.log('filter error');
             }
