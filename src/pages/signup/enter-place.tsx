@@ -4,18 +4,18 @@ import colors from "../../../styles";
 import { login } from "../../store/userSlice";
 import { selectUser } from "../../store/userSlice";
 import { useSelector, useDispatch } from "react-redux";
-
-import { CTA1Button } from "../../components/common/Button";
+import Image from "next/image";
 
 interface testI {
-    data:any;
-    res:any;
+    data: unknown;
+    res: unknown;
 }
 
 type JSONValue =
     | string
     | number
     | boolean
+    | Response
     | JSONObject
     | JSONArray;
 
@@ -143,7 +143,14 @@ export default function EnterPlace(){
                 })
             }
             </div>
-            초대코드는 먼저 가입한 가족 구성원에게 문의하세요.
+            <div className="codeText">
+            <Image alt="enter" width={16} height={16} src={`/img/enterPlace.svg`} priority/>
+            초대코드는 &nbsp;
+            <div className="codeOrange">
+            먼저 가입한 가족 구성원
+            </div>
+            에게 문의하세요.
+            </div>
             <br/>
             <style jsx>{`
             .container {
@@ -158,11 +165,27 @@ export default function EnterPlace(){
                 color: ${colors.graySubTitle};
                 font-size: 14px;
                 font-weight: 500;
+                margin-right: auto;
+                margin-left: 20px;
             }
             .mainText {
                 margin-bottom: 72px;
                 font-weight: 600;
                 font-size: 24px;
+                margin-right: auto;
+                margin-left : 20px;
+            }
+            .codeText {
+                margin-top: 12px;
+                display: flex;
+                font-size: 12px;
+                font-weight: 500;
+                margin-left: auto;
+                margin-right: 20px;
+                color: ${colors.graySubTitle2};
+            }
+            .codeOrange {
+                color: ${colors.mainOrange};
             }
 
             input {

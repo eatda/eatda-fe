@@ -102,7 +102,8 @@ export default function RecipeCard({ id, type, popular, image, comment, title, i
               who_liked?.map((v:number,i:number)=>{
                 return(
                   <div key={v}>
-                    <Image alt="character" width={20} height={20} src={`/character/like_${v}.svg`} priority/>
+                    <Image alt="character"
+                    width={20} height={20} src={`/character/like_${v}.svg`} priority/>
                   </div>
                 )
               })
@@ -138,6 +139,8 @@ export default function RecipeCard({ id, type, popular, image, comment, title, i
           flex-direction: column;
           align-items: flex-end;
           justify-content: space-between;
+          background-size: cover;
+          background-position: center;
           background-image: url(${image});
         }
         .itemText {

@@ -2,6 +2,8 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState, useRef } from "react"
 import { CTA1Button, TextBox2, CTA1ButtonSelect } from "../../components/common/Button";
 import Navigation from "../../components/common/Navigation";
+import Image from "next/image";
+import colors from "../../../styles";
 
 import { login } from "../../store/userSlice";
 import { selectUser } from "../../store/userSlice";
@@ -125,25 +127,74 @@ export default function Signup(){
     switch(current){
       case 0 :
         return (
-          <>
+          <div className="item">
+          <Image alt="character" width={184} height={194} src={`/img/signup.svg`} priority/> 
+          <div className="text">
           반갑습니다!<br/>
           프로필을 완성해봐요
-          </>
+          </div>
+          <style jsx>{`
+            .item{
+              margin-top: 150px;
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
+              text-align: center;
+            }
+            .text {
+              margin-top: 36px;
+              font-size: 24px;
+              font-weight: 600;
+            }
+          `}</style>
+          </div>
         )
       case 1 :
         return (
-          <>
-          닉네임 설정해주세요
+          <div className="item">
+          <div className="textMain">
+          닉네임을 설정해주세요.
+          </div>
+          <div className="textSub">
+            가족 공간 내에서는 닉네임으로 활동해요.
+          </div>
           <TextBox2 text="맘스터치" onChange={handleChange} value={form.name}/>
           <br/>
+          <div className="textSub2">
           최대 12자
+          </div>
           <br/><br/>
-          </>
+          <style jsx>{`
+            .item {
+              margin-left: 20px;
+            }
+            .textMain {
+              font-size: 24px;
+              font-weight: 700;
+            }
+            .textSub {
+              font-size: 14px;
+              color: ${colors.graySubTitle};
+              margin-bottom: 90px;
+            }
+            .textSub2 {
+              display: flex;
+              flex-direction: row-reverse;
+              margin-right: 20px;
+              margin-top: 12px;
+              font-size: 12px;
+              color: ${colors.graySubTitle2};
+            }
+          `}</style>
+          </div>
         )
       case 2 :
         return (
-          <>
+          <div className="item">
+          <div className="textMain">
           활동 캐릭터를 설정해주세요.
+          </div>
           {
             characterData?.map((v:characterI,idx:number)=>{
               return(
@@ -158,7 +209,30 @@ export default function Signup(){
               )
             })
           }
-          </>
+          <style jsx>{`
+            .item {
+              margin-left: 20px;
+            }
+            .textMain {
+              margin-bottom: 100px;
+              font-size: 24px;
+              font-weight: 700;
+            }
+            .textSub {
+              font-size: 14px;
+              color: ${colors.graySubTitle};
+              margin-bottom: 90px;
+            }
+            .textSub2 {
+              display: flex;
+              flex-direction: row-reverse;
+              margin-right: 20px;
+              margin-top: 12px;
+              font-size: 12px;
+              color: ${colors.graySubTitle2};
+            }
+          `}</style>
+          </div>
         )
       case 3 :
         return(

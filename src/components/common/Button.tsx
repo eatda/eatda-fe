@@ -175,6 +175,8 @@ export function TextBox2({text, onChange, value, active, unit, type} : TextBoxI)
         {unit}
         <style jsx>{`
         input {
+            font-size: 20px;
+            font-weigth: 500;
             width: ${unit ? "320px" : "350px"};
             border: none;
             color: ${ value === "" ? colors.grayBackgroundSub : colors.grayMainTitle};
