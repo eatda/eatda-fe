@@ -1,6 +1,7 @@
 import MiniHeader from "../../components/common/MiniHeader";
 import Header from "../../components/common/Header";
 import { useSession } from "next-auth/react";
+import colors from "../../../styles";
 
 const WeeklySugarData = {
   start: "23.01.17",
@@ -15,15 +16,15 @@ const WeeklySugarData = {
     },
     {
       day: "THU",
-      level: 3,
+      level: 2,
     },
     {
       day: "WED",
-      level: 3,
+      level: 0,
     },
     {
       day: "TUE",
-      level: 3,
+      level: 1,
     },
   ],
 };
@@ -96,9 +97,11 @@ export default function Report() {
         rightURL="/library/report"
       />
       <div className="container">
-        <div className="title">
-          {session.data?.user.name}님의 <br />
-          주간보고서 입니다
+        <div className="box">
+          <div className="big-title">
+            {session.data?.user.name}님의 <br />
+            주간보고서 입니다
+          </div>
           <div className="duration">
             {WeeklySugarData.start} ~ {WeeklySugarData.end}
           </div>
@@ -107,16 +110,20 @@ export default function Report() {
           </div>
         </div>
         <div className="box">
-          주간 혈당 요약
+          <div className="title">주간 혈당 요약</div>
           <div className="summary">
-            <ul>
-              <li>저혈당 {WeeklySugarData.low}일</li>
-              <li>정상혈당 {WeeklySugarData.common}일</li>
-              <li>고혈당 {WeeklySugarData.high}일</li>
-            </ul>
+            <div className="summary-list">
+              <div className="summary-item">저혈당 {WeeklySugarData.low}일</div>
+              <div className="summary-item">
+                정상혈당 {WeeklySugarData.common}일
+              </div>
+              <div className="summary-item">
+                고혈당 {WeeklySugarData.high}일
+              </div>
+            </div>
             <div className="bar-graph">
               {WeeklySugarData.data.map((day, idx) => (
-                <div key={idx} className={`level${day.level}`}>
+                <div key={idx} className={`bar-item level${day.level}`}>
                   {day.day}
                 </div>
               ))}
@@ -125,7 +132,7 @@ export default function Report() {
         </div>
         <hr />
         <div className="box">
-          식후 혈당 낮았던 식단 TOP3
+          <div className="title"> 식후 혈당 낮았던 식단 TOP3</div>
           <div className="recipe-list">
             {LowHighData.best.map((meal, idx) => (
               <div key={idx}>
@@ -137,7 +144,7 @@ export default function Report() {
           </div>
         </div>
         <div className="box">
-          식후 혈당 높았던 식단 TOP3
+          <div className="title"> 식후 혈당 높았던 식단 TOP3</div>
           <div className="recipe-list">
             {LowHighData.worst.map((meal, idx) => (
               <div key={idx}>
@@ -152,6 +159,61 @@ export default function Report() {
       <style jsx>{`
         .container {
           width: 390px;
+          padding: 20px;
+        }
+        .box {
+          margin-bottom: 16px;
+        }
+        .big-title {
+          font-size: 24px;
+          font-weight: 700;
+        }
+        .duration {
+          color: ${colors.subTitle};
+          font-weight: 500;
+        }
+        .explain {
+          font-size: 12px;
+          color: ${colors.subTitle2};
+        }
+
+        .title {
+          font-weight: 700;
+          font-size: 20px;
+        }
+
+        .summary {
+          width: 350px;
+          background-color: ${colors.grayBackground};
+        }
+        .summary-list {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+        }
+        .bar-graph {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          gap: 6px;
+        }
+        .bar-item {
+          display: flex;
+          flex: 1;
+          justify-content: center;
+          color: ${colors.grayWhite};
+        }
+        .level0 {
+          border: solid 1px ${colors.blackSub};
+        }
+        .level1 {
+          background-color: ${colors.mainYellow};
+        }
+        .level2 {
+          background-color: ${colors.mainOrange};
+        }
+        .level3 {
+          background-color: ${colors.subRed};
         }
       `}</style>
     </>
