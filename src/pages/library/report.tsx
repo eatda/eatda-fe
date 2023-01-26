@@ -2,32 +2,19 @@ import MiniHeader from "../../components/common/MiniHeader";
 import Header from "../../components/common/Header";
 import { useSession } from "next-auth/react";
 import colors from "../../../styles";
+import { useEffect, useState } from "react";
+import { Get } from "../../hooks/Fetch";
+import { useSelector } from "react-redux";
+import { selectToken } from "../../store/tokenSlice";
 
-const WeeklySugarData = {
-  start: "23.01.17",
-  end: "01.20",
-  low: 0,
-  common: 0,
-  high: 4,
-  data: [
-    {
-      day: "FRI",
-      level: 3,
-    },
-    {
-      day: "THU",
-      level: 2,
-    },
-    {
-      day: "WED",
-      level: 0,
-    },
-    {
-      day: "TUE",
-      level: 1,
-    },
-  ],
-};
+interface WeeklyDataType {
+  start: string;
+  end: string;
+  low: number;
+  common: number;
+  high: number;
+  data: { day: string; level: number }[];
+}
 
 const LowHighData = {
   best: [
@@ -86,6 +73,23 @@ const LowHighData = {
 
 export default function Report() {
   const session = useSession();
+  const token = useSelector(selectToken);
+  const [weeklyData, setWeeklyData] = useState<WeeklyDataType>();
+
+  useEffect(() => {
+    async function fetchWeeklyData() {
+      const { data, res }: any = await Get({
+        url: "users/blood-sugar-level/report/",
+        token: token.access_token,
+      });
+      if (data.ok) {
+        setWeeklyData(res);
+      } else {
+        console.log("myMealData error");
+      }
+    }
+    fetchWeeklyData();
+  }, []);
 
   return (
     <>
@@ -97,39 +101,44 @@ export default function Report() {
         rightURL="/library/report"
       />
       <div className="container">
-        <div className="box">
-          <div className="big-title">
-            {session.data?.user.name}님의 <br />
-            주간보고서 입니다
-          </div>
-          <div className="duration">
-            {WeeklySugarData.start} ~ {WeeklySugarData.end}
-          </div>
-          <div className="explain">
-            1주일간 식사 후 혈당을 기록하여 주간 분석 레포트를 발급 받아요!
-          </div>
-        </div>
-        <div className="box">
-          <div className="title">주간 혈당 요약</div>
-          <div className="summary">
-            <div className="summary-list">
-              <div className="summary-item">저혈당 {WeeklySugarData.low}일</div>
-              <div className="summary-item">
-                정상혈당 {WeeklySugarData.common}일
+        {weeklyData ? (
+          <>
+            <div className="box">
+              <div className="big-title">
+                {session.data?.user.name}님의 <br />
+                주간보고서 입니다
               </div>
-              <div className="summary-item">
-                고혈당 {WeeklySugarData.high}일
+              <div className="duration">
+                {weeklyData.start} ~ {weeklyData.end}
+              </div>
+              <div className="explain">
+                1주일간 식사 후 혈당을 기록하여 주간 분석 레포트를 발급 받아요!
               </div>
             </div>
-            <div className="bar-graph">
-              {WeeklySugarData.data.map((day, idx) => (
-                <div key={idx} className={`bar-item level${day.level}`}>
-                  {day.day}
+            <div className="box">
+              <div className="title">주간 혈당 요약</div>
+              <div className="summary">
+                <div className="summary-list">
+                  <div className="summary-item">저혈당 {weeklyData.low}일</div>
+                  <div className="summary-item">
+                    정상혈당 {weeklyData.common}일
+                  </div>
+                  <div className="summary-item">고혈당 {weeklyData.high}일</div>
                 </div>
-              ))}
+                <div className="bar-graph">
+                  {weeklyData.data.map((day, idx) => (
+                    <div key={idx} className={`bar-item level${day.level}`}>
+                      {day.day}
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
+          </>
+        ) : (
+          <>noooooo</>
+        )}
+
         <hr />
         <div className="box">
           <div className="title"> 식후 혈당 낮았던 식단 TOP3</div>
