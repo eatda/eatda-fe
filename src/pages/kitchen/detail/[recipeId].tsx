@@ -1,7 +1,7 @@
 import { GetServerSideProps } from "next";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { pasta } from "../../../assets/imagePath";
+import colors from "../../../../styles";
 import FooterButton from "../../../components/common/FooterButton";
 import Navigation from "../../../components/common/Navigation";
 import DetailBox from "../../../components/kitchen/DetailBox";
@@ -18,7 +18,13 @@ export default function Detail({ recipeData }: DetailProps) {
   return (
     <>
       <Navigation text="상세정보" />
-      <Image src={pasta} alt="pasta" width={390} height={300} priority />
+      <Image
+        src={recipeData.image}
+        alt="pasta"
+        width={390}
+        height={300}
+        priority
+      />
       <div className="container">
         <div className="name">
           <div className="comment">{recipeData.name.comment}</div>
@@ -58,6 +64,17 @@ export default function Detail({ recipeData }: DetailProps) {
           display: flex;
           flex-direction: column;
           gap: 30px;
+          padding: 0px 20px;
+        }
+        .name {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          font-size: 20px;
+          font-weight: 500;
+        }
+        .comment {
+          color: ${colors.graySubTitle};
         }
       `}</style>
     </>
