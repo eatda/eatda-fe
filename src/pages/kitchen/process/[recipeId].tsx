@@ -1,11 +1,15 @@
 import Navigation from "../../../components/common/Navigation";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { useState } from "react";
+import { useReducer, useState } from "react";
 import colors from "../../../../styles";
 import ProcessCard from "../../../components/kitchen/ProcessCard";
 import { GetServerSideProps } from "next";
 import { RecipeDataType } from "../../../interface/recipe";
+import { useSelector } from "react-redux";
+import { selectToken } from "../../../store/tokenSlice";
+import { useRouter } from "next/router";
+import { Post } from "../../../hooks/Fetch";
 
 const mealButtonData = [
   { timelinine: 0, icon: "", text: "아침" },
@@ -18,10 +22,23 @@ interface ProcessProps {
 }
 
 export default function Process({ recipeData }: ProcessProps) {
+  const { query } = useRouter();
+  const token = useSelector(selectToken);
+  const router = useRouter();
+
   const [when, setWhen] = useState(0);
 
   function handleSubmit() {
-    console.log(when);
+    const requestBody = {
+      diet_id: query.recipeId,
+      timeline: when,
+    };
+    Post({
+      url: "users/diet/",
+      token: token.access_token,
+      requestBody: requestBody,
+    });
+    router.back();
   }
 
   // 레시피 과정 데이터에서 재료에 해당하는 단어 뽑아서 카드 데이터 넣기

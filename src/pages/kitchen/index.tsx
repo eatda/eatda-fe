@@ -87,7 +87,7 @@ export default function Recipe() {
       <div className="container">
         <div className="textHeader">나에게 딱 맞는 레시피!</div>
         <div className="margin">
-          {mineList ? (
+          {/* {mineList ? (
             <RecipeList type="recommend" mine={true} data={mineList} />
           ) : (
             <Image
@@ -97,7 +97,7 @@ export default function Recipe() {
               src={`/img/mineEmpty.svg`}
               priority
             />
-          )}
+          )} */}
         </div>
       </div>
       <div className="bar" />
