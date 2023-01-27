@@ -35,3 +35,21 @@ export async function Post({ url, token, requestBody }: FetchProps) {
     return error;
   }
 }
+
+export async function Delete({ url, token, requestBody }: FetchProps) {
+  try {
+    const data = await fetch(`${process.env.NEXT_PUBLIC_API_ROOT}${url}`, {
+      method: "DELETE",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+      body: JSON.stringify(requestBody),
+    });
+    const res = await data.json();
+    return { data, res };
+  } catch (error) {
+    return error;
+  }
+}
