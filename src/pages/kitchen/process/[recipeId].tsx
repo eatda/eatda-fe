@@ -1,5 +1,3 @@
-import { useRouter } from "next/router";
-import FooterButton from "../../../components/common/FooterButton";
 import Navigation from "../../../components/common/Navigation";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -9,12 +7,22 @@ import ProcessCard from "../../../components/kitchen/ProcessCard";
 import { GetServerSideProps } from "next";
 import { RecipeDataType } from "../../../interface/recipe";
 
+const mealButtonData = [
+  { timelinine: 0, icon: "", text: "아침" },
+  { timelinine: 1, icon: "", text: "점심" },
+  { timelinine: 2, icon: "", text: "저녁" },
+];
+
 interface ProcessProps {
   recipeData: RecipeDataType;
 }
 
 export default function Process({ recipeData }: ProcessProps) {
-  const router = useRouter();
+  const [when, setWhen] = useState(0);
+
+  function handleSubmit() {
+    console.log(when);
+  }
 
   // 레시피 과정 데이터에서 재료에 해당하는 단어 뽑아서 카드 데이터 넣기
   recipeData.recipe.forEach((menu) => {
@@ -49,8 +57,29 @@ export default function Process({ recipeData }: ProcessProps) {
             ))}
           </div>
         ))}
+        <div className="finish-box">
+          <div>이미지이미지</div>
+          <div className="select-meal">
+            언제 식사 하시나요?
+            <div className="meal-list">
+              {mealButtonData.map((meal) => (
+                <div
+                  onClick={() => setWhen(meal.timelinine)}
+                  key={meal.timelinine}
+                  className={
+                    meal.timelinine == when
+                      ? "meal-button clicked"
+                      : "meal-button"
+                  }
+                >
+                  {meal.text}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
-      <FooterButton text="요리 완료하기" path="/" />
+      <button onClick={handleSubmit}>요리 완료하기</button>
       <style jsx>{`
         .container {
           display: flex;
@@ -74,6 +103,33 @@ export default function Process({ recipeData }: ProcessProps) {
         }
         .sub {
           background-color: ${colors.mainYellow};
+        }
+
+        .finish-box {
+          border: 1px solid ${colors.blackSub};
+          border-radius: 4px;
+        }
+        .select-meal {
+          padding: 10px;
+          background-color: ${colors.grayBackgroundSub};
+        }
+        .meal-list {
+          display: flex;
+          justify-content: space-between;
+        }
+        .meal-button {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border: 1px solid ${colors.blackSub};
+          background-color: ${colors.grayWhite};
+          border-radius: 21px;
+          min-width: 100px;
+          height: 42px;
+        }
+        .clicked {
+          background-color: ${colors.mainOrange};
+          color: ${colors.grayWhite};
         }
       `}</style>
     </>
