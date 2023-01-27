@@ -1,37 +1,9 @@
 import Image from "next/image";
-import Link from "next/link";
 import { useRouter } from "next/router";
-import { useState } from "react";
 import { pasta } from "../../../assets/imagePath";
 import FooterButton from "../../../components/common/FooterButton";
 import Navigation from "../../../components/common/Navigation";
 import DetailBox from "../../../components/kitchen/DetailBox";
-
-interface Ingredients {
-  name: string;
-  amount: string;
-}
-const ingredientsData: Ingredients[] = [
-  { name: "통밀푸실리", amount: "15g" },
-  { name: "양상추", amount: "30g" },
-  { name: "방울토마토", amount: "5개" },
-  { name: "오이", amount: "20g" },
-  { name: "새우", amount: "1/2개" },
-];
-interface Tip {
-  title: string;
-  text: string;
-}
-const tipData: Tip[] = [
-  {
-    title: "1. 영양 덩어리 방울토마토",
-    text: "방울토마토는 큰 토마토보다 비타민 B, 비타민 C, 칼륨, 식이섬유가 1.5~2배로 많고 라이코펜은 3배로 많습니다.껍질에는 항산화 물질인 플라보노이드가 풍부해 콜레스테롤 수치를 개선해 혈관 벽을 보호하고, 혈액순환을 원활하게 해줍니다. 방울토마토는 큰 토마토보다 껍질 비율이높기 때문에, 같은 양을 먹어도 더 많은 플라보노이드를 섭취할 수 있습니다.",
-  },
-  {
-    title: "2.  양질의 단백질 공급원, 새우",
-    text: "새우의 단백질 함량은 붉은 고기만큼 높지만, 지방은훨씬 적습니다. 새우는 탄수화물 함량이 낮아 혈당 조절에용이합니다. 인슐린이 원활히 분비되게 돕는 아연도 풍부하게 들어있습니다.",
-  },
-];
 
 const recipeData = {
   id: 50,

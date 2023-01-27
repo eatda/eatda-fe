@@ -1,17 +1,20 @@
 import colors from "../../../styles";
 
-interface ProcessType {
-  num: number;
-  ingredients: string[];
-  text: string;
-  splitted?: string[];
-}
 interface ProcessCardProps {
-  content: string | ProcessType;
+  num: number;
+  content: {
+    ingredients: string[];
+    step: string;
+    splitted?: string[];
+  };
   selected: boolean;
 }
 
-export default function ProcessCard({ content, selected }: ProcessCardProps) {
+export default function ProcessCard({
+  num,
+  content,
+  selected,
+}: ProcessCardProps) {
   return (
     <>
       <div className="process-box">
@@ -21,7 +24,7 @@ export default function ProcessCard({ content, selected }: ProcessCardProps) {
           </div>
         ) : (
           <div className={selected ? "selected" : ""}>
-            <h3>{content.num}</h3>
+            <h3>{num}</h3>
             <div>
               {content.splitted?.map((word, idx) => (
                 <span key={idx}>
