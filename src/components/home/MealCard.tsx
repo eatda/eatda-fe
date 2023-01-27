@@ -4,6 +4,7 @@ import colors from "../../../styles";
 import { Post, Delete } from "../../hooks/Fetch";
 import { selectToken } from "../../store/tokenSlice";
 import { useSelector } from "react-redux";
+import { useRouter } from "next/router";
 
 interface MealCardProps {
   is_exist: boolean;
@@ -13,13 +14,18 @@ interface MealCardProps {
   img?: string;
 
   is_me_liked?: boolean;
-  who_liked?: [];
+  who_liked?: [] | any;
 }
 
 export default function MealCard({is_exist, type, text, name, img, is_me_liked, who_liked }: MealCardProps) {
   const [like, setLike] = useState<boolean | undefined>(()=>is_me_liked);
+  const router = useRouter();
   const token = useSelector(selectToken);
   const timeLine = ["아침", "점심", "저녁"];
+
+  const handleRouter = () => {
+    router.replace('/kitchen');
+  }
 
   const handleClick = (e:React.MouseEvent<HTMLImageElement>) => {
     async function fetchData(method: String){
@@ -75,6 +81,18 @@ export default function MealCard({is_exist, type, text, name, img, is_me_liked, 
           <div className="textType">
           {type}
           </div>
+          <div className="like">
+            {
+              who_liked?.map((v:number,i:number)=>{
+                return(
+                  <div key={v}>
+                    <Image alt="character"
+                    width={20} height={20} src={`/character/like_${v}.svg`} priority/>
+                  </div>
+                )
+              })
+            }
+          </div>
           <Image 
           onClick={handleClick}
           alt="character" 
@@ -84,7 +102,7 @@ export default function MealCard({is_exist, type, text, name, img, is_me_liked, 
           </div>
         </div>
         :
-        <div className="card">
+        <div onClick={handleRouter} className="card">
         <div className="emptyCard">
           + <br/>
         식사하러 가기
@@ -136,7 +154,7 @@ export default function MealCard({is_exist, type, text, name, img, is_me_liked, 
         .textMain{
           margin-right: auto;
           margin-left: 12px;
-          margin-bottom: 6px;
+          margin-bottom: 2px;
           font-size: 18px;
           font-weight: 600;
         }
@@ -157,6 +175,23 @@ export default function MealCard({is_exist, type, text, name, img, is_me_liked, 
           justify-content: space-between;
           align-items: center;
           margin-right: 12px;
+        }
+        .like {
+          display: flex;
+          flex-direction: row-reverse;
+          align-items: center;
+          justify-content: center;
+          width: ${who_liked?.length * 20 + 16}px;
+          height: 32px;
+          line-height: 13px;
+          border-radius: 15px;
+          margin-top: 6px;
+          margin-right: 8px;
+          margin-bottom: 8px;
+          float: right;
+          color: ${colors.graySubTitle};
+          background: ${colors.grayBackgroundSub};
+          // background-color: rgba( 255, 255, 255, 0.9 );
         }
       `}</style>
     </>

@@ -38,7 +38,7 @@ const dummyData = {
           },
           "is_me_liked": true,
           "who_liked": [
-              4
+              4,2
           ]
       },
       {
@@ -73,7 +73,7 @@ const dummyData = {
               "timeline": 2
           },
           "is_me_liked": true,
-          "who_liked": []
+          "who_liked": [1,2]
       }
   ]
 };
@@ -179,6 +179,7 @@ export default function Home() {
                   img={v.data.image}
 
                   is_me_liked={v.is_me_liked}
+                  who_liked={v.who_liked}
                   />
                   :
                   <MealCard

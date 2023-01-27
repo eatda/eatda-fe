@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { selectToken } from "../../store/tokenSlice";
 import { Post, Delete } from "../../hooks/Fetch";
+import { useRouter } from "next/router";
 
 interface SugarCardProps {
   is_exist?: boolean;
@@ -12,11 +13,12 @@ interface SugarCardProps {
   time?: string;
 
   is_me_liked?: boolean;
-  who_liked?: [];
+  who_liked?: [] | any;
 }
 
 export default function SugarCard({ is_exist, timeline, value, time, is_me_liked, who_liked }: SugarCardProps) {
   const [like, setLike] = useState<boolean | undefined>(()=>is_me_liked);
+  const router = useRouter();
   const token = useSelector(selectToken);
   const mealType = () => {
     switch (timeline) {
@@ -31,6 +33,10 @@ export default function SugarCard({ is_exist, timeline, value, time, is_me_liked
     }
   };
 
+  const handleRouter = () => {
+    router.replace('/library');
+  }
+  
   const handleClick = (e:React.MouseEvent<HTMLImageElement>) => {
     async function fetchData(method: String){
       const requestBody = {
@@ -80,6 +86,18 @@ export default function SugarCard({ is_exist, timeline, value, time, is_me_liked
           <div className="textType">
           {mealType()}
           </div>
+          <div className="like">
+            {
+              who_liked?.map((v:number,i:number)=>{
+                return(
+                  <div key={v}>
+                    <Image alt="character"
+                    width={20} height={20} src={`/character/like_${v}.svg`} priority/>
+                  </div>
+                )
+              })
+            }
+          </div>
           <Image 
           onClick={handleClick}
           alt="character" 
@@ -89,7 +107,7 @@ export default function SugarCard({ is_exist, timeline, value, time, is_me_liked
           </div>
         </div>
       :
-      <div className="cardEmptyOut">
+      <div onClick={handleRouter} className="cardEmptyOut">
         <div className="cardEmptyIn">
           + <br/>
           혈당 기록하러 가기
@@ -103,7 +121,7 @@ export default function SugarCard({ is_exist, timeline, value, time, is_me_liked
         }
         .card {
           width: 350px;
-          height: 108px;
+          height: 112px;
           padding-top: 8px;
           padding-left: 12px;
           paddig-right: 12px;
@@ -119,7 +137,7 @@ export default function SugarCard({ is_exist, timeline, value, time, is_me_liked
           justify-content: center;
           align-items: center;
           width: 350px;
-          height: 108px;
+          height: 112px;
           border: 1px solid ${colors.grayBackgroundSub};
           background-color: white;
           border-radius: 4px;
@@ -169,6 +187,23 @@ export default function SugarCard({ is_exist, timeline, value, time, is_me_liked
           display: flex;
           justify-content: space-between;
           align-items: center;
+        }
+        .like {
+          display: flex;
+          flex-direction: row-reverse;
+          align-items: center;
+          justify-content: center;
+          width: ${who_liked?.length * 20 + 16}px;
+          height: 32px;
+          line-height: 13px;
+          border-radius: 15px;
+          margin-top: 6px;
+          margin-right: 8px;
+          margin-bottom: 8px;
+          float: right;
+          color: ${colors.graySubTitle};
+          background: ${colors.grayBackgroundSub};
+          // background-color: rgba( 255, 255, 255, 0.9 );
         }
       `}</style>
     </div>
