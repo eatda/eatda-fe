@@ -5,7 +5,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useState } from "react";
 import colors from "../../../../styles";
-import ProcessCard from "../../../components/recipe/ProcessCard";
+import ProcessCard from "../../../components/kitchen/ProcessCard";
 import { GetServerSideProps } from "next";
 import { RecipeDataType } from "../../../interface/recipe";
 
@@ -15,7 +15,6 @@ interface ProcessProps {
 
 export default function Process({ recipeData }: ProcessProps) {
   const router = useRouter();
-  const [curCard, setCurCard] = useState(0);
 
   // 레시피 과정 데이터에서 재료에 해당하는 단어 뽑아서 카드 데이터 넣기
   recipeData.recipe.forEach((menu) => {
@@ -33,40 +32,48 @@ export default function Process({ recipeData }: ProcessProps) {
 
   return (
     <>
-      <div>
-        <Navigation text="상세정보" />
-        <div className="container">
-          {recipeData.recipe.map((menu, idx) => (
-            <div key={idx} className="process-list">
-              <div className="title">{menu.title}</div>
-              {menu.process.map((step, idx) => (
-                <ProcessCard
-                  key={idx}
-                  num={idx + 1}
-                  content={step}
-                  selected={curCard == idx}
-                />
-              ))}
+      <Navigation text="상세정보" />
+      <div className="container">
+        {recipeData.recipe.map((menu, idx) => (
+          <div key={idx} className="process-list">
+            <div className={idx == 0 ? "title main" : "title sub"}>
+              {menu.title}
             </div>
-          ))}
-          <div className="blank">1</div>
-          <div className="blank">2</div>
-          <div className="blank">3</div>
-        </div>
-        <FooterButton text="요리 완료하기" path="/" />
+            {menu.process.map((step, idx) => (
+              <ProcessCard
+                key={idx}
+                num={idx + 1}
+                content={step}
+                selected={false}
+              />
+            ))}
+          </div>
+        ))}
       </div>
+      <FooterButton text="요리 완료하기" path="/" />
       <style jsx>{`
         .container {
           display: flex;
           flex-direction: column;
-          gap: 8px;
           justify-content: center;
-          margin-top: 60px;
-          overflow: hidden;
-          width: 390px;
+          padding: 0px 20px;
         }
-        .blank {
-          opacity: 0;
+        .title {
+          display: flex;
+          align-items: center;
+          height: 56px;
+          border-radius: 4px;
+          font-size: 24px;
+          font-weight: 700;
+          padding: 0px 12px;
+          margin-bottom: 12px;
+        }
+        .main {
+          color: ${colors.grayWhite};
+          background-color: ${colors.mainOrange};
+        }
+        .sub {
+          background-color: ${colors.mainYellow};
         }
       `}</style>
     </>
