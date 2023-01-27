@@ -7,11 +7,12 @@ import { useState } from "react";
 import colors from "../../../../styles";
 import ProcessCard from "../../../components/recipe/ProcessCard";
 import { GetServerSideProps } from "next";
-import { RecipeDataType } from "../detail/[recipeId]";
+import { RecipeDataType } from "../../../interface/recipe";
 
 interface ProcessProps {
   recipeData: RecipeDataType;
 }
+
 export default function Process({ recipeData }: ProcessProps) {
   const router = useRouter();
   const [curCard, setCurCard] = useState(0);
