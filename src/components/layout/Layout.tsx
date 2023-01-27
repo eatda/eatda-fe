@@ -13,13 +13,14 @@ export default function Layout({ children }: LayoutProps) {
   const viewType =
     pathname.includes("/add") ||
     pathname.includes("/detail") ||
+    pathname.includes("/process") ||
     pathname.includes("/signup") ||
     pathname.includes("/filter") ||
     pathname === ("/") || 
     pathname.includes("/onboarding")
       ? "sub"
       : "main";
-  
+
   // const [screenWidth, setScreenWidth] = useState(390);
   // const [isInitialRender, setIsInitialRender] = useState(true);
   // useEffect(() => {
@@ -36,7 +37,9 @@ export default function Layout({ children }: LayoutProps) {
   return (
     <>
       <div className="container">
-        <div className="content">{children}</div>
+        <div className={viewType == "main" ? "main content" : "sub content"}>
+          {children}
+        </div>
         {viewType === "main" && <TabBar />}
       </div>
       <style jsx>{`
@@ -47,6 +50,13 @@ export default function Layout({ children }: LayoutProps) {
           width: 390px;
         }
         .content {
+        }
+        .main {
+          padding-bottom: 60px;
+          padding: 0px 20px;
+        }
+        .sub {
+          padding-top: 70px;
           padding-bottom: 60px;
         }
       `}</style>

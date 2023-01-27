@@ -94,7 +94,6 @@ export default function Library() {
           justify-content: center;
           align-items: center;
           flex-direction: column;
-          width: 390px;
           margin-top: 32px;
         }
         .empty {
