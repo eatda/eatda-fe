@@ -98,7 +98,7 @@ export default function Recipe() {
               src={`/img/mineEmpty.svg`}
               priority
             />
-          )} */}
+          )} 
         </div>
       </div>
       <div className="bar" />
