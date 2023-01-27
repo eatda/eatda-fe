@@ -1,14 +1,12 @@
 import { signIn, signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import Image from "next/image";
 
 import { login } from "../../store/userSlice";
 import { selectUser } from "../../store/userSlice";
 import { putToken } from "../../store/tokenSlice";
 import { selectToken } from "../../store/tokenSlice";
 import { useSelector, useDispatch } from "react-redux";
-
 
 export default function SignIn() {
   const router = useRouter();
@@ -55,7 +53,7 @@ export default function SignIn() {
           isDiabetes: res.user_info.is_diabetes,
           usergroup: user.usergroup,
         };
-        // console.log(user.usersocial_id);
+        console.log(user.usersocial_id);
         dispatch(login(reduxData));
         dispatch(putToken({ access_token: res.access_token }));
         console.log("로그인 완료");
@@ -81,34 +79,37 @@ export default function SignIn() {
 
   return (
     <div className="container">
-    <div className="buttonItem">
-      <button onClick={() => signIn("kakao")}>카카오로 시작하기</button>
-    </div>
-    
+      <div className="buttonItem">
+        <button onClick={() => signIn("kakao")}>카카오로 시작하기</button>
+      </div>
+
       <style jsx>{`
-      .container{
-        width: 390px;
-        height: 844px;
-        background-image: url("/img/onboarding.svg");
-      }
-      .buttonItem {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 60px;
-        position: fixed;
-        bottom: 36px;
-        left: 0;
-        right: 0;
-      }
-      button {
-        background: #FBE64D;
-        border: none;
-        width: 350px;
-        height: 54px;
-        font-size: 16px;
-        border-radius: 4px;
-      }
+        .container {
+          position: fixed;
+          top: 0;
+          bottom: 0;
+          right: 0;
+          left: 0;
+          background-image: url("/img/onboarding.svg");
+        }
+        .buttonItem {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 60px;
+          position: fixed;
+          bottom: 36px;
+          left: 0;
+          right: 0;
+        }
+        button {
+          background: #fbe64d;
+          border: none;
+          width: 350px;
+          height: 54px;
+          font-size: 16px;
+          border-radius: 4px;
+        }
       `}</style>
     </div>
   );
