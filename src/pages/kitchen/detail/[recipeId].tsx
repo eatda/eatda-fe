@@ -1,129 +1,95 @@
+import { GetServerSideProps } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import { useRouter } from "next/router";
-import { useState } from "react";
-import { pasta } from "../../../assets/imagePath";
+import colors from "../../../../styles";
 import FooterButton from "../../../components/common/FooterButton";
 import Navigation from "../../../components/common/Navigation";
+import DetailBox from "../../../components/kitchen/DetailBox";
+import { RecipeDataType } from "../../../interface/recipe";
 
-interface Ingredients {
-  name: string;
-  amount: string;
+interface DetailProps {
+  recipeData: RecipeDataType;
 }
-const ingredientsData: Ingredients[] = [
-  { name: "통밀푸실리", amount: "15g" },
-  { name: "양상추", amount: "30g" },
-  { name: "방울토마토", amount: "5개" },
-  { name: "오이", amount: "20g" },
-  { name: "새우", amount: "1/2개" },
-];
-interface Tip {
-  title: string;
-  text: string;
-}
-const tipData: Tip[] = [
-  {
-    title: "1. 영양 덩어리 방울토마토",
-    text: "방울토마토는 큰 토마토보다 비타민 B, 비타민 C, 칼륨, 식이섬유가 1.5~2배로 많고 라이코펜은 3배로 많습니다.껍질에는 항산화 물질인 플라보노이드가 풍부해 콜레스테롤 수치를 개선해 혈관 벽을 보호하고, 혈액순환을 원활하게 해줍니다. 방울토마토는 큰 토마토보다 껍질 비율이높기 때문에, 같은 양을 먹어도 더 많은 플라보노이드를 섭취할 수 있습니다.",
-  },
-  {
-    title: "2.  양질의 단백질 공급원, 새우",
-    text: "새우의 단백질 함량은 붉은 고기만큼 높지만, 지방은훨씬 적습니다. 새우는 탄수화물 함량이 낮아 혈당 조절에용이합니다. 인슐린이 원활히 분비되게 돕는 아연도 풍부하게 들어있습니다.",
-  },
-];
 
-export default function Detail() {
+export default function Detail({ recipeData }: DetailProps) {
   const { query } = useRouter();
   const recipeId = query.recipeId;
 
-  const [isNutrientOpen, setIsNutrientOpen] = useState(false);
-  const [isTipOpen, setIsTipOpen] = useState(false);
-
   return (
     <>
-      <div>
-        <Navigation text="상세정보" />
-        <Image src={pasta} alt="pasta" width={390} height={300} priority />
-        <h5>마음까지 신선해지는</h5>
-        <h4>냉파스타 샐러드</h4>
-        <div className="container">
-          <div className="ingredients">
-            <div className="basic">
-              <div>
-                기본재료<span>1인분</span>
-              </div>
-              <hr />
-              {ingredientsData.map((ingredient) => (
-                <div key={ingredient.name}>
-                  <span>{ingredient.name}</span>
-                  <span>{ingredient.amount}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className="ingredients">
-            <div className="basic">
-              <div>
-                드레싱 재료<span>1인분</span>
-              </div>
-              <hr />
-              {ingredientsData.map((ingredient) => (
-                <div key={ingredient.name}>
-                  <span>{ingredient.name}</span>
-                  <span>{ingredient.amount}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className="nutrients">
-            <div>
-              영양 정보
-              <button onClick={() => setIsNutrientOpen(!isNutrientOpen)}>
-                토글
-              </button>
-            </div>
-            <hr />
-            {isNutrientOpen && (
-              <>
-                {ingredientsData.map((ingredient) => (
-                  <div key={ingredient.name}>
-                    <span>{ingredient.name}</span>
-                    <span>{ingredient.amount}</span>
-                  </div>
-                ))}
-              </>
-            )}
-          </div>
-          <div className="tip">
-            <div>
-              건강 비결
-              <button onClick={() => setIsTipOpen(!isTipOpen)}>토글</button>
-              <hr />
-              {isTipOpen && (
-                <div className="content">
-                  {tipData.map((tip) => (
-                    <div key={tip.title}>
-                      <h5>{tip.title}</h5>
-                      <div>{tip.text}</div>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-          </div>
+      <Navigation text="상세정보" />
+      <Image
+        src={recipeData.image}
+        alt="pasta"
+        width={390}
+        height={300}
+        priority
+      />
+      <div className="container">
+        <div className="name">
+          <div className="comment">{recipeData.name.comment}</div>
+          <div className="title">{recipeData.name.title}</div>
         </div>
-        <FooterButton
-          path={`/kitchen/process/${recipeId}`}
-          text="요리 시작하기"
+        {recipeData.ingredient.map((item, idx) => (
+          <DetailBox key={idx} icon={""} type={"ingredient"} content={item} />
+        ))}
+        <DetailBox
+          icon={""}
+          type={"nutrient"}
+          content={{
+            title: "영양정보",
+            data: [
+              { name: "탄수화물", amount: `${recipeData.carbohydrate}` },
+              { name: "단백질", amount: `${recipeData.protein}` },
+              { name: "지방", amount: `${recipeData.province}` },
+              { name: "총 칼로리", amount: `${recipeData.total_calorie}` },
+            ],
+          }}
+        />
+        <DetailBox
+          icon={""}
+          type={"tip"}
+          content={{
+            title: "건강 비결",
+            tip: recipeData.tip,
+          }}
         />
       </div>
+      <FooterButton
+        path={`/kitchen/process/${recipeId}`}
+        text="요리 시작하기"
+      />
       <style jsx>{`
         .container {
           display: flex;
           flex-direction: column;
           gap: 30px;
+          padding: 0px 20px;
+        }
+        .name {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          font-size: 20px;
+          font-weight: 500;
+        }
+        .comment {
+          color: ${colors.graySubTitle};
         }
       `}</style>
     </>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const recipeData = await (
+    await fetch(
+      `${process.env.NEXT_PUBLIC_API_ROOT}diets/${context.params?.recipeId}`
+    )
+  ).json();
+  return {
+    props: {
+      recipeData,
+    },
+  };
+};

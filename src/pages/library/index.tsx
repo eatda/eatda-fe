@@ -25,7 +25,6 @@ interface RecordDataType {
 
 export default function Library() {
   const user = useSelector(selectUser);
-  console.log("🚀 ~ file: index.tsx:28 ~ Library ~ user", user);
   const token = useSelector(selectToken);
   const [recordData, setRecordData] = useState<RecordDataType[]>([]);
 
