@@ -197,12 +197,12 @@ export default function Detail() {
           <div className="title">{recipeData.name.title}</div>
         </div>
         {recipeData.ingredient.map((item, idx) => (
-          <DetailBox key={idx} icon={""} type={"ingredient"} data={item} />
+          <DetailBox key={idx} icon={""} type={"ingredient"} content={item} />
         ))}
         <DetailBox
           icon={""}
           type={"nutrient"}
-          data={{
+          content={{
             title: "영양정보",
             data: [
               { name: "탄수화물", amount: `${recipeData.carbohydrate}` },
@@ -210,6 +210,14 @@ export default function Detail() {
               { name: "지방", amount: `${recipeData.province}` },
               { name: "총 칼로리", amount: `${recipeData.total_calorie}` },
             ],
+          }}
+        />
+        <DetailBox
+          icon={""}
+          type={"tip"}
+          content={{
+            title: "건강 비결",
+            tip: recipeData.tip,
           }}
         />
       </div>

@@ -5,10 +5,14 @@ import colors from "../../../styles";
 interface DetailBoxProps {
   icon: string;
   type: "ingredient" | "nutrient" | "tip";
-  data: { title: string; data: { name: string; amount: string | number }[] };
+  content: {
+    title: string;
+    data?: { name: string; amount: string | number }[];
+    tip?: { title: string; text: string }[];
+  };
 }
 
-export default function DetailBox({ icon, type, data }: DetailBoxProps) {
+export default function DetailBox({ icon, type, content }: DetailBoxProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -16,15 +20,15 @@ export default function DetailBox({ icon, type, data }: DetailBoxProps) {
       <div className="container">
         <div className="title" onClick={() => setIsOpen(!isOpen)}>
           {/* <Image src={"/icon"} width={12} height={12} alt="" /> */}
-          {data.title} {type === "ingredient" && "재료"}
+          {content.title} {type === "ingredient" && "재료"}
           {type === "ingredient" && <div className="tag">1인분</div>}
           <div> {isOpen ? "ㅠ" : "ㅛ"}</div>
         </div>
         {isOpen && (
           <>
-            {type == "nutrient" && (
+            {type == "nutrient" && content.data && (
               <div className="list">
-                {data.data.map((item, idx) => (
+                {content.data.map((item, idx) => (
                   <div key={idx} className="item">
                     <div className="name">{item.name}</div>
                     <div className={idx == 3 ? "amount" : "kcal"}>
@@ -35,12 +39,24 @@ export default function DetailBox({ icon, type, data }: DetailBoxProps) {
                 ))}
               </div>
             )}
-            {type == "ingredient" && (
+            {type == "ingredient" && content.data && (
               <div className="list">
-                {data.data.map((item, idx) => (
+                {content.data.map((item, idx) => (
                   <div key={idx} className="item">
                     <div className="name">{item.name}</div>
                     <div className="amoung">{item.amount}</div>
+                  </div>
+                ))}
+              </div>
+            )}
+            {type == "tip" && content.tip && (
+              <div className="list">
+                {content.tip.map((item, idx) => (
+                  <div key={idx} className="paragraph">
+                    <div className="subtitle">
+                      {idx + 1}. {item.title}
+                    </div>
+                    <div className="text">{item.text}</div>
                   </div>
                 ))}
               </div>
