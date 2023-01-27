@@ -15,7 +15,7 @@ export default function Recipe() {
   const token = useSelector(selectToken);
   const filterQuery = useSelector(selectFilterQuery);
   const [filterList, setFilterList] = useState();
-  const [mineList, setMineList] = useState();
+  const [mineList, setMineList] = useState<[] | any>([]);
 
   const fetchMine = async () => {
     const URL = `${process.env.NEXT_PUBLIC_API_ROOT}users/diet/fit/`;
@@ -68,6 +68,7 @@ export default function Recipe() {
       if (data.ok) {
         setMineList(res);
       } else {
+        setMineList([]);
         console.log("mine error");
       }
     }
@@ -87,7 +88,7 @@ export default function Recipe() {
       <div className="container">
         <div className="textHeader">나에게 딱 맞는 레시피!</div>
         <div className="margin">
-          {mineList ? (
+          {mineList?.length !== 0 ? (
             <RecipeList type="recommend" mine={true} data={mineList} />
           ) : (
             <Image
