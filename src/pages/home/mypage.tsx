@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { Get } from "../../hooks/Fetch";
+import { copyCode } from "../../hooks/CopyClipBoard";
 
 interface myDataI {
   name: string;
@@ -42,10 +43,6 @@ export default function MyPage() {
     }
     fetchData();
   }, []);
-
-  const handleClick = () => {
-    signOut();
-  };
 
   useEffect(() => {
     if (session.status === "unauthenticated") {
@@ -103,7 +100,11 @@ export default function MyPage() {
           <></>
         )}
         <br />
-        <button onClick={handleClick}>초대코드 복사하기 {myData?.group}</button>
+        {myData && (
+          <button onClick={() => copyCode(myData.group)}>
+            초대코드 복사하기 {myData.group}
+          </button>
+        )}
         <button>서비스 평가 및 정식 출시 알림 받기</button>
         <button onClick={() => signOut()}>로그아웃하기</button>
         <button />

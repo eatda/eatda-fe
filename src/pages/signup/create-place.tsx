@@ -7,6 +7,7 @@ import Image from "next/image";
 import { login } from "../../store/userSlice";
 import { selectUser } from "../../store/userSlice";
 import { useSelector, useDispatch } from "react-redux";
+import { copyCode } from "../../hooks/CopyClipBoard";
 
 export default function CreatePlace() {
   const router = useRouter();
@@ -29,15 +30,6 @@ export default function CreatePlace() {
         break;
       default:
         break;
-    }
-  };
-
-  const handleCopyClipBoard = async (text: string) => {
-    try {
-      await navigator.clipboard.writeText(text);
-      alert("가족코드가 복사되었습니다.");
-    } catch (error) {
-      alert("다시 링크 복사 버튼을 눌러주세요.");
     }
   };
 
@@ -114,7 +106,7 @@ export default function CreatePlace() {
               </div>
               <div className="code">{code}</div>
             </div>
-            <button className="copy" onClick={() => handleCopyClipBoard(code)}>
+            <button className="copy" onClick={() => copyCode(code)}>
               <Image
                 alt="copy"
                 width={24}
