@@ -6,7 +6,7 @@ import FooterButton from "../../../components/common/FooterButton";
 import Navigation from "../../../components/common/Navigation";
 import DetailBox from "../../../components/kitchen/DetailBox";
 
-interface RecipeDataType {
+export interface RecipeDataType {
   id: number;
   name: {
     title: string;
@@ -31,6 +31,7 @@ interface RecipeDataType {
     process: {
       ingredients: string[];
       step: string;
+      splitted?: string[];
     }[];
   }[];
   tip: {
