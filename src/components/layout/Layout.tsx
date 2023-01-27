@@ -15,6 +15,7 @@ export default function Layout({ children }: LayoutProps) {
     pathname.includes("/detail") ||
     pathname.includes("/signup") ||
     pathname.includes("/filter") ||
+    pathname === ("/") || 
     pathname.includes("/onboarding")
       ? "sub"
       : "main";
