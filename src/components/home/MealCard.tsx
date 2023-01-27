@@ -107,7 +107,7 @@ export default function MealCard({is_exist, type, text, name, img, is_me_liked, 
           align-items: center;
           width: 350px;
           height: 245px;
-          border: 1px solid ${colors.blackSub};
+          border: 1px solid ${colors.grayBackgroundSub};
           background-color: white;
           border-radius: 5px;
         }
