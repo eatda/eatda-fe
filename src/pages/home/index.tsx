@@ -13,6 +13,8 @@ const sliderSettings = {
   slideToScroll: 1,
 };
 
+const dummyData = [];
+
 export default function Home() {
   return (
     <>
