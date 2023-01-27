@@ -1,4 +1,3 @@
-import RecipeList from "../../components/recipe/RecipeList";
 import colors from "../../../styles";
 import MiniHeader from "../../components/common/MiniHeader";
 import Header from "../../components/common/Header";
@@ -8,6 +7,7 @@ import { useSelector } from "react-redux";
 import Image from "next/image";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import RecipeList from "../../components/kitchen/RecipeList";
 
 const sliderSettings = {
   dots: true,
