@@ -5,7 +5,7 @@ import colors from "../../../styles";
 interface DetailBoxProps {
   icon: string;
   type: "ingredient" | "nutrient" | "tip";
-  data: { title: string; data: { name: string; amount: string }[] };
+  data: { title: string; data: { name: string; amount: string | number }[] };
 }
 
 export default function DetailBox({ icon, type, data }: DetailBoxProps) {
@@ -21,14 +21,31 @@ export default function DetailBox({ icon, type, data }: DetailBoxProps) {
           <div> {isOpen ? "ㅠ" : "ㅛ"}</div>
         </div>
         {isOpen && (
-          <div className="list">
-            {data.data.map((item, idx) => (
-              <div key={idx} className="item">
-                <div className="name">{item.name}</div>
-                <div className="amount">{item.amount}</div>
+          <>
+            {type == "nutrient" && (
+              <div className="list">
+                {data.data.map((item, idx) => (
+                  <div key={idx} className="item">
+                    <div className="name">{item.name}</div>
+                    <div className={idx == 3 ? "amount" : "kcal"}>
+                      {item.amount}
+                      {idx == 3 ? "kcal" : "g"}
+                    </div>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
+            )}
+            {type == "ingredient" && (
+              <div className="list">
+                {data.data.map((item, idx) => (
+                  <div key={idx} className="item">
+                    <div className="name">{item.name}</div>
+                    <div className="amoung">{item.amount}</div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </>
         )}
       </div>
       <style jsx>{`

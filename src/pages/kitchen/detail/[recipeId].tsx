@@ -187,7 +187,6 @@ const recipeData = {
 export default function Detail() {
   const { query } = useRouter();
   const recipeId = query.recipeId;
-
   return (
     <>
       <Navigation text="상세정보" />
@@ -200,6 +199,19 @@ export default function Detail() {
         {recipeData.ingredient.map((item, idx) => (
           <DetailBox key={idx} icon={""} type={"ingredient"} data={item} />
         ))}
+        <DetailBox
+          icon={""}
+          type={"nutrient"}
+          data={{
+            title: "영양정보",
+            data: [
+              { name: "탄수화물", amount: `${recipeData.carbohydrate}` },
+              { name: "단백질", amount: `${recipeData.protein}` },
+              { name: "지방", amount: `${recipeData.province}` },
+              { name: "총 칼로리", amount: `${recipeData.total_calorie}` },
+            ],
+          }}
+        />
       </div>
       <FooterButton
         path={`/kitchen/process/${recipeId}`}
