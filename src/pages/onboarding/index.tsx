@@ -53,6 +53,7 @@ export default function SignIn() {
           isDiabetes: res.user_info.is_diabetes,
           usergroup: user.usergroup,
         };
+        console.log(user.usersocial_id);
         dispatch(login(reduxData));
         dispatch(putToken({ access_token: res.access_token }));
         console.log("로그인 완료");
