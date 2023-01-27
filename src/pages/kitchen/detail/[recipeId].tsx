@@ -188,9 +188,6 @@ export default function Detail() {
   const { query } = useRouter();
   const recipeId = query.recipeId;
 
-  const [isNutrientOpen, setIsNutrientOpen] = useState(false);
-  const [isTipOpen, setIsTipOpen] = useState(false);
-
   return (
     <>
       <Navigation text="상세정보" />
