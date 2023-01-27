@@ -4,6 +4,8 @@ import { selectToken } from "../../store/tokenSlice";
 import { useSelector, useDispatch } from "react-redux";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { signIn, signOut, useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 
 interface myDataI {
     name: string;
@@ -21,6 +23,8 @@ interface myDataI {
 export default function MyPage(){
     const [myData, setMyData] = useState<myDataI>();
     const token = useSelector(selectToken);
+    const router = useRouter();
+    const session = useSession();
 
     const fetchMyPage = async () => {
         const URL = `${process.env.NEXT_PUBLIC_API_ROOT}users/info`;
@@ -56,8 +60,14 @@ export default function MyPage(){
     })
 
     const handleClick = () => {
-        console.log('click');
+        signOut();
     }
+    
+    useEffect(()=>{
+        if(session.status === "unauthenticated"){
+            router.replace('/onboarding');
+        }
+    },[session.status]);
 
     return(
         <>
@@ -108,7 +118,7 @@ export default function MyPage(){
         <button>
             서비스 평가 및 정식 출시 알림 받기
         </button>
-        <button>
+        <button onClick={()=>signOut()}>
             로그아웃하기
         </button>
         <button/>
