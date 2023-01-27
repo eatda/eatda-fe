@@ -13,30 +13,22 @@ export default function Layout({ children }: LayoutProps) {
   const viewType =
     pathname.includes("/add") ||
     pathname.includes("/detail") ||
+    pathname.includes("/process") ||
     pathname.includes("/signup") ||
     pathname.includes("/filter") ||
-    pathname === ("/") || 
+    pathname === "/" ||
     pathname.includes("/onboarding")
       ? "sub"
       : "main";
-  
-  // const [screenWidth, setScreenWidth] = useState(390);
-  // const [isInitialRender, setIsInitialRender] = useState(true);
-  // useEffect(() => {
-  //   if (isInitialRender) {
-  //     setIsInitialRender(false);
-  //     setScreenWidth(GetScreenWidth());
-  //   }
-  // }, [screenWidth, isInitialRender]);
-  // useEffect(()=>{
-  //   setScreenWidth(GetScreenWidth());
-  // },[])
+
   const screenWidth = GetScreenWidth();
 
   return (
     <>
       <div className="container">
-        <div className="content">{children}</div>
+        <div className={viewType == "main" ? "main content" : "sub content"}>
+          {children}
+        </div>
         {viewType === "main" && <TabBar />}
       </div>
       <style jsx>{`
@@ -47,7 +39,14 @@ export default function Layout({ children }: LayoutProps) {
           width: 390px;
         }
         .content {
+          padding: 0px 20px;
+        }
+        .main {
           padding-bottom: 60px;
+        }
+        .sub {
+          padding-top: 70px;
+          padding-bottom: 70px;
         }
       `}</style>
     </>

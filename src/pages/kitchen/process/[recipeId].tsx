@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 import { selectToken } from "../../../store/tokenSlice";
 import { useRouter } from "next/router";
 import { Post } from "../../../hooks/Fetch";
+import FooterButton from "../../../components/common/FooterButton";
 
 const mealButtonData = [
   { timelinine: 0, icon: "", text: "아침" },
@@ -96,13 +97,12 @@ export default function Process({ recipeData }: ProcessProps) {
           </div>
         </div>
       </div>
-      <button onClick={handleSubmit}>요리 완료하기</button>
+      <FooterButton onClick={handleSubmit} text={"요리 완료하기"} />
       <style jsx>{`
         .container {
           display: flex;
           flex-direction: column;
           justify-content: center;
-          padding: 0px 20px;
         }
         .title {
           display: flex;

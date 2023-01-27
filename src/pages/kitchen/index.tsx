@@ -1,4 +1,3 @@
-import RecipeList from "../../components/recipe/RecipeList";
 import colors from "../../../styles";
 import MiniHeader from "../../components/common/MiniHeader";
 import Header from "../../components/common/Header";
@@ -9,6 +8,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { selectFilterQuery } from "../../store/filterSlice";
 import PushPageButton from "../../components/common/PushPageButton";
+import RecipeList from "../../components/kitchen/RecipeList";
 
 export default function Recipe() {
   const router = useRouter();
@@ -98,7 +98,7 @@ export default function Recipe() {
               src={`/img/mineEmpty.svg`}
               priority
             />
-          )} 
+          )}
         </div>
       </div>
       <div className="bar" />
@@ -112,30 +112,21 @@ export default function Recipe() {
         <RecipeList type="recommend" data={filterList} />
       </div>
       <style jsx>{`
-            .box {
-                width: 390px
-            }
-            .container {
-                margin-left: 20px;
-                width: 390px
-                background: black;
-            }
-            .bar {
-                background: #F8F8F8;
-                height: 4px;
-                width: 390px;
-                margin-top: 12px;
-                margin-bottom: 18px;
-            }
-            .margin {
-                margin-right: 20px
-            }
-            .textHeader {
-              margin-top: 18px;
-              font-size: 20px;
-              font-weight: 700;
-            }
-        `}</style>
+        .bar {
+          background: #f8f8f8;
+          height: 4px;
+          margin-top: 12px;
+          margin-bottom: 18px;
+        }
+        .margin {
+          margin-right: 20px;
+        }
+        .textHeader {
+          margin-top: 18px;
+          font-size: 20px;
+          font-weight: 700;
+        }
+      `}</style>
     </div>
   );
 }

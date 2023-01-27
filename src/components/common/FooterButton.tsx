@@ -1,16 +1,16 @@
-import Link from "next/link";
+import colors from "../../../styles";
 
 interface FooterButtonProps {
-  path: string;
+  onClick: any;
   text: string;
 }
-export default function FooterButton({ path, text }: FooterButtonProps) {
+export default function FooterButton({ onClick, text }: FooterButtonProps) {
   return (
     <>
       <div className="footer">
-        <Link href={path}>
-          <button>{text}</button>
-        </Link>
+        <div className="button" onClick={onClick}>
+          {text}
+        </div>
       </div>
       <style jsx>{`
         .footer {
@@ -18,16 +18,21 @@ export default function FooterButton({ path, text }: FooterButtonProps) {
           bottom: 0;
           right: 0;
           left: 0;
+          padding: 10px 20px;
           display: flex;
           justify-content: center;
         }
-        .footer button {
-          background-color: tomato;
+        .button {
           display: flex;
           justify-content: center;
           align-items: center;
           height: 50px;
-          width: 350px;
+          flex: 1;
+          background-color: ${colors.mainOrange};
+          color: ${colors.grayWhite};
+          font-weight: 700;
+          font-size: 20px;
+          border-radius: 4px;
         }
       `}</style>
     </>

@@ -1,4 +1,3 @@
-import RecipeList from "../../components/recipe/RecipeList";
 import colors from "../../../styles";
 import MiniHeader from "../../components/common/MiniHeader";
 import Header from "../../components/common/Header";
@@ -8,6 +7,7 @@ import { useSelector } from "react-redux";
 import Image from "next/image";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import RecipeList from "../../components/kitchen/RecipeList";
 
 const sliderSettings = {
   dots: true,
@@ -101,13 +101,15 @@ export default function OurPick() {
         <div className="margin">
           {/* <RecipeList type="pick" data={popularPick} popular={true}/> */}
           {popularPick?.length === 0 ? (
-            <Image
-              alt="character"
-              width={361}
-              height={152}
-              src={`/img/popularEmpty.svg`}
-              priority
-            />
+            <div className="no-data">
+              <Image
+                alt="character"
+                width={361}
+                height={152}
+                src={`/img/popularEmpty.svg`}
+                priority
+              />
+            </div>
           ) : (
             <RecipeList type="pick" data={popularPick} popular={true} />
           )}
@@ -123,11 +125,11 @@ export default function OurPick() {
       <div className="bar" />
       <div className="container">
         {pick?.map((v, i) => {
-          console.log(v);
           return (
             <div key={i}>
               <div className="textHeader">
-                <div className="textMain">{v.user_name}</div>의 pick!
+                <div className="textMain">{v.user_name}</div>의 pick{" "}
+                {v.data.length}개
               </div>
               {v.is_exist ? (
                 <div className="margin">
@@ -155,52 +157,37 @@ export default function OurPick() {
         })}
       </div>
       <style jsx>{`
-            .box {
-                width: 390px
-            }
-            .container {
-                margin-left: 20px;
-                width: 390px
-                background: black;
-            }
-            .bar {
-                background: #F8F8F8;
-                height: 4px;
-                width: 390px;
+        .bar {
+          background: #f8f8f8;
+          height: 4px;
+          margin-bottom: 18px;
+        }
+        .miniHeader {
+          margin-top: 25px;
+        }
+        .emptyBox {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          height: 152px;
+          border: 1px solid #d9d9d9;
+          color: ${colors.graySubTitle2};
+          font-size: 14px;
+          text-align: center;
+          margin-bottom: 24px;
+          margin-top: 12px;
+        }
 
-                margin-bottom: 18px;
-            }
-            .miniHeader {
-                margin-top: 25px;
-            }
-            .margin {
-                margin-right: 20px
-            }
-
-            .emptyBox {
-                display: flex;
-                flex-direction: column;
-                justify-content:center;
-                align-items: center;
-                height: 152px;
-                width: 360px;
-                border: 1px solid #D9D9D9;
-                color: ${colors.graySubTitle2};
-                font-size: 14px;
-                text-align: center;
-                margin-bottom: 24px;
-                margin-top: 12px;
-            }
-
-            .textHeader {
-                display: flex;
-                font-size: 20px;
-                font-weight: 700;
-            }
-            .textMain {
-                color: ${colors.mainOrange};
-            }
-        `}</style>
+        .textHeader {
+          display: flex;
+          font-size: 20px;
+          font-weight: 700;
+        }
+        .textMain {
+          color: ${colors.mainOrange};
+        }
+      `}</style>
     </div>
   );
 }

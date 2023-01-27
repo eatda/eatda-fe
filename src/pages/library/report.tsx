@@ -108,7 +108,7 @@ export default function Report() {
             </div>
           </>
         ) : (
-          <>noooooo</>
+          <>로그인 만료!</>
         )}
 
         <hr />
@@ -159,8 +159,6 @@ export default function Report() {
       </div>
       <style jsx>{`
         .container {
-          width: 390px;
-          padding: 20px;
         }
         .box {
           margin-bottom: 16px;
