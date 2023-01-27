@@ -125,11 +125,11 @@ export default function OurPick() {
       <div className="bar" />
       <div className="container">
         {pick?.map((v, i) => {
-          console.log(v);
           return (
             <div key={i}>
               <div className="textHeader">
-                <div className="textMain">{v.user_name}</div>의 pick!
+                <div className="textMain">{v.user_name}</div>의 pick{" "}
+                {v.data.length}개
               </div>
               {v.is_exist ? (
                 <div className="margin">

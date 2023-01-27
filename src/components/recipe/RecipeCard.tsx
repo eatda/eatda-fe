@@ -130,20 +130,16 @@ export default function RecipeCard({
       </div>
       <style jsx>{`
         .container {
-          // margin-left: 5px;
-          margin-right: 10px;
           margin-bottom: ${marginBottom};
           background: ${colors.grayWhite};
           height: 196px;
-          width: 170px;
+          min-width: 165px;
           border-radius: 4px;
           border: solid ${colors.grayBackgroundSub} 1px;
         }
 
         .itemImg {
           height: 131px;
-          width: 170px;
-
           display: flex;
           flex-direction: column;
           align-items: flex-end;
@@ -154,7 +150,6 @@ export default function RecipeCard({
         }
         .itemText {
           height: 65px;
-          width: 170px;
         }
 
         .buttonImg {

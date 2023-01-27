@@ -16,22 +16,11 @@ export default function Layout({ children }: LayoutProps) {
     pathname.includes("/process") ||
     pathname.includes("/signup") ||
     pathname.includes("/filter") ||
-    pathname === ("/") || 
+    pathname === "/" ||
     pathname.includes("/onboarding")
       ? "sub"
       : "main";
 
-  // const [screenWidth, setScreenWidth] = useState(390);
-  // const [isInitialRender, setIsInitialRender] = useState(true);
-  // useEffect(() => {
-  //   if (isInitialRender) {
-  //     setIsInitialRender(false);
-  //     setScreenWidth(GetScreenWidth());
-  //   }
-  // }, [screenWidth, isInitialRender]);
-  // useEffect(()=>{
-  //   setScreenWidth(GetScreenWidth());
-  // },[])
   const screenWidth = GetScreenWidth();
 
   return (
@@ -50,14 +39,14 @@ export default function Layout({ children }: LayoutProps) {
           width: 390px;
         }
         .content {
+          padding: 0px 20px;
         }
         .main {
           padding-bottom: 60px;
-          padding: 0px 20px;
         }
         .sub {
           padding-top: 70px;
-          padding-bottom: 60px;
+          padding-bottom: 70px;
         }
       `}</style>
     </>
