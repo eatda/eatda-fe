@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import { selectToken } from "../../store/tokenSlice";
 import { Get, Post } from "../../hooks/Fetch";
+import FooterButton from "../../components/common/FooterButton";
 
 const offset = new Date().getTimezoneOffset() * 60000;
 const today = new Date(Date.now() - offset);
@@ -160,14 +161,12 @@ export default function Add() {
           </div>
         </div>
       </div>
-      <button onClick={handleSubmit}>혈당 기록 완료</button>
+      <FooterButton onClick={handleSubmit} text="혈당 기록 완료" />
       <style jsx>{`
         .container {
           display: flex;
           flex-direction: column;
           align-items: center;
-          width: 390px;
-          padding-top: 70px;
         }
 
         .today-sugar {

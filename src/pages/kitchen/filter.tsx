@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
+import FooterButton from "../../components/common/FooterButton";
 import Navigation from "../../components/common/Navigation";
 import FilterButton from "../../components/filter/FilterButton";
 import {
@@ -80,8 +81,8 @@ export default function Filter({ filterData }: FilterProps) {
 
   return (
     <>
+      <Navigation text={"필터"} />
       <div className="container">
-        <Navigation text={"필터"} />
         <div className="content">
           {filterData.map((data: FilterDataType) => (
             <div key={data.category.id} className="category">
@@ -100,8 +101,8 @@ export default function Filter({ filterData }: FilterProps) {
             </div>
           ))}
         </div>
-        <button onClick={setFilter}>필터를설정해요</button>
       </div>
+      <FooterButton onClick={setFilter} text="설정하기" />
       <style jsx>{`
         .filters {
           display: flex;

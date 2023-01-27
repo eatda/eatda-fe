@@ -12,19 +12,22 @@ interface DetailProps {
 }
 
 export default function Detail({ recipeData }: DetailProps) {
-  const { query } = useRouter();
-  const recipeId = query.recipeId;
+  const router = useRouter();
+  const recipeId = router.query?.recipeId;
 
   return (
     <>
       <Navigation text="상세정보" />
-      <Image
-        src={recipeData.image}
-        alt="pasta"
-        width={390}
-        height={300}
-        priority
-      />
+      <div className="image">
+        <Image
+          src={recipeData.image}
+          alt="pasta"
+          width={390}
+          height={300}
+          priority
+        />
+      </div>
+
       <div className="container">
         <div className="name">
           <div className="comment">{recipeData.name.comment}</div>
@@ -56,15 +59,17 @@ export default function Detail({ recipeData }: DetailProps) {
         />
       </div>
       <FooterButton
-        path={`/kitchen/process/${recipeId}`}
+        onClick={() => router.push(`/kitchen/process/${recipeId}`)}
         text="요리 시작하기"
       />
       <style jsx>{`
+        .image {
+          margin-left: -20px;
+        }
         .container {
           display: flex;
           flex-direction: column;
           gap: 30px;
-          padding: 0px 20px;
         }
         .name {
           display: flex;
