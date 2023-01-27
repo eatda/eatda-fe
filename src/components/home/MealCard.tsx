@@ -21,7 +21,7 @@ export default function MealCard({is_exist, type, text, name, img, is_me_liked, 
   const token = useSelector(selectToken);
   const timeLine = ["아침", "점심", "저녁"];
 
-  const handleClick = (e:React.MouseEvent<HTMLDivElement>) => {
+  const handleClick = (e:React.MouseEvent<HTMLImageElement>) => {
     async function fetchData(method: String){
       const requestBody = {
         "target": 0,
@@ -41,6 +41,14 @@ export default function MealCard({is_exist, type, text, name, img, is_me_liked, 
         });
       }
     }
+    if(like){
+      fetchData('DELETE');
+      // console.log('Delete');
+    }else{
+      fetchData('POST');
+      // console.log('post')
+    }
+    setLike(!like);
   }
   
   return (
@@ -68,6 +76,7 @@ export default function MealCard({is_exist, type, text, name, img, is_me_liked, 
           {type}
           </div>
           <Image 
+          onClick={handleClick}
           alt="character" 
           width={32} height={32} 
           src={like? `/button/like_full.svg` : `/button/like_empty.svg`} 
