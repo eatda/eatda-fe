@@ -128,8 +128,7 @@ export default function OurPick() {
           return (
             <div key={i}>
               <div className="textHeader">
-                <div className="textMain">{v.user_name}</div>의 pick{" "}
-                {v.data.length}개
+                <div className="textMain">{v.user_name}</div>의 PICK!
               </div>
               {v.is_exist ? (
                 <div className="margin">
