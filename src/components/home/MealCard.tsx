@@ -199,7 +199,7 @@ export default function MealCard({is_exist, type, text, name, img, is_me_liked, 
           background-size: cover;
           background-position: center;
           background-image: url(${img});
-          width: 350px;
+          // width: 350px;
           height: 150px;
         }
       `}</style>
