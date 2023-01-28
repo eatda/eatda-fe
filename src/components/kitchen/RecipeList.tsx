@@ -59,6 +59,11 @@ export default function RecipeList({
           flex-direction: column;
           height: auto;
           overflow: ${overflow_container};
+          -ms-overflow-style: none; /* 인터넷 익스플로러 */
+          scrollbar-width: none; /* 파이어폭스 */
+        }
+        .container::-webkit-scrollbar {
+          display: none; /* 크롬, 사파리, 오페라, 엣지 */
         }
 
         .item {
@@ -67,7 +72,12 @@ export default function RecipeList({
           width: auto;
           gap: 12px;
           overflow: auto;
+          -ms-overflow-style: none; /* 인터넷 익스플로러 */
+          scrollbar-width: none; /* 파이어폭스 */
         }
+        .item::-webkit-scrollbar {
+          display: none; /* 크롬, 사파리, 오페라, 엣지 */
+        } 
       `}</style>
     </>
   );
