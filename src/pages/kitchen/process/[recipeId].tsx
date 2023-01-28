@@ -105,7 +105,7 @@ export default function Process({ recipeData }: ProcessProps) {
         <div className="finish-box">
           <div className="image-box">
             <Image
-              src={"/img/recipeComplete.svg"}
+              src={image.complete_meal}
               width="233"
               height="131"
               alt="조리완료"
