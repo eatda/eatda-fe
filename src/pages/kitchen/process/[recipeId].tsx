@@ -1,7 +1,7 @@
 import Navigation from "../../../components/common/Navigation";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { useReducer, useState } from "react";
+import { useState } from "react";
 import colors from "../../../../styles";
 import ProcessCard from "../../../components/kitchen/ProcessCard";
 import { GetServerSideProps } from "next";
@@ -11,11 +11,38 @@ import { selectToken } from "../../../store/tokenSlice";
 import { useRouter } from "next/router";
 import { Post } from "../../../hooks/Fetch";
 import FooterButton from "../../../components/common/FooterButton";
+import Image from "next/image";
+
+const image = {
+  complete_meal: "/process/complete_meal.svg",
+  when_eat: "/process/when_eat.svg",
+  breakfast_black: "/process/breakfast_black.svg",
+  breakfast_white: "/process/breakfast_white.svg",
+  lunch_white: "/process/lunch_white.svg",
+  lunch_black: "/process/lunch_black.svg",
+  dinner_white: "/process/dinner_white.svg",
+  dinner_black: "/process/dinner_black.svg",
+};
 
 const mealButtonData = [
-  { timelinine: 0, icon: "", text: "아침" },
-  { timelinine: 1, icon: "", text: "점심" },
-  { timelinine: 2, icon: "", text: "저녁" },
+  {
+    timelinine: 0,
+    icon: image.breakfast_black,
+    selected: image.breakfast_white,
+    text: "아침",
+  },
+  {
+    timelinine: 1,
+    icon: image.lunch_black,
+    selected: image.lunch_white,
+    text: "점심",
+  },
+  {
+    timelinine: 2,
+    icon: image.dinner_black,
+    selected: image.dinner_white,
+    text: "저녁",
+  },
 ];
 
 interface ProcessProps {
@@ -76,8 +103,16 @@ export default function Process({ recipeData }: ProcessProps) {
           </div>
         ))}
         <div className="finish-box">
-          <div>이미지이미지</div>
+          <div className="image-box">
+            <Image
+              src={"/img/recipeComplete.svg"}
+              width="233"
+              height="131"
+              alt="조리완료"
+            />
+          </div>
           <div className="select-meal">
+            <Image src={image.when_eat} width={16} height={16} alt={""} />
             언제 식사 하시나요?
             <div className="meal-list">
               {mealButtonData.map((meal) => (
@@ -90,6 +125,12 @@ export default function Process({ recipeData }: ProcessProps) {
                       : "meal-button"
                   }
                 >
+                  <Image
+                    src={meal.timelinine == when ? meal.selected : meal.icon}
+                    alt=""
+                    width={16}
+                    height={16}
+                  />
                   {meal.text}
                 </div>
               ))}
@@ -125,14 +166,23 @@ export default function Process({ recipeData }: ProcessProps) {
         .finish-box {
           border: 1px solid ${colors.blackSub};
           border-radius: 4px;
+          padding: 6px;
+        }
+        .image-box {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 10px 0px 50px 0px;
         }
         .select-meal {
+          border-radius: 6px;
           padding: 10px;
-          background-color: ${colors.grayBackgroundSub};
+          background-color: ${colors.grayBackground};
         }
         .meal-list {
           display: flex;
           justify-content: space-between;
+          margin-top: 10px;
         }
         .meal-button {
           display: flex;
@@ -143,6 +193,7 @@ export default function Process({ recipeData }: ProcessProps) {
           border-radius: 21px;
           min-width: 100px;
           height: 42px;
+          gap: 5px;
         }
         .clicked {
           background-color: ${colors.mainOrange};
