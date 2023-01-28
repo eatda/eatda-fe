@@ -28,7 +28,7 @@ export default function Recipe() {
         },
       });
 
-      const res = data.json();
+      const res = await data.json();
       return { data, res };
     } catch (error) {
       return error;
@@ -67,6 +67,7 @@ export default function Recipe() {
       const { data, res }: any = await fetchMine();
       if (data.ok) {
         setMineList(res);
+        console.log(res);
       } else {
         setMineList([]);
         console.log("mine error");
