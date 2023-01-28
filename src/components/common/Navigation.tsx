@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import Image from "next/image";
+import colors from "../../../styles";
 
 interface NavigationProps {
   text: string;
@@ -7,9 +8,14 @@ interface NavigationProps {
 export default function Navigation({ text }: NavigationProps) {
   const router = useRouter();
   const back = "<";
+
   return (
     <>
-      <div className="container">
+      <div
+        className={
+          router.pathname.includes("/detail") ? "container" : "container opaque"
+        }
+      >
         <button onClick={() => router.back()}>
           <Image
             alt="back"
@@ -33,7 +39,9 @@ export default function Navigation({ text }: NavigationProps) {
           top: 0;
           left: 0;
           right: 0;
-          background-color: white;
+        }
+        .opaque {
+          background-color: ${colors.grayWhite};
         }
         button {
           border: none;

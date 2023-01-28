@@ -18,16 +18,7 @@ export default function Detail({ recipeData }: DetailProps) {
   return (
     <>
       <Navigation text="상세정보" />
-      <div className="image">
-        <Image
-          src={recipeData.image}
-          alt="pasta"
-          width={390}
-          height={300}
-          priority
-        />
-      </div>
-
+      <div className="image" />
       <div className="container">
         <div className="name">
           <div className="comment">{recipeData.name.comment}</div>
@@ -64,7 +55,19 @@ export default function Detail({ recipeData }: DetailProps) {
       />
       <style jsx>{`
         .image {
+          width: 390px;
+          height: 400px;
+          margin-top: -50px;
           margin-left: -20px;
+          object-fit: cover;
+          background-size: cover;
+          background-image: linear-gradient(
+              ${colors.grayWhite},
+              5%,
+              transparent,
+              ${colors.grayWhite}
+            ),
+            url(${recipeData.image});
         }
         .container {
           display: flex;
@@ -77,6 +80,7 @@ export default function Detail({ recipeData }: DetailProps) {
           align-items: center;
           font-size: 20px;
           font-weight: 500;
+          margin-top: -30px;
         }
         .comment {
           color: ${colors.graySubTitle};
