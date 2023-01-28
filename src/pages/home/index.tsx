@@ -95,7 +95,7 @@ export default function Home() {
     <>
       <div className="container">
         <div className="header">
-          <h2>Eat Da</h2>
+          <Image alt="character" width={126} height={32} src={`/img/logo.svg`} priority/>
           <button onClick={handleClick}>
             <Image
               alt="character"
@@ -155,6 +155,7 @@ export default function Home() {
       <style jsx>{`
         .header {
           display: flex;
+          margin-top: 17px;
           flex-direction: row;
           justify-content: space-between;
         }

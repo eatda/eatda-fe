@@ -128,8 +128,7 @@ export default function OurPick() {
           return (
             <div key={i}>
               <div className="textHeader">
-                <div className="textMain">{v.user_name}</div>의 pick{" "}
-                {v.data.length}개
+                <div className="textMain">{v.user_name}</div>의 PICK!
               </div>
               {v.is_exist ? (
                 <div className="margin">
@@ -183,10 +182,14 @@ export default function OurPick() {
           display: flex;
           font-size: 20px;
           font-weight: 700;
+          margin-top: 24px;
+          margin-bottom: 12px;
         }
         .textMain {
           color: ${colors.mainOrange};
         }
+
+
       `}</style>
     </div>
   );

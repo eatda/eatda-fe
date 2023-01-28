@@ -8,6 +8,10 @@ export default function TabBar() {
   const router = useRouter();
   const [currentPath, setCurrentPath] = useState(router.pathname);
 
+  useEffect(()=>{
+    setCurrentPath(router.pathname);
+  },[router])
+
   const handleRouting = (src: string) => {
     setCurrentPath(`/${src}`);
     router.replace(`/${src}`);

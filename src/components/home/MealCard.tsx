@@ -65,7 +65,9 @@ export default function MealCard({is_exist, type, text, name, img, is_me_liked, 
         <div className="cardItem">
           {
             img?
-            <Image src={img} width={350} height={150} alt="img"/>
+          <div className="cardImg">
+          </div>
+            // <Image src={img} width={350} height={150} alt="img"/>
             :
             <>
             Loading...
@@ -192,6 +194,13 @@ export default function MealCard({is_exist, type, text, name, img, is_me_liked, 
           color: ${colors.graySubTitle};
           background: ${colors.grayBackgroundSub};
           // background-color: rgba( 255, 255, 255, 0.9 );
+        }
+        .cardImg {
+          background-size: cover;
+          background-position: center;
+          background-image: url(${img});
+          width: 350px;
+          height: 150px;
         }
       `}</style>
     </>
