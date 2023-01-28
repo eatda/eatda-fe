@@ -33,10 +33,16 @@ export default function Layout({ children }: LayoutProps) {
       </div>
       <style jsx>{`
         .container {
+          max-width: 390px;
+          width: 100vw;
+          // display: flex;
+          // flex-direction: column;
+          // justify-content: center;
+          // align-items: center;
+          // padding-left: 32px;
           background: ${colors.grayWhite};
           // background: ${colors.grayBackgroundSub};
           // width: ${screenWidth}px;
-          width: 390px;
         }
         .content {
           padding: 0px 20px;

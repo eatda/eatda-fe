@@ -134,6 +134,7 @@ export default function RecipeCard({
           background: ${colors.grayWhite};
           height: 196px;
           min-width: 165px;
+          max-width: 170px;
           border-radius: 4px;
           border: solid ${colors.grayBackgroundSub} 1px;
         }

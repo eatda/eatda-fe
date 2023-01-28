@@ -84,7 +84,19 @@ export default function Home() {
         console.log("HomeData error");
       }
     }
+    async function fetchRecord() {
+      const {data, res} : any = await Get({
+        url : "users/blood-sugar-level/report/",
+        token: token.access_token
+      });
+      if (data.ok){
+        console.log(res);
+      }else {
+        console.log('error');
+      }
+    }
     fetchHome();
+    fetchRecord();
   }, []);
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
