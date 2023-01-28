@@ -28,7 +28,7 @@ export default function Recipe() {
         },
       });
 
-      const res = data.json();
+      const res = await data.json();
       return { data, res };
     } catch (error) {
       return error;
@@ -119,7 +119,7 @@ export default function Recipe() {
           margin-bottom: 18px;
         }
         .margin {
-          margin-right: 20px;
+          // margin-right: 20px;
         }
         .textHeader {
           margin-top: 18px;
