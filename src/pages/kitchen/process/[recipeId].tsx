@@ -56,17 +56,21 @@ export default function Process({ recipeData }: ProcessProps) {
 
   const [when, setWhen] = useState(0);
 
-  function handleSubmit() {
+  async function handleSubmit() {
     const requestBody = {
       diet_id: query.recipeId,
       timeline: when,
     };
-    Post({
+    const { data, res }: any = await Post({
       url: "users/diet/",
       token: token.access_token,
       requestBody: requestBody,
     });
-    router.back();
+    if (typeof data == "undefined") {
+      router.back();
+    } else if (data.status == 403) {
+      alert("이미 해당 시간대에 등록된 식단이 있습니다.");
+    }
   }
 
   // 레시피 과정 데이터에서 재료에 해당하는 단어 뽑아서 카드 데이터 넣기
