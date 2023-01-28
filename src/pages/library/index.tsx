@@ -132,7 +132,7 @@ export default function Library() {
           font-weight: 700;
         }
         .time {
-          color: ${colors.subTitle2};
+          color: ${colors.graySubTitle2};
           font-size: 14px;
         }
         hr {

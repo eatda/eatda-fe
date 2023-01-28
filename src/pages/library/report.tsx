@@ -168,12 +168,12 @@ export default function Report() {
           font-weight: 700;
         }
         .duration {
-          color: ${colors.subTitle};
+          color: ${colors.graySubTitle};
           font-weight: 500;
         }
         .explain {
           font-size: 12px;
-          color: ${colors.subTitle2};
+          color: ${colors.graySubTitle2};
         }
 
         .title {

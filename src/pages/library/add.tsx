@@ -192,7 +192,7 @@ export default function Add() {
           background-color: ${colors.blackSub};
         }
         .date span {
-          color: ${colors.subTitle};
+          color: ${colors.graySubTitle};
           font-weight: 500;
         }
 
@@ -204,7 +204,7 @@ export default function Add() {
           padding: 8px;
           box-sizing: border-box;
           background-color: ${colors.blackSub};
-          color: ${colors.subTitle};
+          color: ${colors.graySubTitle2};
         }
         .mymeal-item {
           display: flex;
