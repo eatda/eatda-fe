@@ -20,8 +20,12 @@ export default function PushPageButton({
       </button>
       <style jsx>{`
         button {
+          display: flex;
+          justify-content: center;
           color: ${colors.graySubTitle};
-          width: 350px;
+          // width: 350px;
+          // width: 300px;
+          width: 99%;
           height: 34px;
           background: ${colors.grayWhite};
           margin-top: 12px;
