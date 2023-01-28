@@ -67,7 +67,6 @@ export default function Recipe() {
       const { data, res }: any = await fetchMine();
       if (data.ok) {
         setMineList(res);
-        console.log(res);
       } else {
         setMineList([]);
         console.log("mine error");
@@ -120,7 +119,7 @@ export default function Recipe() {
           margin-bottom: 18px;
         }
         .margin {
-          margin-right: 20px;
+          // margin-right: 20px;
         }
         .textHeader {
           margin-top: 18px;
