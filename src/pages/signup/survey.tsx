@@ -164,10 +164,10 @@ export default function Survey({ allergyResponse }: surveyI) {
       case 0:
         const heightValue = e.target.value;
         setForm({ ...form, height: Number(heightValue) });
-        // const regexH = /^\d{3}[.]\d{1}$/;
         const regexH = /^\d{3}$/;
+        const regexH2 = /^\d{3}[.]\d{1}$/;
 
-        if (regexH.test(heightValue)) {
+        if (regexH.test(heightValue) || regexH2.test(heightValue)) {
           setIsValid({ ...isValid, isHeight: true });
         } else {
           setIsValid({ ...isValid, isHeight: false });
@@ -177,10 +177,10 @@ export default function Survey({ allergyResponse }: surveyI) {
       case 1:
         const weightValue = e.target.value;
         setForm({ ...form, weight: Number(weightValue) });
-        // const regexW = /^\d{2}[.]\d{1}$/;
         const regexW = /^\d{2}$/;
+        const regexW2 = /^\d{2}[.]\d{1}$/;
 
-        if (regexW.test(weightValue)) {
+        if (regexW.test(weightValue) || regexW2.test(weightValue)) {
           setIsValid({ ...isValid, isWeight: true });
         } else {
           setIsValid({ ...isValid, isWeight: false });
