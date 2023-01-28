@@ -228,7 +228,7 @@ export default function Survey({ allergyResponse }: surveyI) {
               .textMain {
                 display: flex;
                 margin-right: auto;
-                margin-left: 20px;
+                // margin-left: 20px;
                 font-size: 24px;
                 font-weight: 600;
               }
@@ -269,7 +269,7 @@ export default function Survey({ allergyResponse }: surveyI) {
               .textMain {
                 display: flex;
                 margin-right: auto;
-                margin-left: 20px;
+                // margin-left: 20px;
                 font-size: 24px;
                 font-weight: 600;
               }
@@ -308,7 +308,7 @@ export default function Survey({ allergyResponse }: surveyI) {
               .textMain {
                 display: flex;
                 margin-right: auto;
-                margin-left: 20px;
+                // margin-left: 20px;
                 font-size: 24px;
                 font-weight: 600;
               }
@@ -354,7 +354,7 @@ export default function Survey({ allergyResponse }: surveyI) {
               .textMain {
                 display: flex;
                 margin-right: auto;
-                margin-left: 20px;
+                // margin-left: 20px;
                 font-size: 24px;
                 font-weight: 600;
               }
@@ -386,7 +386,7 @@ export default function Survey({ allergyResponse }: surveyI) {
             <div className="textSub">거의 다 왔어요!!</div>
             <style jsx>{`
               .item {
-                margin-top: 150px;
+                margin-top: 50px;
                 display: flex;
                 align-items: center;
                 flex-direction: column;
@@ -442,7 +442,7 @@ export default function Survey({ allergyResponse }: surveyI) {
               .textMain {
                 display: flex;
                 margin-right: auto;
-                margin-left: 20px;
+                // margin-left: 20px;
                 font-size: 24px;
                 font-weight: 600;
               }
@@ -453,7 +453,7 @@ export default function Survey({ allergyResponse }: surveyI) {
                 font-size: 14px;
                 color: ${colors.graySubTitle};
                 margin-right: auto;
-                margin-left: 20px;
+                // margin-left: 20px;
                 margin-bottom: 55px;
               }
               .bar {
@@ -509,7 +509,7 @@ export default function Survey({ allergyResponse }: surveyI) {
               .textMain {
                 display: flex;
                 margin-right: auto;
-                margin-left: 20px;
+                // margin-left: 20px;
                 font-size: 24px;
                 font-weight: 600;
               }
@@ -520,7 +520,7 @@ export default function Survey({ allergyResponse }: surveyI) {
                 font-size: 14px;
                 color: ${colors.graySubTitle};
                 margin-right: auto;
-                margin-left: 20px;
+                // margin-left: 20px;
                 margin-bottom: 55px;
               }
               .bar {
@@ -558,7 +558,7 @@ export default function Survey({ allergyResponse }: surveyI) {
       </div>
       <style jsx>{`
         .container {
-          padding-top: 60px;
+          // padding-top: 10px;
         }
         .buttonItem {
           display: flex;
