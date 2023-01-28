@@ -183,10 +183,14 @@ export default function OurPick() {
           display: flex;
           font-size: 20px;
           font-weight: 700;
+          margin-top: 24px;
+          margin-bottom: 12px;
         }
         .textMain {
           color: ${colors.mainOrange};
         }
+
+
       `}</style>
     </div>
   );
