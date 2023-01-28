@@ -133,8 +133,9 @@ export default function RecipeCard({
           margin-bottom: ${marginBottom};
           background: ${colors.grayWhite};
           height: 196px;
-          min-width: 165px;
-          max-width: 170px;
+          width: 47.5%;
+          // min-width: 165px;
+          // max-width: 170px;
           border-radius: 4px;
           border: solid ${colors.grayBackgroundSub} 1px;
         }
