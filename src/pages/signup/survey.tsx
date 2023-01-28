@@ -164,7 +164,8 @@ export default function Survey({ allergyResponse }: surveyI) {
       case 0:
         const heightValue = e.target.value;
         setForm({ ...form, height: Number(heightValue) });
-        const regexH = /^\d{3}[.]\d{1}$/;
+        // const regexH = /^\d{3}[.]\d{1}$/;
+        const regexH = /^\d{3}$/;
 
         if (regexH.test(heightValue)) {
           setIsValid({ ...isValid, isHeight: true });
@@ -176,7 +177,8 @@ export default function Survey({ allergyResponse }: surveyI) {
       case 1:
         const weightValue = e.target.value;
         setForm({ ...form, weight: Number(weightValue) });
-        const regexW = /^\d{2}[.]\d{1}$/;
+        // const regexW = /^\d{2}[.]\d{1}$/;
+        const regexW = /^\d{2}$/;
 
         if (regexW.test(weightValue)) {
           setIsValid({ ...isValid, isWeight: true });
@@ -228,7 +230,7 @@ export default function Survey({ allergyResponse }: surveyI) {
               .textMain {
                 display: flex;
                 margin-right: auto;
-                margin-left: 20px;
+                // margin-left: 20px;
                 font-size: 24px;
                 font-weight: 600;
               }
@@ -269,7 +271,7 @@ export default function Survey({ allergyResponse }: surveyI) {
               .textMain {
                 display: flex;
                 margin-right: auto;
-                margin-left: 20px;
+                // margin-left: 20px;
                 font-size: 24px;
                 font-weight: 600;
               }
@@ -308,7 +310,7 @@ export default function Survey({ allergyResponse }: surveyI) {
               .textMain {
                 display: flex;
                 margin-right: auto;
-                margin-left: 20px;
+                // margin-left: 20px;
                 font-size: 24px;
                 font-weight: 600;
               }
@@ -354,7 +356,7 @@ export default function Survey({ allergyResponse }: surveyI) {
               .textMain {
                 display: flex;
                 margin-right: auto;
-                margin-left: 20px;
+                // margin-left: 20px;
                 font-size: 24px;
                 font-weight: 600;
               }
@@ -386,7 +388,7 @@ export default function Survey({ allergyResponse }: surveyI) {
             <div className="textSub">거의 다 왔어요!!</div>
             <style jsx>{`
               .item {
-                margin-top: 150px;
+                margin-top: 50px;
                 display: flex;
                 align-items: center;
                 flex-direction: column;
@@ -442,7 +444,7 @@ export default function Survey({ allergyResponse }: surveyI) {
               .textMain {
                 display: flex;
                 margin-right: auto;
-                margin-left: 20px;
+                // margin-left: 20px;
                 font-size: 24px;
                 font-weight: 600;
               }
@@ -453,7 +455,7 @@ export default function Survey({ allergyResponse }: surveyI) {
                 font-size: 14px;
                 color: ${colors.graySubTitle};
                 margin-right: auto;
-                margin-left: 20px;
+                // margin-left: 20px;
                 margin-bottom: 55px;
               }
               .bar {
@@ -509,7 +511,7 @@ export default function Survey({ allergyResponse }: surveyI) {
               .textMain {
                 display: flex;
                 margin-right: auto;
-                margin-left: 20px;
+                // margin-left: 20px;
                 font-size: 24px;
                 font-weight: 600;
               }
@@ -520,7 +522,7 @@ export default function Survey({ allergyResponse }: surveyI) {
                 font-size: 14px;
                 color: ${colors.graySubTitle};
                 margin-right: auto;
-                margin-left: 20px;
+                // margin-left: 20px;
                 margin-bottom: 55px;
               }
               .bar {
@@ -558,7 +560,7 @@ export default function Survey({ allergyResponse }: surveyI) {
       </div>
       <style jsx>{`
         .container {
-          padding-top: 60px;
+          // padding-top: 10px;
         }
         .buttonItem {
           display: flex;
