@@ -115,7 +115,6 @@ export default function MyPage() {
           flex-direction: column;
           align-items: center;
           text-align: center;
-          width: 390px;
           // min-height: 800px;
           padding-top: 60px;
         }
@@ -134,7 +133,7 @@ export default function MyPage() {
 
         .info {
           background: ${colors.grayBackground};
-          width: 350px;
+          width: 98%;
           height: 124px;
           border-radius: 6px;
 
@@ -146,7 +145,7 @@ export default function MyPage() {
           margin-top: 20px;
         }
         .line {
-          min-width: 390px;
+          width: 98%;
           height: 2px;
           background: ${colors.grayWhite};
         }
@@ -161,7 +160,7 @@ export default function MyPage() {
           border-top: 2px solid ${colors.grayBackgroundSub};
           height: 62px;
           line-height: 62px;
-          min-width: 390px;
+          width: 98%;
         }
       `}</style>
     </>
