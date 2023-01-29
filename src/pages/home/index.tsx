@@ -100,7 +100,7 @@ export default function Home() {
   }, []);
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    router.replace("/home/mypage");
+    router.push("/home/mypage");
   };
 
   return (

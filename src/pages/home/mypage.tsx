@@ -9,6 +9,14 @@ import { useRouter } from "next/router";
 import { Get } from "../../hooks/Fetch";
 import { copyCode } from "../../hooks/CopyClipBoard";
 
+const activityData = [
+  "활동이 적거나 운동을 안하는 경우",
+  "가벼운 활동 및 운동",
+  "보통의 활동 및 운동",
+  "적극적인 활동 및 운동",
+  "매우 적극적인 활동 및 운동"
+];
+
 interface myDataI {
   name: string;
   character: number;
@@ -19,6 +27,7 @@ interface myDataI {
   gender?: string;
   height?: number;
   weight?: number;
+  activity?: number;
   allergy?: { id: number; name: string }[];
 }
 
@@ -56,41 +65,51 @@ export default function MyPage() {
       <div className="container">
         <div className="profile">
           {myData?.character && (
+            <div className="image">
             <Image
               alt="character"
-              width={80}
-              height={80}
+              width={55}
+              height={55}
               src={`/character/ch_${myData?.character}.svg`}
               priority
             />
+            </div>
           )}
           <br />
           <div className="profile_dia">
             {myData?.is_diabetes ? "당뇨인" : "당뇨인 가족"}
           </div>
-          <br />
+          <div className="name">
           {myData?.name}
+          </div>
+          <div className="survey">
           {myData?.is_diabetes ? (
             <>
-              <br />
-              {myData?.height}cm {myData?.weight}kg {myData?.gender}
+              {myData?.height}cm &nbsp; &nbsp; &nbsp;
+              {myData?.weight}kg &nbsp; &nbsp; &nbsp;
+              {myData?.gender === 'f' ? '여성' : '남성'}
             </>
           ) : (
             <></>
           )}
+          </div>
         </div>
         <br />
         {myData?.is_diabetes ? (
           <>
             <div className="info">
-              <div className="infoItem">활동량</div>
-              <br />
+              <div className="infoGroup">
+                <div className="infoItem">활동량</div>
+                <div className="infoVal">
+                {typeof myData?.activity === "number" ? activityData[myData?.activity] : "" }
+                </div>
+              </div>
               <div className="line"></div>
-              <div className="infoItem">
-                알레르기
-                <div>
+              <div className="infoGroup">
+                <div className="infoItem">알레르기</div>
+                <div className="infoVal">
                   {myData?.allergy?.map((allergy, idx) => (
-                    <span key={idx}>{allergy.name} </span>
+                    <span key={idx}>{allergy.name}, </span>
                   ))}
                 </div>
               </div>
@@ -101,12 +120,38 @@ export default function MyPage() {
         )}
         <br />
         {myData && (
-          <button onClick={() => copyCode(myData.group)}>
-            초대코드 복사하기 {myData.group}
+          <button className="buttonStyle" onClick={() => copyCode(myData.group)}>
+            <Image alt="character" width={24} height={24} src={`/img/mypage/code.svg`} priority/>
+            &nbsp;
+            <div className="textButton">
+            초대코드 복사하기 
+            {/* {myData.group} */}
+            </div>
+            <div className="go">
+            <Image alt="character" width={32} height={32} src={`/img/mypage/go.svg`} priority/>
+            </div>
           </button>
         )}
-        <button>서비스 평가 및 정식 출시 알림 받기</button>
-        <button onClick={() => signOut()}>로그아웃하기</button>
+        <button className="buttonStyle">
+        <Image alt="character" width={24} height={24} src={`/img/mypage/alarm.svg`} priority/>
+        &nbsp;
+        <div className="textButton">
+          서비스 평가 및 정식 출시 알림 받기
+        </div>
+        <div className="go">
+        <Image alt="character" width={32} height={32} src={`/img/mypage/go.svg`} priority/>
+        </div>
+        </button>
+        <button className="buttonStyle" onClick={() => signOut()}>
+        <Image alt="character" width={24} height={24} src={`/img/mypage/logout.svg`} priority/>
+        &nbsp;
+        <div className="textButton">
+          로그아웃하기
+        </div>
+        <div className="go">
+        <Image alt="character" width={32} height={32} src={`/img/mypage/go.svg`} priority/>
+        </div>
+        </button>
         <button />
       </div>
       <style jsx>{`
@@ -115,9 +160,19 @@ export default function MyPage() {
           flex-direction: column;
           align-items: center;
           text-align: center;
-          width: 390px;
           // min-height: 800px;
           padding-top: 60px;
+        }
+
+        .image {
+          width: 80px;
+          height: 80px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 100px;
+          border: 2px solid ${colors.mainOrange};
+          margin-top: 20px;
         }
 
         .profile {
@@ -130,30 +185,55 @@ export default function MyPage() {
           color: ${colors.grayWhite};
           width: ${myData?.is_diabetes ? "60px" : "80px"};
           border-radius: 2px;
+          font-size: 14px;
         }
 
         .info {
           background: ${colors.grayBackground};
-          width: 350px;
+          width: 98%;
           height: 124px;
           border-radius: 6px;
 
           display: flex;
           flex-direction: column;
           align-items: center;
+          margin-bottom: 36px;
+          margin-top: 24px;
+        }
+        .infoGroup {
+          display: flex;
+          height: 61px;
+          width: 85%;
+          align-items: center;
         }
         .infoItem {
-          margin-top: 20px;
+          font-size: 16px;
+          font-weight: 700;
+          margin-right: auto;
+        }
+        .infoVal {
+          font-size: 16px;
+          color: ${colors.graySubTitle};
         }
         .line {
-          min-width: 390px;
+          width: 98%;
           height: 2px;
           background: ${colors.grayWhite};
+        }
+        .name {
+          margin-top: 7px;
+          font-size: 20px;
+          font-weight: 900;
+        }
+        .survey {
+          display: flex;
+          color: ${colors.graySubTitle};
+          font-size: 14px;
+          margin-top: 4px;
         }
 
         button {
           display: flex;
-          // flex-direction: column;
           align-items: center;
 
           background: none;
@@ -161,7 +241,18 @@ export default function MyPage() {
           border-top: 2px solid ${colors.grayBackgroundSub};
           height: 62px;
           line-height: 62px;
-          min-width: 390px;
+          width: 98%;
+        }
+
+        .textButton {
+          font-size: 16px;
+          font-weight: 600;
+        }
+
+        .go {
+          margin-left: auto;
+          display: flex;
+          align-items: center;
         }
       `}</style>
     </>
