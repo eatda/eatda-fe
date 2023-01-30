@@ -23,10 +23,10 @@ export default function CreatePlace() {
         setPage((prevNumber) => prevNumber + 1);
         break;
       case "false":
-        router.replace("/signup/enter-place");
+        router.push("/signup/enter-place");
         break;
       case "enter":
-        router.replace("/signup");
+        router.push("/signup");
         break;
       default:
         break;

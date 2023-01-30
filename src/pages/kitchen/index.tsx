@@ -91,13 +91,11 @@ export default function Recipe() {
           {mineList?.length !== 0 ? (
             <RecipeList type="recommend" mine={true} data={mineList} />
           ) : (
-            <Image
-              alt="character"
-              width={361}
-              height={152}
-              src={`/img/mineEmpty.svg`}
-              priority
-            />
+            <div className="emptyMine">
+              식사 후 혈당을 기록하여 <br/>
+              체질 맞춤형 레시피를 추천 받아요!
+            </div>
+
           )}
         </div>
       </div>
@@ -125,6 +123,17 @@ export default function Recipe() {
           margin-top: 18px;
           font-size: 20px;
           font-weight: 700;
+        }
+        .emptyMine {
+          margin-top: 12px;
+          border: 1px solid #D9D9D9;
+          height: 152px;
+          color: ${colors.graySubTitle2};
+          font-size: 14px;
+          display: flex;
+          justify-content: center;
+          text-align: center;
+          align-items: center;
         }
       `}</style>
     </div>

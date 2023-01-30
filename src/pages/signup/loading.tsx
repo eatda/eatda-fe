@@ -39,9 +39,9 @@ export default function Loading() {
     const URL = `${process.env.NEXT_PUBLIC_API_ROOT}accounts/register/`;
     let bodyData: bodyDataI = {
       social_id: user.usersocial_id,
-      // social_id: 'familytest4',
+      // social_id: 'familytest7',
       email: user.useremail,
-      // email: 'familytest4@gmail.com',
+      // email: 'familytest7@gmail.com',
       name: user.username,
       character: user.usercharacter,
       group: user.usergroup,
