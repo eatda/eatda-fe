@@ -34,7 +34,7 @@ export default function RecipeCard({
   const router = useRouter();
   const token = useSelector(selectToken);
   const marginBottom =
-    popular === true && router.pathname === "/kitchen/ourpick" ? "45px" : "9px";
+    popular === true && router.pathname === "/kitchen/ourpick" ? "9px" : "9px";
   const display =
     popular === true && router.pathname === "/kitchen/ourpick"
       ? "flex"
@@ -186,6 +186,8 @@ export default function RecipeCard({
           font-size: 14px;
           font-weight: 600;
           color: ${colors.graySubTitle2};
+          margin-top: 10px;
+          margin-bottom: 2px;
         }
         .textTitle {
           margin-left: 6px;

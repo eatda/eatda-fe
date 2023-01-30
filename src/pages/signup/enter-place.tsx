@@ -178,7 +178,8 @@ export default function EnterPlace() {
         }
 
         input {
-          max-width: 43px;
+          // max-width: 43px;
+          width: 12%;
           height: 72px;
           font-weight: 700;
           font-size: 48px;
