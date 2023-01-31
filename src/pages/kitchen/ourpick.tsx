@@ -156,6 +156,7 @@ export default function OurPick() {
         .bar {
           background: #f8f8f8;
           height: 4px;
+          margin-top: 15px;
           margin-bottom: 18px;
         }
         .miniHeader {
