@@ -22,6 +22,7 @@ export default function PushPageButton({
         button {
           display: flex;
           justify-content: center;
+          align-items:center;
           color: ${colors.graySubTitle};
           // width: 350px;
           // width: 300px;

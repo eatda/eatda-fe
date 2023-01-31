@@ -52,7 +52,7 @@ export default function Add() {
   const [mealOpened, setMealOpened] = useState(false);
   const [selectedMeal, setSelectedMeal] = useState<SelectedMealType>();
   const [time, setTime] = useState(today.toISOString().slice(11, 16));
-  const [sugar, setSugar] = useState<number>();
+  const [sugar, setSugar] = useState<number>(0);
 
   function handleMealChange(id: number) {
     const clicked = myMealData.filter((item) => item.id === id)[0];
@@ -99,15 +99,31 @@ export default function Add() {
       <div className="container">
         <div className="today-sugar">
           <div>
-            오늘의 혈당
-            <div>170 mg/dl</div>
+            <div className="intro">
+              <div className="intro_title">오늘의 혈당</div>
+              <div className="intro_sugar">{sugar} mg/dl</div>
+              <div className="bar">
+                <div className="bar1">
+                </div>
+                <Image alt="chart" width={16} height={21} src={`/img/library/arrow.svg`} priority/>
+                {/* <div className="bar2"></div>
+                <div className="bar3"></div> */}
+              </div>
+                <Image alt="chart" width={318} height={61} src={`/img/library/chart_0.svg`} priority/>
+            </div>
           </div>
-          <Image src={pasta} width={320} height={56} alt={"그래프"} priority />
+          {/* <Image src={pasta} width={320} height={56} alt={"그래프"} priority /> */}
         </div>
         <div className="input-list">
           <div className="item" onClick={() => setMealOpened(!mealOpened)}>
             내 식단
-            <div className="icon">{mealOpened ? "ㅛ" : "ㅠ"}</div>
+            <div className="icon">
+              {mealOpened ? 
+              <Image alt="character" width={16} height={10} src={`/img/detail/down.svg`} priority/>
+              :
+              <Image alt="character" width={16} height={10} src={`/img/detail/up.svg`} priority/>
+              }
+              </div>
           </div>
           {mealOpened && (
             <div className="mymeal-list">
@@ -154,10 +170,14 @@ export default function Add() {
           </div>
           <div className="item">
             혈당{" "}
+            <div className="num">
             <input
               type="number"
+              min="0" max="300"
               onChange={(e) => handleSugarChange(e.target.value)}
-            />
+            /> 
+            mg/dl
+            </div>
           </div>
         </div>
       </div>
@@ -176,7 +196,8 @@ export default function Add() {
         }
 
         .item {
-          margin-top: 20px;
+          // gap: 12px;
+          margin-top: 12px;
           display: flex;
           align-items: center;
           justify-content: space-between;
@@ -204,7 +225,7 @@ export default function Add() {
           padding: 8px;
           box-sizing: border-box;
           background-color: ${colors.blackSub};
-          color: ${colors.graySubTitle2};
+          color: ${colors.graySubTitle};
         }
         .mymeal-item {
           display: flex;
@@ -224,6 +245,64 @@ export default function Add() {
 
         input[type="time"] {
           float: right;
+          width: 120px;
+          height: 27px;
+          font-size: 16px;
+          border: none;
+          font-family: 'Pretendard-Regular';
+        }
+        input[type="number"] {
+          text-align: right;
+          margin-left: auto;
+          margin-right: 3px;
+          width: 75px;
+          height: 27px;
+          font-size: 16px;
+          border: none;
+          font-family: 'Pretendard-Regular';
+        }
+
+        .intro {
+          height: 124px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+        }
+        .intro_title {
+          font-size: 16px;
+          font-weight: 700;
+        }
+        .intro_sugar {
+          margin-top: 8px;
+          margin-bottom: 10px;
+          font-size: 14px;
+          font-weight: 700;
+          color: ${colors.mainOrange};
+        }
+        .bar {
+          width: 300px;
+          height: 20px;
+          display: flex;
+        }
+        .bar1 {
+          background: #FF9458;
+          height: 22px;
+          // width: ${(sugar-12)/300 * 100 > 300 ? 0 : (sugar-12)/300 * 100}%;
+          margin-left: ${(sugar-12)/300 * 100 > (300-12)/300 * 100 ? (300-12)/300 * 100 : (sugar-12)/300 * 100}%;
+          max-width: 200px;
+          opacity: 0.3;
+        }
+        .bar2 {
+          background: #FFE094;
+          height: 22px;
+          opacity: 0.3;
+        }
+        .bar3 {
+          background: #D8593C;
+          width: 160px;
+          height: 22px;
+          opacity: 0.3;
         }
       `}</style>
     </>

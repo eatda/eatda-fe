@@ -55,7 +55,7 @@ export default function Library() {
       {user.isDiabetes && (
         <PushPageButton
           name="필터"
-          src="/button/filter.svg"
+          src="/img/library/add.svg"
           page="/library/add"
         />
       )}
@@ -95,6 +95,7 @@ export default function Library() {
           align-items: center;
           flex-direction: column;
           margin-top: 32px;
+          width: 100%;
         }
         .empty {
           color: ${colors.graySubTitle};
@@ -102,6 +103,7 @@ export default function Library() {
         }
         .date {
           font-weight: 700;
+          font-size: 20px;
           margin-bottom: 16px;
         }
         .record-card {
@@ -109,7 +111,8 @@ export default function Library() {
           justify-content: space-between;
           padding: 12px;
           box-sizing: border-box;
-          width: 350px;
+          width: 340px;
+          // width: 99%;
           height: 74px;
           border: solid 1px ${colors.blackSub};
           border-radius: 6px;
