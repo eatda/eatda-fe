@@ -31,6 +31,8 @@ export default function Filter({ filterData }: FilterProps) {
   const selectedFilter = useSelector(selectFilter);
   const router = useRouter();
 
+  console.log(filterData);
+
   // 필터 데이터 선택여부 초기화
   filterData.forEach((item) => {
     item.filter.forEach((filter) => {
