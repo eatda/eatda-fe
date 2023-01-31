@@ -86,12 +86,15 @@ export default function SignIn() {
 
       <style jsx>{`
         .container {
+          height: 750px;
           position: fixed;
           top: 0;
           bottom: 0;
           right: 0;
           left: 0;
           background-image: url("/img/onboarding.svg");
+          background-size: auto;
+          background-position: center;
         }
         .buttonItem {
           display: flex;
