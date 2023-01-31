@@ -289,7 +289,7 @@ export default function Add() {
           background: #FF9458;
           height: 22px;
           // width: ${(sugar-12)/300 * 100 > 300 ? 0 : (sugar-12)/300 * 100}%;
-          margin-left: ${(sugar-12)/300 * 100 > (300-12)/300 * 100 ? 0 : (sugar-12)/300 * 100}%;
+          margin-left: ${(sugar-12)/300 * 100 > (300-12)/300 * 100 ? (300-12)/300 * 100 : (sugar-12)/300 * 100}%;
           max-width: 200px;
           opacity: 0.3;
         }
