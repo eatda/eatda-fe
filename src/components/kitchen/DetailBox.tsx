@@ -3,6 +3,7 @@ import { useState } from "react";
 import colors from "../../../styles";
 
 interface DetailBoxProps {
+  idx?: number;
   icon: string;
   type: "ingredient" | "nutrient" | "tip";
   content: {
@@ -12,7 +13,7 @@ interface DetailBoxProps {
   };
 }
 
-export default function DetailBox({ icon, type, content }: DetailBoxProps) {
+export default function DetailBox({ idx, icon, type, content }: DetailBoxProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -21,10 +22,31 @@ export default function DetailBox({ icon, type, content }: DetailBoxProps) {
         <div className="title-box" onClick={() => setIsOpen(!isOpen)}>
           {/* <Image src={"/icon"} width={12} height={12} alt="" /> */}
           <div className="title">
+            {
+              type === "ingredient" &&
+              <Image alt="character" 
+              width={16} height={16} 
+              src={idx===0 ? `/img/detail/${icon.slice(0,4)}.svg` : `/img/detail/${icon.slice(4)}.svg`} 
+              priority/>
+            }
+            {
+              type !== "ingredient" &&
+              <Image alt="character" 
+              width={16} height={16} 
+              src={`/img/detail/${icon}.svg`} 
+              priority/>
+            }
+            &nbsp;
             {content.title} {type === "ingredient" && "재료"}
           </div>
           {type === "ingredient" && <div className="tag">1인분</div>}
-          <div> {isOpen ? "ㅠ" : "ㅛ"}</div>
+          <div> 
+            {isOpen ? 
+            <Image alt="down" width={16} height={10} src={`/img/detail/down.svg`} priority/> 
+            : 
+            <Image alt="up" width={16} height={10} src={`/img/detail/up.svg`} priority/> 
+            }
+          </div>
         </div>
         {isOpen && (
           <>
@@ -77,11 +99,24 @@ export default function DetailBox({ icon, type, content }: DetailBoxProps) {
           border-radius: 6px;
         }
         .title {
+          display: flex;
+          align-items:center;
           font-weight: 700;
+          font-size: 16px;
         }
         .tag {
           color: ${colors.grayWhite};
-          background-color: ${colors.mainOrange};
+          background-color: ${colors.graySubTitle};
+          border-radius: 2px;
+          font-size: 12px;
+          width: 36px;
+          height: 18px;
+          display: flex;
+          text-align: center;
+          align-items: center;
+          justify-content: center;
+          margin-left: auto;
+          margin-right: 15px;
         }
         .list {
           background-color: ${colors.grayBackground};

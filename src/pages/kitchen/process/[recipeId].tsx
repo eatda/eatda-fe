@@ -68,7 +68,7 @@ export default function Process({ recipeData }: ProcessProps) {
     });
     if (typeof data == "undefined") {
       alert("식단이 등록되었습니다");
-      router.back();
+      router.replace('/kitchen/process/timer');
     } else if (data.status == 403) {
       alert("이미 해당 시간대에 등록된 식단이 있습니다.");
     }
@@ -95,6 +95,19 @@ export default function Process({ recipeData }: ProcessProps) {
         {recipeData.recipe.map((menu, idx) => (
           <div key={idx} className="process-list">
             <div className={idx == 0 ? "title main" : "title sub"}>
+              {
+                idx === 0 ?
+                <Image alt="character" 
+                width={24} height={24} 
+                src={`/img/process/main.svg`} 
+                priority/>
+              :
+                <Image alt="character" 
+                width={24} height={24} 
+                src={`/img/process/side.svg`} 
+                priority/>
+              }
+              &nbsp;
               {menu.title}
             </div>
             {menu.process.map((step, idx) => (

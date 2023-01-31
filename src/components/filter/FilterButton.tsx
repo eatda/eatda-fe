@@ -26,7 +26,7 @@ export default function FilterButton({
           className={selected ? "selected" : "not-selected"}
         >
           <div className="icon">
-            <Image src={filter.image} alt={"icon"} width={48} height={48} />
+            <Image src={selected ? filter.image_selected : filter.image} alt={"icon"} width={48} height={48} />
           </div>
           <div className="name-text">{filter.name}</div>
         </div>
@@ -40,8 +40,8 @@ export default function FilterButton({
           height: 80px;
         }
         .selected .icon {
-          background-color: ${colors.mainOrange};
-          border-radius: 50%;
+          border-radius: 100%;
+          border: 1px solid ${colors.mainOrange};
           color: white;
         }
         .not-selected {

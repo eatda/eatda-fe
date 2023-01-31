@@ -39,7 +39,7 @@ export default function TabBar() {
     <>
       <div className="container">
         {TabBarItems.map((item, idx) => {
-          const isSelected = currentPath === `/${item.src}`;
+          const isSelected = currentPath.includes(`/${item.src}`);
 
           return (
             <div key={idx} onClick={() => handleRouting(item.src)}>
