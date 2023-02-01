@@ -67,10 +67,18 @@ export default function Home() {
       if (data.ok) {
         setDiet(res.diet);
         setBlood(res.blood_sugar_level);
-        setInitialMealCard(res.diet.findIndex((v: any) => v.is_exist));
-        setInitialBloodCard(
-          res.blood_sugar_level.findIndex((v: any) => v.is_exist)
+
+        const initialMealIdx = res.diet.findIndex((v: any) => v.is_exist);
+        if (initialMealIdx != -1) {
+          setInitialMealCard(initialMealIdx);
+        }
+        const initialBloodIdx = res.blood_sugar_level.findIndex(
+          (v: any) => v.is_exist
         );
+        if (initialBloodIdx != -1) {
+          setInitialBloodCard(initialBloodIdx);
+        }
+
         setIsLoading(true);
       } else {
         console.log("HomeData error");
