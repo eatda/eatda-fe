@@ -54,23 +54,27 @@ export default function Process({ recipeData }: ProcessProps) {
   const token = useSelector(selectToken);
   const router = useRouter();
 
-  const [when, setWhen] = useState(0);
+  const [when, setWhen] = useState<number>();
 
   async function handleSubmit() {
-    const requestBody = {
-      diet_id: query.recipeId,
-      timeline: when,
-    };
-    const { data, res }: any = await Post({
-      url: "users/diet/",
-      token: token.access_token,
-      requestBody: requestBody,
-    });
-    if (typeof data == "undefined") {
-      alert("식단이 등록되었습니다");
-      router.replace('/kitchen/process/timer');
-    } else if (data.status == 403) {
-      alert("이미 해당 시간대에 등록된 식단이 있습니다.");
+    if (typeof when == "undefined") {
+      alert("식사 시간대가 선택되지 않았습니다");
+    } else {
+      const requestBody = {
+        diet_id: query.recipeId,
+        timeline: when,
+      };
+      const { data, res }: any = await Post({
+        url: "users/diet/",
+        token: token.access_token,
+        requestBody: requestBody,
+      });
+      if (typeof data == "undefined") {
+        alert("식단이 등록되었습니다");
+        router.replace("/kitchen/process/timer");
+      } else if (data.status == 403) {
+        alert("이미 해당 시간대에 등록된 식단이 있습니다.");
+      }
     }
   }
 
@@ -95,18 +99,23 @@ export default function Process({ recipeData }: ProcessProps) {
         {recipeData.recipe.map((menu, idx) => (
           <div key={idx} className="process-list">
             <div className={idx == 0 ? "title main" : "title sub"}>
-              {
-                idx === 0 ?
-                <Image alt="character" 
-                width={24} height={24} 
-                src={`/img/process/main.svg`} 
-                priority/>
-              :
-                <Image alt="character" 
-                width={24} height={24} 
-                src={`/img/process/side.svg`} 
-                priority/>
-              }
+              {idx === 0 ? (
+                <Image
+                  alt="character"
+                  width={24}
+                  height={24}
+                  src={`/img/process/main.svg`}
+                  priority
+                />
+              ) : (
+                <Image
+                  alt="character"
+                  width={24}
+                  height={24}
+                  src={`/img/process/side.svg`}
+                  priority
+                />
+              )}
               &nbsp;
               {menu.title}
             </div>
