@@ -1,17 +1,17 @@
 import Image from "next/image";
 import colors from "../../../styles";
-import { MealCardType } from "../../pages/library/report";
+import { DietType } from "../../interface/diet";
 
 interface MealCardProps {
-  meals: MealCardType[];
+  meals: DietType[];
 }
 
 export default function BestWorstCards({ meals }: MealCardProps) {
   return (
     <>
       <div className="wrapper">
-        {meals.map((meal) => (
-          <div className="container">
+        {meals.map((meal, idx) => (
+          <div key={idx} className="container">
             <Image
               src={meal.image}
               width={112}
