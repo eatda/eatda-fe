@@ -9,6 +9,14 @@ import { selectToken } from "../../store/tokenSlice";
 import Image from "next/image";
 import { WeeklySugarDataType } from "../../interface/weeklyData";
 import WeeklySumary from "../../components/kitchen/WeeklySummary";
+import BestWorstCard from "../../components/library/BestWorstCards";
+import BestWorstCards from "../../components/library/BestWorstCards";
+
+export interface MealCardType {
+  id: number;
+  name: { title: string; comment: string };
+  image: string;
+}
 
 interface WeeklyDataType {
   start: string;
@@ -20,16 +28,8 @@ interface WeeklyDataType {
 }
 
 interface LowHighDataType {
-  best: {
-    id: number;
-    name: { title: string; comment: string };
-    image: string;
-  }[];
-  worst: {
-    id: number;
-    name: { title: string; comment: string };
-    image: string;
-  }[];
+  best: MealCardType[];
+  worst: MealCardType[];
 }
 
 export default function Report() {
@@ -75,21 +75,25 @@ export default function Report() {
         rightURL="/library/report"
       />
       <div className="container">
-        {weeklyData ? (
-          <>
-            <div className="box">
-              <div className="big-title">
-                {session.data?.user.name}님의 <br />
-                주간보고서 입니다
-              </div>
-              <div className="duration">
-                {weeklyData.start} ~ {weeklyData.end}
-              </div>
-              <div className="explain">
-                1주일간 식사 후 혈당을 기록하여 주간 분석 레포트를 발급 받아요!
-              </div>
-            </div>
-            <div className="box">
+        <div className="box">
+          <div className="big-title">
+            {session.data?.user.name}님의 <br />
+            주간보고서 입니다
+          </div>
+          <div className="duration">
+            {weeklyData && (
+              <>
+                20{weeklyData.start} ~ {weeklyData.end}
+              </>
+            )}
+          </div>
+          <div className="explain">
+            1주일간 식사 후 혈당을 기록하여 주간 분석 레포트를 발급 받아요!
+          </div>
+        </div>
+        <div className="box">
+          {weeklyData ? (
+            <>
               <div className="title">주간 혈당 요약</div>
               <WeeklySumary
                 low={weeklyData.low}
@@ -97,51 +101,19 @@ export default function Report() {
                 high={weeklyData.high}
                 data={weeklyData.data}
               />
-            </div>
-          </>
-        ) : (
-          <>로그인 만료!</>
-        )}
+            </>
+          ) : null}
+        </div>
 
         <hr />
         <>
           <div className="box">
             <div className="title"> 식후 혈당 낮았던 식단 TOP3</div>
-            <div className="recipe-list">
-              {lowHighData?.best.map((meal, idx) => (
-                <div key={idx}>
-                  <div>
-                    {meal.name.comment} {meal.name.title}
-                    <Image
-                      src={meal.image}
-                      width={112}
-                      height={85}
-                      alt={"이미지"}
-                      priority
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
+            {lowHighData && <BestWorstCards meals={lowHighData.best} />}
           </div>
           <div className="box">
             <div className="title"> 식후 혈당 높았던 식단 TOP3</div>
-            <div className="recipe-list">
-              {lowHighData?.worst.map((meal, idx) => (
-                <div key={idx}>
-                  <div>
-                    {meal.name.comment} {meal.name.title}
-                    <Image
-                      src={meal.image}
-                      width={112}
-                      height={85}
-                      alt={"이미지"}
-                      priority
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
+            {lowHighData && <BestWorstCards meals={lowHighData.worst} />}
           </div>
         </>
       </div>
@@ -169,6 +141,8 @@ export default function Report() {
         .title {
           font-weight: 700;
           font-size: 20px;
+          margin-top: 18px;
+          margin-bottom: 12px;
         }
       `}</style>
     </>
