@@ -9,6 +9,7 @@ import { selectToken } from "../../store/tokenSlice";
 import BestWorstCards from "../../components/library/BestWorstCards";
 import WeeklySummary from "../../components/library/WeeklySummary";
 import { DietType } from "../../interface/diet";
+import Image from "next/image";
 
 interface LowHighDataType {
   best: DietType[];
@@ -57,11 +58,31 @@ export default function Report() {
         <>
           <div className="box">
             <div className="title"> 식후 혈당 낮았던 식단 TOP3</div>
-            {lowHighData && <BestWorstCards meals={lowHighData.best} />}
+            {lowHighData ? (
+              <BestWorstCards meals={lowHighData.best} />
+            ) : (
+              <Image
+                src="/img/library/noReport.svg"
+                width={352}
+                height={150}
+                alt="지난 7일간 3회 이상 식후 혈당을 입력한 경우에만
+열람 가능합니다."
+              />
+            )}
           </div>
           <div className="box">
             <div className="title"> 식후 혈당 높았던 식단 TOP3</div>
-            {lowHighData && <BestWorstCards meals={lowHighData.worst} />}
+            {lowHighData ? (
+              <BestWorstCards meals={lowHighData.worst} />
+            ) : (
+              <Image
+                src="/img/library/noReport.svg"
+                width={352}
+                height={150}
+                alt="지난 7일간 3회 이상 식후 혈당을 입력한 경우에만
+열람 가능합니다."
+              />
+            )}
           </div>
         </>
       </div>
