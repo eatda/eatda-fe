@@ -93,6 +93,7 @@ export default function WeeklySummary({ duration }: { duration?: boolean }) {
           margin-bottom: 18px;
         }
         .mini-duration {
+          margin-top: 12px;
           font-size: 12px;
           color: ${colors.graySubTitle};
           text-align: right;

@@ -10,13 +10,14 @@ import { selectUser } from "../../store/userSlice";
 import { useSelector } from "react-redux";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import WeeklySummary from "../../components/kitchen/WeeklySummary";
+import WeeklySummary from "../../components/library/WeeklySummary";
 import colors from "../../../styles";
 import { DietType } from "../../interface/diet";
 import { SugarRecordType } from "../../interface/sugarRecord";
+import SliderDots from "../../components/home/SliderDots";
 
 const sliderSettings = {
-  dots: true,
+  dots: false,
   infinite: true,
   spped: 500,
   slideToShow: 1,
@@ -59,6 +60,9 @@ export default function Home() {
   const router = useRouter();
   const token = useSelector(selectToken);
   const user = useSelector(selectUser);
+
+  const [curMealCard, setCurMealCard] = useState(0);
+  const [curBloodCard, setCurBloodCard] = useState(0);
 
   const type = ["아침", "점심", "저녁"];
   const [diet, setDiet] = useState<dietI[] | any>();
@@ -119,7 +123,10 @@ export default function Home() {
         </div>
         <div className="box">
           <div className="title">오늘의 식사</div>
-          <Slider {...sliderSettings}>
+          <Slider
+            {...sliderSettings}
+            beforeChange={(curSlide, newSlide) => setCurMealCard(newSlide)}
+          >
             {diet?.map((v: dietI | any, i: number) =>
               v.is_exist ? (
                 <MealCard
@@ -137,11 +144,15 @@ export default function Home() {
               )
             )}
           </Slider>
+          <SliderDots data={diet} cur={curMealCard} />
           <div className="hr" />
         </div>
         <div className="box">
           <div className="title">오늘의 식후 혈당</div>
-          <Slider {...sliderSettings}>
+          <Slider
+            {...sliderSettings}
+            beforeChange={(curSlide, newSlide) => setCurBloodCard(newSlide)}
+          >
             {blood.map((v: bloodI | any, i: number) =>
               v.is_exist ? (
                 <SugarCard
@@ -158,6 +169,7 @@ export default function Home() {
               )
             )}
           </Slider>
+          <SliderDots data={blood} cur={curBloodCard} />
           <div className="hr" />
         </div>
         <div className="box">
@@ -170,14 +182,15 @@ export default function Home() {
           flex-direction: row;
           justify-content: space-between;
           padding: 15px 0px;
-          margin-bottom: 5px;
+          margin-bottom: 10px;
         }
         .container {
           display: flex;
           flex-direction: column;
+          margin-bottom: 10px;
         }
         .title {
-          font-weight: 700px;
+          font-weight: 700;
           font-size: 20px;
           margin-bottom: 12px;
         }
@@ -186,7 +199,7 @@ export default function Home() {
           background: none;
         }
         .hr {
-          margin: 26px -20px;
+          margin: 8px -20px 16px -20px;
           height: 4px;
           background-color: ${colors.grayBackground};
         }
