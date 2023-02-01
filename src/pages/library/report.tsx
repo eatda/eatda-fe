@@ -7,7 +7,7 @@ import { Get } from "../../hooks/Fetch";
 import { useSelector } from "react-redux";
 import { selectToken } from "../../store/tokenSlice";
 import BestWorstCards from "../../components/library/BestWorstCards";
-import WeeklySummary from "../../components/kitchen/WeeklySummary";
+import WeeklySummary from "../../components/library/WeeklySummary";
 import { DietType } from "../../interface/diet";
 
 interface LowHighDataType {

@@ -76,8 +76,8 @@ export default function WeeklySummary({ duration }: { duration?: boolean }) {
                   </div>
                 ))}
               </div>
+              {!duration && <div className="mini-duration">{durationText}</div>}
             </div>
-            {!duration && <div className="mini-duration">{durationText}</div>}
           </>
         ) : null}
       </div>
