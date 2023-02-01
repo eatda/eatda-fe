@@ -19,13 +19,19 @@ export default function Detail({ recipeData }: DetailProps) {
     <>
       <Navigation text="상세정보" />
       <div className="image" />
+      <div className="name">
+        <div className="comment">{recipeData.name.comment}</div>
+        <div className="title">{recipeData.name.title}</div>
+      </div>
       <div className="container">
-        <div className="name">
-          <div className="comment">{recipeData.name.comment}</div>
-          <div className="title">{recipeData.name.title}</div>
-        </div>
         {recipeData.ingredient.map((item, idx) => (
-          <DetailBox key={idx} idx={idx} icon={"mainside"} type={"ingredient"} content={item} />
+          <DetailBox
+            key={idx}
+            idx={idx}
+            icon={"mainside"}
+            type={"ingredient"}
+            content={item}
+          />
         ))}
         <DetailBox
           icon={"nutrient"}
@@ -55,25 +61,19 @@ export default function Detail({ recipeData }: DetailProps) {
       />
       <style jsx>{`
         .image {
-          width: 100%;
-          height: 400px;
-          margin-top: -50px;
-          // margin-left: -20px;
-          margin-bottom: 10px;
+          height: 390px;
+          width: 390px;
+          margin-top: -60px;
+          margin-left: -20px;
           object-fit: cover;
           background-size: cover;
           background-image: linear-gradient(
               ${colors.grayWhite},
-              5%,
+              20%,
               transparent,
               ${colors.grayWhite}
             ),
             url(${recipeData.image});
-        }
-        .container {
-          display: flex;
-          flex-direction: column;
-          gap: 12px;
         }
         .name {
           display: flex;
@@ -81,7 +81,13 @@ export default function Detail({ recipeData }: DetailProps) {
           align-items: center;
           font-size: 20px;
           font-weight: 900;
-          margin-top: -30px;
+          margin-top: -50px;
+          margin-bottom: 32px;
+        }
+        .container {
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
         }
         .comment {
           color: ${colors.graySubTitle};
