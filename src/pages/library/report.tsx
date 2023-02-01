@@ -6,25 +6,13 @@ import { useEffect, useState } from "react";
 import { Get } from "../../hooks/Fetch";
 import { useSelector } from "react-redux";
 import { selectToken } from "../../store/tokenSlice";
-import Image from "next/image";
-import { WeeklySugarDataType } from "../../interface/weeklyData";
-import WeeklySumary from "../../components/kitchen/WeeklySummary";
-import BestWorstCard from "../../components/library/BestWorstCards";
 import BestWorstCards from "../../components/library/BestWorstCards";
+import WeeklySummary from "../../components/kitchen/WeeklySummary";
 
 export interface MealCardType {
   id: number;
   name: { title: string; comment: string };
   image: string;
-}
-
-interface WeeklyDataType {
-  start: string;
-  end: string;
-  low: number;
-  common: number;
-  high: number;
-  data: WeeklySugarDataType[];
 }
 
 interface LowHighDataType {
@@ -35,21 +23,10 @@ interface LowHighDataType {
 export default function Report() {
   const session = useSession();
   const token = useSelector(selectToken);
-  const [weeklyData, setWeeklyData] = useState<WeeklyDataType>();
+
   const [lowHighData, setLowHighData] = useState<LowHighDataType>();
 
   useEffect(() => {
-    async function fetchWeeklyData() {
-      const { data, res }: any = await Get({
-        url: "users/blood-sugar-level/report/",
-        token: token.access_token,
-      });
-      if (data.ok) {
-        setWeeklyData(res);
-      } else {
-        console.log("weekly data error");
-      }
-    }
     async function fetchLowHighData() {
       const { data, res }: any = await Get({
         url: "users/diet/rank/",
@@ -61,7 +38,6 @@ export default function Report() {
         console.log("low high data error");
       }
     }
-    fetchWeeklyData();
     fetchLowHighData();
   }, []);
 
@@ -77,35 +53,12 @@ export default function Report() {
       <div className="container">
         <div className="box">
           <div className="big-title">
-            {session.data?.user.name}님의 <br />
+            {session?.data?.user.name}님의 <br />
             주간보고서 입니다
           </div>
-          <div className="duration">
-            {weeklyData && (
-              <>
-                20{weeklyData.start} ~ {weeklyData.end}
-              </>
-            )}
-          </div>
-          <div className="explain">
-            1주일간 식사 후 혈당을 기록하여 주간 분석 레포트를 발급 받아요!
-          </div>
+          <WeeklySummary duration={true} />
         </div>
-        <div className="box">
-          {weeklyData ? (
-            <>
-              <div className="title">주간 혈당 요약</div>
-              <WeeklySumary
-                low={weeklyData.low}
-                common={weeklyData.common}
-                high={weeklyData.high}
-                data={weeklyData.data}
-              />
-            </>
-          ) : null}
-        </div>
-
-        <hr />
+        <div className="hr" />
         <>
           <div className="box">
             <div className="title"> 식후 혈당 낮았던 식단 TOP3</div>
@@ -129,15 +82,11 @@ export default function Report() {
           font-weight: 700;
           padding: 10px 0px;
         }
-        .duration {
-          color: ${colors.graySubTitle};
-          font-weight: 500;
+        .hr {
+          margin: 0px -20px;
+          height: 4px;
+          background-color: ${colors.grayBackground};
         }
-        .explain {
-          font-size: 12px;
-          color: ${colors.graySubTitle2};
-        }
-
         .title {
           font-weight: 700;
           font-size: 20px;

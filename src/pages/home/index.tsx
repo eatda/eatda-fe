@@ -10,6 +10,8 @@ import { selectUser } from "../../store/userSlice";
 import { useSelector } from "react-redux";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import WeeklySummary from "../../components/kitchen/WeeklySummary";
+import colors from "../../../styles";
 
 const sliderSettings = {
   dots: true,
@@ -64,9 +66,10 @@ interface bloodI {
 }
 
 export default function Home() {
+  const router = useRouter();
   const token = useSelector(selectToken);
   const user = useSelector(selectUser);
-  const router = useRouter();
+
   const type = ["아침", "점심", "저녁"];
   const [diet, setDiet] = useState<dietI[] | any>();
   const [blood, setBlood] = useState<bloodI[] | any>([]);
@@ -85,14 +88,14 @@ export default function Home() {
       }
     }
     async function fetchRecord() {
-      const {data, res} : any = await Get({
-        url : "users/blood-sugar-level/report/",
-        token: token.access_token
+      const { data, res }: any = await Get({
+        url: "users/blood-sugar-level/report/",
+        token: token.access_token,
       });
-      if (data.ok){
+      if (data.ok) {
         console.log(res);
-      }else {
-        console.log('error');
+      } else {
+        console.log("error");
       }
     }
     fetchHome();
@@ -107,7 +110,13 @@ export default function Home() {
     <>
       <div className="container">
         <div className="header">
-          <Image alt="character" width={126} height={32} src={`/img/logo.svg`} priority/>
+          <Image
+            alt="logo"
+            width={126}
+            height={32}
+            src={`/img/logo.svg`}
+            priority
+          />
           <button onClick={handleClick}>
             <Image
               alt="character"
@@ -118,8 +127,8 @@ export default function Home() {
             />
           </button>
         </div>
-        <div className="homeBox">
-          <h4>오늘의 식사</h4>
+        <div className="box">
+          <div className="title">오늘의 식사</div>
           <Slider {...sliderSettings}>
             {diet?.map((v: dietI | any, i: number) =>
               v.is_exist ? (
@@ -138,9 +147,10 @@ export default function Home() {
               )
             )}
           </Slider>
+          <div className="hr" />
         </div>
-        <div className="homeBox">
-          <h4>오늘의 식후 혈당</h4>
+        <div className="box">
+          <div className="title">오늘의 식후 혈당</div>
           <Slider {...sliderSettings}>
             {blood.map((v: bloodI | any, i: number) =>
               v.is_exist ? (
@@ -158,26 +168,37 @@ export default function Home() {
               )
             )}
           </Slider>
+          <div className="hr" />
         </div>
-        <div className="homeBox">
-          <h4>주간 혈당 요약</h4>
-          <div>카드</div>
+        <div className="box">
+          <WeeklySummary />
         </div>
       </div>
       <style jsx>{`
         .header {
           display: flex;
-          margin-top: 17px;
           flex-direction: row;
           justify-content: space-between;
+          padding: 15px 0px;
+          margin-bottom: 5px;
         }
         .container {
           display: flex;
           flex-direction: column;
         }
+        .title {
+          font-weight: 700px;
+          font-size: 20px;
+          margin-bottom: 12px;
+        }
         button {
           border: none;
           background: none;
+        }
+        .hr {
+          margin: 26px -20px;
+          height: 4px;
+          background-color: ${colors.grayBackground};
         }
       `}</style>
     </>
