@@ -1,14 +1,28 @@
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
+import { useState } from "react";
 import colors from "../../../styles";
 
-interface SliderDotsProps {
-  data: any[];
-  cur: number;
+interface HomeSliderProps {
+  initial: number;
+  children?: JSX.Element;
 }
-export default function SliderDots({ data, cur }: SliderDotsProps) {
+
+export default function HomeSlider({ initial, children }: HomeSliderProps) {
+  const [cur, setCur] = useState(initial);
+
   return (
     <>
+      <Slider
+        infinite={false}
+        initialSlide={initial}
+        beforeChange={(curSlide, newSlide) => setCur(newSlide)}
+      >
+        {children}
+      </Slider>
       <div className="list">
-        {data?.map((v: any, idx: number) => (
+        {[0, 1, 2]?.map((v: any, idx: number) => (
           <div key={idx} className={idx === cur ? "dot now" : "dot"} />
         ))}
       </div>

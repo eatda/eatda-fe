@@ -1,6 +1,3 @@
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import Slider from "react-slick";
 import MealCard from "../../components/home/MealCard";
 import SugarCard from "../../components/home/SugarCard";
 import React, { useEffect, useState } from "react";
@@ -14,15 +11,7 @@ import WeeklySummary from "../../components/library/WeeklySummary";
 import colors from "../../../styles";
 import { DietType } from "../../interface/diet";
 import { SugarRecordType } from "../../interface/sugarRecord";
-import SliderDots from "../../components/home/SliderDots";
-
-const sliderSettings = {
-  dots: false,
-  infinite: true,
-  spped: 500,
-  slideToShow: 1,
-  slideToScroll: 1,
-};
+import HomeSlider from "../../components/home/HomeSlider";
 
 interface dietI {
   diet:
@@ -61,8 +50,9 @@ export default function Home() {
   const token = useSelector(selectToken);
   const user = useSelector(selectUser);
 
-  const [curMealCard, setCurMealCard] = useState(0);
-  const [curBloodCard, setCurBloodCard] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
+  const [initialMealCard, setInitialMealCard] = useState(0);
+  const [initialBloodCard, setInitialBloodCard] = useState(0);
 
   const type = ["아침", "점심", "저녁"];
   const [diet, setDiet] = useState<dietI[] | any>();
@@ -77,6 +67,11 @@ export default function Home() {
       if (data.ok) {
         setDiet(res.diet);
         setBlood(res.blood_sugar_level);
+        setInitialMealCard(res.diet.findIndex((v: any) => v.is_exist));
+        setInitialBloodCard(
+          res.blood_sugar_level.findIndex((v: any) => v.is_exist)
+        );
+        setIsLoading(true);
       } else {
         console.log("HomeData error");
       }
@@ -96,7 +91,7 @@ export default function Home() {
     fetchRecord();
   }, []);
 
-  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleClick = () => {
     router.push("/home/mypage");
   };
 
@@ -123,53 +118,49 @@ export default function Home() {
         </div>
         <div className="box">
           <div className="title">오늘의 식사</div>
-          <Slider
-            {...sliderSettings}
-            beforeChange={(curSlide, newSlide) => setCurMealCard(newSlide)}
-          >
-            {diet?.map((v: dietI | any, i: number) =>
-              v.is_exist ? (
-                <MealCard
-                  key={i}
-                  is_exist={v.is_exist}
-                  type={type[i]}
-                  text={v.data.name.title}
-                  name={v.data.name.comment}
-                  img={v.data.image}
-                  is_me_liked={v.is_me_liked}
-                  who_liked={v.who_liked}
-                />
-              ) : (
-                <MealCard key={i} is_exist={v.is_exist} type={type[i]} />
-              )
-            )}
-          </Slider>
-          <SliderDots data={diet} cur={curMealCard} />
+          {isLoading && (
+            <HomeSlider initial={initialMealCard}>
+              {diet?.map((v: dietI | any, i: number) =>
+                v.is_exist ? (
+                  <MealCard
+                    key={i}
+                    is_exist={v.is_exist}
+                    type={type[i]}
+                    text={v.data.name.title}
+                    name={v.data.name.comment}
+                    img={v.data.image}
+                    is_me_liked={v.is_me_liked}
+                    who_liked={v.who_liked}
+                  />
+                ) : (
+                  <MealCard key={i} is_exist={v.is_exist} type={type[i]} />
+                )
+              )}
+            </HomeSlider>
+          )}
           <div className="hr" />
         </div>
         <div className="box">
           <div className="title">오늘의 식후 혈당</div>
-          <Slider
-            {...sliderSettings}
-            beforeChange={(curSlide, newSlide) => setCurBloodCard(newSlide)}
-          >
-            {blood.map((v: bloodI | any, i: number) =>
-              v.is_exist ? (
-                <SugarCard
-                  key={i}
-                  is_exist={v.is_exist}
-                  timeline={v.data.timeline}
-                  value={v.data.level}
-                  time={v.data.time}
-                  is_me_liked={v.is_me_liked}
-                  who_liked={v.who_liked}
-                />
-              ) : (
-                <SugarCard key={i} is_exist={v.is_exist} />
-              )
-            )}
-          </Slider>
-          <SliderDots data={blood} cur={curBloodCard} />
+          {isLoading && (
+            <HomeSlider initial={initialBloodCard}>
+              {blood.map((v: bloodI | any, i: number) =>
+                v.is_exist ? (
+                  <SugarCard
+                    key={i}
+                    is_exist={v.is_exist}
+                    timeline={v.data.timeline}
+                    value={v.data.level}
+                    time={v.data.time}
+                    is_me_liked={v.is_me_liked}
+                    who_liked={v.who_liked}
+                  />
+                ) : (
+                  <SugarCard key={i} is_exist={v.is_exist} />
+                )
+              )}
+            </HomeSlider>
+          )}
           <div className="hr" />
         </div>
         <div className="box">
