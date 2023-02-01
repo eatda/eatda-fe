@@ -7,6 +7,8 @@ import { Get } from "../../hooks/Fetch";
 import { useSelector } from "react-redux";
 import { selectToken } from "../../store/tokenSlice";
 import Image from "next/image";
+import { WeeklySugarDataType } from "../../interface/weeklyData";
+import WeeklySumary from "../../components/kitchen/WeeklySummary";
 
 interface WeeklyDataType {
   start: string;
@@ -14,7 +16,7 @@ interface WeeklyDataType {
   low: number;
   common: number;
   high: number;
-  data: { day: string; level: number }[];
+  data: WeeklySugarDataType[];
 }
 
 interface LowHighDataType {
@@ -89,22 +91,12 @@ export default function Report() {
             </div>
             <div className="box">
               <div className="title">주간 혈당 요약</div>
-              <div className="summary">
-                <div className="summary-list">
-                  <div className="summary-item">저혈당 {weeklyData.low}일</div>
-                  <div className="summary-item">
-                    정상혈당 {weeklyData.common}일
-                  </div>
-                  <div className="summary-item">고혈당 {weeklyData.high}일</div>
-                </div>
-                <div className="bar-graph">
-                  {weeklyData.data.map((day, idx) => (
-                    <div key={idx} className={`bar-item level${day.level}`}>
-                      {day.day}
-                    </div>
-                  ))}
-                </div>
-              </div>
+              <WeeklySumary
+                low={weeklyData.low}
+                common={weeklyData.common}
+                high={weeklyData.high}
+                data={weeklyData.data}
+              />
             </div>
           </>
         ) : (
@@ -112,53 +104,50 @@ export default function Report() {
         )}
 
         <hr />
-        {lowHighData ? (
-          <>
-            <div className="box">
-              <div className="title"> 식후 혈당 낮았던 식단 TOP3</div>
-              <div className="recipe-list">
-                {lowHighData.best.map((meal, idx) => (
-                  <div key={idx}>
-                    <div>
-                      {meal.name.comment} {meal.name.title}
-                      <Image
-                        src={meal.image}
-                        width={112}
-                        height={85}
-                        alt={"이미지"}
-                        priority
-                      />
-                    </div>
+        <>
+          <div className="box">
+            <div className="title"> 식후 혈당 낮았던 식단 TOP3</div>
+            <div className="recipe-list">
+              {lowHighData?.best.map((meal, idx) => (
+                <div key={idx}>
+                  <div>
+                    {meal.name.comment} {meal.name.title}
+                    <Image
+                      src={meal.image}
+                      width={112}
+                      height={85}
+                      alt={"이미지"}
+                      priority
+                    />
                   </div>
-                ))}
-              </div>
+                </div>
+              ))}
             </div>
-            <div className="box">
-              <div className="title"> 식후 혈당 높았던 식단 TOP3</div>
-              <div className="recipe-list">
-                {lowHighData.worst.map((meal, idx) => (
-                  <div key={idx}>
-                    <div>
-                      {meal.name.comment} {meal.name.title}
-                      <Image
-                        src={meal.image}
-                        width={112}
-                        height={85}
-                        alt={"이미지"}
-                        priority
-                      />
-                    </div>
+          </div>
+          <div className="box">
+            <div className="title"> 식후 혈당 높았던 식단 TOP3</div>
+            <div className="recipe-list">
+              {lowHighData?.worst.map((meal, idx) => (
+                <div key={idx}>
+                  <div>
+                    {meal.name.comment} {meal.name.title}
+                    <Image
+                      src={meal.image}
+                      width={112}
+                      height={85}
+                      alt={"이미지"}
+                      priority
+                    />
                   </div>
-                ))}
-              </div>
+                </div>
+              ))}
             </div>
-          </>
-        ) : (
-          <></>
-        )}
+          </div>
+        </>
       </div>
       <style jsx>{`
         .container {
+          margin-top: 10px;
         }
         .box {
           margin-bottom: 16px;
@@ -166,6 +155,7 @@ export default function Report() {
         .big-title {
           font-size: 24px;
           font-weight: 700;
+          padding: 10px 0px;
         }
         .duration {
           color: ${colors.graySubTitle};
@@ -179,40 +169,6 @@ export default function Report() {
         .title {
           font-weight: 700;
           font-size: 20px;
-        }
-
-        .summary {
-          width: 350px;
-          background-color: ${colors.grayBackground};
-        }
-        .summary-list {
-          display: flex;
-          flex-direction: row;
-          justify-content: space-between;
-        }
-        .bar-graph {
-          display: flex;
-          flex-direction: row;
-          justify-content: space-between;
-          gap: 6px;
-        }
-        .bar-item {
-          display: flex;
-          flex: 1;
-          justify-content: center;
-          color: ${colors.grayWhite};
-        }
-        .level0 {
-          border: solid 1px ${colors.blackSub};
-        }
-        .level1 {
-          background-color: ${colors.mainYellow};
-        }
-        .level2 {
-          background-color: ${colors.mainOrange};
-        }
-        .level3 {
-          background-color: ${colors.subRed};
         }
       `}</style>
     </>
