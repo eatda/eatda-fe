@@ -13,6 +13,7 @@ import { useRouter } from "next/router";
 import WeeklySummary from "../../components/kitchen/WeeklySummary";
 import colors from "../../../styles";
 import { DietType } from "../../interface/diet";
+import { SugarRecordType } from "../../interface/sugarRecord";
 
 const sliderSettings = {
   dots: true,
@@ -48,11 +49,7 @@ interface bloodI {
       }
     | {
         is_exist: boolean;
-        data: {
-          time: string;
-          level: number;
-          timeline: number;
-        };
+        data: SugarRecordType;
         is_me_liked: boolean;
         who_liked: never[];
       };
