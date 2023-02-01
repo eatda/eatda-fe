@@ -12,6 +12,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import WeeklySummary from "../../components/kitchen/WeeklySummary";
 import colors from "../../../styles";
+import { DietType } from "../../interface/diet";
 
 const sliderSettings = {
   dots: true,
@@ -31,15 +32,7 @@ interface dietI {
       }
     | {
         is_exist: boolean;
-        data: {
-          id: number;
-          name: {
-            title: string;
-            comment: string;
-          };
-          image: string;
-          timeline: number;
-        };
+        data: DietType;
         is_me_liked: boolean;
         who_liked: number[];
       };

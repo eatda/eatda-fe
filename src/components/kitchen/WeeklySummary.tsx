@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import colors from "../../../styles";
 import { Get } from "../../hooks/Fetch";
-import { WeeklySugarDataType } from "../../interface/weeklyData";
 import { selectToken } from "../../store/tokenSlice";
 
 interface WeeklyDataType {
@@ -11,7 +10,10 @@ interface WeeklyDataType {
   low: number;
   common: number;
   high: number;
-  data: WeeklySugarDataType[];
+  data: {
+    day: string;
+    level: number;
+  }[];
 }
 
 export default function WeeklySummary({ duration }: { duration?: boolean }) {

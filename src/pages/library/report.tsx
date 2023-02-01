@@ -8,16 +8,11 @@ import { useSelector } from "react-redux";
 import { selectToken } from "../../store/tokenSlice";
 import BestWorstCards from "../../components/library/BestWorstCards";
 import WeeklySummary from "../../components/kitchen/WeeklySummary";
-
-export interface MealCardType {
-  id: number;
-  name: { title: string; comment: string };
-  image: string;
-}
+import { DietType } from "../../interface/diet";
 
 interface LowHighDataType {
-  best: MealCardType[];
-  worst: MealCardType[];
+  best: DietType[];
+  worst: DietType[];
 }
 
 export default function Report() {
