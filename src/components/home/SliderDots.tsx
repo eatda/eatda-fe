@@ -9,7 +9,7 @@ export default function SliderDots({ data, cur }: SliderDotsProps) {
     <>
       <div className="list">
         {data?.map((v: any, idx: number) => (
-          <div className={idx === cur ? "dot now" : "dot"} />
+          <div key={idx} className={idx === cur ? "dot now" : "dot"} />
         ))}
       </div>
       <style jsx>{`

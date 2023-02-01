@@ -60,8 +60,8 @@ export default function WeeklySummary({ duration }: { duration?: boolean }) {
             <div className="title">주간 혈당 요약</div>
             <div className="wrapper">
               <div className="ul">
-                {sugarLevelList.map((type) => (
-                  <div className="li">
+                {sugarLevelList.map((type, idx) => (
+                  <div key={idx} className="li">
                     <div className="circle" style={{ color: type.color }}>
                       ●
                     </div>
