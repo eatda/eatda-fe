@@ -1,24 +1,20 @@
 import Navigation from "../../components/common/Navigation";
 import colors from "../../../styles";
 import { useEffect, useState } from "react";
-import { pasta } from "../../assets/imagePath";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import { selectToken } from "../../store/tokenSlice";
 import { Get, Post } from "../../hooks/Fetch";
 import FooterButton from "../../components/common/FooterButton";
+import { DietType } from "../../interface/diet";
 
 const offset = new Date().getTimezoneOffset() * 60000;
 const today = new Date(Date.now() - offset);
 
 interface MyMealDataType {
   id: number;
-  diet: {
-    id: number;
-    name: { title: string; comment: string };
-    image: string;
-  };
+  diet: DietType;
   date: string;
   timeline: number;
 }
@@ -103,13 +99,24 @@ export default function Add() {
               <div className="intro_title">오늘의 혈당</div>
               <div className="intro_sugar">{sugar} mg/dl</div>
               <div className="bar">
-                <div className="bar1">
-                </div>
-                <Image alt="chart" width={16} height={21} src={`/img/library/arrow.svg`} priority/>
+                <div className="bar1"></div>
+                <Image
+                  alt="chart"
+                  width={16}
+                  height={21}
+                  src={`/img/library/arrow.svg`}
+                  priority
+                />
                 {/* <div className="bar2"></div>
                 <div className="bar3"></div> */}
               </div>
-                <Image alt="chart" width={318} height={61} src={`/img/library/chart_0.svg`} priority/>
+              <Image
+                alt="chart"
+                width={318}
+                height={61}
+                src={`/img/library/chart_0.svg`}
+                priority
+              />
             </div>
           </div>
           {/* <Image src={pasta} width={320} height={56} alt={"그래프"} priority /> */}
@@ -118,12 +125,24 @@ export default function Add() {
           <div className="item" onClick={() => setMealOpened(!mealOpened)}>
             내 식단
             <div className="icon">
-              {mealOpened ? 
-              <Image alt="character" width={16} height={10} src={`/img/detail/down.svg`} priority/>
-              :
-              <Image alt="character" width={16} height={10} src={`/img/detail/up.svg`} priority/>
-              }
-              </div>
+              {mealOpened ? (
+                <Image
+                  alt="character"
+                  width={16}
+                  height={10}
+                  src={`/img/detail/down.svg`}
+                  priority
+                />
+              ) : (
+                <Image
+                  alt="character"
+                  width={16}
+                  height={10}
+                  src={`/img/detail/up.svg`}
+                  priority
+                />
+              )}
+            </div>
           </div>
           {mealOpened && (
             <div className="mymeal-list">
@@ -171,12 +190,13 @@ export default function Add() {
           <div className="item">
             혈당{" "}
             <div className="num">
-            <input
-              type="number"
-              min="0" max="300"
-              onChange={(e) => handleSugarChange(e.target.value)}
-            /> 
-            mg/dl
+              <input
+                type="number"
+                min="0"
+                max="300"
+                onChange={(e) => handleSugarChange(e.target.value)}
+              />
+              mg/dl
             </div>
           </div>
         </div>
@@ -249,7 +269,7 @@ export default function Add() {
           height: 27px;
           font-size: 16px;
           border: none;
-          font-family: 'Pretendard-Regular';
+          font-family: "Pretendard-Regular";
         }
         input[type="number"] {
           text-align: right;
@@ -259,7 +279,7 @@ export default function Add() {
           height: 27px;
           font-size: 16px;
           border: none;
-          font-family: 'Pretendard-Regular';
+          font-family: "Pretendard-Regular";
         }
 
         .intro {
@@ -286,20 +306,24 @@ export default function Add() {
           display: flex;
         }
         .bar1 {
-          background: #FF9458;
+          background: #ff9458;
           height: 22px;
-          // width: ${(sugar-12)/300 * 100 > 300 ? 0 : (sugar-12)/300 * 100}%;
-          margin-left: ${(sugar-12)/300 * 100 > (300-12)/300 * 100 ? (300-12)/300 * 100 : (sugar-12)/300 * 100}%;
+          // width: ${((sugar - 12) / 300) * 100 > 300
+            ? 0
+            : ((sugar - 12) / 300) * 100}%;
+          margin-left: ${((sugar - 12) / 300) * 100 > ((300 - 12) / 300) * 100
+            ? ((300 - 12) / 300) * 100
+            : ((sugar - 12) / 300) * 100}%;
           max-width: 200px;
           opacity: 0.3;
         }
         .bar2 {
-          background: #FFE094;
+          background: #ffe094;
           height: 22px;
           opacity: 0.3;
         }
         .bar3 {
-          background: #D8593C;
+          background: #d8593c;
           width: 160px;
           height: 22px;
           opacity: 0.3;

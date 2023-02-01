@@ -8,6 +8,7 @@ import Image from "next/image";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import RecipeList from "../../components/kitchen/RecipeList";
+import { DietType } from "../../interface/diet";
 
 const sliderSettings = {
   dots: true,
@@ -18,14 +19,7 @@ const sliderSettings = {
 };
 
 interface popularPickI {
-  diet: {
-    id: number;
-    name: {
-      comment: string;
-      title: string;
-    };
-    image: string;
-  };
+  diet: DietType;
   is_me_liked: boolean;
   who_liked: number[];
 }
@@ -34,14 +28,7 @@ interface pickI {
   user_name: string;
   is_exist: boolean;
   data: {
-    diet: {
-      id: number;
-      name: {
-        comment: string;
-        title: string;
-      };
-      image: string;
-    };
+    diet: DietType;
     is_me_liked: boolean;
   }[];
 }
@@ -188,7 +175,7 @@ export default function OurPick() {
         }
         .emptyPick {
           height: 152px;
-          border: 1px solid #D9D9D9;
+          border: 1px solid #d9d9d9;
           font-size: 14px;
           color: ${colors.graySubTitle2};
           display: flex;
@@ -197,7 +184,6 @@ export default function OurPick() {
           text-align: center;
           margin-bottom: 12px;
         }
-
       `}</style>
     </div>
   );

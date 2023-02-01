@@ -7,20 +7,11 @@ import { Get } from "../../hooks/Fetch";
 import { useSelector } from "react-redux";
 import { selectToken } from "../../store/tokenSlice";
 import { selectUser } from "../../store/userSlice";
+import { SugarRecordType } from "../../interface/sugarRecord";
 
 interface RecordDataType {
   date: string;
-  data: {
-    id: number;
-    diet: {
-      id: number;
-      image: string;
-      name: { title: string; comment: string };
-    };
-    time: string;
-    level: number;
-    timeline: number;
-  }[];
+  data: SugarRecordType[];
 }
 
 export default function Library() {
@@ -112,7 +103,6 @@ export default function Library() {
           padding: 12px;
           box-sizing: border-box;
           width: 340px;
-          // width: 99%;
           height: 74px;
           border: solid 1px ${colors.blackSub};
           border-radius: 6px;
