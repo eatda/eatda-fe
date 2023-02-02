@@ -16,7 +16,7 @@ export default function Detail({ recipeData }: DetailProps) {
   const recipeId = router.query?.recipeId;
 
   return (
-    <>
+    <div className="box">
       <Navigation text="상세정보" />
       <div className="image" />
       <div className="name">
@@ -60,6 +60,10 @@ export default function Detail({ recipeData }: DetailProps) {
         text="요리 시작하기"
       />
       <style jsx>{`
+        .box {
+          // background: black;
+          width: 350px;
+        }
         .image {
           height: 390px;
           width: 390px;
@@ -88,13 +92,14 @@ export default function Detail({ recipeData }: DetailProps) {
           display: flex;
           flex-direction: column;
           gap: 12px;
+
         }
         .comment {
           color: ${colors.graySubTitle};
           font-weight: 500;
         }
       `}</style>
-    </>
+    </div>
   );
 }
 
