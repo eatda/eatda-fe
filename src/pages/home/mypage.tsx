@@ -8,6 +8,7 @@ import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { Get } from "../../hooks/Fetch";
 import { copyCode } from "../../hooks/CopyClipBoard";
+import ModalBasic from "../../components/home/ModalBasic";
 
 const activityData = [
   "활동이 적거나 운동을 안하는 경우",
@@ -33,6 +34,7 @@ interface myDataI {
 
 export default function MyPage() {
   const [myData, setMyData] = useState<myDataI>();
+  const [data, setData] = useState<boolean>(false)
   const token = useSelector(selectToken);
   const router = useRouter();
   const session = useSession();
@@ -120,14 +122,15 @@ export default function MyPage() {
         )}
         <br />
         {myData && (
-          <button className="buttonStyle" onClick={() => copyCode(myData.group)}>
+          <button className="buttonStyle" onClick={()=>{}}>
+            {data && <ModalBasic group={myData.group} data={data} setData={(v: boolean) => { setData(v) }}/>}
             <Image alt="character" width={24} height={24} src={`/img/mypage/code.svg`} priority/>
             &nbsp;
-            <div className="textButton">
+            <div className="textButton" onClick={()=>setData(true)}>
             초대코드 복사하기 
             {/* {myData.group} */}
             </div>
-            <div className="go">
+            <div className="go" onClick={()=>setData(true)}>
             <Image alt="character" width={32} height={32} src={`/img/mypage/go.svg`} priority/>
             </div>
           </button>
