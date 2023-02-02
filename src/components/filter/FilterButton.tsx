@@ -28,7 +28,7 @@ export default function FilterButton({
           <div className="icon">
             <Image src={selected ? filter.image_selected : filter.image} alt={"icon"} width={48} height={48} />
           </div>
-          <div className="name-text">{filter.name}</div>
+          <div className={ selected ? "nameTrue" : "nameFalse"}>{filter.name}</div>
         </div>
       </div>
       <style jsx>{`
@@ -38,8 +38,24 @@ export default function FilterButton({
           align-items: center;
           width: 48px;
           height: 80px;
+          margin: 15px;
+          text-align: center;
+        }
+        .nameTrue {
+          margin-top: 4px;
+          color: ${colors.mainOrange};
+        }
+        .nameFalse {
+          width: 60px;
+          margin-top: 4px;
+          color: ${colors.graySubTitle};
         }
         .selected .icon {
+          height: 60px;
+          width: 60px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
           border-radius: 100%;
           border: 1px solid ${colors.mainOrange};
           color: white;

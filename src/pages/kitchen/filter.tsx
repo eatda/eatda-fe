@@ -99,7 +99,7 @@ export default function Filter({ filterData }: FilterProps) {
                   />
                 ))}
               </div>
-              <hr />
+              <div className="bar"/>
             </div>
           ))}
         </div>
@@ -109,6 +109,11 @@ export default function Filter({ filterData }: FilterProps) {
         .filters {
           display: flex;
           flex-direction: row;
+          flex-wrap: wrap;
+        }
+        .bar {
+          background: #F8F8F8;
+          height: 4px;
         }
       `}</style>
     </>

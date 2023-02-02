@@ -74,10 +74,10 @@ export default function MealCard({is_exist, type, text, name, img, is_me_liked, 
             </>
           }
           <div className="textSub">
-          {text}
+          {name}
           </div>
           <div className="textMain">
-          {name}
+          {text}
           </div>
           <div className="imageStyle">
           <div className="textType">
