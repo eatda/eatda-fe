@@ -6,6 +6,7 @@ import { illust } from "../assets/illust";
 import { route } from "../assets/route";
 
 export default function Home() {
+  console.log("pwa 배포 완료");
   const router = useRouter();
   console.log(router);
   const session = useSession();
