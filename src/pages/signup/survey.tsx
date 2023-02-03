@@ -15,7 +15,8 @@ import { putSurvey } from "../../store/surveySlice";
 import { selectSurvey } from "../../store/surveySlice";
 import { selectUser } from "../../store/userSlice";
 import { useSelector, useDispatch } from "react-redux";
-import { signup } from "../../assets/icon";
+import { route } from "../../assets/route";
+import { illust } from "../../assets/illust";
 
 const activityData = [
   {
@@ -116,7 +117,7 @@ export default function Survey({ allergyResponse }: surveyI) {
         allergy: allergyQuery,
       };
       dispatch(putSurvey(reduxData));
-      router.replace("/signup/loading");
+      router.replace(route.loading);
     }
   };
 
@@ -376,7 +377,7 @@ export default function Survey({ allergyResponse }: surveyI) {
               alt="character"
               width={184}
               height={194}
-              src={signup}
+              src={illust.signup}
               priority
             />
             <div className="bar" />

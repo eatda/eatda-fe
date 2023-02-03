@@ -13,8 +13,9 @@ import colors from "../../../styles";
 import { login } from "../../store/userSlice";
 import { selectUser } from "../../store/userSlice";
 import { useSelector, useDispatch } from "react-redux";
-import { signup } from "../../assets/icon";
 import { character } from "../../assets/character";
+import { route } from "../../assets/route";
+import { illust } from "../../assets/illust";
 
 interface formI {
   name: string;
@@ -72,9 +73,7 @@ export default function Signup() {
         usergroup: user.usergroup,
       };
       dispatch(login(reduxData));
-      form.sugar
-        ? router.replace("/signup/survey")
-        : router.replace("/signup/loading");
+      form.sugar ? router.replace(route.survey) : router.replace(route.loading);
     }
   };
 
@@ -137,7 +136,7 @@ export default function Signup() {
               alt="character"
               width={184}
               height={194}
-              src={signup}
+              src={illust.signup}
               priority
             />
             <div className="text">

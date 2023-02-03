@@ -16,14 +16,14 @@ export const notice = "/img/icon/pencil-simple-line.svg";
 export const logout = "/img/icon/logout.svg";
 
 // 주방 탭
-export const btn_filter = "/img/button/push_filter.svg"
+export const btn_filter = "/img/icon/push_filter.svg"
 export const ic_heart = {
-  empty: "/img/button/heart_empty.svg",
-  fill: "/img/button/heart_full.svg",
+  empty: "/img/icon/heart_empty.svg",
+  fill: "/img/icon/heart_full.svg",
 };
 export const ic_like = {
-  empty: "/img/button/like_empty.svg",
-  fill: "/img/button/like_full.svg",
+  empty: "/img/icon/like_empty.svg",
+  fill: "/img/icon/like_full.svg",
 };
 
 export const main = "/img/icon/fish-food.svg";
@@ -46,9 +46,10 @@ export const dinner = {
 };
 
 // 서재 탭
-export const btn_add = "/img/button/push_add_record.svg"
+export const btn_add = "/img/icon/push_add_record.svg"
 
 
 // 회원가입
 export const enter = "/img/icon/check-circle.svg";
 export const create = "/img/icon/alert-circle.svg";
+export const check = "/img/icon/check.svg";

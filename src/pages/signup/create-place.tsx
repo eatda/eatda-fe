@@ -9,6 +9,7 @@ import { selectUser } from "../../store/userSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { copyCode } from "../../hooks/CopyClipBoard";
 import { copy, create } from "../../assets/icon";
+import { route } from "../../assets/route";
 
 export default function CreatePlace() {
   const router = useRouter();
@@ -24,10 +25,10 @@ export default function CreatePlace() {
         setPage((prevNumber) => prevNumber + 1);
         break;
       case "false":
-        router.push("/signup/enter-place");
+        router.push(route.enterPlace);
         break;
       case "enter":
-        router.push("/signup");
+        router.push(route.signup);
         break;
       default:
         break;

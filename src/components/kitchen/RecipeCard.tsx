@@ -6,6 +6,7 @@ import { selectToken } from "../../store/tokenSlice";
 import { useSelector } from "react-redux";
 import { character_like } from "../../assets/character";
 import { ic_heart } from "../../assets/icon";
+import { route } from "../../assets/route";
 
 interface RecipeCardType {
   id: number;
@@ -80,7 +81,7 @@ export default function RecipeCard({
       }
       setLike(!like);
     } else {
-      router.push(`/kitchen/detail/${id}`);
+      router.push(`${route.detail}${id}`);
     }
   };
 

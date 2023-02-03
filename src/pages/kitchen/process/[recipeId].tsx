@@ -21,6 +21,7 @@ import {
   when_eat,
 } from "../../../assets/icon";
 import { illust } from "../../../assets/illust";
+import { route } from "../../../assets/route";
 
 const mealButtonData = [
   {
@@ -69,7 +70,7 @@ export default function Process({ recipeData }: ProcessProps) {
       });
       if (typeof data == "undefined") {
         alert("식단이 등록되었습니다");
-        router.replace("/kitchen/process/timer");
+        router.replace(route.timer);
       } else if (data.status == 403) {
         alert("이미 해당 시간대에 등록된 식단이 있습니다.");
       }

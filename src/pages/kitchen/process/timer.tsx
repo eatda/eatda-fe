@@ -2,12 +2,13 @@ import { useRouter } from "next/router";
 import { CTA1Button } from "../../../components/common/Button";
 import Image from "next/image";
 import { illust } from "../../../assets/illust";
+import { route } from "../../../assets/route";
 
 export default function Timer() {
   const router = useRouter();
 
   const handleClick = () => {
-    router.replace("/home");
+    router.replace(route.home);
   };
   return (
     <div className="container">

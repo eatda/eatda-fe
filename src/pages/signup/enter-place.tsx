@@ -6,6 +6,7 @@ import { selectUser } from "../../store/userSlice";
 import { useSelector, useDispatch } from "react-redux";
 import Image from "next/image";
 import { enter } from "../../assets/icon";
+import { route } from "../../assets/route";
 
 type JSONValue = string | number | boolean | Response | JSONObject | JSONArray;
 
@@ -69,7 +70,7 @@ export default function EnterPlace() {
           usergroup: code.join(""),
         };
         dispatch(login(reduxData));
-        router.replace("/signup");
+        router.replace(route.signup);
       } else {
         alert(res.error);
       }

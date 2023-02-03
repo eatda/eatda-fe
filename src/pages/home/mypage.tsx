@@ -10,6 +10,7 @@ import { Get } from "../../hooks/Fetch";
 import ModalBasic from "../../components/home/ModalBasic";
 import { copy, logout, next, notice } from "../../assets/icon";
 import { character } from "../../assets/character";
+import { route } from "../../assets/route";
 
 const activityData = [
   "활동이 적거나 운동을 안하는 경우",
@@ -58,7 +59,7 @@ export default function MyPage() {
 
   useEffect(() => {
     if (session.status === "unauthenticated") {
-      router.replace("/onboarding");
+      router.replace(route.onboarding);
     }
   }, [session.status]);
 

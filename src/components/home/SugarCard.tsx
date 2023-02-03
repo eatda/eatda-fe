@@ -7,6 +7,7 @@ import { Post, Delete } from "../../hooks/Fetch";
 import { useRouter } from "next/router";
 import { ic_heart, ic_measure, ic_time } from "../../assets/icon";
 import { character_like } from "../../assets/character";
+import { route } from "../../assets/route";
 
 interface SugarCardProps {
   is_exist?: boolean;
@@ -43,7 +44,7 @@ export default function SugarCard({
   };
 
   const handleRouter = () => {
-    router.replace("/library");
+    router.replace(route.library);
   };
 
   const handleClick = (e: React.MouseEvent<HTMLImageElement>) => {

@@ -14,6 +14,7 @@ import { SugarRecordType } from "../../interface/sugarRecord";
 import HomeSlider from "../../components/home/HomeSlider";
 import { character_like } from "../../assets/character";
 import { logo } from "../../assets/illust";
+import { route } from "../../assets/route";
 
 interface dietI {
   diet:
@@ -102,7 +103,7 @@ export default function Home() {
   }, []);
 
   const handleClick = () => {
-    router.push("/home/mypage");
+    router.push(route.mypage);
   };
 
   return (

@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import { character_like } from "../../assets/character";
 import { ic_heart } from "../../assets/icon";
+import { route } from "../../assets/route";
 
 interface MealCardProps {
   is_exist: boolean;
@@ -34,7 +35,7 @@ export default function MealCard({
   const timeLine = ["아침", "점심", "저녁"];
 
   const handleRouter = () => {
-    router.replace("/kitchen");
+    router.replace(route.kitchen);
   };
 
   const handleClick = (e: React.MouseEvent<HTMLImageElement>) => {

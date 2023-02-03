@@ -2,6 +2,7 @@ import { GetServerSideProps } from "next";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import colors from "../../../../styles";
+import { route } from "../../../assets/route";
 import FooterButton from "../../../components/common/FooterButton";
 import Navigation from "../../../components/common/Navigation";
 import DetailBox from "../../../components/kitchen/DetailBox";
@@ -48,7 +49,7 @@ export default function Detail({ recipeData }: DetailProps) {
         />
       </div>
       <FooterButton
-        onClick={() => router.push(`/kitchen/process/${recipeId}`)}
+        onClick={() => router.push(`${route.process}${recipeId}`)}
         text="요리 시작하기"
       />
       <style jsx>{`
