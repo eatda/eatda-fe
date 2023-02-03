@@ -16,7 +16,7 @@ export const route = {
     filter: "/kitchen/filter",
     detail: "/kitchen/detail/",
     process: "/kitchen/process/",
-    timer: "/kitchen/timer",
+    timer: "/kitchen/process/timer",
     
     library: "/library",
     report: "/library/report",
