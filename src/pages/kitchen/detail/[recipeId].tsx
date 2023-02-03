@@ -25,16 +25,9 @@ export default function Detail({ recipeData }: DetailProps) {
       </div>
       <div className="container">
         {recipeData.ingredient.map((item, idx) => (
-          <DetailBox
-            key={idx}
-            idx={idx}
-            icon={"mainside"}
-            type={"ingredient"}
-            content={item}
-          />
+          <DetailBox key={idx} idx={idx} type={"ingredient"} content={item} />
         ))}
         <DetailBox
-          icon={"nutrient"}
           type={"nutrient"}
           content={{
             title: "영양정보",
@@ -47,7 +40,6 @@ export default function Detail({ recipeData }: DetailProps) {
           }}
         />
         <DetailBox
-          icon={"health"}
           type={"tip"}
           content={{
             title: "건강 비결",
@@ -92,7 +84,6 @@ export default function Detail({ recipeData }: DetailProps) {
           display: flex;
           flex-direction: column;
           gap: 12px;
-
         }
         .comment {
           color: ${colors.graySubTitle};
