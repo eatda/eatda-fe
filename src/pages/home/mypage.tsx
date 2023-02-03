@@ -1,21 +1,21 @@
 import Navigation from "../../components/common/Navigation";
 import colors from "../../../styles";
 import { selectToken } from "../../store/tokenSlice";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { Get } from "../../hooks/Fetch";
-import { copyCode } from "../../hooks/CopyClipBoard";
 import ModalBasic from "../../components/home/ModalBasic";
+import { copy, logout, next, notice } from "../../assets/icon";
 
 const activityData = [
   "활동이 적거나 운동을 안하는 경우",
   "가벼운 활동 및 운동",
   "보통의 활동 및 운동",
   "적극적인 활동 및 운동",
-  "매우 적극적인 활동 및 운동"
+  "매우 적극적인 활동 및 운동",
 ];
 
 interface myDataI {
@@ -34,7 +34,7 @@ interface myDataI {
 
 export default function MyPage() {
   const [myData, setMyData] = useState<myDataI>();
-  const [data, setData] = useState<boolean>(false)
+  const [data, setData] = useState<boolean>(false);
   const token = useSelector(selectToken);
   const router = useRouter();
   const session = useSession();
@@ -68,32 +68,30 @@ export default function MyPage() {
         <div className="profile">
           {myData?.character && (
             <div className="image">
-            <Image
-              alt="character"
-              width={55}
-              height={55}
-              src={`/character/ch_${myData?.character}.svg`}
-              priority
-            />
+              <Image
+                alt="character"
+                width={55}
+                height={55}
+                src={`/character/ch_${myData?.character}.svg`}
+                priority
+              />
             </div>
           )}
           <br />
           <div className="profile_dia">
             {myData?.is_diabetes ? "당뇨인" : "당뇨인 가족"}
           </div>
-          <div className="name">
-          {myData?.name}
-          </div>
+          <div className="name">{myData?.name}</div>
           <div className="survey">
-          {myData?.is_diabetes ? (
-            <>
-              {myData?.height}cm &nbsp; &nbsp; &nbsp;
-              {myData?.weight}kg &nbsp; &nbsp; &nbsp;
-              {myData?.gender === 'f' ? '여성' : '남성'}
-            </>
-          ) : (
-            <></>
-          )}
+            {myData?.is_diabetes ? (
+              <>
+                {myData?.height}cm &nbsp; &nbsp; &nbsp;
+                {myData?.weight}kg &nbsp; &nbsp; &nbsp;
+                {myData?.gender === "f" ? "여성" : "남성"}
+              </>
+            ) : (
+              <></>
+            )}
           </div>
         </div>
         <br />
@@ -103,7 +101,9 @@ export default function MyPage() {
               <div className="infoGroup">
                 <div className="infoItem">활동량</div>
                 <div className="infoVal">
-                {typeof myData?.activity === "number" ? activityData[myData?.activity] : "" }
+                  {typeof myData?.activity === "number"
+                    ? activityData[myData?.activity]
+                    : ""}
                 </div>
               </div>
               <div className="line"></div>
@@ -122,38 +122,41 @@ export default function MyPage() {
         )}
         <br />
         {myData && (
-          <button className="buttonStyle" onClick={()=>{}}>
-            {data && <ModalBasic group={myData.group} data={data} setData={(v: boolean) => { setData(v) }}/>}
-            <Image alt="character" width={24} height={24} src={`/img/mypage/code.svg`} priority/>
+          <button className="buttonStyle" onClick={() => {}}>
+            {data && (
+              <ModalBasic
+                group={myData.group}
+                data={data}
+                setData={(v: boolean) => {
+                  setData(v);
+                }}
+              />
+            )}
+            <Image alt="character" width={24} height={24} src={copy} priority />
             &nbsp;
-            <div className="textButton" onClick={()=>setData(true)}>
-            초대코드 복사하기 
-            {/* {myData.group} */}
+            <div className="textButton" onClick={() => setData(true)}>
+              초대코드 복사하기
             </div>
-            <div className="go" onClick={()=>setData(true)}>
-            <Image alt="character" width={32} height={32} src={`/img/mypage/go.svg`} priority/>
+            <div className="go" onClick={() => setData(true)}>
+              <Image alt="" width={32} height={32} src={next} priority />
             </div>
           </button>
         )}
         <button className="buttonStyle">
-        <Image alt="character" width={24} height={24} src={`/img/mypage/alarm.svg`} priority/>
-        &nbsp;
-        <div className="textButton">
-          서비스 평가 및 정식 출시 알림 받기
-        </div>
-        <div className="go">
-        <Image alt="character" width={32} height={32} src={`/img/mypage/go.svg`} priority/>
-        </div>
+          <Image alt="" width={24} height={24} src={notice} priority />
+          &nbsp;
+          <div className="textButton">서비스 평가 및 정식 출시 알림 받기</div>
+          <div className="go">
+            <Image alt="" width={32} height={32} src={next} priority />
+          </div>
         </button>
         <button className="buttonStyle" onClick={() => signOut()}>
-        <Image alt="character" width={24} height={24} src={`/img/mypage/logout.svg`} priority/>
-        &nbsp;
-        <div className="textButton">
-          로그아웃하기
-        </div>
-        <div className="go">
-        <Image alt="character" width={32} height={32} src={`/img/mypage/go.svg`} priority/>
-        </div>
+          <Image alt="" width={24} height={24} src={logout} priority />
+          &nbsp;
+          <div className="textButton">로그아웃하기</div>
+          <div className="go">
+            <Image alt="character" width={32} height={32} src={next} priority />
+          </div>
         </button>
         <button />
       </div>
@@ -163,7 +166,6 @@ export default function MyPage() {
           flex-direction: column;
           align-items: center;
           text-align: center;
-          // min-height: 800px;
           padding-top: 60px;
         }
 
