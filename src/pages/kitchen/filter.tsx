@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import FooterButton from "../../components/common/FooterButton";
-import Navigation from "../../components/common/Navigation";
+import Navigation from "../../components/layout/Navigation";
 import FilterButton from "../../components/kitchen/FilterButton";
 import {
   addFilter,
@@ -9,6 +9,7 @@ import {
   selectFilter,
   setFilterQuery,
 } from "../../store/filterSlice";
+import Hr from "../../components/common/Hr";
 
 export interface FilterType {
   id: number;

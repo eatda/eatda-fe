@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { CTA1ButtonSmall, CTA1Button } from "../../components/common/Button";
-import Navigation from "../../components/common/Navigation";
+import Navigation from "../../components/layout/Navigation";
 import colors from "../../assets/styles";
 import Image from "next/image";
 import { login } from "../../store/userSlice";

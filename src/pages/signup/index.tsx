@@ -6,7 +6,7 @@ import {
   CTA1ButtonSelect,
   CTA1ButtonSelect2,
 } from "../../components/common/Button";
-import Navigation from "../../components/common/Navigation";
+import Navigation from "../../components/layout/Navigation";
 import Image from "next/image";
 import colors from "../../assets/styles";
 

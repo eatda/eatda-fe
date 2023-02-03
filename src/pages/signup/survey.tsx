@@ -7,7 +7,7 @@ import {
   RadioBox,
   CheckBox,
 } from "../../components/common/Button";
-import Navigation from "../../components/common/Navigation";
+import Navigation from "../../components/layout/Navigation";
 import colors from "../../assets/styles";
 import Image from "next/image";
 

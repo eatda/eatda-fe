@@ -67,6 +67,7 @@ export default function Header({
           display: flex;
           justify-content: center;
           margin-top: 25px;
+          padding: 0px 20px;
         }
 
         .trueButton {
