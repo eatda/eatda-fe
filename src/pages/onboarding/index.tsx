@@ -92,7 +92,7 @@ export default function SignIn() {
           bottom: 0;
           right: 0;
           left: 0;
-          background-image: url("/img/onboarding.svg");
+          background-image: url(onboarding);
           background-size: auto;
           background-position: center;
         }

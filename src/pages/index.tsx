@@ -2,6 +2,7 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import Image from "next/image";
+import { splash } from "../assets/icon";
 
 export default function Home() {
   const router = useRouter();
@@ -11,23 +12,23 @@ export default function Home() {
     if (session.status == "authenticated") {
       router.replace("/home", undefined, { shallow: true });
     } else {
-      setTimeout(()=>{
+      setTimeout(() => {
         router.replace("/onboarding", undefined, { shallow: true });
-      },2000)
+      }, 2000);
     }
-  },[]);
+  }, []);
 
   return (
     <div className="container">
-      <Image alt="character" width={176} height={148} src={`/img/splash1.svg`} priority/>
+      <Image alt="character" width={176} height={148} src={splash} priority />
       <style jsx>{`
-       .container{
-        display: flex;
-        flex-direction: column;
-        height: 600px;
-        align-items: center;
-        justify-content: center;
-      }
+        .container {
+          display: flex;
+          flex-direction: column;
+          height: 600px;
+          align-items: center;
+          justify-content: center;
+        }
       `}</style>
     </div>
   );

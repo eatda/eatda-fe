@@ -5,7 +5,8 @@ import { useSelector } from "react-redux";
 import { selectToken } from "../../store/tokenSlice";
 import { Post, Delete } from "../../hooks/Fetch";
 import { useRouter } from "next/router";
-import { ic_measure, ic_time } from "../../assets/icon";
+import { ic_heart, ic_measure, ic_time } from "../../assets/icon";
+import { character_like } from "../../assets/character";
 
 interface SugarCardProps {
   is_exist?: boolean;
@@ -111,7 +112,7 @@ export default function SugarCard({
                       alt="character"
                       width={20}
                       height={20}
-                      src={`/character/like_${v}.svg`}
+                      src={character_like[v]}
                       priority
                     />
                   </div>
@@ -123,7 +124,7 @@ export default function SugarCard({
               alt="character"
               width={32}
               height={32}
-              src={like ? `/button/like_full.svg` : `/button/like_empty.svg`}
+              src={like ? ic_heart.fill : ic_heart.empty}
               priority
             />
           </div>

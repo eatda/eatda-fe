@@ -16,6 +16,7 @@ export const notice = "/img/icon/pencil-simple-line.svg";
 export const logout = "/img/icon/logout.svg";
 
 // 주방 탭
+export const btn_filter = "/img/button/push_filter.svg"
 export const ic_heart = {
   empty: "/img/button/heart_empty.svg",
   fill: "/img/button/heart_full.svg",
@@ -43,6 +44,10 @@ export const dinner = {
   white:"/img/icon/moon_white.svg", 
   black:"/img/icon/moon_black.svg"
 };
+
+// 서재 탭
+export const btn_add = "/img/button/push_add_record.svg"
+
 
 // 회원가입
 export const enter = "/img/icon/check-circle.svg";

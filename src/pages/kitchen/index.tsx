@@ -9,6 +9,7 @@ import Image from "next/image";
 import { selectFilterQuery } from "../../store/filterSlice";
 import PushPageButton from "../../components/common/PushPageButton";
 import RecipeList from "../../components/kitchen/RecipeList";
+import { btn_filter } from "../../assets/icon";
 
 export default function Recipe() {
   const router = useRouter();
@@ -92,21 +93,16 @@ export default function Recipe() {
             <RecipeList type="recommend" mine={true} data={mineList} />
           ) : (
             <div className="emptyMine">
-              식사 후 혈당을 기록하여 <br/>
+              식사 후 혈당을 기록하여 <br />
               체질 맞춤형 레시피를 추천 받아요!
             </div>
-
           )}
         </div>
       </div>
       <div className="bar" />
       <div className="container">
         <div className="textHeader">오늘 이 레시피는 어때요?</div>
-        <PushPageButton
-          name="필터"
-          src="/button/filter.svg"
-          page="/kitchen/filter"
-        />
+        <PushPageButton name="필터" src={btn_filter} page="/kitchen/filter" />
         <RecipeList type="recommend" data={filterList} />
       </div>
       <style jsx>{`
@@ -127,7 +123,7 @@ export default function Recipe() {
         }
         .emptyMine {
           margin-top: 12px;
-          border: 1px solid #D9D9D9;
+          border: 1px solid #d9d9d9;
           height: 152px;
           color: ${colors.graySubTitle2};
           font-size: 14px;

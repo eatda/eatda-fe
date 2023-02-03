@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import { selectToken } from "../../store/tokenSlice";
 import { selectUser } from "../../store/userSlice";
 import { SugarRecordType } from "../../interface/sugarRecord";
+import { btn_add } from "../../assets/icon";
 
 interface RecordDataType {
   date: string;
@@ -44,11 +45,7 @@ export default function Library() {
         rightURL="/library/report"
       />
       {user.isDiabetes && (
-        <PushPageButton
-          name="필터"
-          src="/img/library/add.svg"
-          page="/library/add"
-        />
+        <PushPageButton name="필터" src={btn_add} page="/library/add" />
       )}
       <div className="container">
         {recordData.length === 0 && (

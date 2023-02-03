@@ -10,6 +10,7 @@ import BestWorstCards from "../../components/library/BestWorstCards";
 import WeeklySummary from "../../components/library/WeeklySummary";
 import { DietType } from "../../interface/diet";
 import Image from "next/image";
+import { illust } from "../../assets/illust";
 
 interface LowHighDataType {
   best: DietType[];
@@ -62,7 +63,7 @@ export default function Report() {
               <BestWorstCards meals={lowHighData.best} />
             ) : (
               <Image
-                src="/img/library/noReport.svg"
+                src={illust.report}
                 width={352}
                 height={150}
                 alt="지난 7일간 3회 이상 식후 혈당을 입력한 경우에만
@@ -76,7 +77,7 @@ export default function Report() {
               <BestWorstCards meals={lowHighData.worst} />
             ) : (
               <Image
-                src="/img/library/noReport.svg"
+                src={illust.report}
                 width={352}
                 height={150}
                 alt="지난 7일간 3회 이상 식후 혈당을 입력한 경우에만

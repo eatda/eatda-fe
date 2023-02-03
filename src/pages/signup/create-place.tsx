@@ -108,7 +108,13 @@ export default function CreatePlace() {
               <div className="code">{code}</div>
             </div>
             <button className="copy" onClick={() => copyCode(code)}>
-              <Image alt="copy" width={24} height={24} src={copy} priority />
+              <Image
+                alt="copy"
+                width={24}
+                height={24}
+                src={copy.white}
+                priority
+              />
               &nbsp; 링크 복사하기
             </button>
             <div className="buttonItem">

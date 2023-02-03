@@ -8,6 +8,7 @@ import { selectToken } from "../../store/tokenSlice";
 import { Get, Post } from "../../hooks/Fetch";
 import FooterButton from "../../components/common/FooterButton";
 import { DietType } from "../../interface/diet";
+import { down, up } from "../../assets/icon";
 
 const offset = new Date().getTimezoneOffset() * 60000;
 const today = new Date(Date.now() - offset);
@@ -130,7 +131,7 @@ export default function Add() {
                   alt="character"
                   width={16}
                   height={10}
-                  src={`/img/detail/down.svg`}
+                  src={down}
                   priority
                 />
               ) : (
@@ -138,7 +139,7 @@ export default function Add() {
                   alt="character"
                   width={16}
                   height={10}
-                  src={`/img/detail/up.svg`}
+                  src={up}
                   priority
                 />
               )}

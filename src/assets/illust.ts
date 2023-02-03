@@ -1,3 +1,4 @@
+export const logo = "/img/logo.svg"
 export const illust = {
     character : "/img/illust/character.svg",
     report : "/img/illust/library_report.svg",

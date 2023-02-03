@@ -9,6 +9,7 @@ import { useRouter } from "next/router";
 import { Get } from "../../hooks/Fetch";
 import ModalBasic from "../../components/home/ModalBasic";
 import { copy, logout, next, notice } from "../../assets/icon";
+import { character } from "../../assets/character";
 
 const activityData = [
   "활동이 적거나 운동을 안하는 경우",
@@ -72,7 +73,7 @@ export default function MyPage() {
                 alt="character"
                 width={55}
                 height={55}
-                src={`/character/ch_${myData?.character}.svg`}
+                src={character[myData?.character]}
                 priority
               />
             </div>
@@ -132,7 +133,13 @@ export default function MyPage() {
                 }}
               />
             )}
-            <Image alt="character" width={24} height={24} src={copy} priority />
+            <Image
+              alt="character"
+              width={24}
+              height={24}
+              src={copy.black}
+              priority
+            />
             &nbsp;
             <div className="textButton" onClick={() => setData(true)}>
               초대코드 복사하기

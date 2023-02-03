@@ -9,6 +9,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import RecipeList from "../../components/kitchen/RecipeList";
 import { DietType } from "../../interface/diet";
+import { illust } from "../../assets/illust";
 
 const sliderSettings = {
   dots: true,
@@ -122,7 +123,7 @@ export default function OurPick() {
                       alt="character"
                       width={80}
                       height={73.07}
-                      src={`/img/pickEmpty.svg`}
+                      src={illust.pick}
                       priority
                     />
                     아직 {v.user_name}님이 선호하는 레시피가 없어요

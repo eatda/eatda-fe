@@ -12,6 +12,8 @@ import colors from "../../../styles";
 import { DietType } from "../../interface/diet";
 import { SugarRecordType } from "../../interface/sugarRecord";
 import HomeSlider from "../../components/home/HomeSlider";
+import { character_like } from "../../assets/character";
+import { logo } from "../../assets/illust";
 
 interface dietI {
   diet:
@@ -107,19 +109,13 @@ export default function Home() {
     <>
       <div className="container">
         <div className="header">
-          <Image
-            alt="logo"
-            width={126}
-            height={32}
-            src={`/img/logo.svg`}
-            priority
-          />
+          <Image alt="logo" width={126} height={32} src={logo} priority />
           <button onClick={handleClick}>
             <Image
               alt="character"
               width={32}
               height={32}
-              src={`/character/like_${user.usercharacter}.svg`}
+              src={character_like[user.usercharacter]}
               priority
             />
           </button>
