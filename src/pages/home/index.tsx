@@ -50,6 +50,8 @@ interface bloodI {
 }
 
 export default function Home() {
+  console.log("pwa 배포 완료");
+
   const router = useRouter();
   const token = useSelector(selectToken);
   const user = useSelector(selectUser);

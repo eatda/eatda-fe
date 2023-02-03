@@ -1,0 +1,27 @@
+{
+    "name": "Eat-Da (잇다)",
+    "short_name": "EatDa",
+    "icons": [
+      {
+        "src": "/icons/icon-512.png",
+        "sizes": "512x512",
+        "type": "image/png",
+        "purpose": "any maskable"
+      },
+      {
+        "src": "/icons/icon-310.png",
+        "sizes": "384x384",
+        "type": "image/png"
+      },
+      {
+        "src": "/icons/icon-196.png",
+        "sizes": "192x192",
+        "type": "image/png"
+      }
+    ],
+    "theme_color": "#FFFFFF",
+    "background_color": "#FFFFFF",
+    "start_url": "/",
+    "display": "standalone",
+    "orientation": "portrait"
+  }
