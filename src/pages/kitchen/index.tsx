@@ -8,6 +8,7 @@ import PushPageButton from "../../components/common/PushPageButton";
 import RecipeList from "../../components/kitchen/RecipeList";
 import { btn_filter } from "../../assets/icon";
 import { route } from "../../assets/route";
+import Hr from "../../components/common/Hr";
 
 export default function Recipe() {
   const token = useSelector(selectToken);
@@ -96,22 +97,13 @@ export default function Recipe() {
           )}
         </div>
       </div>
-      <div className="bar" />
+      <Hr />
       <div className="container">
         <div className="textHeader">오늘 이 레시피는 어때요?</div>
         <PushPageButton name="필터" src={btn_filter} page="/kitchen/filter" />
         <RecipeList type="recommend" data={filterList} />
       </div>
       <style jsx>{`
-        .bar {
-          background: #f8f8f8;
-          height: 4px;
-          margin-top: 12px;
-          margin-bottom: 18px;
-        }
-        .margin {
-          // margin-right: 20px;
-        }
         .textHeader {
           margin-top: 18px;
           margin-bottom: 10px;

@@ -9,6 +9,7 @@ import { selectUser } from "../../store/userSlice";
 import { SugarRecordType } from "../../interface/sugarRecord";
 import { btn_add, ic_measure, ic_time } from "../../assets/icon";
 import Image from "next/image";
+import Hr from "../../components/common/Hr";
 
 interface RecordDataType {
   date: string;
@@ -80,7 +81,7 @@ export default function Library() {
                 </div>
               ))}
             </div>
-            <hr />
+            <Hr />
           </div>
         ))}
       </div>
@@ -132,11 +133,6 @@ export default function Library() {
         .time {
           color: ${colors.graySubTitle2};
           font-size: 14px;
-        }
-        hr {
-          border: 0;
-          border-top: 1px solid ${colors.blackSub};
-          margin-bottom: 24px;
         }
       `}</style>
     </>

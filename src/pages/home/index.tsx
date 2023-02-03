@@ -15,6 +15,7 @@ import HomeSlider from "../../components/home/HomeSlider";
 import { character_like } from "../../assets/illust";
 import { logo } from "../../assets/illust";
 import { route } from "../../assets/route";
+import Hr from "../../components/common/Hr";
 
 interface dietI {
   diet:
@@ -143,7 +144,7 @@ export default function Home() {
               )}
             </HomeSlider>
           )}
-          <div className="hr" />
+          <Hr />
         </div>
         <div className="box">
           <div className="title">오늘의 식후 혈당</div>
@@ -166,7 +167,7 @@ export default function Home() {
               )}
             </HomeSlider>
           )}
-          <div className="hr" />
+          <Hr />
         </div>
         <div className="box">
           <WeeklySummary />
@@ -199,11 +200,6 @@ export default function Home() {
         button {
           border: none;
           background: none;
-        }
-        .hr {
-          margin: 8px -20px 16px -20px;
-          height: 4px;
-          background-color: ${colors.grayBackground};
         }
       `}</style>
     </>

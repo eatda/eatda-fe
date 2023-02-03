@@ -11,6 +11,7 @@ import { DietType } from "../../interface/diet";
 import Image from "next/image";
 import { illust } from "../../assets/illust";
 import { route } from "../../assets/route";
+import Hr from "../../components/common/Hr";
 
 interface LowHighDataType {
   best: DietType[];
@@ -55,7 +56,7 @@ export default function Report() {
           </div>
           <WeeklySummary duration={true} />
         </div>
-        <div className="hr" />
+        <Hr />
         <>
           <div className="box">
             <div className="title"> 식후 혈당 낮았던 식단 TOP3</div>
@@ -98,11 +99,6 @@ export default function Report() {
           font-size: 24px;
           font-weight: 700;
           padding: 10px 0px;
-        }
-        .hr {
-          margin: 0px -20px;
-          height: 4px;
-          background-color: ${colors.grayBackground};
         }
         .title {
           font-weight: 700;

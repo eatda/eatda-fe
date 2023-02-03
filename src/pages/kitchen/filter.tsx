@@ -99,7 +99,7 @@ export default function Filter({ filterData }: FilterProps) {
                   />
                 ))}
               </div>
-              <div className="hr" />
+              <Hr />
             </div>
           ))}
         </div>

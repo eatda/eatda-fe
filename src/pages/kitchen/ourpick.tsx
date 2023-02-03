@@ -10,6 +10,7 @@ import RecipeList from "../../components/kitchen/RecipeList";
 import { DietType } from "../../interface/diet";
 import { illust } from "../../assets/illust";
 import { route } from "../../assets/route";
+import Hr from "../../components/common/Hr";
 
 interface popularPickI {
   diet: DietType;
@@ -84,16 +85,9 @@ export default function OurPick() {
           ) : (
             <RecipeList type="pick" data={popularPick} popular={true} />
           )}
-          {/* {
-                    [0].map((v,i)=>{
-                        return(
-                            <RecipeList key={i} type="pick" data={popularPick} popular={true}/>
-                        )
-                    })
-                } */}
         </div>
       </div>
-      <div className="bar" />
+      <Hr />
       <div className="container">
         {pick?.map((v, i) => {
           return (
@@ -127,15 +121,6 @@ export default function OurPick() {
         })}
       </div>
       <style jsx>{`
-        .bar {
-          background: #f8f8f8;
-          height: 4px;
-          margin-top: 15px;
-          margin-bottom: 18px;
-        }
-        .miniHeader {
-          margin-top: 25px;
-        }
         .emptyBox {
           display: flex;
           flex-direction: column;
