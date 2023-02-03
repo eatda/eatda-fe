@@ -1,4 +1,4 @@
-import Navigation from "../../../components/common/Navigation";
+import Navigation from "../../../components/layout/Navigation";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useState } from "react";

@@ -128,12 +128,16 @@ export default function DetailBox({ idx, type, content }: DetailBoxProps) {
           flex-direction: row;
           align-items: center;
           justify-content: space-between;
-          min-height: 38px;
           border-bottom: 1px solid ${colors.grayBackgroundSub};
           font-size: 14px;
+          padding: 11px 0px;
         }
         .name {
+          min-width: 100px;
           color: ${colors.grayMainTitle};
+        }
+        .amount {
+          text-align: right;
         }
 
         .paragraph {

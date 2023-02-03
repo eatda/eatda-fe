@@ -1,10 +1,9 @@
 import { GetServerSideProps } from "next";
-import Image from "next/image";
 import { useRouter } from "next/router";
 import colors from "../../../assets/styles";
 import { route } from "../../../assets/route";
 import FooterButton from "../../../components/common/FooterButton";
-import Navigation from "../../../components/common/Navigation";
+import Navigation from "../../../components/layout/Navigation";
 import DetailBox from "../../../components/kitchen/DetailBox";
 import { RecipeDataType } from "../../../interface/recipe";
 
