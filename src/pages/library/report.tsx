@@ -1,4 +1,4 @@
-import Header from "../../components/common/Header";
+import Header from "../../components/layout/Header";
 import { useSession } from "next-auth/react";
 import colors from "../../assets/styles";
 import { useEffect, useState } from "react";
