@@ -5,7 +5,7 @@ import { Post, Delete } from "../../hooks/Fetch";
 import { selectToken } from "../../store/tokenSlice";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
-import { character_like } from "../../assets/character";
+import { character_like } from "../../assets/illust";
 import { ic_heart } from "../../assets/icon";
 import { route } from "../../assets/route";
 

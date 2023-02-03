@@ -9,7 +9,7 @@ import { useRouter } from "next/router";
 import { Get } from "../../hooks/Fetch";
 import ModalBasic from "../../components/home/ModalBasic";
 import { copy, logout, next, notice } from "../../assets/icon";
-import { character } from "../../assets/character";
+import { character } from "../../assets/illust";
 import { route } from "../../assets/route";
 
 const activityData = [
@@ -174,7 +174,7 @@ export default function MyPage() {
           flex-direction: column;
           align-items: center;
           text-align: center;
-          padding-top: 60px;
+          margin-top: -40px;
         }
 
         .image {

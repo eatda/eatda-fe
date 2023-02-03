@@ -13,7 +13,7 @@ import colors from "../../assets/styles";
 import { login } from "../../store/userSlice";
 import { selectUser } from "../../store/userSlice";
 import { useSelector, useDispatch } from "react-redux";
-import { character } from "../../assets/character";
+import { character } from "../../assets/illust";
 import { route } from "../../assets/route";
 import { illust } from "../../assets/illust";
 

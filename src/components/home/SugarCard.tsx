@@ -6,7 +6,7 @@ import { selectToken } from "../../store/tokenSlice";
 import { Post, Delete } from "../../hooks/Fetch";
 import { useRouter } from "next/router";
 import { ic_heart, ic_measure, ic_time } from "../../assets/icon";
-import { character_like } from "../../assets/character";
+import { character_like } from "../../assets/illust";
 import { route } from "../../assets/route";
 
 interface SugarCardProps {

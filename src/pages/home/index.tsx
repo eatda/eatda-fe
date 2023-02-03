@@ -12,7 +12,7 @@ import colors from "../../assets/styles";
 import { DietType } from "../../interface/diet";
 import { SugarRecordType } from "../../interface/sugarRecord";
 import HomeSlider from "../../components/home/HomeSlider";
-import { character_like } from "../../assets/character";
+import { character_like } from "../../assets/illust";
 import { logo } from "../../assets/illust";
 import { route } from "../../assets/route";
 
