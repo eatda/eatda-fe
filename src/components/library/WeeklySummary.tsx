@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import colors from "../../../styles";
+import colors from "../../assets/styles";
 import { Get } from "../../hooks/Fetch";
 import { selectToken } from "../../store/tokenSlice";
 

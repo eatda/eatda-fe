@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { CTA1ButtonSmall, CTA1Button } from "../../components/common/Button";
 import Navigation from "../../components/common/Navigation";
-import colors from "../../../styles";
+import colors from "../../assets/styles";
 import Image from "next/image";
 import { login } from "../../store/userSlice";
 import { selectUser } from "../../store/userSlice";

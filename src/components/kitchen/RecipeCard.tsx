@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
-import colors from "../../../styles";
+import colors from "../../assets/styles";
 import Image from "next/image";
 import { selectToken } from "../../store/tokenSlice";
 import { useSelector } from "react-redux";

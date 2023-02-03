@@ -8,7 +8,7 @@ import {
   CheckBox,
 } from "../../components/common/Button";
 import Navigation from "../../components/common/Navigation";
-import colors from "../../../styles";
+import colors from "../../assets/styles";
 import Image from "next/image";
 
 import { putSurvey } from "../../store/surveySlice";

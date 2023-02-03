@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { useState } from "react";
-import colors from "../../../styles";
+import colors from "../../assets/styles";
 import { Post, Delete } from "../../hooks/Fetch";
 import { selectToken } from "../../store/tokenSlice";
 import { useSelector } from "react-redux";

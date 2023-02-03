@@ -1,5 +1,5 @@
 import Image from "next/image";
-import colors from "../../../styles";
+import colors from "../../assets/styles";
 import { DietType } from "../../interface/diet";
 
 interface MealCardProps {

@@ -1,5 +1,5 @@
 import Navigation from "../../components/common/Navigation";
-import colors from "../../../styles";
+import colors from "../../assets/styles";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";

@@ -6,7 +6,7 @@ import { putToken } from "../../store/tokenSlice";
 import { login } from "../../store/userSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
-import colors from "../../../styles";
+import colors from "../../assets/styles";
 import { route } from "../../assets/route";
 
 interface bodyDataI {

@@ -1,5 +1,5 @@
 import { ValueOf } from "next/dist/shared/lib/constants";
-import colors from "../../../styles";
+import colors from "../../assets/styles";
 import Image from "next/image";
 import { check } from "../../assets/icon";
 

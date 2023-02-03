@@ -2,7 +2,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { useState } from "react";
-import colors from "../../../styles";
+import colors from "../../assets/styles";
 
 interface HomeSliderProps {
   initial: number;

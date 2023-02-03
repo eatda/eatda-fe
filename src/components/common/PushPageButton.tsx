@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
-import colors from "../../../styles";
+import colors from "../../assets/styles";
 
 interface PushPageButtonProps {
   name?: string;
@@ -22,7 +22,7 @@ export default function PushPageButton({
         button {
           display: flex;
           justify-content: center;
-          align-items:center;
+          align-items: center;
           color: ${colors.graySubTitle};
           // width: 350px;
           // width: 300px;

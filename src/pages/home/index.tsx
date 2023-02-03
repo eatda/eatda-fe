@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import WeeklySummary from "../../components/library/WeeklySummary";
-import colors from "../../../styles";
+import colors from "../../assets/styles";
 import { DietType } from "../../interface/diet";
 import { SugarRecordType } from "../../interface/sugarRecord";
 import HomeSlider from "../../components/home/HomeSlider";

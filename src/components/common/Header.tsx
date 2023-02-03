@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import colors from "../../../styles";
+import colors from "../../assets/styles";
 
 interface HeaderType {
   text: string;

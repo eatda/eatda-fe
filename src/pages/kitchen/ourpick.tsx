@@ -1,4 +1,4 @@
-import colors from "../../../styles";
+import colors from "../../assets/styles";
 import Header from "../../components/common/Header";
 import { useEffect, useState } from "react";
 import { selectToken } from "../../store/tokenSlice";

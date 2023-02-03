@@ -1,5 +1,5 @@
 import Header from "../../components/common/Header";
-import colors from "../../../styles";
+import colors from "../../assets/styles";
 import PushPageButton from "../../components/common/PushPageButton";
 import { useEffect, useState } from "react";
 import { Get } from "../../hooks/Fetch";

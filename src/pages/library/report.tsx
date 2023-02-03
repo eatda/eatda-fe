@@ -1,6 +1,6 @@
 import Header from "../../components/common/Header";
 import { useSession } from "next-auth/react";
-import colors from "../../../styles";
+import colors from "../../assets/styles";
 import { useEffect, useState } from "react";
 import { Get } from "../../hooks/Fetch";
 import { useSelector } from "react-redux";

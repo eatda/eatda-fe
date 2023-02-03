@@ -1,4 +1,4 @@
-import colors from "../../../styles";
+import colors from "../../assets/styles";
 import Header from "../../components/common/Header";
 import { selectToken } from "../../store/tokenSlice";
 import { useSelector } from "react-redux";

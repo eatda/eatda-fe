@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import Image from "next/image";
-import colors from "../../../styles";
+import colors from "../../assets/styles";
 import { back } from "../../assets/icon";
 
 interface NavigationProps {

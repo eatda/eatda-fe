@@ -2,7 +2,7 @@ import Navigation from "../../../components/common/Navigation";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useState } from "react";
-import colors from "../../../../styles";
+import colors from "../../../assets/styles";
 import ProcessCard from "../../../components/kitchen/ProcessCard";
 import { GetServerSideProps } from "next";
 import { RecipeDataType } from "../../../interface/recipe";

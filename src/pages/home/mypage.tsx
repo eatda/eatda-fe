@@ -1,5 +1,5 @@
 import Navigation from "../../components/common/Navigation";
-import colors from "../../../styles";
+import colors from "../../assets/styles";
 import { selectToken } from "../../store/tokenSlice";
 import { useSelector } from "react-redux";
 import Image from "next/image";

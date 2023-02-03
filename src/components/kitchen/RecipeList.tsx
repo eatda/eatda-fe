@@ -1,7 +1,7 @@
 import RecipeCard from "./RecipeCard";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import colors from "../../../styles";
+import colors from "../../assets/styles";
 
 interface RecipeListType {
   type: string;
@@ -71,27 +71,27 @@ export default function RecipeList({
           overflow-y: hidden;
         }
 
-        .scrollBar { 
+        .scrollBar {
           width: 200px;
           height: 200px;
           overflow-y: scroll;
         }
-        
+
         /* 아래의 모든 코드는 영역::코드로 사용 */
         .item::-webkit-scrollbar {
           height: 5px;
-            width: 1px;  /* 스크롤바의 너비 */
+          width: 1px; /* 스크롤바의 너비 */
         }
-        
+
         .item::-webkit-scrollbar-thumb {
-            height: 1px; /* 스크롤바의 길이 */
-            background: ${colors.mainOrange}; /* 스크롤바의 색상 */
-            
-            border-radius: 10px;
+          height: 1px; /* 스크롤바의 길이 */
+          background: ${colors.mainOrange}; /* 스크롤바의 색상 */
+
+          border-radius: 10px;
         }
-        
+
         .item::-webkit-scrollbar-track {
-            background: ${colors.grayBackground};  /*스크롤바 뒷 배경 색상*/
+          background: ${colors.grayBackground}; /*스크롤바 뒷 배경 색상*/
         }
       `}</style>
     </>

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { useState } from "react";
-import colors from "../../../styles";
+import colors from "../../assets/styles";
 import { down, main, nutrient, side, tips, up } from "../../assets/icon";
 
 interface DetailBoxProps {

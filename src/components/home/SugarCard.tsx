@@ -1,4 +1,4 @@
-import colors from "../../../styles";
+import colors from "../../assets/styles";
 import Image from "next/image";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";

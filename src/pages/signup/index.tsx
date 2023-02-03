@@ -8,7 +8,7 @@ import {
 } from "../../components/common/Button";
 import Navigation from "../../components/common/Navigation";
 import Image from "next/image";
-import colors from "../../../styles";
+import colors from "../../assets/styles";
 
 import { login } from "../../store/userSlice";
 import { selectUser } from "../../store/userSlice";
