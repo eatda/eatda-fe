@@ -45,7 +45,6 @@ export default function FilterButton({
           align-items: center;
           width: 48px;
           height: 80px;
-          margin: 15px;
           text-align: center;
         }
         .nameTrue {

@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import FooterButton from "../../components/common/FooterButton";
 import Navigation from "../../components/common/Navigation";
-import FilterButton from "../../components/filter/FilterButton";
+import FilterButton from "../../components/kitchen/FilterButton";
 import {
   addFilter,
   deleteFilter,
@@ -88,7 +88,7 @@ export default function Filter({ filterData }: FilterProps) {
         <div className="content">
           {filterData.map((data: FilterDataType) => (
             <div key={data.category.id} className="category">
-              <h2>{data.category.name}</h2>
+              <div className="title">{data.category.name}</div>
               <div className="filters">
                 {data.filter.map((filter) => (
                   <FilterButton
@@ -99,21 +99,23 @@ export default function Filter({ filterData }: FilterProps) {
                   />
                 ))}
               </div>
-              <div className="bar"/>
+              <div className="hr" />
             </div>
           ))}
         </div>
       </div>
       <FooterButton onClick={setFilter} text="설정하기" />
       <style jsx>{`
+        .title {
+          font-weight: 700;
+          font-size: 20px;
+          margin: 20px 0px;
+        }
         .filters {
           display: flex;
           flex-direction: row;
           flex-wrap: wrap;
-        }
-        .bar {
-          background: #F8F8F8;
-          height: 4px;
+          gap: 20px;
         }
       `}</style>
     </>
