@@ -1,4 +1,3 @@
-import MiniHeader from "../../components/common/MiniHeader";
 import Header from "../../components/common/Header";
 import { useSession } from "next-auth/react";
 import colors from "../../../styles";
@@ -11,6 +10,7 @@ import WeeklySummary from "../../components/library/WeeklySummary";
 import { DietType } from "../../interface/diet";
 import Image from "next/image";
 import { illust } from "../../assets/illust";
+import { route } from "../../assets/route";
 
 interface LowHighDataType {
   best: DietType[];
@@ -40,12 +40,12 @@ export default function Report() {
 
   return (
     <>
-      <Header text="서재" />
-      <MiniHeader
+      <Header
+        text="서재"
         left="식후 혈당 기록하기"
         right="주간레포트"
-        leftURL="/library"
-        rightURL="/library/report"
+        leftURL={route.library}
+        rightURL={route.report}
       />
       <div className="container">
         <div className="box">

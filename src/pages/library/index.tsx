@@ -1,4 +1,3 @@
-import MiniHeader from "../../components/common/MiniHeader";
 import Header from "../../components/common/Header";
 import colors from "../../../styles";
 import PushPageButton from "../../components/common/PushPageButton";
@@ -38,8 +37,8 @@ export default function Library() {
 
   return (
     <>
-      <Header text="서재" />
-      <MiniHeader
+      <Header
+        text="서재"
         left="식후 혈당 기록하기"
         right="주간레포트"
         leftURL="/library"

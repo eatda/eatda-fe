@@ -174,10 +174,16 @@ export default function Home() {
       </div>
       <style jsx>{`
         .header {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          z-index: 1;
+          background-color: ${colors.grayWhite};
           display: flex;
           flex-direction: row;
           justify-content: space-between;
-          padding: 15px 0px;
+          padding: 25px 20px;
           margin-bottom: 10px;
         }
         .container {

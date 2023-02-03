@@ -1,5 +1,4 @@
 import colors from "../../../styles";
-import MiniHeader from "../../components/common/MiniHeader";
 import Header from "../../components/common/Header";
 import { useEffect, useState } from "react";
 import { selectToken } from "../../store/tokenSlice";
@@ -10,14 +9,7 @@ import "slick-carousel/slick/slick-theme.css";
 import RecipeList from "../../components/kitchen/RecipeList";
 import { DietType } from "../../interface/diet";
 import { illust } from "../../assets/illust";
-
-const sliderSettings = {
-  dots: true,
-  infinite: true,
-  spped: 500,
-  slideToShow: 1,
-  slideToScroll: 1,
-};
+import { route } from "../../assets/route";
 
 interface popularPickI {
   diet: DietType;
@@ -61,7 +53,6 @@ export default function OurPick() {
       if (data.ok) {
         console.log(res);
         setPick(res.indivisual_list);
-        // setPopularPick([]);
         setPopularPick(res.popular_pick);
       } else {
         console.log("error");
@@ -71,16 +62,14 @@ export default function OurPick() {
   }, []);
 
   return (
-    <div className="box">
-      <Header text="주방" />
-      <div className="miniHeader">
-        <MiniHeader
-          left="추천 식사"
-          right="Our Pick!"
-          leftURL="/kitchen"
-          rightURL="/kitchen/ourpick"
-        />
-      </div>
+    <>
+      <Header
+        text="주방"
+        left="추천 식사"
+        right="Our Pick!"
+        leftURL={route.kitchen}
+        rightURL={route.ourPick}
+      />
       <div className="container">
         <div className="textHeader">
           <div className="textMain">가족들의 인기 &nbsp;</div>
@@ -138,9 +127,6 @@ export default function OurPick() {
         })}
       </div>
       <style jsx>{`
-        .box {
-          margin-bottom: 30px;
-        }
         .bar {
           background: #f8f8f8;
           height: 4px;
@@ -163,7 +149,6 @@ export default function OurPick() {
           margin-bottom: 24px;
           margin-top: 12px;
         }
-
         .textHeader {
           display: flex;
           font-size: 20px;
@@ -186,6 +171,6 @@ export default function OurPick() {
           margin-bottom: 12px;
         }
       `}</style>
-    </div>
+    </>
   );
 }

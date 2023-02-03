@@ -1,18 +1,15 @@
 import colors from "../../../styles";
-import MiniHeader from "../../components/common/MiniHeader";
 import Header from "../../components/common/Header";
-import { useRouter } from "next/router";
 import { selectToken } from "../../store/tokenSlice";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import Image from "next/image";
 import { selectFilterQuery } from "../../store/filterSlice";
 import PushPageButton from "../../components/common/PushPageButton";
 import RecipeList from "../../components/kitchen/RecipeList";
 import { btn_filter } from "../../assets/icon";
+import { route } from "../../assets/route";
 
 export default function Recipe() {
-  const router = useRouter();
   const token = useSelector(selectToken);
   const filterQuery = useSelector(selectFilterQuery);
   const [filterList, setFilterList] = useState();
@@ -79,12 +76,12 @@ export default function Recipe() {
 
   return (
     <div className="box">
-      <Header text="주방" />
-      <MiniHeader
+      <Header
+        text="주방"
         left="추천 식사"
         right="Our Pick!"
-        leftURL="/kitchen"
-        rightURL="/kitchen/ourpick"
+        leftURL={route.kitchen}
+        rightURL={route.ourPick}
       />
       <div className="container">
         <div className="textHeader">나에게 딱 맞는 레시피!</div>
