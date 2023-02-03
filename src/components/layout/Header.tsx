@@ -1,20 +1,21 @@
 import { useRouter } from "next/router";
-import colors from "../../../styles";
+import colors from "../../assets/styles";
 
-interface MiniHeaderType {
+interface HeaderType {
+  text: string;
   left: string;
   right: string;
   leftURL: string;
   rightURL: string;
 }
 
-// 필터 부분 추가해야 함
-export default function MiniHeader({
+export default function Header({
+  text,
   left,
   right,
   leftURL,
   rightURL,
-}: MiniHeaderType) {
+}: HeaderType) {
   const router = useRouter();
 
   const handleButtonClick = () => {
@@ -28,26 +29,45 @@ export default function MiniHeader({
   return (
     <>
       <div className="container">
-        <button
-          onClick={handleButtonClick}
-          className={
-            router.pathname === rightURL ? "trueButton" : "falseButton"
-          }
-        >
-          {left}
-        </button>
-        <button
-          onClick={handleButtonClick}
-          className={router.pathname === leftURL ? "trueButton" : "falseButton"}
-        >
-          {right}
-        </button>
+        <div className="header">{text}</div>
+        <div className="miniheader">
+          <button
+            onClick={handleButtonClick}
+            className={
+              router.pathname === rightURL ? "trueButton" : "falseButton"
+            }
+          >
+            {left}
+          </button>
+          <button
+            onClick={handleButtonClick}
+            className={
+              router.pathname === leftURL ? "trueButton" : "falseButton"
+            }
+          >
+            {right}
+          </button>
+        </div>
       </div>
       <style jsx>{`
         .container {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          background-color: ${colors.grayWhite};
+        }
+        .header {
+          margin-left: 20px;
+          padding-top: 27px;
+          font-weight: 700;
+          font-size: 27px;
+        }
+        .miniheader {
           display: flex;
           justify-content: center;
           margin-top: 25px;
+          padding: 0px 20px;
         }
 
         .trueButton {

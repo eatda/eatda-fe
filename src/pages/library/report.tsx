@@ -1,7 +1,6 @@
-import MiniHeader from "../../components/common/MiniHeader";
-import Header from "../../components/common/Header";
+import Header from "../../components/layout/Header";
 import { useSession } from "next-auth/react";
-import colors from "../../../styles";
+import colors from "../../assets/styles";
 import { useEffect, useState } from "react";
 import { Get } from "../../hooks/Fetch";
 import { useSelector } from "react-redux";
@@ -10,6 +9,9 @@ import BestWorstCards from "../../components/library/BestWorstCards";
 import WeeklySummary from "../../components/library/WeeklySummary";
 import { DietType } from "../../interface/diet";
 import Image from "next/image";
+import { illust } from "../../assets/illust";
+import { route } from "../../assets/route";
+import Hr from "../../components/common/Hr";
 
 interface LowHighDataType {
   best: DietType[];
@@ -39,12 +41,12 @@ export default function Report() {
 
   return (
     <>
-      <Header text="서재" />
-      <MiniHeader
+      <Header
+        text="서재"
         left="식후 혈당 기록하기"
         right="주간레포트"
-        leftURL="/library"
-        rightURL="/library/report"
+        leftURL={route.library}
+        rightURL={route.report}
       />
       <div className="container">
         <div className="box">
@@ -54,7 +56,7 @@ export default function Report() {
           </div>
           <WeeklySummary duration={true} />
         </div>
-        <div className="hr" />
+        <Hr />
         <>
           <div className="box">
             <div className="title"> 식후 혈당 낮았던 식단 TOP3</div>
@@ -62,7 +64,7 @@ export default function Report() {
               <BestWorstCards meals={lowHighData.best} />
             ) : (
               <Image
-                src="/img/library/noReport.svg"
+                src={illust.report}
                 width={352}
                 height={150}
                 alt="지난 7일간 3회 이상 식후 혈당을 입력한 경우에만
@@ -76,7 +78,7 @@ export default function Report() {
               <BestWorstCards meals={lowHighData.worst} />
             ) : (
               <Image
-                src="/img/library/noReport.svg"
+                src={illust.report}
                 width={352}
                 height={150}
                 alt="지난 7일간 3회 이상 식후 혈당을 입력한 경우에만
@@ -97,11 +99,6 @@ export default function Report() {
           font-size: 24px;
           font-weight: 700;
           padding: 10px 0px;
-        }
-        .hr {
-          margin: 0px -20px;
-          height: 4px;
-          background-color: ${colors.grayBackground};
         }
         .title {
           font-weight: 700;

@@ -1,5 +1,5 @@
-import Navigation from "../../components/common/Navigation";
-import colors from "../../../styles";
+import Navigation from "../../components/layout/Navigation";
+import colors from "../../assets/styles";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -8,6 +8,7 @@ import { selectToken } from "../../store/tokenSlice";
 import { Get, Post } from "../../hooks/Fetch";
 import FooterButton from "../../components/common/FooterButton";
 import { DietType } from "../../interface/diet";
+import { down, up } from "../../assets/icon";
 
 const offset = new Date().getTimezoneOffset() * 60000;
 const today = new Date(Date.now() - offset);
@@ -104,22 +105,19 @@ export default function Add() {
                   alt="chart"
                   width={16}
                   height={21}
-                  src={`/img/library/arrow.svg`}
+                  src={`/img/chart/arrow.svg`}
                   priority
                 />
-                {/* <div className="bar2"></div>
-                <div className="bar3"></div> */}
               </div>
               <Image
                 alt="chart"
                 width={318}
                 height={61}
-                src={`/img/library/chart_0.svg`}
+                src={`/img/chart/chart_0.svg`}
                 priority
               />
             </div>
           </div>
-          {/* <Image src={pasta} width={320} height={56} alt={"그래프"} priority /> */}
         </div>
         <div className="input-list">
           <div className="item" onClick={() => setMealOpened(!mealOpened)}>
@@ -130,7 +128,7 @@ export default function Add() {
                   alt="character"
                   width={16}
                   height={10}
-                  src={`/img/detail/down.svg`}
+                  src={down}
                   priority
                 />
               ) : (
@@ -138,7 +136,7 @@ export default function Add() {
                   alt="character"
                   width={16}
                   height={10}
-                  src={`/img/detail/up.svg`}
+                  src={up}
                   priority
                 />
               )}

@@ -1,10 +1,13 @@
-import colors from "../../../styles";
+import colors from "../../assets/styles";
 import Image from "next/image";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { selectToken } from "../../store/tokenSlice";
 import { Post, Delete } from "../../hooks/Fetch";
 import { useRouter } from "next/router";
+import { ic_heart, ic_measure, ic_time } from "../../assets/icon";
+import { character_like } from "../../assets/illust";
+import { route } from "../../assets/route";
 
 interface SugarCardProps {
   is_exist?: boolean;
@@ -16,8 +19,15 @@ interface SugarCardProps {
   who_liked?: [] | any;
 }
 
-export default function SugarCard({ is_exist, timeline, value, time, is_me_liked, who_liked }: SugarCardProps) {
-  const [like, setLike] = useState<boolean | undefined>(()=>is_me_liked);
+export default function SugarCard({
+  is_exist,
+  timeline,
+  value,
+  time,
+  is_me_liked,
+  who_liked,
+}: SugarCardProps) {
+  const [like, setLike] = useState<boolean | undefined>(() => is_me_liked);
   const router = useRouter();
   const token = useSelector(selectToken);
   const mealType = () => {
@@ -34,90 +44,104 @@ export default function SugarCard({ is_exist, timeline, value, time, is_me_liked
   };
 
   const handleRouter = () => {
-    router.replace('/library');
-  }
-  
-  const handleClick = (e:React.MouseEvent<HTMLImageElement>) => {
-    async function fetchData(method: String){
+    router.replace(route.library);
+  };
+
+  const handleClick = (e: React.MouseEvent<HTMLImageElement>) => {
+    async function fetchData(method: String) {
       const requestBody = {
-        "target": 1,
-        "timeline": timeline
-      }
-      if(method === 'POST'){
-        const {data, res} : any = await Post({
-          url: 'users/home/like/', 
-          token: token.access_token, 
-          requestBody: requestBody
+        target: 1,
+        timeline: timeline,
+      };
+      if (method === "POST") {
+        const { data, res }: any = await Post({
+          url: "users/home/like/",
+          token: token.access_token,
+          requestBody: requestBody,
         });
-      }else if(method === 'DELETE'){
-        const {data, res} : any = await Delete({
-          url: 'users/home/like/', 
-          token: token.access_token, 
-          requestBody: requestBody
+      } else if (method === "DELETE") {
+        const { data, res }: any = await Delete({
+          url: "users/home/like/",
+          token: token.access_token,
+          requestBody: requestBody,
         });
       }
     }
-    if(like){
-      fetchData('DELETE');
+    if (like) {
+      fetchData("DELETE");
       // console.log('Delete');
-    }else{
-      fetchData('POST');
+    } else {
+      fetchData("POST");
       // console.log('post')
     }
     setLike(!like);
-  }
+  };
 
   return (
     <div className="container">
-    {
-      is_exist ?
+      {is_exist ? (
         <div className="card">
           <div className="textValue">
-          <Image alt="character" width={16} height={16} src={`/img/todayValue.svg`} priority/>
-          &nbsp;
-          {value}mg/dl
+            <Image
+              alt="character"
+              width={16}
+              height={16}
+              src={ic_measure}
+              priority
+            />
+            &nbsp;
+            {value}mg/dl
           </div>
           <div className="textTime">
-          <Image alt="character" width={16} height={16} src={`/img/todayTime.svg`} priority/>
-          &nbsp;
-          {time} 측정
+            <Image
+              alt="character"
+              width={16}
+              height={16}
+              src={ic_time}
+              priority
+            />
+            &nbsp;
+            {time} 측정
           </div>
           <div className="imageStyle">
-          <div className="textType">
-          {mealType()}
-          </div>
-          <div className="like">
-            {
-              who_liked?.map((v:number,i:number)=>{
-                return(
+            <div className="textType">{mealType()}</div>
+            <div className="like">
+              {who_liked?.map((v: number, i: number) => {
+                return (
                   <div key={v}>
-                    <Image alt="character"
-                    width={20} height={20} src={`/character/like_${v}.svg`} priority/>
+                    <Image
+                      alt="character"
+                      width={20}
+                      height={20}
+                      src={character_like[v]}
+                      priority
+                    />
                   </div>
-                )
-              })
-            }
+                );
+              })}
+            </div>
+            <Image
+              onClick={handleClick}
+              alt="character"
+              width={32}
+              height={32}
+              src={like ? ic_heart.fill : ic_heart.empty}
+              priority
+            />
           </div>
-          <Image 
-          onClick={handleClick}
-          alt="character" 
-          width={32} height={32} 
-          src={like? `/button/like_full.svg` : `/button/like_empty.svg`} 
-          priority/>
+        </div>
+      ) : (
+        <div onClick={handleRouter} className="cardEmptyOut">
+          <div className="cardEmptyIn">
+            + <br />
+            혈당 기록하러 가기
           </div>
         </div>
-      :
-      <div onClick={handleRouter} className="cardEmptyOut">
-        <div className="cardEmptyIn">
-          + <br/>
-          혈당 기록하러 가기
-        </div>
-        </div>
-    }
+      )}
       <style jsx>{`
         .container {
-            display: flex;
-            justify-content: center;
+          display: flex;
+          justify-content: center;
         }
         .card {
           width: 350px;
@@ -155,7 +179,7 @@ export default function SugarCard({ is_exist, timeline, value, time, is_me_liked
           flex-direction: column;
         }
 
-        .textTime{
+        .textTime {
           display: flex;
           align-items: center;
           margin-right: auto;
@@ -164,14 +188,14 @@ export default function SugarCard({ is_exist, timeline, value, time, is_me_liked
           color: ${colors.graySubTitle};
           font-size: 14px;
         }
-        .textValue{
+        .textValue {
           display: flex;
           align-items: center;
           margin-right: auto;
           font-size: 24px;
           font-weight: 600;
         }
-        .textType{
+        .textType {
           text-align: center;
           line-height: 24px;
           margin-right: auto;
@@ -203,7 +227,6 @@ export default function SugarCard({ is_exist, timeline, value, time, is_me_liked
           float: right;
           color: ${colors.graySubTitle};
           background: ${colors.grayBackgroundSub};
-          // background-color: rgba( 255, 255, 255, 0.9 );
         }
       `}</style>
     </div>

@@ -1,18 +1,21 @@
 import { useRouter } from "next/router";
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import {
   CTA1Button,
   TextBox2,
   CTA1ButtonSelect,
   CTA1ButtonSelect2,
 } from "../../components/common/Button";
-import Navigation from "../../components/common/Navigation";
+import Navigation from "../../components/layout/Navigation";
 import Image from "next/image";
-import colors from "../../../styles";
+import colors from "../../assets/styles";
 
 import { login } from "../../store/userSlice";
 import { selectUser } from "../../store/userSlice";
 import { useSelector, useDispatch } from "react-redux";
+import { character } from "../../assets/illust";
+import { route } from "../../assets/route";
+import { illust } from "../../assets/illust";
 
 interface formI {
   name: string;
@@ -70,9 +73,7 @@ export default function Signup() {
         usergroup: user.usergroup,
       };
       dispatch(login(reduxData));
-      form.sugar
-        ? router.replace("/signup/survey")
-        : router.replace("/signup/loading");
+      form.sugar ? router.replace(route.survey) : router.replace(route.loading);
     }
   };
 
@@ -135,7 +136,7 @@ export default function Signup() {
               alt="character"
               width={184}
               height={194}
-              src={`/img/signup.svg`}
+              src={illust.signup}
               priority
             />
             <div className="text">
@@ -212,7 +213,7 @@ export default function Signup() {
                     active={form.character === v.id ? true : false}
                     onClick={handleClick}
                     value={v.id}
-                    image={`/character/ch_${v.id}.svg`}
+                    image={character[v.id]}
                   />
                 );
               })}

@@ -2,15 +2,15 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import colors from "../../../styles";
+import colors from "../../assets/styles";
 
 export default function TabBar() {
   const router = useRouter();
   const [currentPath, setCurrentPath] = useState(router.pathname);
 
-  useEffect(()=>{
+  useEffect(() => {
     setCurrentPath(router.pathname);
-  },[router])
+  }, [router]);
 
   const handleRouting = (src: string) => {
     setCurrentPath(`/${src}`);
@@ -44,7 +44,7 @@ export default function TabBar() {
           return (
             <div key={idx} onClick={() => handleRouting(item.src)}>
               <Image
-                src={`/tabbar/${item.src}${isSelected ? "" : "_empty"}.svg`}
+                src={`/img/tabbar/${item.src}${isSelected ? "" : "_empty"}.svg`}
                 alt={item.title}
                 width={30}
                 height={45}

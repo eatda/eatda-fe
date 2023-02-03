@@ -1,9 +1,9 @@
 import { GetServerSideProps } from "next";
-import Image from "next/image";
 import { useRouter } from "next/router";
-import colors from "../../../../styles";
+import colors from "../../../assets/styles";
+import { route } from "../../../assets/route";
 import FooterButton from "../../../components/common/FooterButton";
-import Navigation from "../../../components/common/Navigation";
+import Navigation from "../../../components/layout/Navigation";
 import DetailBox from "../../../components/kitchen/DetailBox";
 import { RecipeDataType } from "../../../interface/recipe";
 
@@ -25,16 +25,9 @@ export default function Detail({ recipeData }: DetailProps) {
       </div>
       <div className="container">
         {recipeData.ingredient.map((item, idx) => (
-          <DetailBox
-            key={idx}
-            idx={idx}
-            icon={"mainside"}
-            type={"ingredient"}
-            content={item}
-          />
+          <DetailBox key={idx} idx={idx} type={"ingredient"} content={item} />
         ))}
         <DetailBox
-          icon={"nutrient"}
           type={"nutrient"}
           content={{
             title: "영양정보",
@@ -47,7 +40,6 @@ export default function Detail({ recipeData }: DetailProps) {
           }}
         />
         <DetailBox
-          icon={"health"}
           type={"tip"}
           content={{
             title: "건강 비결",
@@ -56,7 +48,7 @@ export default function Detail({ recipeData }: DetailProps) {
         />
       </div>
       <FooterButton
-        onClick={() => router.push(`/kitchen/process/${recipeId}`)}
+        onClick={() => router.push(`${route.process}${recipeId}`)}
         text="요리 시작하기"
       />
       <style jsx>{`
@@ -92,7 +84,6 @@ export default function Detail({ recipeData }: DetailProps) {
           display: flex;
           flex-direction: column;
           gap: 12px;
-
         }
         .comment {
           color: ${colors.graySubTitle};

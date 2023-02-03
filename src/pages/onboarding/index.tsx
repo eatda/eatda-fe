@@ -7,6 +7,8 @@ import { selectUser } from "../../store/userSlice";
 import { putToken } from "../../store/tokenSlice";
 import { selectToken } from "../../store/tokenSlice";
 import { useSelector, useDispatch } from "react-redux";
+import { route } from "../../assets/route";
+import { illust } from "../../assets/illust";
 
 export default function SignIn() {
   const router = useRouter();
@@ -57,11 +59,11 @@ export default function SignIn() {
         dispatch(login(reduxData));
         dispatch(putToken({ access_token: res.access_token }));
         console.log("로그인 완료");
-        router.replace("/home", undefined, { shallow: true });
+        router.replace(route.home, undefined, { shallow: true });
       } else {
         console.log(user.usersocial_id);
         console.log("회원가입하기");
-        router.replace("/signup/create-place", undefined, { shallow: true });
+        router.replace(route.createPlace, undefined, { shallow: true });
       }
     }
     if (session.status == "authenticated") {
@@ -92,7 +94,7 @@ export default function SignIn() {
           bottom: 0;
           right: 0;
           left: 0;
-          background-image: url("/img/onboarding.svg");
+          background-image: url(${illust.signin});
           background-size: auto;
           background-position: center;
         }

@@ -1,10 +1,10 @@
 import Image from "next/image";
 import { useState } from "react";
-import colors from "../../../styles";
+import colors from "../../assets/styles";
+import { down, main, nutrient, side, tips, up } from "../../assets/icon";
 
 interface DetailBoxProps {
   idx?: number;
-  icon: string;
   type: "ingredient" | "nutrient" | "tip";
   content: {
     title: string;
@@ -13,39 +13,39 @@ interface DetailBoxProps {
   };
 }
 
-export default function DetailBox({ idx, icon, type, content }: DetailBoxProps) {
+export default function DetailBox({ idx, type, content }: DetailBoxProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <>
       <div className="container">
         <div className="title-box" onClick={() => setIsOpen(!isOpen)}>
-          {/* <Image src={"/icon"} width={12} height={12} alt="" /> */}
           <div className="title">
-            {
-              type === "ingredient" &&
-              <Image alt="character" 
-              width={16} height={16} 
-              src={idx===0 ? `/img/detail/${icon.slice(0,4)}.svg` : `/img/detail/${icon.slice(4)}.svg`} 
-              priority/>
-            }
-            {
-              type !== "ingredient" &&
-              <Image alt="character" 
-              width={16} height={16} 
-              src={`/img/detail/${icon}.svg`} 
-              priority/>
-            }
+            {type === "ingredient" && (
+              <Image
+                alt=""
+                width={16}
+                height={16}
+                src={idx === 0 ? main : side}
+                priority
+              />
+            )}
+            {type === "nutrient" && (
+              <Image alt="" width={16} height={16} src={nutrient} priority />
+            )}
+            {type === "tip" && (
+              <Image alt="" width={16} height={16} src={tips} priority />
+            )}
             &nbsp;
             {content.title} {type === "ingredient" && "재료"}
           </div>
           {type === "ingredient" && <div className="tag">1인분</div>}
-          <div> 
-            {isOpen ? 
-            <Image alt="down" width={16} height={10} src={`/img/detail/down.svg`} priority/> 
-            : 
-            <Image alt="up" width={16} height={10} src={`/img/detail/up.svg`} priority/> 
-            }
+          <div>
+            {isOpen ? (
+              <Image alt="down" width={16} height={10} src={down} priority />
+            ) : (
+              <Image alt="up" width={16} height={10} src={up} priority />
+            )}
           </div>
         </div>
         {isOpen && (
@@ -100,7 +100,7 @@ export default function DetailBox({ idx, icon, type, content }: DetailBoxProps) 
         }
         .title {
           display: flex;
-          align-items:center;
+          align-items: center;
           font-weight: 700;
           font-size: 16px;
         }
@@ -128,12 +128,16 @@ export default function DetailBox({ idx, icon, type, content }: DetailBoxProps) 
           flex-direction: row;
           align-items: center;
           justify-content: space-between;
-          min-height: 38px;
           border-bottom: 1px solid ${colors.grayBackgroundSub};
           font-size: 14px;
+          padding: 11px 0px;
         }
         .name {
+          min-width: 100px;
           color: ${colors.grayMainTitle};
+        }
+        .amount {
+          text-align: right;
         }
 
         .paragraph {

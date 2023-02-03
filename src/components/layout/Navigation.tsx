@@ -1,13 +1,13 @@
 import { useRouter } from "next/router";
 import Image from "next/image";
-import colors from "../../../styles";
+import colors from "../../assets/styles";
+import { back } from "../../assets/icon";
 
 interface NavigationProps {
   text: string;
 }
 export default function Navigation({ text }: NavigationProps) {
   const router = useRouter();
-  const back = "<";
 
   return (
     <>
@@ -17,13 +17,7 @@ export default function Navigation({ text }: NavigationProps) {
         }
       >
         <button onClick={() => router.back()}>
-          <Image
-            alt="back"
-            width={32}
-            height={32}
-            src={`/button/back.svg`}
-            priority
-          />
+          <Image alt="back" width={32} height={32} src={back} priority />
         </button>
         <div className="text">{text}</div>
         <div className="blank"></div>

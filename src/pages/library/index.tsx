@@ -1,6 +1,5 @@
-import MiniHeader from "../../components/common/MiniHeader";
-import Header from "../../components/common/Header";
-import colors from "../../../styles";
+import Header from "../../components/layout/Header";
+import colors from "../../assets/styles";
 import PushPageButton from "../../components/common/PushPageButton";
 import { useEffect, useState } from "react";
 import { Get } from "../../hooks/Fetch";
@@ -8,6 +7,9 @@ import { useSelector } from "react-redux";
 import { selectToken } from "../../store/tokenSlice";
 import { selectUser } from "../../store/userSlice";
 import { SugarRecordType } from "../../interface/sugarRecord";
+import { btn_add, ic_measure, ic_time } from "../../assets/icon";
+import Image from "next/image";
+import Hr from "../../components/common/Hr";
 
 interface RecordDataType {
   date: string;
@@ -36,19 +38,15 @@ export default function Library() {
 
   return (
     <>
-      <Header text="서재" />
-      <MiniHeader
+      <Header
+        text="서재"
         left="식후 혈당 기록하기"
         right="주간레포트"
         leftURL="/library"
         rightURL="/library/report"
       />
       {user.isDiabetes && (
-        <PushPageButton
-          name="필터"
-          src="/img/library/add.svg"
-          page="/library/add"
-        />
+        <PushPageButton name="필터" src={btn_add} page="/library/add" />
       )}
       <div className="container">
         {recordData.length === 0 && (
@@ -69,13 +67,21 @@ export default function Library() {
                     {data.timeline === 2 && "저녁"}
                   </div>
                   <div className="content">
-                    <div className="level">{data.level} mg/dl</div>
-                    <div className="time">{data.time} 측정</div>
+                    <div className="level">
+                      <Image src={ic_measure} alt="" width={16} height={16} />
+                      &nbsp;
+                      {data.level} mg/dl
+                    </div>
+                    <div className="time">
+                      <Image src={ic_time} alt="" width={16} height={16} />
+                      &nbsp;
+                      {data.time} 측정
+                    </div>
                   </div>
                 </div>
               ))}
             </div>
-            <hr />
+            <Hr />
           </div>
         ))}
       </div>
@@ -127,11 +133,6 @@ export default function Library() {
         .time {
           color: ${colors.graySubTitle2};
           font-size: 14px;
-        }
-        hr {
-          border: 0;
-          border-top: 1px solid ${colors.blackSub};
-          margin-bottom: 24px;
         }
       `}</style>
     </>

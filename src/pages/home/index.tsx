@@ -8,10 +8,14 @@ import { useSelector } from "react-redux";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import WeeklySummary from "../../components/library/WeeklySummary";
-import colors from "../../../styles";
+import colors from "../../assets/styles";
 import { DietType } from "../../interface/diet";
 import { SugarRecordType } from "../../interface/sugarRecord";
 import HomeSlider from "../../components/home/HomeSlider";
+import { character_like } from "../../assets/illust";
+import { logo } from "../../assets/illust";
+import { route } from "../../assets/route";
+import Hr from "../../components/common/Hr";
 
 interface dietI {
   diet:
@@ -100,26 +104,20 @@ export default function Home() {
   }, []);
 
   const handleClick = () => {
-    router.push("/home/mypage");
+    router.push(route.mypage);
   };
 
   return (
     <>
       <div className="container">
         <div className="header">
-          <Image
-            alt="logo"
-            width={126}
-            height={32}
-            src={`/img/logo.svg`}
-            priority
-          />
+          <Image alt="logo" width={126} height={32} src={logo} priority />
           <button onClick={handleClick}>
             <Image
               alt="character"
               width={32}
               height={32}
-              src={`/character/like_${user.usercharacter}.svg`}
+              src={character_like[user.usercharacter]}
               priority
             />
           </button>
@@ -146,7 +144,7 @@ export default function Home() {
               )}
             </HomeSlider>
           )}
-          <div className="hr" />
+          <Hr />
         </div>
         <div className="box">
           <div className="title">오늘의 식후 혈당</div>
@@ -169,7 +167,7 @@ export default function Home() {
               )}
             </HomeSlider>
           )}
-          <div className="hr" />
+          <Hr />
         </div>
         <div className="box">
           <WeeklySummary />
@@ -177,10 +175,16 @@ export default function Home() {
       </div>
       <style jsx>{`
         .header {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          z-index: 1;
+          background-color: ${colors.grayWhite};
           display: flex;
           flex-direction: row;
           justify-content: space-between;
-          padding: 15px 0px;
+          padding: 25px 20px;
           margin-bottom: 10px;
         }
         .container {
@@ -196,11 +200,6 @@ export default function Home() {
         button {
           border: none;
           background: none;
-        }
-        .hr {
-          margin: 8px -20px 16px -20px;
-          height: 4px;
-          background-color: ${colors.grayBackground};
         }
       `}</style>
     </>

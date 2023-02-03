@@ -3,9 +3,10 @@ import { SessionProvider } from "next-auth/react";
 import Layout from "../components/layout/Layout";
 import { Provider } from "react-redux";
 import store from "../store/store";
-import {persistor} from '../store/store';
+import { persistor } from "../store/store";
 import { PersistGate } from "redux-persist/integration/react";
 import "../../globals.css";
+import "../../public/style.css";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -22,10 +23,8 @@ export default function App({ Component, pageProps }: AppProps) {
       <style jsx global>
         {`
           body {
-            // height: 100vh;
             display: flex;
             justify-content: center;
-            // align-items: center;
           }
         `}
       </style>

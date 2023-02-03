@@ -1,4 +1,4 @@
-import Router, { useRouter } from "next/router";
+import { useRouter } from "next/router";
 import React, { useState, useCallback } from "react";
 import {
   CTA1Button,
@@ -7,14 +7,16 @@ import {
   RadioBox,
   CheckBox,
 } from "../../components/common/Button";
-import Navigation from "../../components/common/Navigation";
-import colors from "../../../styles";
+import Navigation from "../../components/layout/Navigation";
+import colors from "../../assets/styles";
 import Image from "next/image";
 
 import { putSurvey } from "../../store/surveySlice";
 import { selectSurvey } from "../../store/surveySlice";
 import { selectUser } from "../../store/userSlice";
 import { useSelector, useDispatch } from "react-redux";
+import { route } from "../../assets/route";
+import { illust } from "../../assets/illust";
 
 const activityData = [
   {
@@ -115,7 +117,7 @@ export default function Survey({ allergyResponse }: surveyI) {
         allergy: allergyQuery,
       };
       dispatch(putSurvey(reduxData));
-      router.replace("/signup/loading");
+      router.replace(route.loading);
     }
   };
 
@@ -230,7 +232,6 @@ export default function Survey({ allergyResponse }: surveyI) {
               .textMain {
                 display: flex;
                 margin-right: auto;
-                // margin-left: 20px;
                 font-size: 24px;
                 font-weight: 600;
               }
@@ -271,7 +272,6 @@ export default function Survey({ allergyResponse }: surveyI) {
               .textMain {
                 display: flex;
                 margin-right: auto;
-                // margin-left: 20px;
                 font-size: 24px;
                 font-weight: 600;
               }
@@ -310,7 +310,6 @@ export default function Survey({ allergyResponse }: surveyI) {
               .textMain {
                 display: flex;
                 margin-right: auto;
-                // margin-left: 20px;
                 font-size: 24px;
                 font-weight: 600;
               }
@@ -356,7 +355,6 @@ export default function Survey({ allergyResponse }: surveyI) {
               .textMain {
                 display: flex;
                 margin-right: auto;
-                // margin-left: 20px;
                 font-size: 24px;
                 font-weight: 600;
               }
@@ -379,7 +377,7 @@ export default function Survey({ allergyResponse }: surveyI) {
               alt="character"
               width={184}
               height={194}
-              src={`/img/signup.svg`}
+              src={illust.signup}
               priority
             />
             <div className="bar" />
@@ -444,7 +442,6 @@ export default function Survey({ allergyResponse }: surveyI) {
               .textMain {
                 display: flex;
                 margin-right: auto;
-                // margin-left: 20px;
                 font-size: 24px;
                 font-weight: 600;
               }
@@ -455,7 +452,6 @@ export default function Survey({ allergyResponse }: surveyI) {
                 font-size: 14px;
                 color: ${colors.graySubTitle};
                 margin-right: auto;
-                // margin-left: 20px;
                 margin-bottom: 55px;
               }
               .bar {
@@ -511,7 +507,6 @@ export default function Survey({ allergyResponse }: surveyI) {
               .textMain {
                 display: flex;
                 margin-right: auto;
-                // margin-left: 20px;
                 font-size: 24px;
                 font-weight: 600;
               }
@@ -522,7 +517,6 @@ export default function Survey({ allergyResponse }: surveyI) {
                 font-size: 14px;
                 color: ${colors.graySubTitle};
                 margin-right: auto;
-                // margin-left: 20px;
                 margin-bottom: 55px;
               }
               .bar {
@@ -560,7 +554,6 @@ export default function Survey({ allergyResponse }: surveyI) {
       </div>
       <style jsx>{`
         .container {
-          // padding-top: 10px;
         }
         .buttonItem {
           display: flex;

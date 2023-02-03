@@ -1,13 +1,15 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { CTA1ButtonSmall, CTA1Button } from "../../components/common/Button";
-import Navigation from "../../components/common/Navigation";
-import colors from "../../../styles";
+import Navigation from "../../components/layout/Navigation";
+import colors from "../../assets/styles";
 import Image from "next/image";
 import { login } from "../../store/userSlice";
 import { selectUser } from "../../store/userSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { copyCode } from "../../hooks/CopyClipBoard";
+import { copy, create } from "../../assets/icon";
+import { route } from "../../assets/route";
 
 export default function CreatePlace() {
   const router = useRouter();
@@ -23,10 +25,10 @@ export default function CreatePlace() {
         setPage((prevNumber) => prevNumber + 1);
         break;
       case "false":
-        router.push("/signup/enter-place");
+        router.push(route.enterPlace);
         break;
       case "enter":
-        router.push("/signup");
+        router.push(route.signup);
         break;
       default:
         break;
@@ -99,7 +101,7 @@ export default function CreatePlace() {
                   alt="place"
                   width={16}
                   height={16}
-                  src={`/img/createPlace.svg`}
+                  src={create}
                   priority
                 />
                 초대 코드를 복사하여 가족에게 공유하세요!
@@ -111,7 +113,7 @@ export default function CreatePlace() {
                 alt="copy"
                 width={24}
                 height={24}
-                src={`/button/copy.svg`}
+                src={copy.white}
                 priority
               />
               &nbsp; 링크 복사하기

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { useState } from "react";
-import colors from "../../../styles";
+import colors from "../../assets/styles";
 import { FilterType } from "../../pages/kitchen/filter";
 
 interface FilterButtonProps {
@@ -26,9 +26,16 @@ export default function FilterButton({
           className={selected ? "selected" : "not-selected"}
         >
           <div className="icon">
-            <Image src={selected ? filter.image_selected : filter.image} alt={"icon"} width={48} height={48} />
+            <Image
+              src={selected ? filter.image_selected : filter.image}
+              alt={"icon"}
+              width={48}
+              height={48}
+            />
           </div>
-          <div className={ selected ? "nameTrue" : "nameFalse"}>{filter.name}</div>
+          <div className={selected ? "nameTrue" : "nameFalse"}>
+            {filter.name}
+          </div>
         </div>
       </div>
       <style jsx>{`
@@ -38,7 +45,6 @@ export default function FilterButton({
           align-items: center;
           width: 48px;
           height: 80px;
-          margin: 15px;
           text-align: center;
         }
         .nameTrue {

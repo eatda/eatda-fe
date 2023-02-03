@@ -1,12 +1,12 @@
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import colors from "../../../styles";
-import { heart_full } from "../../assets/imagePath";
-import { heart_empty } from "../../assets/imagePath";
-import { ch_0, ch_1, ch_2, ch_3, ch_4, ch_5 } from "../../assets/imagePath";
+import { useState } from "react";
+import colors from "../../assets/styles";
 import Image from "next/image";
 import { selectToken } from "../../store/tokenSlice";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { character_like } from "../../assets/illust";
+import { ic_heart } from "../../assets/icon";
+import { route } from "../../assets/route";
 
 interface RecipeCardType {
   id: number;
@@ -81,7 +81,7 @@ export default function RecipeCard({
       }
       setLike(!like);
     } else {
-      router.push(`/kitchen/detail/${id}`);
+      router.push(`${route.detail}${id}`);
     }
   };
 
@@ -105,7 +105,7 @@ export default function RecipeCard({
       <div className="container">
         <div onClick={handleClick} className="itemImg">
           <button className="buttonImg" value="like">
-            <img src={like ? heart_full : heart_empty} alt="like" />
+            <img src={like ? ic_heart.fill : ic_heart.empty} alt="like" />
           </button>
           <div className="like">
             {who_liked?.map((v: number, i: number) => {
@@ -115,7 +115,7 @@ export default function RecipeCard({
                     alt="character"
                     width={20}
                     height={20}
-                    src={`/character/like_${v}.svg`}
+                    src={character_like[v]}
                     priority
                   />
                 </div>
@@ -134,8 +134,7 @@ export default function RecipeCard({
           background: ${colors.grayWhite};
           height: 196px;
           width: 47.5%;
-          min-width: ${type === 'pick' ? "165px" : ""};
-          // max-width: 170px;
+          min-width: ${type === "pick" ? "165px" : ""};
           border-radius: 4px;
           border: solid ${colors.grayBackgroundSub} 1px;
         }
