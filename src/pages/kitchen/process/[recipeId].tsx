@@ -12,35 +12,33 @@ import { useRouter } from "next/router";
 import { Post } from "../../../hooks/Fetch";
 import FooterButton from "../../../components/common/FooterButton";
 import Image from "next/image";
-
-const image = {
-  complete_meal: "/process/complete_meal.svg",
-  when_eat: "/process/when_eat.svg",
-  breakfast_black: "/process/breakfast_black.svg",
-  breakfast_white: "/process/breakfast_white.svg",
-  lunch_white: "/process/lunch_white.svg",
-  lunch_black: "/process/lunch_black.svg",
-  dinner_white: "/process/dinner_white.svg",
-  dinner_black: "/process/dinner_black.svg",
-};
+import {
+  breakfast,
+  dinner,
+  lunch,
+  main,
+  side,
+  when_eat,
+} from "../../../assets/icon";
+import { illust } from "../../../assets/illust";
 
 const mealButtonData = [
   {
     timelinine: 0,
-    icon: image.breakfast_black,
-    selected: image.breakfast_white,
+    icon: breakfast.black,
+    selected: breakfast.white,
     text: "아침",
   },
   {
     timelinine: 1,
-    icon: image.lunch_black,
-    selected: image.lunch_white,
+    icon: lunch.black,
+    selected: lunch.white,
     text: "점심",
   },
   {
     timelinine: 2,
-    icon: image.dinner_black,
-    selected: image.dinner_white,
+    icon: dinner.black,
+    selected: dinner.white,
     text: "저녁",
   },
 ];
@@ -104,7 +102,7 @@ export default function Process({ recipeData }: ProcessProps) {
                   alt="character"
                   width={24}
                   height={24}
-                  src={`/img/process/main.svg`}
+                  src={main}
                   priority
                 />
               ) : (
@@ -112,7 +110,7 @@ export default function Process({ recipeData }: ProcessProps) {
                   alt="character"
                   width={24}
                   height={24}
-                  src={`/img/process/side.svg`}
+                  src={side}
                   priority
                 />
               )}
@@ -132,15 +130,15 @@ export default function Process({ recipeData }: ProcessProps) {
         <div className="finish-box">
           <div className="image-box">
             <Image
-              src={image.complete_meal}
+              src={illust.complete}
               width="233"
               height="131"
               alt="조리완료"
             />
           </div>
           <div className="select-meal">
-            <Image src={image.when_eat} width={16} height={16} alt={""} />
-            언제 식사 하시나요?
+            <Image src={when_eat} width={16} height={16} alt={""} /> &nbsp; 언제
+            식사 하시나요?
             <div className="meal-list">
               {mealButtonData.map((meal) => (
                 <div
