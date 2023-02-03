@@ -105,22 +105,19 @@ export default function Add() {
                   alt="chart"
                   width={16}
                   height={21}
-                  src={`/img/library/arrow.svg`}
+                  src={`/img/chart/arrow.svg`}
                   priority
                 />
-                {/* <div className="bar2"></div>
-                <div className="bar3"></div> */}
               </div>
               <Image
                 alt="chart"
                 width={318}
                 height={61}
-                src={`/img/library/chart_0.svg`}
+                src={`/img/chart/chart_0.svg`}
                 priority
               />
             </div>
           </div>
-          {/* <Image src={pasta} width={320} height={56} alt={"그래프"} priority /> */}
         </div>
         <div className="input-list">
           <div className="item" onClick={() => setMealOpened(!mealOpened)}>

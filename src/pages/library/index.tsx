@@ -8,7 +8,8 @@ import { useSelector } from "react-redux";
 import { selectToken } from "../../store/tokenSlice";
 import { selectUser } from "../../store/userSlice";
 import { SugarRecordType } from "../../interface/sugarRecord";
-import { btn_add } from "../../assets/icon";
+import { btn_add, ic_measure, ic_time } from "../../assets/icon";
+import Image from "next/image";
 
 interface RecordDataType {
   date: string;
@@ -66,8 +67,16 @@ export default function Library() {
                     {data.timeline === 2 && "저녁"}
                   </div>
                   <div className="content">
-                    <div className="level">{data.level} mg/dl</div>
-                    <div className="time">{data.time} 측정</div>
+                    <div className="level">
+                      <Image src={ic_measure} alt="" width={16} height={16} />
+                      &nbsp;
+                      {data.level} mg/dl
+                    </div>
+                    <div className="time">
+                      <Image src={ic_time} alt="" width={16} height={16} />
+                      &nbsp;
+                      {data.time} 측정
+                    </div>
                   </div>
                 </div>
               ))}
