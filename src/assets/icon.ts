@@ -17,3 +17,10 @@ export const main = "/img/icon/fish-food.svg";
 export const side = "/img/icon/food.svg";
 export const nutrient = "/img/icon/info-circle.svg";
 export const tips = "/img/icon/tips.svg";
+
+// 회원가입 
+export const splash = "/img/illust/onboarding_splash.svg";
+export const signin = "/img/illust/onboarding_signin.svg";
+export const signup = "/img/illust/onboarding_signup.svg";
+export const enter = "/img/icon/check-circle.svg";
+export const create = "/img/icon/alert-circle.svg";

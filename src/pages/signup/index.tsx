@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import {
   CTA1Button,
   TextBox2,
@@ -13,6 +13,8 @@ import colors from "../../../styles";
 import { login } from "../../store/userSlice";
 import { selectUser } from "../../store/userSlice";
 import { useSelector, useDispatch } from "react-redux";
+import { signup } from "../../assets/icon";
+import { character } from "../../assets/character";
 
 interface formI {
   name: string;
@@ -135,7 +137,7 @@ export default function Signup() {
               alt="character"
               width={184}
               height={194}
-              src={`/img/signup.svg`}
+              src={signup}
               priority
             />
             <div className="text">
@@ -212,7 +214,7 @@ export default function Signup() {
                     active={form.character === v.id ? true : false}
                     onClick={handleClick}
                     value={v.id}
-                    image={`/character/ch_${v.id}.svg`}
+                    image={character[v.id]}
                   />
                 );
               })}

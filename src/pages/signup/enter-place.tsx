@@ -5,11 +5,7 @@ import { login } from "../../store/userSlice";
 import { selectUser } from "../../store/userSlice";
 import { useSelector, useDispatch } from "react-redux";
 import Image from "next/image";
-
-interface testI {
-  data: unknown;
-  res: unknown;
-}
+import { enter } from "../../assets/icon";
 
 type JSONValue = string | number | boolean | Response | JSONObject | JSONArray;
 
@@ -131,13 +127,7 @@ export default function EnterPlace() {
         })}
       </div>
       <div className="codeText">
-        <Image
-          alt="enter"
-          width={16}
-          height={16}
-          src={`/img/enterPlace.svg`}
-          priority
-        />
+        <Image alt="enter" width={16} height={16} src={enter} priority />
         초대코드는 &nbsp;
         <div className="codeOrange">먼저 가입한 가족 구성원</div>
         에게 문의하세요.
@@ -178,7 +168,6 @@ export default function EnterPlace() {
         }
 
         input {
-          // max-width: 43px;
           width: 12%;
           height: 72px;
           font-weight: 700;

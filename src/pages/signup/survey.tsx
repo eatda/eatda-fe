@@ -1,4 +1,4 @@
-import Router, { useRouter } from "next/router";
+import { useRouter } from "next/router";
 import React, { useState, useCallback } from "react";
 import {
   CTA1Button,
@@ -15,6 +15,7 @@ import { putSurvey } from "../../store/surveySlice";
 import { selectSurvey } from "../../store/surveySlice";
 import { selectUser } from "../../store/userSlice";
 import { useSelector, useDispatch } from "react-redux";
+import { signup } from "../../assets/icon";
 
 const activityData = [
   {
@@ -230,7 +231,6 @@ export default function Survey({ allergyResponse }: surveyI) {
               .textMain {
                 display: flex;
                 margin-right: auto;
-                // margin-left: 20px;
                 font-size: 24px;
                 font-weight: 600;
               }
@@ -271,7 +271,6 @@ export default function Survey({ allergyResponse }: surveyI) {
               .textMain {
                 display: flex;
                 margin-right: auto;
-                // margin-left: 20px;
                 font-size: 24px;
                 font-weight: 600;
               }
@@ -310,7 +309,6 @@ export default function Survey({ allergyResponse }: surveyI) {
               .textMain {
                 display: flex;
                 margin-right: auto;
-                // margin-left: 20px;
                 font-size: 24px;
                 font-weight: 600;
               }
@@ -356,7 +354,6 @@ export default function Survey({ allergyResponse }: surveyI) {
               .textMain {
                 display: flex;
                 margin-right: auto;
-                // margin-left: 20px;
                 font-size: 24px;
                 font-weight: 600;
               }
@@ -379,7 +376,7 @@ export default function Survey({ allergyResponse }: surveyI) {
               alt="character"
               width={184}
               height={194}
-              src={`/img/signup.svg`}
+              src={signup}
               priority
             />
             <div className="bar" />
@@ -444,7 +441,6 @@ export default function Survey({ allergyResponse }: surveyI) {
               .textMain {
                 display: flex;
                 margin-right: auto;
-                // margin-left: 20px;
                 font-size: 24px;
                 font-weight: 600;
               }
@@ -455,7 +451,6 @@ export default function Survey({ allergyResponse }: surveyI) {
                 font-size: 14px;
                 color: ${colors.graySubTitle};
                 margin-right: auto;
-                // margin-left: 20px;
                 margin-bottom: 55px;
               }
               .bar {
@@ -511,7 +506,6 @@ export default function Survey({ allergyResponse }: surveyI) {
               .textMain {
                 display: flex;
                 margin-right: auto;
-                // margin-left: 20px;
                 font-size: 24px;
                 font-weight: 600;
               }
@@ -522,7 +516,6 @@ export default function Survey({ allergyResponse }: surveyI) {
                 font-size: 14px;
                 color: ${colors.graySubTitle};
                 margin-right: auto;
-                // margin-left: 20px;
                 margin-bottom: 55px;
               }
               .bar {
@@ -560,7 +553,6 @@ export default function Survey({ allergyResponse }: surveyI) {
       </div>
       <style jsx>{`
         .container {
-          // padding-top: 10px;
         }
         .buttonItem {
           display: flex;
