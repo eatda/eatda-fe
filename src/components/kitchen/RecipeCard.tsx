@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import { character_like } from "../../assets/illust";
 import { ic_heart } from "../../assets/icon";
 import { route } from "../../assets/route";
+import { selectUser } from "../../store/userSlice";
 
 interface RecipeCardType {
   id: number;
@@ -33,6 +34,7 @@ export default function RecipeCard({
 }: RecipeCardType) {
   const router = useRouter();
   const token = useSelector(selectToken);
+  const user = useSelector(selectUser);
   const marginBottom =
     popular === true && router.pathname === "/kitchen/ourpick" ? "9px" : "9px";
   const display =
@@ -40,6 +42,8 @@ export default function RecipeCard({
       ? "flex"
       : "none";
   const [like, setLike] = useState<boolean | undefined>(() => is_me_liked);
+  const [whoList, setWhoList] = useState(()=>who_liked);
+  console.log('?:',whoList);
 
   // console.log(id,type, name, image, comment, title, is_me_liked, who_liked, like)
 
@@ -76,8 +80,15 @@ export default function RecipeCard({
       if (like) {
         // like 삭제
         fetchData("DELETE");
+        if(who_liked !== undefined){
+          const newWhoList = whoList.filter((val : number) => val !== user.usercharacter);
+          setWhoList(newWhoList);
+        }
       } else {
         fetchData("POST");
+        if(who_liked !== undefined){
+          setWhoList([user.usercharacter, ...whoList]);
+        }
       }
       setLike(!like);
     } else {
@@ -108,7 +119,7 @@ export default function RecipeCard({
             <img src={like ? ic_heart.fill : ic_heart.empty} alt="like" />
           </button>
           <div className="like">
-            {who_liked?.map((v: number, i: number) => {
+            {whoList?.map((v: number, i: number) => {
               return (
                 <div key={v}>
                   <Image
@@ -167,7 +178,7 @@ export default function RecipeCard({
           flex-direction: row-reverse;
           align-items: center;
           justify-content: center;
-          width: ${who_liked?.length * 20 + 16}px;
+          width: ${whoList?.length * 20 + 16}px;
           height: 32px;
           line-height: 13px;
           border-radius: 15px;

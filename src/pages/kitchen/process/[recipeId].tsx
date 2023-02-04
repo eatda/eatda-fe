@@ -211,13 +211,14 @@ export default function Process({ recipeData }: ProcessProps) {
           margin-top: 10px;
         }
         .meal-button {
+          width: 32%;
           display: flex;
           justify-content: center;
           align-items: center;
           border: 1px solid ${colors.blackSub};
           background-color: ${colors.grayWhite};
           border-radius: 21px;
-          min-width: 100px;
+          // min-width: 100px;
           height: 42px;
           gap: 5px;
         }

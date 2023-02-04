@@ -121,6 +121,9 @@ export default function OurPick() {
         })}
       </div>
       <style jsx>{`
+        .container {
+          margin-bottom: 15px;
+        }
         .emptyBox {
           display: flex;
           flex-direction: column;

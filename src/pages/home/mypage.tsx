@@ -68,7 +68,7 @@ export default function MyPage() {
       <Navigation text="마이페이지" />
       <div className="container">
         <div className="profile">
-          {myData?.character && (
+          {myData?.character !== undefined && (
             <div className="image">
               <Image
                 alt="character"

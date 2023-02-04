@@ -3,7 +3,9 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 
 import { login } from "../../store/userSlice";
+import { checkTeamDia } from "../../store/teamSlice";
 import { selectUser } from "../../store/userSlice";
+import { selectTeam } from "../../store/teamSlice";
 import { putToken } from "../../store/tokenSlice";
 import { selectToken } from "../../store/tokenSlice";
 import { useSelector, useDispatch } from "react-redux";
@@ -60,11 +62,22 @@ export default function SignIn() {
         dispatch(putToken({ access_token: res.access_token }));
         console.log("로그인 완료");
         router.replace(route.home, undefined, { shallow: true });
-      } else {
+      } 
+      else {
         console.log(user.usersocial_id);
         console.log("회원가입하기");
         router.replace(route.createPlace, undefined, { shallow: true });
       }
+      
+      // api 변경 후
+      // else if(data.status === 404) {
+      //   console.log(user.usersocial_id);
+      //   console.log("회원가입하기");
+      //   router.replace(route.createPlace, undefined, { shallow: true });
+      // } else {
+      //   console.log('로그인 다시 시도');
+      //   router.replace(route.onboarding, undefined, { shallow: true });
+      // }
     }
     if (session.status == "authenticated") {
       const reduxData = {
