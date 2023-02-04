@@ -4,6 +4,7 @@ import { CTA1ButtonSmall, CTA1Button } from "../../components/common/Button";
 import Navigation from "../../components/layout/Navigation";
 import colors from "../../assets/styles";
 import Image from "next/image";
+import { checkTeamDia } from "../../store/teamSlice";
 import { login } from "../../store/userSlice";
 import { selectUser } from "../../store/userSlice";
 import { useSelector, useDispatch } from "react-redux";
@@ -23,6 +24,7 @@ export default function CreatePlace() {
     switch (e.currentTarget.value) {
       case "true":
         setPage((prevNumber) => prevNumber + 1);
+        dispatch(checkTeamDia({teamDiabetes : false}));
         break;
       case "false":
         router.push(route.enterPlace);

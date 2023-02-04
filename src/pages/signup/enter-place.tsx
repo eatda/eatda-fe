@@ -2,7 +2,9 @@ import { useRouter } from "next/router";
 import React, { useEffect, useRef, useState } from "react";
 import colors from "../../assets/styles";
 import { login } from "../../store/userSlice";
+import { checkTeamDia } from "../../store/teamSlice";
 import { selectUser } from "../../store/userSlice";
+import { selectTeam } from "../../store/teamSlice";
 import { useSelector, useDispatch } from "react-redux";
 import Image from "next/image";
 import { enter } from "../../assets/icon";
@@ -20,6 +22,7 @@ export default function EnterPlace() {
   const router = useRouter();
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
+  const team = useSelector(selectTeam);
   const codeLength = 6;
   const inputRef = useRef<null[] | HTMLDivElement[]>([]);
   const idxArray = Array.from({ length: codeLength }, (v, i) => i);
@@ -70,6 +73,7 @@ export default function EnterPlace() {
           usergroup: code.join(""),
         };
         dispatch(login(reduxData));
+        dispatch(checkTeamDia({teamDiabetes : res.is_diabetes}));
         router.replace(route.signup);
       } else {
         alert(res.error);

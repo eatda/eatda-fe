@@ -3,7 +3,9 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 
 import { login } from "../../store/userSlice";
+import { checkTeamDia } from "../../store/teamSlice";
 import { selectUser } from "../../store/userSlice";
+import { selectTeam } from "../../store/teamSlice";
 import { putToken } from "../../store/tokenSlice";
 import { selectToken } from "../../store/tokenSlice";
 import { useSelector, useDispatch } from "react-redux";

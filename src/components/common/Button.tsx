@@ -127,6 +127,36 @@ export function CTA1ButtonSelect({
   );
 }
 
+export function CTA1ButtonNoneSelect({
+  onClick,
+  text,
+  active,
+  value,
+  image,
+}: CTA1ButtonSelectI) {
+  return (
+    <>
+      <button onClick={onClick} value={value}>
+        {text}
+        {image ? (
+          <Image src={image} alt="ch" width={30} height={30} priority />
+        ) : null}
+      </button>
+      <style jsx>{`
+        button {
+          ${CTA1Source}
+          font-size: 20px;
+          font-weight: 600;
+          width: 350px;
+          background: ${active ? colors.mainOrange : "#E6E6E6"};
+          border: 1px solid ${active ? "none" : colors.grayBackgroundSub};
+          color: ${colors.grayWhite};
+        }
+      `}</style>
+    </>
+  );
+}
+
 export function CTA1ButtonSelect2({
   onClick,
   text,
@@ -345,6 +375,7 @@ export default {
   CTA1ButtonSmall,
   CTA2Button,
   CTA1ButtonSelect,
+  CTA1ButtonNoneSelect,
   CTA1ButtonSelect2,
   TextBox2,
   RadioBox,

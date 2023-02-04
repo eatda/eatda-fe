@@ -5,6 +5,7 @@ import {
   TextBox2,
   CTA1ButtonSelect,
   CTA1ButtonSelect2,
+  CTA1ButtonNoneSelect
 } from "../../components/common/Button";
 import Navigation from "../../components/layout/Navigation";
 import Image from "next/image";
@@ -12,6 +13,7 @@ import colors from "../../assets/styles";
 
 import { login } from "../../store/userSlice";
 import { selectUser } from "../../store/userSlice";
+import { selectTeam } from "../../store/teamSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { character } from "../../assets/illust";
 import { route } from "../../assets/route";
@@ -32,6 +34,7 @@ export default function Signup() {
   const router = useRouter();
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
+  const teamDia = useSelector(selectTeam);
   const [characterData, setCharacterData] = useState<characterI[]>();
   const [page, setPage] = useState(0);
 
@@ -69,11 +72,15 @@ export default function Signup() {
         useremail: user.useremail,
         username: form.name,
         usercharacter: form.character,
-        isDiabetes: form.sugar,
+        isDiabetes: teamDia.teamDiabetes ? false : form.sugar,
         usergroup: user.usergroup,
       };
       dispatch(login(reduxData));
-      form.sugar ? router.replace(route.survey) : router.replace(route.loading);
+      if(teamDia.teamDiabetes){
+        router.replace(route.loading);
+      }else{
+        form.sugar ? router.replace(route.survey) : router.replace(route.loading);
+      }
     }
   };
 
@@ -250,6 +257,23 @@ export default function Signup() {
             </div>
             <div className="textSub">기본 설문 조사가 이루어집니다.</div>
             <div className="bar" />
+            {teamDia.teamDiabetes ? 
+            <>
+            <CTA1ButtonNoneSelect
+              active={false}
+              value="true"
+              text="네, 당뇨인이에요"
+            />
+            <div className="bar2" />
+            <CTA1ButtonSelect
+              active={form.sugar === null ? false : !form.sugar}
+              value="false"
+              text="아니요, 당뇨인 가족이에요"
+              onClick={handleClick}
+            />
+            </>
+            :
+            <>
             <CTA1ButtonSelect
               active={form.sugar === null ? false : form.sugar}
               value="true"
@@ -263,6 +287,8 @@ export default function Signup() {
               text="아니요, 당뇨인 가족이에요"
               onClick={handleClick}
             />
+            </>
+            }
             <style jsx>{`
               .item {
                 display: flex;
