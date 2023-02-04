@@ -59,7 +59,7 @@ export default function CreatePlace() {
 
   return (
     <>
-      <Navigation text="가족 공간 생성" />
+      {page === 0 && <Navigation text="가족 공간 생성" />}
       <div className="container">
         {page === 0 ? (
           <>
@@ -173,7 +173,7 @@ export default function CreatePlace() {
         }
         .textMain {
           margin-right: auto;
-          margin-left: 20px;
+          // margin-left: 20px;
           display: flex;
           flex-direction: row;
           font-size: 24px;

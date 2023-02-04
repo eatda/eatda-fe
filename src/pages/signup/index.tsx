@@ -186,7 +186,7 @@ export default function Signup() {
             <br />
             <style jsx>{`
               .item {
-                margin-left: 20px;
+                // margin-left: 20px;
               }
               .textMain {
                 font-size: 24px;
@@ -235,7 +235,7 @@ export default function Signup() {
               .textMain {
                 margin-bottom: 50px;
                 margin-right: auto;
-                margin-left: 20px;
+                // margin-left: 20px;
                 font-size: 24px;
                 font-weight: 700;
               }
@@ -297,7 +297,7 @@ export default function Signup() {
               }
               .textMain {
                 margin-right: auto;
-                margin-left: 20px;
+                // margin-left: 20px;
                 font-size: 24px;
                 font-weight: 700;
               }
@@ -307,7 +307,7 @@ export default function Signup() {
               .textSub {
                 display: flex;
                 margin-right: auto;
-                margin-left: 20px;
+                // margin-left: 20px;
                 font-size: 14px;
                 color: ${colors.graySubTitle};
               }
