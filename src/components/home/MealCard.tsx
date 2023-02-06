@@ -3,10 +3,11 @@ import { useState } from "react";
 import colors from "../../assets/styles";
 import { Post, Delete } from "../../hooks/Fetch";
 import { selectToken } from "../../store/tokenSlice";
+import { selectUser } from "../../store/userSlice";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import { character_like } from "../../assets/illust";
-import { ic_heart } from "../../assets/icon";
+import { ic_heart, ic_like } from "../../assets/icon";
 import { route } from "../../assets/route";
 
 interface MealCardProps {
@@ -30,8 +31,10 @@ export default function MealCard({
   who_liked,
 }: MealCardProps) {
   const [like, setLike] = useState<boolean | undefined>(() => is_me_liked);
+  const [whoList, setWhoList] = useState(()=>who_liked);
   const router = useRouter();
   const token = useSelector(selectToken);
+  const user = useSelector(selectUser);
   const timeLine = ["아침", "점심", "저녁"];
 
   const handleRouter = () => {
@@ -60,8 +63,15 @@ export default function MealCard({
     }
     if (like) {
       fetchData("DELETE");
+      if(who_liked !== undefined){
+        const newWhoList = whoList.filter((val : number) => val !== user.usercharacter);
+        setWhoList(newWhoList);
+      }
     } else {
       fetchData("POST");
+      if(who_liked !== undefined){
+        setWhoList([user.usercharacter, ...whoList]);
+      }
     }
     setLike(!like);
   };
@@ -77,7 +87,7 @@ export default function MealCard({
             <div className="imageStyle">
               <div className="textType">{type}</div>
               <div className="like">
-                {who_liked?.map((v: number, i: number) => {
+                {whoList?.map((v: number, i: number) => {
                   return (
                     <div key={v}>
                       <Image
@@ -96,7 +106,7 @@ export default function MealCard({
                 alt="character"
                 width={32}
                 height={32}
-                src={like ? ic_heart.fill : ic_heart.empty}
+                src={like ? ic_like.fill : ic_like.empty}
                 priority
               />
             </div>
@@ -181,7 +191,7 @@ export default function MealCard({
           flex-direction: row-reverse;
           align-items: center;
           justify-content: center;
-          width: ${who_liked?.length * 20 + 16}px;
+          width: ${whoList?.length * 20 + 16}px;
           height: 32px;
           line-height: 13px;
           border-radius: 15px;
