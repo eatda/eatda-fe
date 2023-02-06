@@ -3,9 +3,10 @@ import Image from "next/image";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { selectToken } from "../../store/tokenSlice";
+import { selectUser } from "../../store/userSlice";
 import { Post, Delete } from "../../hooks/Fetch";
 import { useRouter } from "next/router";
-import { ic_heart, ic_measure, ic_time } from "../../assets/icon";
+import { ic_heart, ic_measure, ic_time, ic_like } from "../../assets/icon";
 import { character_like } from "../../assets/illust";
 import { route } from "../../assets/route";
 
@@ -28,8 +29,10 @@ export default function SugarCard({
   who_liked,
 }: SugarCardProps) {
   const [like, setLike] = useState<boolean | undefined>(() => is_me_liked);
+  const [whoList, setWhoList] = useState(()=>who_liked);
   const router = useRouter();
   const token = useSelector(selectToken);
+  const user = useSelector(selectUser);
   const mealType = () => {
     switch (timeline) {
       case 0:
@@ -69,10 +72,15 @@ export default function SugarCard({
     }
     if (like) {
       fetchData("DELETE");
-      // console.log('Delete');
+      if(who_liked !== undefined){
+        const newWhoList = whoList.filter((val : number) => val !== user.usercharacter);
+        setWhoList(newWhoList);
+      }
     } else {
       fetchData("POST");
-      // console.log('post')
+      if(who_liked !== undefined){
+        setWhoList([user.usercharacter, ...whoList]);
+      }
     }
     setLike(!like);
   };
@@ -106,7 +114,7 @@ export default function SugarCard({
           <div className="imageStyle">
             <div className="textType">{mealType()}</div>
             <div className="like">
-              {who_liked?.map((v: number, i: number) => {
+              {whoList?.map((v: number, i: number) => {
                 return (
                   <div key={v}>
                     <Image
@@ -125,7 +133,7 @@ export default function SugarCard({
               alt="character"
               width={32}
               height={32}
-              src={like ? ic_heart.fill : ic_heart.empty}
+              src={like ? ic_like.fill : ic_like.empty}
               priority
             />
           </div>
@@ -217,7 +225,7 @@ export default function SugarCard({
           flex-direction: row-reverse;
           align-items: center;
           justify-content: center;
-          width: ${who_liked?.length * 20 + 16}px;
+          width: ${whoList?.length * 20 + 16}px;
           height: 32px;
           line-height: 13px;
           border-radius: 15px;

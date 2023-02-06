@@ -10,6 +10,7 @@ import WeeklySummary from "../../components/library/WeeklySummary";
 import { DietType } from "../../interface/diet";
 import Image from "next/image";
 import { illust } from "../../assets/illust";
+import { character } from "../../assets/illust";
 import { route } from "../../assets/route";
 import Hr from "../../components/common/Hr";
 
@@ -40,7 +41,7 @@ export default function Report() {
   }, []);
 
   return (
-    <>
+    <div className="out">
       <Header
         text="서재"
         left="식후 혈당 기록하기"
@@ -63,13 +64,27 @@ export default function Report() {
             {lowHighData ? (
               <BestWorstCards meals={lowHighData.best} />
             ) : (
-              <Image
+              <div className="empty">
+                <div className="emptyImg">
+                <Image
+                src={character[0]}
+                width={50}
+                height={50}
+                alt="character"
+                />
+                </div>
+                <div className="emptyText">
+                지난 7일간 3회 이상 식후 혈당을 입력한 경우에만 <br/>
+                열람 가능합니다.
+                </div>
+              {/* <Image
                 src={illust.report}
-                width={352}
+                width={300}
                 height={150}
                 alt="지난 7일간 3회 이상 식후 혈당을 입력한 경우에만
 열람 가능합니다."
-              />
+              /> */}
+              </div>
             )}
           </div>
           <div className="box">
@@ -77,13 +92,27 @@ export default function Report() {
             {lowHighData ? (
               <BestWorstCards meals={lowHighData.worst} />
             ) : (
-              <Image
+              <div className="empty">
+                <div className="emptyImg">
+                <Image
+                src={character[0]}
+                width={50}
+                height={50}
+                alt="character"
+                />
+                </div>
+                <div className="emptyText">
+                지난 7일간 3회 이상 식후 혈당을 입력한 경우에만 <br/>
+                열람 가능합니다.
+                </div>
+              {/* <Image
                 src={illust.report}
-                width={352}
+                width={300}
                 height={150}
                 alt="지난 7일간 3회 이상 식후 혈당을 입력한 경우에만
-열람 가능합니다."
-              />
+                열람 가능합니다."
+              /> */}
+              </div>
             )}
           </div>
         </>
@@ -106,7 +135,20 @@ export default function Report() {
           margin-top: 18px;
           margin-bottom: 12px;
         }
+        .empty {
+          display: flex;
+          flex-direction: column;
+          align-item: center;
+          justify-content: center;
+          text-align: center;
+          height: 150px;
+          border: 1px solid #D9D9D9;
+        }
+        .emptyText {
+          font-size: 14px;
+          color: ${colors.graySubTitle2};
+        }
       `}</style>
-    </>
+    </div>
   );
 }

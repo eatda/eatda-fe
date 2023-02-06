@@ -43,7 +43,7 @@ export default function RecipeCard({
       : "none";
   const [like, setLike] = useState<boolean | undefined>(() => is_me_liked);
   const [whoList, setWhoList] = useState(()=>who_liked);
-  console.log('?:',whoList);
+  // console.log('?:',whoList);
 
   // console.log(id,type, name, image, comment, title, is_me_liked, who_liked, like)
 

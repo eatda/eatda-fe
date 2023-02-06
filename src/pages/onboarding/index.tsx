@@ -48,6 +48,7 @@ export default function SignIn() {
   useEffect(() => {
     async function fetchData() {
       const { data, res }: any = await fetchLogin();
+      console.log('data.status:',data.status);
       if (data.ok) {
         const reduxData = {
           usersocial_id: user.usersocial_id,
@@ -63,21 +64,14 @@ export default function SignIn() {
         console.log("로그인 완료");
         router.replace(route.home, undefined, { shallow: true });
       } 
-      else {
+      else if(data.status === 404) {
         console.log(user.usersocial_id);
         console.log("회원가입하기");
         router.replace(route.createPlace, undefined, { shallow: true });
+      } else {
+        console.log('로그인 다시 시도');
+        router.replace(route.onboarding, undefined, { shallow: true });
       }
-      
-      // api 변경 후
-      // else if(data.status === 404) {
-      //   console.log(user.usersocial_id);
-      //   console.log("회원가입하기");
-      //   router.replace(route.createPlace, undefined, { shallow: true });
-      // } else {
-      //   console.log('로그인 다시 시도');
-      //   router.replace(route.onboarding, undefined, { shallow: true });
-      // }
     }
     if (session.status == "authenticated") {
       const reduxData = {

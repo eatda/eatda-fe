@@ -6,7 +6,8 @@ export default function Hr() {
       <div className="hr" />
       <style jsx>{`
         .hr {
-          margin: 8px -20px 16px -20px;
+          width: 100%;
+          margin: 8px 0px 16px 0px;
           height: 4px;
           background-color: ${colors.grayBackground};
         }

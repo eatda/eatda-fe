@@ -89,7 +89,7 @@ export function CTA1Button({ onClick, text, active, value }: CTA1ButtonI) {
           ${CTA1Source}
           font-size: 20px;
           font-weight: 600;
-          width: 350px;
+          width: 90%;
           background: ${active ? colors.mainOrange : colors.grayBackgroundSub};
         }
       `}</style>
@@ -117,7 +117,7 @@ export function CTA1ButtonSelect({
           ${CTA1Source}
           font-size: 20px;
           font-weight: 600;
-          width: 350px;
+          width: 100%;
           background: ${active ? colors.mainOrange : colors.grayWhite};
           border: 1px solid ${active ? "none" : colors.grayBackgroundSub};
           color: ${active ? colors.grayWhite : colors.graySubTitle};
@@ -147,7 +147,7 @@ export function CTA1ButtonNoneSelect({
           ${CTA1Source}
           font-size: 20px;
           font-weight: 600;
-          width: 350px;
+          width: 100%;
           background: ${active ? colors.mainOrange : "#E6E6E6"};
           border: 1px solid ${active ? "none" : colors.grayBackgroundSub};
           color: ${colors.grayWhite};
@@ -246,6 +246,7 @@ export function TextBox2({
       <style jsx>{`
         .container {
           display: flex;
+          width: 100%;
         }
         .text {
           color: ${colors.graySubTitle2};
@@ -254,7 +255,7 @@ export function TextBox2({
         input {
           font-size: 20px;
           font-weigth: 500;
-          width: ${unit ? "300px" : "350px"};
+          width: ${unit ? "100%" : "100%"};
           border: none;
           color: ${value === ""
             ? colors.grayBackgroundSub
@@ -302,7 +303,7 @@ export function RadioBox({
           display: flex;
           align-items: center;
           justify-content: space-between;
-          width: 350px;
+          width: 330px;
           height: 80px;
           background: ${select ? colors.mainOrange : "none"};
           color: ${select ? colors.grayWhite : colors.graySubTitle};
@@ -339,6 +340,7 @@ export function CheckBox({ name, text, value, select, onChange }: CheckBoxI) {
       />
       <style jsx>{`
         .container {
+          margin-bottom: 12px;
           display: flex;
           align-items: center;
           justify-content: space-between;

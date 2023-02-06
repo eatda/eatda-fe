@@ -179,7 +179,7 @@ export default function Survey({ allergyResponse }: surveyI) {
       case 1:
         const weightValue = e.target.value;
         setForm({ ...form, weight: Number(weightValue) });
-        const regexW = /^\d{2}$/;
+        const regexW = /^\d{1,3}$/;
         const regexW2 = /^\d{2}[.]\d{1}$/;
 
         if (regexW.test(weightValue) || regexW2.test(weightValue)) {
@@ -438,6 +438,7 @@ export default function Survey({ allergyResponse }: surveyI) {
                 display: flex;
                 align-items: center;
                 flex-direction: column;
+                width: 100%;
               }
               .textMain {
                 display: flex;
@@ -531,9 +532,37 @@ export default function Survey({ allergyResponse }: surveyI) {
   };
   return (
     <>
-      {page < 3 && <Navigation text="기본 정보" />}
+      {page < 4 && <Navigation text="기본 정보" />}
       {page >= 3 && <Navigation text="습관 정보" />}
       <div className="container">
+        <div className="bar">
+          {
+            page<4 ?
+            [0,1,2,3].map((v:number)=>{
+              return(
+                page < v
+                ?
+                <div key={v} className="order1"></div>
+                :
+                <div key={v} className="order1_none"></div>
+              )
+            })
+            :
+            page !== 4
+            ?
+            [5,6].map((v:number,i:number)=>{
+              return(
+                page < v
+                ?
+                <div key={v} className="order2"></div>
+                :
+                <div key={v} className="order2_none"></div>
+              )
+            })
+            :
+            <></>
+          }
+        </div>
         {getPage(page)}
         <br />
         <div className="buttonItem">
@@ -554,6 +583,33 @@ export default function Survey({ allergyResponse }: surveyI) {
       </div>
       <style jsx>{`
         .container {
+        }
+        .bar {
+          width: 100%;
+          height: 3px;
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: 24px;
+        }
+        .order1 {
+          width: 23%;
+          height: 3px;
+          background: ${colors.grayBackground};
+        }
+        .order1_none {
+          width: 23%;
+          height: 3px;
+          background: ${colors.blackSub};
+        }
+        .order2 {
+          width: 49%;
+          height: 3px;
+          background: ${colors.grayBackground};
+        }
+        .order2_none {
+          width: 49%;
+          height: 3px;
+          background: ${colors.blackSub};
         }
         .buttonItem {
           display: flex;
