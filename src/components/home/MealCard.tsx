@@ -143,6 +143,8 @@ export default function MealCard({
           border: 1px solid ${colors.grayBackgroundSub};
           background-color: white;
           border-radius: 5px;
+          width: 350px;
+          height: 245px;
         }
 
         .cardItem {
