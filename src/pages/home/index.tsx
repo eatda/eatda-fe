@@ -186,12 +186,14 @@ export default function Home() {
           display: flex;
           flex-direction: row;
           justify-content: space-between;
-          padding: 25px 20px;
-          margin-bottom: 10px;
+          align-items: center;
+          padding: 0px 20px;
+          height: 64px;
         }
         .container {
           display: flex;
           flex-direction: column;
+          margin-top: -10px;
           margin-bottom: 10px;
         }
         .title {

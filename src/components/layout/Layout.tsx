@@ -20,7 +20,7 @@ export default function Layout({ children }: LayoutProps) {
       ? "sub"
       : "main";
 
-  const isHeader = viewType == "main" && pathname !== "home" ? true : false;
+  const isHeader = viewType == "main" && pathname !== "/home" ? true : false;
 
   return (
     <>
