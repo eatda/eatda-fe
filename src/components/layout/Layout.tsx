@@ -38,7 +38,7 @@ export default function Layout({ children }: LayoutProps) {
       <style jsx>{`
         .container {
           max-width: 390px;
-          width: 100vh;
+          width: 100vw;
           background: ${colors.grayWhite};
         }
         .content {
