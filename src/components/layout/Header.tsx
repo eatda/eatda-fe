@@ -18,11 +18,11 @@ export default function Header({
 }: HeaderType) {
   const router = useRouter();
 
-  const handleButtonClick = () => {
-    if (router.pathname === leftURL) {
-      router.replace(rightURL);
-    } else {
+  const handleButtonClick = (left: boolean) => {
+    if (left) {
       router.replace(leftURL);
+    } else {
+      router.replace(rightURL);
     }
   };
 
@@ -32,7 +32,7 @@ export default function Header({
         <div className="header">{text}</div>
         <div className="miniheader">
           <button
-            onClick={handleButtonClick}
+            onClick={() => handleButtonClick(true)}
             className={
               router.pathname === rightURL ? "trueButton" : "falseButton"
             }
@@ -40,7 +40,7 @@ export default function Header({
             {left}
           </button>
           <button
-            onClick={handleButtonClick}
+            onClick={() => handleButtonClick(false)}
             className={
               router.pathname === leftURL ? "trueButton" : "falseButton"
             }
@@ -56,18 +56,16 @@ export default function Header({
           left: 0;
           right: 0;
           background-color: ${colors.grayWhite};
+          padding: 10px 20px 0px 20px;
         }
         .header {
-          margin-left: 20px;
-          padding-top: 27px;
           font-weight: 700;
           font-size: 27px;
         }
         .miniheader {
+          margin-top: 16px;
           display: flex;
           justify-content: center;
-          margin-top: 25px;
-          padding: 0px 20px;
         }
 
         .trueButton {
