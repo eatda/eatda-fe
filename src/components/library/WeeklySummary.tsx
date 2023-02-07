@@ -1,5 +1,7 @@
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { ic_calendar } from "../../assets/icon";
 import colors from "../../assets/styles";
 import { Get } from "../../hooks/Fetch";
 import { selectToken } from "../../store/tokenSlice";
@@ -76,7 +78,13 @@ export default function WeeklySummary({ duration }: { duration?: boolean }) {
                   </div>
                 ))}
               </div>
-              {!duration && <div className="mini-duration">{durationText}</div>}
+              {!duration && (
+                <div className="mini-duration">
+                  <Image src={ic_calendar} width={16} height={16} alt="" />
+                  &nbsp;
+                  {durationText}
+                </div>
+              )}
             </div>
           </>
         ) : null}
@@ -162,6 +170,13 @@ export default function WeeklySummary({ duration }: { duration?: boolean }) {
         }
         .level3 {
           background-color: ${sugarLevelList[2].color};
+        }
+
+        // 미니
+        .mini-duration {
+          display: flex;
+          justify-content: flex-end;
+          align-items: center;
         }
       `}</style>
     </>

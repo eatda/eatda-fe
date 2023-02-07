@@ -7,6 +7,7 @@ export const up = "/img/icon/up.svg";
 // 홈 탭
 export const ic_time = "/img/icon/avg-time.svg";
 export const ic_measure = "/img/icon/diabetes-measure.svg";
+export const ic_calendar = "/img/icon/calendar.svg";
 
 export const copy = {
   white:"/img/icon/copy_white.svg", 
