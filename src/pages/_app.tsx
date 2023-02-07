@@ -21,12 +21,7 @@ export default function App({ Component, pageProps }: AppProps) {
         </PersistGate>
       </Provider>
       <style jsx global>
-        {`
-          body {
-            display: flex;
-            justify-content: center;
-          }
-        `}
+        {``}
       </style>
     </>
   );

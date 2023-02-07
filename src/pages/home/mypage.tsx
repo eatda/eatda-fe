@@ -174,7 +174,6 @@ export default function MyPage() {
           flex-direction: column;
           align-items: center;
           text-align: center;
-          margin-top: -40px;
         }
 
         .image {
@@ -185,7 +184,6 @@ export default function MyPage() {
           justify-content: center;
           border-radius: 100px;
           border: 2px solid ${colors.mainOrange};
-          margin-top: 20px;
         }
 
         .profile {
@@ -203,10 +201,9 @@ export default function MyPage() {
 
         .info {
           background: ${colors.grayBackground};
-          width: 98%;
           height: 124px;
+          width: 100%;
           border-radius: 6px;
-
           display: flex;
           flex-direction: column;
           align-items: center;
@@ -216,7 +213,8 @@ export default function MyPage() {
         .infoGroup {
           display: flex;
           height: 61px;
-          width: 85%;
+          padding: 0px 16px;
+          width: 100%;
           align-items: center;
         }
         .infoItem {
@@ -229,7 +227,7 @@ export default function MyPage() {
           color: ${colors.graySubTitle};
         }
         .line {
-          width: 98%;
+          width: 100%;
           height: 2px;
           background: ${colors.grayWhite};
         }
@@ -254,7 +252,7 @@ export default function MyPage() {
           border-top: 2px solid ${colors.grayBackgroundSub};
           height: 62px;
           line-height: 62px;
-          width: 98%;
+          width: 100%;
         }
 
         .textButton {

@@ -5,7 +5,7 @@ import {
   TextBox2,
   CTA1ButtonSelect,
   CTA1ButtonSelect2,
-  CTA1ButtonNoneSelect
+  CTA1ButtonNoneSelect,
 } from "../../components/common/Button";
 import Navigation from "../../components/layout/Navigation";
 import Image from "next/image";
@@ -76,10 +76,12 @@ export default function Signup() {
         usergroup: user.usergroup,
       };
       dispatch(login(reduxData));
-      if(teamDia.teamDiabetes){
+      if (teamDia.teamDiabetes) {
         router.replace(route.loading);
-      }else{
-        form.sugar ? router.replace(route.survey) : router.replace(route.loading);
+      } else {
+        form.sugar
+          ? router.replace(route.survey)
+          : router.replace(route.loading);
       }
     }
   };
@@ -154,7 +156,6 @@ export default function Signup() {
             <style jsx>{`
               .item {
                 margin-top: 150px;
-                display: flex;
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
@@ -227,8 +228,6 @@ export default function Signup() {
             </div>
             <style jsx>{`
               .item {
-                display: flex;
-                flex-direction: column;
                 // align-items: center;
                 // margin-left: 20px;
               }
@@ -257,41 +256,40 @@ export default function Signup() {
             </div>
             <div className="textSub">기본 설문 조사가 이루어집니다.</div>
             <div className="bar" />
-            {teamDia.teamDiabetes ? 
-            <>
-            <CTA1ButtonNoneSelect
-              active={false}
-              value="true"
-              text="네, 당뇨인이에요"
-            />
-            <div className="bar2" />
-            <CTA1ButtonSelect
-              active={form.sugar === null ? false : !form.sugar}
-              value="false"
-              text="아니요, 당뇨인 가족이에요"
-              onClick={handleClick}
-            />
-            </>
-            :
-            <>
-            <CTA1ButtonSelect
-              active={form.sugar === null ? false : form.sugar}
-              value="true"
-              text="네, 당뇨인이에요"
-              onClick={handleClick}
-            />
-            <div className="bar2" />
-            <CTA1ButtonSelect
-              active={form.sugar === null ? false : !form.sugar}
-              value="false"
-              text="아니요, 당뇨인 가족이에요"
-              onClick={handleClick}
-            />
-            </>
-            }
+            {teamDia.teamDiabetes ? (
+              <>
+                <CTA1ButtonNoneSelect
+                  active={false}
+                  value="true"
+                  text="네, 당뇨인이에요"
+                />
+                <div className="bar2" />
+                <CTA1ButtonSelect
+                  active={form.sugar === null ? false : !form.sugar}
+                  value="false"
+                  text="아니요, 당뇨인 가족이에요"
+                  onClick={handleClick}
+                />
+              </>
+            ) : (
+              <>
+                <CTA1ButtonSelect
+                  active={form.sugar === null ? false : form.sugar}
+                  value="true"
+                  text="네, 당뇨인이에요"
+                  onClick={handleClick}
+                />
+                <div className="bar2" />
+                <CTA1ButtonSelect
+                  active={form.sugar === null ? false : !form.sugar}
+                  value="false"
+                  text="아니요, 당뇨인 가족이에요"
+                  onClick={handleClick}
+                />
+              </>
+            )}
             <style jsx>{`
               .item {
-                display: flex;
                 flex-direction: column;
                 align-items: center;
               }

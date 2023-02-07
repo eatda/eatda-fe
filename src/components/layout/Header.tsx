@@ -79,6 +79,7 @@ export default function Header() {
         .header {
           font-weight: 700;
           font-size: 27px;
+          margin-bottom: 30px;
         }
         .miniheader {
           margin-top: 16px;

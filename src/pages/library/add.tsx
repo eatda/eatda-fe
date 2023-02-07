@@ -205,6 +205,7 @@ export default function Add() {
           display: flex;
           flex-direction: column;
           align-items: center;
+          margin-top: 50px;
         }
 
         .today-sugar {

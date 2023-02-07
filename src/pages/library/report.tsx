@@ -112,7 +112,6 @@ export default function Report() {
       </div>
       <style jsx>{`
         .container {
-          margin-top: 10px;
         }
         .box {
           margin-bottom: 16px;

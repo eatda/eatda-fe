@@ -20,7 +20,11 @@ export default function Layout({ children }: LayoutProps) {
       ? "sub"
       : "main";
 
-  const isHeader = viewType == "main" && pathname !== "/home" ? true : false;
+  const isHeader =
+    viewType == "main" &&
+    (pathname.includes("kitchen") || pathname.includes("library"))
+      ? true
+      : false;
 
   return (
     <>
@@ -40,7 +44,7 @@ export default function Layout({ children }: LayoutProps) {
           padding: 0px 20px;
         }
         .main {
-          padding-top: 90px;
+          padding-top: 100px;
           padding-bottom: 60px;
         }
         .sub {
