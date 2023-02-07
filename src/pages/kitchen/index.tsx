@@ -77,13 +77,6 @@ export default function Recipe() {
 
   return (
     <div className="box">
-      <Header
-        text="주방"
-        left="추천 식사"
-        right="Our Pick!"
-        leftURL={route.kitchen}
-        rightURL={route.ourPick}
-      />
       <div className="container">
         <div className="textHeader">나에게 딱 맞는 레시피!</div>
         <div className="margin">

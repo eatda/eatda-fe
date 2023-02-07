@@ -38,13 +38,6 @@ export default function Library() {
 
   return (
     <>
-      <Header
-        text="서재"
-        left="식후 혈당 기록하기"
-        right="주간레포트"
-        leftURL="/library"
-        rightURL="/library/report"
-      />
       {user.isDiabetes && (
         <PushPageButton name="필터" src={btn_add} page="/library/add" />
       )}

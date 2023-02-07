@@ -64,13 +64,6 @@ export default function OurPick() {
 
   return (
     <>
-      <Header
-        text="주방"
-        left="추천 식사"
-        right="Our Pick!"
-        leftURL={route.kitchen}
-        rightURL={route.ourPick}
-      />
       <div className="container">
         <div className="textHeader">
           <div className="textMain">가족들의 인기 &nbsp;</div>

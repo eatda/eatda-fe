@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import { route } from "../../assets/route";
 import colors from "../../assets/styles";
 
 interface HeaderType {
@@ -9,43 +10,60 @@ interface HeaderType {
   rightURL: string;
 }
 
-export default function Header({
-  text,
-  left,
-  right,
-  leftURL,
-  rightURL,
-}: HeaderType) {
+const kitchenHeader: HeaderType = {
+  text: "주방",
+  left: "추천 식사",
+  right: "Our Pick!",
+  leftURL: route.kitchen,
+  rightURL: route.ourPick,
+};
+
+const libraryHeader: HeaderType = {
+  text: "서재",
+  left: "식후 혈당 기록하기",
+  right: "주간레포트",
+  leftURL: route.library,
+  rightURL: route.report,
+};
+
+export default function Header() {
   const router = useRouter();
+  const headerData = router.pathname.includes("kitchen")
+    ? kitchenHeader
+    : libraryHeader;
 
   const handleButtonClick = (left: boolean) => {
     if (left) {
-      router.replace(leftURL);
+      router.replace(headerData.leftURL);
     } else {
-      router.replace(rightURL);
+      router.replace(headerData.rightURL);
     }
   };
 
   return (
     <>
       <div className="container">
-        <div className="header">{text}</div>
+        <div className="header">{headerData.text}</div>
         <div className="miniheader">
           <button
             onClick={() => handleButtonClick(true)}
             className={
-              router.pathname === rightURL ? "trueButton" : "falseButton"
+              router.pathname === headerData.rightURL
+                ? "trueButton"
+                : "falseButton"
             }
           >
-            {left}
+            {headerData.left}
           </button>
           <button
             onClick={() => handleButtonClick(false)}
             className={
-              router.pathname === leftURL ? "trueButton" : "falseButton"
+              router.pathname === headerData.leftURL
+                ? "trueButton"
+                : "falseButton"
             }
           >
-            {right}
+            {headerData.right}
           </button>
         </div>
       </div>

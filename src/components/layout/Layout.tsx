@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import colors from "../../assets/styles";
+import Header from "./Header";
 import TabBar from "./TabBar";
 
 interface LayoutProps {
@@ -19,9 +20,12 @@ export default function Layout({ children }: LayoutProps) {
       ? "sub"
       : "main";
 
+  const isHeader = viewType == "main" && pathname !== "home" ? true : false;
+
   return (
     <>
       <div className="container">
+        {isHeader && <Header />}
         <div className={viewType == "main" ? "main content" : "sub content"}>
           {children}
         </div>
@@ -30,14 +34,13 @@ export default function Layout({ children }: LayoutProps) {
       <style jsx>{`
         .container {
           max-width: 390px;
-          width: 100vw;
           background: ${colors.grayWhite};
         }
         .content {
           padding: 0px 20px;
         }
         .main {
-          padding-top: 110px;
+          padding-top: 90px;
           padding-bottom: 60px;
         }
         .sub {
