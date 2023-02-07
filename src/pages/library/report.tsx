@@ -1,5 +1,3 @@
-import Header from "../../components/layout/Header";
-import { useSession } from "next-auth/react";
 import colors from "../../assets/styles";
 import { useEffect, useState } from "react";
 import { Get } from "../../hooks/Fetch";
@@ -9,9 +7,7 @@ import BestWorstCards from "../../components/library/BestWorstCards";
 import WeeklySummary from "../../components/library/WeeklySummary";
 import { DietType } from "../../interface/diet";
 import Image from "next/image";
-import { illust } from "../../assets/illust";
 import { character } from "../../assets/illust";
-import { route } from "../../assets/route";
 import Hr from "../../components/common/Hr";
 
 interface LowHighDataType {
@@ -20,7 +16,6 @@ interface LowHighDataType {
 }
 
 export default function Report() {
-  const session = useSession();
   const token = useSelector(selectToken);
 
   const [lowHighData, setLowHighData] = useState<LowHighDataType>();
@@ -44,10 +39,6 @@ export default function Report() {
     <div className="out">
       <div className="container">
         <div className="box">
-          <div className="big-title">
-            {session?.data?.user.name}님의 <br />
-            주간보고서 입니다
-          </div>
           <WeeklySummary duration={true} />
         </div>
         <Hr />
@@ -115,11 +106,6 @@ export default function Report() {
         }
         .box {
           margin-bottom: 16px;
-        }
-        .big-title {
-          font-size: 24px;
-          font-weight: 700;
-          padding: 10px 0px;
         }
         .title {
           font-weight: 700;

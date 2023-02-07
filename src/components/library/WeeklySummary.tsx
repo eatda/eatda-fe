@@ -7,6 +7,7 @@ import { Get } from "../../hooks/Fetch";
 import { selectToken } from "../../store/tokenSlice";
 
 interface WeeklyDataType {
+  name: string;
   start: string;
   end: string;
   low: number;
@@ -51,6 +52,10 @@ export default function WeeklySummary({ duration }: { duration?: boolean }) {
       <div className="container">
         {duration && (
           <>
+            <div className="big-title">
+              {weeklyData?.name}님의 <br />
+              주간보고서 입니다
+            </div>
             <div className="duration">{weeklyData && <>{durationText}</>}</div>
             <div className="explain">
               1주일간 식사 후 혈당을 기록하여 주간 분석 레포트를 발급 받아요!
@@ -90,6 +95,11 @@ export default function WeeklySummary({ duration }: { duration?: boolean }) {
         ) : null}
       </div>
       <style jsx>{`
+        .big-title {
+          font-size: 24px;
+          font-weight: 700;
+          padding: 10px 0px;
+        }
         .duration {
           color: ${colors.graySubTitle};
           font-weight: 500;
