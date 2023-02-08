@@ -1,6 +1,6 @@
 import Navigation from "../../components/layout/Navigation";
 import colors from "../../assets/styles";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
@@ -30,6 +30,7 @@ export default function Add() {
   const router = useRouter();
   const token = useSelector(selectToken);
   const [myMealData, setMyMealData] = useState<MyMealDataType[]>([]);
+  const sugarInput = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     async function fetchMyMealData() {
@@ -52,7 +53,7 @@ export default function Add() {
   const [sugar, setSugar] = useState<number>(0);
 
   function dontClickGraph() {
-    alert("혈당량은 아래 필드에서 입력가능합니다.");
+    sugarInput.current?.focus();
   }
   function handleMealChange(id: number) {
     const clicked = myMealData.filter((item) => item.id === id)[0];
@@ -205,6 +206,7 @@ export default function Add() {
                 min="0"
                 max="300"
                 onChange={(e) => handleSugarChange(e.target.value)}
+                ref={sugarInput}
               />
               mg/dl
             </div>
