@@ -165,7 +165,7 @@ export default function Signup() {
                 text-align: center;
                 // height: 750px;
                 background-image: url(${illust.signup_background});
-                // background-size: auto;
+                background-size: auto;
                 background-position: center;
               }
               .text {

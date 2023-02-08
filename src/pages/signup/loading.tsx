@@ -145,7 +145,9 @@ export default function Loading() {
           flex-direction: column;
           align-items: center;
           justify-content: center;
-          min-height: 500px;
+          // min-height: 500px;
+          margin-top: -100px;
+          height: 100vh;
         }
         .textHeader {
           text-align: center;
