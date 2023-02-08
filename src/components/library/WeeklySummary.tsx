@@ -119,6 +119,7 @@ export default function WeeklySummary({ duration }: { duration?: boolean }) {
           font-size: 12px;
           color: ${colors.graySubTitle};
           text-align: right;
+          font-family: "Pretendard-Regular";
         }
 
         // 주간 혈당 요약
