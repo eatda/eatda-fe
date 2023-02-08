@@ -169,7 +169,7 @@ export function CTA1ButtonSelect2({
       <button onClick={onClick} value={value}>
         {text}
         {image ? (
-          <Image src={image} alt="ch" width={78} height={84} priority />
+          <Image src={image} alt="ch" width={100} height={100} priority />
         ) : null}
       </button>
       <style jsx>{`
