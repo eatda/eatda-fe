@@ -8,6 +8,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import colors from "../../assets/styles";
 import { route } from "../../assets/route";
+import Image from "next/image";
+import { illust } from "../../assets/illust";
 
 interface bodyDataI {
   social_id: string;
@@ -41,9 +43,9 @@ export default function Loading() {
     const URL = `${process.env.NEXT_PUBLIC_API_ROOT}accounts/register/`;
     let bodyData: bodyDataI = {
       social_id: user.usersocial_id,
-      // social_id: 'teste55132',
+      // social_id: '7',
       email: user.useremail,
-      // email: 'test535e12@gmail.com',
+      // email: '7@gmail.com',
       name: user.username,
       character: user.usercharacter,
       group: user.usergroup,
@@ -84,7 +86,9 @@ export default function Loading() {
     async function fetchData() {
       const { data, res }: any = await fetchSignup();
       if (data.ok) {
-        setPage(1);
+        setTimeout(() => {
+          setPage(1);
+        }, 5000);
         console.log(res);
         const reduxData = {
           usersocial_id: user.usersocial_id,
@@ -113,11 +117,28 @@ export default function Loading() {
             <div className="textMain">{user.username} 님</div>만을 위한
           </div>
           <div className="textHeader">레시피를 준비 중이에요!</div>
+          <Image
+            alt="character"
+            width={350}
+            height={62}
+            src={illust.loading}
+            priority
+          />
         </div>
       ) : (
-        <>
+        <div className="making">
+          <div className="style">
+          <Image
+            alt="character"
+            width={124}
+            height={182}
+            src={illust.loading_ch}
+            priority
+          />
           <div className="textHeader">
-            건강한 맞춤 식사를 만들 준비가 되셨나요?
+            건강한 맞춤 식사를 <br/>
+            만들 준비가 되셨나요?
+          </div>
           </div>
           <div className="buttonItem">
             <CTA1Button
@@ -126,15 +147,33 @@ export default function Loading() {
               onClick={handleClick}
             />
           </div>
-        </>
+        </div>
       )}
       <style jsx>{`
+        .style {
+          margin-bottom: 50px;
+        }
+        .making {
+          margin: -30px -20px -90px -20px;
+          width: 390px;
+          height: 100vh;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          text-align: center;
+          background-image: url(${illust.signup_background});
+          background-size: auto;
+          background-position: center;
+        }
         .container {
           display: flex;
           flex-direction: column;
           align-items: center;
           justify-content: center;
-          min-height: 500px;
+          // min-height: 500px;
+          margin-top: -100px;
+          height: 100vh;
         }
         .textHeader {
           text-align: center;

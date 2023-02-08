@@ -133,7 +133,7 @@ export default function Signup() {
   if (page === 0) {
     setTimeout(() => {
       setPage((prevNumber) => prevNumber + 1);
-    }, 2000);
+    }, 5000);
   }
 
   const getPage = (current: number) => {
@@ -141,25 +141,32 @@ export default function Signup() {
       case 0:
         return (
           <div className="item">
-            <Image
-              alt="character"
-              width={184}
-              height={194}
-              src={illust.signup}
-              priority
-            />
+            <img className="animated-gif" src={illust.signuploading}></img>
             <div className="text">
               반갑습니다!
               <br />
               프로필을 완성해봐요
             </div>
             <style jsx>{`
+              .animated-gif {
+                margin-bottom: -30px;
+                width: 100%;
+                height: auto;
+              }
               .item {
-                margin-top: 150px;
+                // margin-top: 150px;
+                margin: -66px -20px 0px -20px;
+                width: 390px;
+                height: 100vh;
+                display: flex;
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
                 text-align: center;
+                // height: 750px;
+                background-image: url(${illust.signup_background});
+                background-size: auto;
+                background-position: center;
               }
               .text {
                 margin-top: 36px;
@@ -320,16 +327,43 @@ export default function Signup() {
         );
       default:
         return(
-          <>
-          잠시만 기다려주세요.
-          </>
+          <div className="item">
+            <img className="animated-gif" src={illust.signuploading}></img>
+            <div className="text">
+              잠시만 기다려주세요!
+            </div>
+            <style jsx>{`
+              .animated-gif {
+                margin-bottom: -20px;
+                width: 100%;
+                height: auto;
+              }
+              .item {
+                margin-top: -100px;
+                width: 100%;
+                height: 100vh;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+              }
+              .text {
+                margin-top: 36px;
+                font-size: 24px;
+                font-weight: 600;
+              }
+            `}</style>
+          </div>
         )
     }
   };
 
   return (
     <>
+      {page >0 &&
       <Navigation text="프로필 설정" />
+      }
       <div className="container">
         {getPage(page)}
         <div className="buttonItem">
@@ -347,7 +381,9 @@ export default function Signup() {
         </div>
         <style jsx>{`
           .container {
-            padding-top: 60px;
+            // padding-top: 60px;
+            // display: flex;
+            // align-items: center;
           }
           .buttonItem {
             display: flex;

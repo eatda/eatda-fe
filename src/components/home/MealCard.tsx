@@ -6,7 +6,7 @@ import { selectToken } from "../../store/tokenSlice";
 import { selectUser } from "../../store/userSlice";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
-import { character } from "../../assets/illust";
+import { character,character_like } from "../../assets/illust";
 import { ic_like } from "../../assets/icon";
 import { route } from "../../assets/route";
 
@@ -99,7 +99,7 @@ export default function MealCard({
                               alt="character"
                               width={20}
                               height={20}
-                              src={character[v]}
+                              src={character_like[v]}
                               priority
                             />
                           </div>
@@ -213,7 +213,7 @@ export default function MealCard({
           border-radius: 15px;
           float: right;
           color: ${colors.graySubTitle};
-          background: ${colors.grayBackgroundSub};
+          background: #E6E6E6;
         }
       `}</style>
     </>

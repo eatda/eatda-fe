@@ -29,6 +29,7 @@ export default function Report() {
       });
       if (data.ok) {
         setLowHighData(res);
+        console.log(res, data);
       } else {
         console.log("low high data error");
       }
@@ -58,7 +59,7 @@ export default function Report() {
                   열람 가능합니다.
                 </div>
               </div>
-            )}
+            )} */}
           </div>
           <div className="box">
             <div className="title"> 식후 혈당 높았던 식단 TOP3</div>
@@ -74,7 +75,7 @@ export default function Report() {
                   열람 가능합니다.
                 </div>
               </div>
-            )}
+            )} */}
           </div>
         </>
       </div>

@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import colors from "../../assets/styles";
 import { copyCode } from "../../hooks/CopyClipBoard";
 import Image from "next/image";
-import { copy, create } from "../../assets/icon";
+import { copy, create, x_button } from "../../assets/icon";
 
 interface IChild {
   data: boolean;
@@ -21,7 +21,19 @@ const ModalBasic = ({ data, setData, group }: IChild) => {
   return (
     <div className="container">
       <span className="close" onClick={onClickButton}>
-        X close
+        <div className="text">
+          {' '}&nbsp;&nbsp;
+        </div>
+        <div className="text">
+          초대 코드
+        </div>
+        <Image
+          alt="X"
+          width={16}
+          height={16}
+          src={x_button}
+          priority
+        />
       </span>
       <div className="box">
         {/* <div className="sub">
@@ -58,8 +70,8 @@ const ModalBasic = ({ data, setData, group }: IChild) => {
           justify-content: center;
           align-items: center;
           /* 모달창 크기 */
-          width: 300px;
-          height: 400px;
+          width: 90%;
+          height: 300px;
 
           /* 최상단 위치 */
           z-index: 999;
@@ -82,15 +94,21 @@ const ModalBasic = ({ data, setData, group }: IChild) => {
 
         /* 모달창 내부 X버튼 */
         .close {
-          background: ${colors.mainOrange};
-          width: 100px;
+          display: flex;
+          width: 90%;
+          justify-content: space-between;
+          align-items: center;
           height: 30px;
           border-radius: 4px;
           text-align: center;
-          color: white;
           position: absolute;
-          top: 5px;
+          top: 10px;
           line-height: 30px;
+        }
+        .text {
+          font-size: 18px;
+          font-family: pretendard-medium;
+          font-weight: 500;
         }
 
         .copy {
@@ -105,6 +123,7 @@ const ModalBasic = ({ data, setData, group }: IChild) => {
           border: none;
           color: white;
           line-height: 40px;
+          font-family: pretendard-medium;
         }
 
         .box {
@@ -125,6 +144,7 @@ const ModalBasic = ({ data, setData, group }: IChild) => {
           font-size: 54px;
           line-height: 70px;
           letter-spacing: 4px;
+          font-family: pretendard-bold;
         }
         .sub {
           display: flex;
@@ -134,6 +154,8 @@ const ModalBasic = ({ data, setData, group }: IChild) => {
           font-size: 12px;
           font-weight: 600;
           line-height: 10px;
+          font-family: pretendard-medium;
+          font-weight: 900;
         }
       `}</style>
     </div>
