@@ -19,5 +19,7 @@ export const illust = {
     mine : "/img/illust/recipe_mine.svg",
     pick : "/img/illust/recipe_pick.svg",
     popular : "/img/illust/recipe_popular.svg",
-    kitchen: "/img/illust/recipe_kitchen.svg"
+    kitchen: "/img/illust/recipe_kitchen.svg",
+    empty1: "/img/illust/library_empty1.svg",
+    empty2: "/img/illust/library_empty2.svg",
 }

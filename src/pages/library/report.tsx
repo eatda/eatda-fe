@@ -9,6 +9,7 @@ import { DietType } from "../../interface/diet";
 import Image from "next/image";
 import { character } from "../../assets/illust";
 import Hr from "../../components/common/Hr";
+import { illust } from "../../assets/illust";
 
 interface LowHighDataType {
   best: DietType[];
@@ -51,9 +52,9 @@ export default function Report() {
               <div className="empty">
                 <div className="emptyImg">
                   <Image
-                    src={character[0]}
-                    width={50}
-                    height={50}
+                    src={illust.empty1}
+                    width={98}
+                    height={62}
                     alt="character"
                   />
                 </div>
@@ -79,9 +80,9 @@ export default function Report() {
               <div className="empty">
                 <div className="emptyImg">
                   <Image
-                    src={character[0]}
-                    width={50}
-                    height={50}
+                    src={illust.empty2}
+                    width={101}
+                    height={68}
                     alt="character"
                   />
                 </div>
