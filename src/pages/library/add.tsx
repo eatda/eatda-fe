@@ -243,7 +243,8 @@ export default function Add() {
           font-weight: 700;
         }
         .date {
-          background-color: ${colors.blackSub};
+          background-color: ${colors.grayBackground};
+          border: none;
         }
         .date span {
           color: ${colors.graySubTitle};
