@@ -73,7 +73,16 @@ export default function OurPick() {
           {/* <RecipeList type="pick" data={popularPick} popular={true}/> */}
           {popularPick?.length === 0 ? (
             <div className="emptyPick">
+              <Image
+                alt="character"
+                width={146}
+                height={103}
+                src={illust.pick}
+                priority
+              />
+              <div className="text">
               하트를 누르면 가족들 내 인기 레시피를 보여드려요!
+              </div>
             </div>
           ) : (
             <RecipeList type="pick" data={popularPick} popular={true} />
@@ -97,9 +106,9 @@ export default function OurPick() {
                   <div className="emptyBox">
                     <Image
                       alt="character"
-                      width={80}
-                      height={73.07}
-                      src={illust.pick}
+                      width={79}
+                      height={76}
+                      src={illust.mine}
                       priority
                     />
                     아직 {v.user_name}님이 선호하는 레시피가 없어요
@@ -146,10 +155,14 @@ export default function OurPick() {
           font-size: 14px;
           color: ${colors.graySubTitle2};
           display: flex;
+          flex-direction: column;
           justify-content: center;
           align-items: center;
           text-align: center;
           margin-bottom: 12px;
+        }
+        .text {
+          margin-top: -10px;
         }
       `}</style>
     </>
