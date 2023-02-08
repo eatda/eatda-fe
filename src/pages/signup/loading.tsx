@@ -151,7 +151,7 @@ export default function Loading() {
       )}
       <style jsx>{`
         .style {
-          margin-bottom: 90px;
+          margin-bottom: 50px;
         }
         .making {
           margin: -30px -20px -90px -20px;

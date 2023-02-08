@@ -54,3 +54,6 @@ export const btn_add = "/img/icon/push_add_record.svg"
 export const enter = "/img/icon/check-circle.svg";
 export const create = "/img/icon/alert-circle.svg";
 export const check = "/img/icon/check.svg";
+
+// 마이페이지
+export const x_button = "/img/icon/x_button.svg";
