@@ -132,7 +132,7 @@ export default function OurPick() {
           justify-content: center;
           align-items: center;
           height: 152px;
-          border: 1px solid #d9d9d9;
+          // border: 1px solid #d9d9d9;
           color: ${colors.graySubTitle2};
           font-size: 14px;
           text-align: center;
@@ -151,7 +151,7 @@ export default function OurPick() {
         }
         .emptyPick {
           height: 152px;
-          border: 1px solid #d9d9d9;
+          // border: 1px solid #d9d9d9;
           font-size: 14px;
           color: ${colors.graySubTitle2};
           display: flex;
