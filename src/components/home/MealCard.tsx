@@ -161,6 +161,13 @@ export default function MealCard({
           color: ${colors.graySubTitle2};
           font-size: 14px;
         }
+        .cardImg {
+          background-size: cover;
+          background-position: center;
+          background-image: url(${img});
+          height: 150px;
+          border-radius: 4px 4px 0px 0px;
+        }
         .text-area {
           padding: 8px 12px 11px 12px;
         }
@@ -207,12 +214,6 @@ export default function MealCard({
           float: right;
           color: ${colors.graySubTitle};
           background: ${colors.grayBackgroundSub};
-        }
-        .cardImg {
-          background-size: cover;
-          background-position: center;
-          background-image: url(${img});
-          height: 150px;
         }
       `}</style>
     </>

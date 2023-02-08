@@ -42,7 +42,7 @@ export default function RecipeCard({
       ? "flex"
       : "none";
   const [like, setLike] = useState<boolean | undefined>(() => is_me_liked);
-  const [whoList, setWhoList] = useState(()=>who_liked);
+  const [whoList, setWhoList] = useState(() => who_liked);
   // console.log('?:',whoList);
 
   // console.log(id,type, name, image, comment, title, is_me_liked, who_liked, like)
@@ -80,13 +80,15 @@ export default function RecipeCard({
       if (like) {
         // like 삭제
         fetchData("DELETE");
-        if(who_liked !== undefined){
-          const newWhoList = whoList.filter((val : number) => val !== user.usercharacter);
+        if (who_liked !== undefined) {
+          const newWhoList = whoList.filter(
+            (val: number) => val !== user.usercharacter
+          );
           setWhoList(newWhoList);
         }
       } else {
         fetchData("POST");
-        if(who_liked !== undefined){
+        if (who_liked !== undefined) {
           setWhoList([user.usercharacter, ...whoList]);
         }
       }
@@ -95,21 +97,6 @@ export default function RecipeCard({
       router.push(`${route.detail}${id}`);
     }
   };
-
-  //   useEffect(() => {
-  //     router.events.on('routeChangeStart', (url, { shallow }) => {
-  //           console.log(`routing to ${url}`, `is shallow routing: ${shallow}`);
-  //           if(router.pathname === '/kitchen'){
-  //             console.log('yes');
-  //           }
-  //     });
-
-  //     return () => {
-  //         router.events.off('routeChangeStart', () => {
-  //         console.log('unsubscribed');
-  //         });
-  //     };
-  // }, []);
 
   return (
     <>
@@ -159,6 +146,7 @@ export default function RecipeCard({
           background-size: cover;
           background-position: center;
           background-image: url(${image});
+          border-radius: 4px 4px 0px 0px;
         }
         .itemText {
           height: 65px;
