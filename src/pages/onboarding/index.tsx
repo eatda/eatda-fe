@@ -1,13 +1,9 @@
-import { signIn, signOut, useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-
 import { login } from "../../store/userSlice";
-import { checkTeamDia } from "../../store/teamSlice";
 import { selectUser } from "../../store/userSlice";
-import { selectTeam } from "../../store/teamSlice";
 import { putToken } from "../../store/tokenSlice";
-import { selectToken } from "../../store/tokenSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { route } from "../../assets/route";
 import { illust } from "../../assets/illust";
@@ -17,9 +13,6 @@ export default function SignIn() {
   const session = useSession();
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
-  const token = useSelector(selectToken);
-
-  console.log("session:", session);
 
   const fetchLogin = async () => {
     const URL = `${process.env.NEXT_PUBLIC_API_ROOT}accounts/login/`;
@@ -27,7 +20,6 @@ export default function SignIn() {
       social_id: user.usersocial_id,
       email: user.useremail,
     };
-
     try {
       const data = await fetch(URL, {
         method: "POST",
@@ -37,7 +29,6 @@ export default function SignIn() {
         },
         body: JSON.stringify(bodyData),
       });
-
       const res = await data.json();
       return { data, res };
     } catch (error) {
@@ -48,7 +39,7 @@ export default function SignIn() {
   useEffect(() => {
     async function fetchData() {
       const { data, res }: any = await fetchLogin();
-      console.log('data.status:',data.status);
+      console.log("data.status:", data.status);
       if (data.ok) {
         const reduxData = {
           usersocial_id: user.usersocial_id,
@@ -63,13 +54,12 @@ export default function SignIn() {
         dispatch(putToken({ access_token: res.access_token }));
         console.log("로그인 완료");
         router.replace(route.home, undefined, { shallow: true });
-      } 
-      else if(data.status === 404) {
+      } else if (data.status === 404) {
         console.log(user.usersocial_id);
         console.log("회원가입하기");
         router.replace(route.createPlace, undefined, { shallow: true });
       } else {
-        console.log('로그인 다시 시도');
+        console.log("로그인 다시 시도");
         router.replace(route.onboarding, undefined, { shallow: true });
       }
     }
