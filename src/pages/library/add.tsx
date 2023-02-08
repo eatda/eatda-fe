@@ -51,6 +51,9 @@ export default function Add() {
   const [time, setTime] = useState(today.toISOString().slice(11, 16));
   const [sugar, setSugar] = useState<number>(0);
 
+  function dontClickGraph() {
+    alert("혈당량은 아래 필드에서 입력가능합니다.");
+  }
   function handleMealChange(id: number) {
     const clicked = myMealData.filter((item) => item.id === id)[0];
     const clickedData: SelectedMealType = {
@@ -66,7 +69,11 @@ export default function Add() {
     setTime(newValue);
   }
   function handleSugarChange(value: string) {
-    setSugar(parseInt(value));
+    if (value == "") {
+      setSugar(0);
+    } else {
+      setSugar(parseInt(value));
+    }
   }
 
   function handleSubmit() {
@@ -74,18 +81,23 @@ export default function Add() {
       alert("'내 식단'에서 식단을 선택해 주세요");
     } else if (typeof sugar === "undefined") {
       alert("혈당을 기록해 주세요");
+    } else if (sugar <= 0 || sugar > 300) {
+      alert("혈당량은 0 이상 300 이하의 값만 입력 가능합니다");
     } else {
-      const data = {
+      console.log(sugar);
+      const requestBody = {
         id: selectedMeal.id,
         level: sugar,
         time: time,
       };
-      console.log(data);
-      Post({
+      const { data, res }: any = Post({
         url: "users/blood-sugar-level/",
         token: token.access_token,
-        requestBody: data,
+        requestBody: requestBody,
       });
+      if (typeof data !== "undefined" && data.status === 400) {
+        alert("혈당 입력에 실패했습니다.");
+      }
       router.back();
     }
   }
@@ -96,7 +108,7 @@ export default function Add() {
       <div className="container">
         <div className="today-sugar">
           <div>
-            <div className="intro">
+            <div className="intro" onClick={dontClickGraph}>
               <div className="intro_title">오늘의 혈당</div>
               <div className="intro_sugar">{sugar} mg/dl</div>
               <div className="bar">
