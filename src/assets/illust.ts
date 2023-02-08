@@ -23,4 +23,8 @@ export const illust = {
     empty1: "/img/illust/library_empty1.svg",
     empty2: "/img/illust/library_empty2.svg",
     splash_gif: "/img/illust/splash.gif",
+    survey: "/img/illust/survey.svg",
+    loading: "/img/illust/loading.gif",
+    signuploading: "/img/illust/signuploading.gif",
+    signup_background: "/img/illust/signup_background.svg",
 }

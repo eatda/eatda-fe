@@ -8,6 +8,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import colors from "../../assets/styles";
 import { route } from "../../assets/route";
+import Image from "next/image";
+import { illust } from "../../assets/illust";
 
 interface bodyDataI {
   social_id: string;
@@ -84,7 +86,9 @@ export default function Loading() {
     async function fetchData() {
       const { data, res }: any = await fetchSignup();
       if (data.ok) {
-        setPage(1);
+        setTimeout(() => {
+          setPage(1);
+        }, 5000);
         console.log(res);
         const reduxData = {
           usersocial_id: user.usersocial_id,
@@ -113,6 +117,13 @@ export default function Loading() {
             <div className="textMain">{user.username} 님</div>만을 위한
           </div>
           <div className="textHeader">레시피를 준비 중이에요!</div>
+          <Image
+            alt="character"
+            width={350}
+            height={62}
+            src={illust.loading}
+            priority
+          />
         </div>
       ) : (
         <>
