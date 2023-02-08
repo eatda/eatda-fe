@@ -1,6 +1,5 @@
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
 import Image from "next/image";
 import { illust } from "../assets/illust";
 import { route } from "../assets/route";

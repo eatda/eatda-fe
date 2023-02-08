@@ -1,4 +1,5 @@
 export const route = {
+    root: "/",
     splash: "/onboarding/splash",
     onboarding: "/onboarding",
 

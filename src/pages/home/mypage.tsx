@@ -42,6 +42,12 @@ export default function MyPage() {
   const session = useSession();
 
   useEffect(() => {
+    if (session.status === "unauthenticated") {
+      router.replace(route.root);
+    }
+  }, [session.status]);
+
+  useEffect(() => {
     async function fetchData() {
       const { data, res }: any = await Get({
         url: "users/info/",
@@ -56,12 +62,6 @@ export default function MyPage() {
     }
     fetchData();
   }, []);
-
-  useEffect(() => {
-    if (session.status === "unauthenticated") {
-      router.replace(route.onboarding);
-    }
-  }, [session.status]);
 
   return (
     <>
@@ -115,9 +115,6 @@ export default function MyPage() {
                 <div className="infoStyle">
                   <div className="infoItem">알레르기</div>
                   <div className="infoVal">
-                    {/* {myData?.allergy?.map((allergy, idx) => (
-                    <span key={idx}>{allergy.name}, </span>
-                    ))} */}
                     {myData?.allergy?.map((allergy, idx) => {
                       return myData?.allergy?.length !== idx + 1 ? (
                         <span key={idx}>{allergy.name}, </span>
