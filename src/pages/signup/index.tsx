@@ -130,11 +130,11 @@ export default function Signup() {
     }
   };
 
-  if (page === 0) {
-    setTimeout(() => {
-      setPage((prevNumber) => prevNumber + 1);
-    }, 5000);
-  }
+  // if (page === 0) {
+  //   setTimeout(() => {
+  //     setPage((prevNumber) => prevNumber + 1);
+  //   }, 5000);
+  // }
 
   const getPage = (current: number) => {
     switch (current) {
@@ -155,7 +155,8 @@ export default function Signup() {
               }
               .item {
                 // margin-top: 150px;
-                width: 100%;
+                margin: -80px -20px 0px -20px;
+                width: 390px;
                 height: 100vh;
                 display: flex;
                 flex-direction: column;
@@ -164,9 +165,8 @@ export default function Signup() {
                 text-align: center;
                 // height: 750px;
                 background-image: url(${illust.signup_background});
-                background-size: auto;
+                // background-size: auto;
                 background-position: center;
-                // background: black;
               }
               .text {
                 margin-top: 36px;
@@ -361,7 +361,9 @@ export default function Signup() {
 
   return (
     <>
+      {page >0 &&
       <Navigation text="프로필 설정" />
+      }
       <div className="container">
         {getPage(page)}
         <div className="buttonItem">
