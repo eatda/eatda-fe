@@ -110,6 +110,7 @@ export default function SignIn() {
           justify-content: center;
           align-items: center;
           height: 60px;
+          width: 100%;
           position: fixed;
           bottom: 36px;
           left: 0;
@@ -118,7 +119,7 @@ export default function SignIn() {
         button {
           background: #fbe64d;
           border: none;
-          width: 350px;
+          width: 90%;
           height: 54px;
           font-size: 16px;
           border-radius: 4px;
