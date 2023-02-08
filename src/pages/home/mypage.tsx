@@ -102,33 +102,31 @@ export default function MyPage() {
             <div className="info">
               <div className="infoGroup">
                 <div className="infoStyle">
-                <div className="infoItem">활동량</div>
-                <div className="infoVal">
-                  {typeof myData?.activity === "number"
-                    ? activityData[myData?.activity]
-                    : ""}
-                </div>
+                  <div className="infoItem">활동량</div>
+                  <div className="infoVal">
+                    {typeof myData?.activity === "number"
+                      ? activityData[myData?.activity]
+                      : ""}
+                  </div>
                 </div>
               </div>
               <div className="line"></div>
               <div className="infoGroup">
                 <div className="infoStyle">
-                <div className="infoItem">알레르기</div>
-                <div className="infoVal">
-                  {/* {myData?.allergy?.map((allergy, idx) => (
+                  <div className="infoItem">알레르기</div>
+                  <div className="infoVal">
+                    {/* {myData?.allergy?.map((allergy, idx) => (
                     <span key={idx}>{allergy.name}, </span>
                     ))} */}
-                  {myData?.allergy?.map((allergy, idx) => {
-                    return(
-                      myData?.allergy?.length !== idx+1
-                      ?
-                      <span key={idx}>{allergy.name}, </span>
-                      :
-                      <span key={idx}>{allergy.name} </span>
-                    )
-                  })}
+                    {myData?.allergy?.map((allergy, idx) => {
+                      return myData?.allergy?.length !== idx + 1 ? (
+                        <span key={idx}>{allergy.name}, </span>
+                      ) : (
+                        <span key={idx}>{allergy.name} </span>
+                      );
+                    })}
+                  </div>
                 </div>
-              </div>
               </div>
             </div>
           </>
@@ -166,7 +164,12 @@ export default function MyPage() {
         <button className="buttonStyle">
           <Image alt="" width={24} height={24} src={notice} priority />
           &nbsp;
-          <div className="textButton">서비스 평가 및 정식 출시 알림 받기</div>
+          <div
+            className="textButton"
+            onClick={() => window.open("https://forms.gle/SoX5oYZTceUMA5Br6")}
+          >
+            서비스 평가 및 정식 출시 알림 받기
+          </div>
           <div className="go">
             <Image alt="" width={32} height={32} src={next} priority />
           </div>
@@ -231,7 +234,7 @@ export default function MyPage() {
           align-items: center;
           justify-content: center;
         }
-        .infoStyle{
+        .infoStyle {
           display: flex;
           width: 90%;
         }
