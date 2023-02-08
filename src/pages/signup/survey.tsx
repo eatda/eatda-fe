@@ -373,24 +373,30 @@ export default function Survey({ allergyResponse }: surveyI) {
       case 4:
         return (
           <div className="item">
+            <div className="image">
             <Image
               alt="character"
-              width={184}
-              height={194}
-              src={illust.signup}
+              width={254.49}
+              height={206.24}
+              src={illust.survey}
               priority
-            />
+              />
+            </div>
             <div className="bar" />
             <div className="textMain">이제 습관 관련</div>
             <div className="textMain">추가 질문을 드리겠습니다.</div>
             <div className="textSub">거의 다 왔어요!!</div>
             <style jsx>{`
+              .image {
+                margin-bottom: -40px;
+              }
               .item {
-                margin-top: 50px;
+                margin-top: 60px;
                 display: flex;
                 align-items: center;
                 flex-direction: column;
                 text-align: center;
+                // height: 100%;
               }
               .textMain {
                 display: flex;
@@ -398,6 +404,7 @@ export default function Survey({ allergyResponse }: surveyI) {
                 font-weight: 600;
               }
               .textSub {
+                margin-top: 8px;
                 font-size: 16px;
                 color: #878787;
               }
@@ -536,9 +543,34 @@ export default function Survey({ allergyResponse }: surveyI) {
         );
       default:
         return(
-          <>
-          잠시만 기다려주세요.
-          </>
+          <div className="item">
+            <img className="animated-gif" src={illust.signuploading}></img>
+            <div className="text">
+              잠시만 기다려주세요!
+            </div>
+            <style jsx>{`
+              .animated-gif {
+                margin-bottom: -20px;
+                width: 100%;
+                height: auto;
+              }
+              .item {
+                margin-top: -100px;
+                width: 100%;
+                height: 100vh;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+              }
+              .text {
+                margin-top: 36px;
+                font-size: 24px;
+                font-weight: 600;
+              }
+            `}</style>
+          </div>
         )
     }
   };
