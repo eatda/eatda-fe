@@ -15,7 +15,6 @@ import HomeSlider from "../../components/home/HomeSlider";
 import { character } from "../../assets/illust";
 import { logo } from "../../assets/illust";
 import { route } from "../../assets/route";
-import Hr from "../../components/common/Hr";
 
 interface dietI {
   diet:
@@ -50,8 +49,6 @@ interface bloodI {
 }
 
 export default function Home() {
-  console.log("pwa 배포 완료");
-
   const router = useRouter();
   const token = useSelector(selectToken);
   const user = useSelector(selectUser);
@@ -146,7 +143,6 @@ export default function Home() {
               )}
             </HomeSlider>
           )}
-          <Hr />
         </div>
         <div className="box">
           <div className="title">오늘의 식후 혈당</div>
@@ -158,18 +154,25 @@ export default function Home() {
                     key={i}
                     is_exist={v.is_exist}
                     timeline={v.data.timeline}
-                    value={v.data.level}
+                    level={v.data.level}
                     time={v.data.time}
+                    range={v.data.range}
                     is_me_liked={v.is_me_liked}
                     who_liked={v.who_liked}
                   />
                 ) : (
-                  <SugarCard key={i} is_exist={v.is_exist} />
+                  <SugarCard
+                    key={i}
+                    timeline={0}
+                    level={0}
+                    time={"0"}
+                    range={0}
+                    is_exist={v.is_exist}
+                  />
                 )
               )}
             </HomeSlider>
           )}
-          <Hr />
         </div>
         <div className="box">
           <WeeklySummary />
@@ -190,11 +193,13 @@ export default function Home() {
           padding: 0px 20px;
           height: 64px;
         }
+        .box {
+          margin-bottom: 6px;
+        }
         .container {
           display: flex;
           flex-direction: column;
           margin-top: -10px;
-          margin-bottom: 10px;
         }
         .title {
           font-weight: 700;

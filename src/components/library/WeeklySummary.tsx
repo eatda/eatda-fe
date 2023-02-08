@@ -1,8 +1,9 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { fontFamily } from "../../assets/font";
 import { ic_calendar } from "../../assets/icon";
-import colors from "../../assets/styles";
+import colors, { sugarLevelColor } from "../../assets/styles";
 import { Get } from "../../hooks/Fetch";
 import { selectToken } from "../../store/tokenSlice";
 
@@ -42,9 +43,13 @@ export default function WeeklySummary({ duration }: { duration?: boolean }) {
   const durationText = `20${weeklyData?.start} ~ ${weeklyData?.end}`;
 
   const sugarLevelList = [
-    { color: colors.mainYellow, text: "저혈당", value: weeklyData?.low },
-    { color: colors.mainOrange, text: "정상혈당", value: weeklyData?.common },
-    { color: colors.subRed, text: "고혈당", value: weeklyData?.high },
+    { color: sugarLevelColor[0], text: "저혈당", value: weeklyData?.low },
+    {
+      color: sugarLevelColor[1],
+      text: "정상혈당",
+      value: weeklyData?.common,
+    },
+    { color: sugarLevelColor[2], text: "고혈당", value: weeklyData?.high },
   ];
 
   return (
@@ -115,6 +120,7 @@ export default function WeeklySummary({ duration }: { duration?: boolean }) {
           font-size: 12px;
           color: ${colors.graySubTitle};
           text-align: right;
+          font-family: ${fontFamily.normal};
         }
 
         // 주간 혈당 요약

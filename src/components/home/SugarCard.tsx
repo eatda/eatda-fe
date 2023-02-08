@@ -1,4 +1,4 @@
-import colors from "../../assets/styles";
+import colors, { sugarLevelColor } from "../../assets/styles";
 import Image from "next/image";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
@@ -6,16 +6,13 @@ import { selectToken } from "../../store/tokenSlice";
 import { selectUser } from "../../store/userSlice";
 import { Post, Delete } from "../../hooks/Fetch";
 import { useRouter } from "next/router";
-import { ic_heart, ic_measure, ic_time, ic_like } from "../../assets/icon";
+import { ic_time, ic_like } from "../../assets/icon";
 import { character } from "../../assets/illust";
 import { route } from "../../assets/route";
+import { SugarRecordType } from "../../interface/sugarRecord";
 
-interface SugarCardProps {
-  is_exist?: boolean;
-  timeline?: number;
-  value?: number;
-  time?: string;
-
+interface SugarCardProps extends SugarRecordType {
+  is_exist: boolean;
   is_me_liked?: boolean;
   who_liked?: [] | any;
 }
@@ -23,13 +20,14 @@ interface SugarCardProps {
 export default function SugarCard({
   is_exist,
   timeline,
-  value,
+  level,
   time,
+  range,
   is_me_liked,
   who_liked,
 }: SugarCardProps) {
   const [like, setLike] = useState<boolean | undefined>(() => is_me_liked);
-  const [whoList, setWhoList] = useState(()=>who_liked);
+  const [whoList, setWhoList] = useState(() => who_liked);
   const router = useRouter();
   const token = useSelector(selectToken);
   const user = useSelector(selectUser);
@@ -72,13 +70,15 @@ export default function SugarCard({
     }
     if (like) {
       fetchData("DELETE");
-      if(who_liked !== undefined){
-        const newWhoList = whoList.filter((val : number) => val !== user.usercharacter);
+      if (who_liked !== undefined) {
+        const newWhoList = whoList.filter(
+          (val: number) => val !== user.usercharacter
+        );
         setWhoList(newWhoList);
       }
     } else {
       fetchData("POST");
-      if(who_liked !== undefined){
+      if (who_liked !== undefined) {
         setWhoList([user.usercharacter, ...whoList]);
       }
     }
@@ -90,15 +90,18 @@ export default function SugarCard({
       {is_exist ? (
         <div className="card">
           <div className="textValue">
-            <Image
-              alt="character"
-              width={16}
-              height={16}
-              src={ic_measure}
-              priority
-            />
+            <div
+              className="circle"
+              style={{
+                color: sugarLevelColor[range],
+                fontSize: "8px",
+                marginLeft: "4px",
+              }}
+            >
+              ●
+            </div>
             &nbsp;
-            {value}mg/dl
+            {level}mg/dl
           </div>
           <div className="textTime">
             <Image

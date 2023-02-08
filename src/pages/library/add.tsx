@@ -1,6 +1,6 @@
 import Navigation from "../../components/layout/Navigation";
 import colors from "../../assets/styles";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
@@ -9,6 +9,7 @@ import { Get, Post } from "../../hooks/Fetch";
 import FooterButton from "../../components/common/FooterButton";
 import { DietType } from "../../interface/diet";
 import { down, up } from "../../assets/icon";
+import { fontFamily } from "../../assets/font";
 
 const offset = new Date().getTimezoneOffset() * 60000;
 const today = new Date(Date.now() - offset);
@@ -30,6 +31,7 @@ export default function Add() {
   const router = useRouter();
   const token = useSelector(selectToken);
   const [myMealData, setMyMealData] = useState<MyMealDataType[]>([]);
+  const sugarInput = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     async function fetchMyMealData() {
@@ -51,6 +53,9 @@ export default function Add() {
   const [time, setTime] = useState(today.toISOString().slice(11, 16));
   const [sugar, setSugar] = useState<number>(0);
 
+  function dontClickGraph() {
+    sugarInput.current?.focus();
+  }
   function handleMealChange(id: number) {
     const clicked = myMealData.filter((item) => item.id === id)[0];
     const clickedData: SelectedMealType = {
@@ -66,7 +71,11 @@ export default function Add() {
     setTime(newValue);
   }
   function handleSugarChange(value: string) {
-    setSugar(parseInt(value));
+    if (value == "") {
+      setSugar(0);
+    } else {
+      setSugar(parseInt(value));
+    }
   }
 
   function handleSubmit() {
@@ -74,18 +83,23 @@ export default function Add() {
       alert("'내 식단'에서 식단을 선택해 주세요");
     } else if (typeof sugar === "undefined") {
       alert("혈당을 기록해 주세요");
+    } else if (sugar <= 0 || sugar > 300) {
+      alert("혈당량은 0 이상 300 이하의 값만 입력 가능합니다");
     } else {
-      const data = {
+      console.log(sugar);
+      const requestBody = {
         id: selectedMeal.id,
         level: sugar,
         time: time,
       };
-      console.log(data);
-      Post({
+      const { data, res }: any = Post({
         url: "users/blood-sugar-level/",
         token: token.access_token,
-        requestBody: data,
+        requestBody: requestBody,
       });
+      if (typeof data !== "undefined" && data.status === 400) {
+        alert("혈당 입력에 실패했습니다.");
+      }
       router.back();
     }
   }
@@ -96,7 +110,7 @@ export default function Add() {
       <div className="container">
         <div className="today-sugar">
           <div>
-            <div className="intro">
+            <div className="intro" onClick={dontClickGraph}>
               <div className="intro_title">오늘의 혈당</div>
               <div className="intro_sugar">{sugar} mg/dl</div>
               <div className="bar">
@@ -193,6 +207,7 @@ export default function Add() {
                 min="0"
                 max="300"
                 onChange={(e) => handleSugarChange(e.target.value)}
+                ref={sugarInput}
               />
               mg/dl
             </div>
@@ -215,7 +230,6 @@ export default function Add() {
         }
 
         .item {
-          // gap: 12px;
           margin-top: 12px;
           display: flex;
           align-items: center;
@@ -229,7 +243,8 @@ export default function Add() {
           font-weight: 700;
         }
         .date {
-          background-color: ${colors.blackSub};
+          background-color: ${colors.grayBackground};
+          border: none;
         }
         .date span {
           color: ${colors.graySubTitle};
@@ -268,7 +283,7 @@ export default function Add() {
           height: 27px;
           font-size: 16px;
           border: none;
-          font-family: "Pretendard-Regular";
+          font-family: ${fontFamily.normal};
         }
         input[type="number"] {
           text-align: right;
@@ -278,7 +293,7 @@ export default function Add() {
           height: 27px;
           font-size: 16px;
           border: none;
-          font-family: "Pretendard-Regular";
+          font-family: ${fontFamily.normal};
         }
 
         .intro {

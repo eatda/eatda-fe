@@ -1,5 +1,4 @@
 import colors from "../../assets/styles";
-import Header from "../../components/layout/Header";
 import { selectToken } from "../../store/tokenSlice";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
@@ -7,10 +6,10 @@ import { selectFilterQuery } from "../../store/filterSlice";
 import PushPageButton from "../../components/common/PushPageButton";
 import RecipeList from "../../components/kitchen/RecipeList";
 import { btn_filter } from "../../assets/icon";
-import { route } from "../../assets/route";
 import Hr from "../../components/common/Hr";
 import Image from "next/image";
 import { illust } from "../../assets/illust";
+import { Get } from "../../hooks/Fetch";
 
 export default function Recipe() {
   const token = useSelector(selectToken);
@@ -18,46 +17,12 @@ export default function Recipe() {
   const [filterList, setFilterList] = useState();
   const [mineList, setMineList] = useState<[] | any>([]);
 
-  const fetchMine = async () => {
-    const URL = `${process.env.NEXT_PUBLIC_API_ROOT}users/diet/fit/`;
-    try {
-      const data = await fetch(URL, {
-        method: "GET",
-        credentials: "include",
-        headers: {
-          Authorization: token.access_token,
-        },
-      });
-
-      const res = await data.json();
-      return { data, res };
-    } catch (error) {
-      return error;
-    }
-  };
-
-  const fetchFilter = async () => {
-    const URL = `${process.env.NEXT_PUBLIC_API_ROOT}diets?${filterQuery}`;
-    try {
-      const data = await fetch(URL, {
-        method: "GET",
-        credentials: "include",
-        headers: {
-          Authorization: token.access_token,
-        },
-      });
-
-      const res = await data.json();
-
-      return { data, res };
-    } catch (error) {
-      return error;
-    }
-  };
-
   useEffect(() => {
     async function fetchDataFilter() {
-      const { data, res }: any = await fetchFilter();
+      const { data, res }: any = await Get({
+        url: `diets?${filterQuery}`,
+        token: token.access_token,
+      });
       if (data.ok) {
         setFilterList(res);
       } else {
@@ -65,7 +30,10 @@ export default function Recipe() {
       }
     }
     async function fetchDataMine() {
-      const { data, res }: any = await fetchMine();
+      const { data, res }: any = await Get({
+        url: "users/diet/fit/",
+        token: token.access_token,
+      });
       if (data.ok) {
         setMineList(res);
       } else {
@@ -94,8 +62,8 @@ export default function Recipe() {
                 priority
               />
               <div className="text">
-              식사 후 혈당을 기록하여 <br />
-              체질 맞춤형 레시피를 추천 받아요!
+                식사 후 혈당을 기록하여 <br />
+                체질 맞춤형 레시피를 추천 받아요!
               </div>
             </div>
           )}

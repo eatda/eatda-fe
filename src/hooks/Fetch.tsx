@@ -1,10 +1,14 @@
 interface FetchProps {
   url: string;
-  token: string;
+  token?: string;
   requestBody?: any;
 }
 
-export async function Get({ url, token }: FetchProps) {
+interface GetFetchProps extends FetchProps {
+  token: string;
+}
+
+export async function Get({ url, token }: GetFetchProps) {
   try {
     const data = await fetch(`${process.env.NEXT_PUBLIC_API_ROOT}${url}`, {
       method: "GET",
@@ -19,20 +23,37 @@ export async function Get({ url, token }: FetchProps) {
 }
 
 export async function Post({ url, token, requestBody }: FetchProps) {
-  try {
-    const data = await fetch(`${process.env.NEXT_PUBLIC_API_ROOT}${url}`, {
-      method: "POST",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: token,
-      },
-      body: JSON.stringify(requestBody),
-    });
-    const res = await data.json();
-    return { data, res };
-  } catch (error) {
-    return error;
+  if (token) {
+    try {
+      const data = await fetch(`${process.env.NEXT_PUBLIC_API_ROOT}${url}`, {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token,
+        },
+        body: JSON.stringify(requestBody),
+      });
+      const res = await data.json();
+      return { data, res };
+    } catch (error) {
+      return error;
+    }
+  } else {
+    try {
+      const data = await fetch(`${process.env.NEXT_PUBLIC_API_ROOT}${url}`, {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(requestBody),
+      });
+      const res = await data.json();
+      return { data, res };
+    } catch (error) {
+      return error;
+    }
   }
 }
 

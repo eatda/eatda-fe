@@ -7,7 +7,6 @@ import BestWorstCards from "../../components/library/BestWorstCards";
 import WeeklySummary from "../../components/library/WeeklySummary";
 import { DietType } from "../../interface/diet";
 import Image from "next/image";
-import { character } from "../../assets/illust";
 import Hr from "../../components/common/Hr";
 import { illust } from "../../assets/illust";
 
@@ -47,86 +46,35 @@ export default function Report() {
         <>
           <div className="box">
             <div className="title"> 식후 혈당 낮았던 식단 TOP3</div>
-            {
-              lowHighData &&
-              lowHighData.best &&
-              lowHighData.best.length ===0 &&
-              <div className="empty">
-                <div className="emptyImg">
-                  <Image
-                    src={illust.empty1}
-                    width={98}
-                    height={62}
-                    alt="character"
-                  />
-                </div>
-                <div className="emptyText">
-                  지난 7일간 3회 이상 식후 혈당을 입력한 경우에만 <br />
-                  열람 가능합니다.
-                </div>
-              </div>
-            }
-            {lowHighData && <BestWorstCards meals={lowHighData.best} />}
-            {/* {lowHighData ? (
+            {lowHighData?.best.length == 3 ? (
               <BestWorstCards meals={lowHighData.best} />
             ) : (
               <div className="empty">
                 <div className="emptyImg">
-                  <Image
-                    src={illust.empty1}
-                    width={98}
-                    height={62}
-                    alt="character"
-                  />
+                  <Image src={illust.empty1} width={98} height={62} alt="" />
                 </div>
                 <div className="emptyText">
                   지난 7일간 3회 이상 식후 혈당을 입력한 경우에만 <br />
                   열람 가능합니다.
                 </div>
               </div>
-            )} */}
+            )}
           </div>
           <div className="box">
             <div className="title"> 식후 혈당 높았던 식단 TOP3</div>
-            {
-              lowHighData &&
-              lowHighData.worst &&
-              lowHighData.worst.length ===0 &&
-              <div className="empty">
-                <div className="emptyImg">
-                  <Image
-                    src={illust.empty2}
-                    width={101}
-                    height={68}
-                    alt="character"
-                  />
-                </div>
-                <div className="emptyText">
-                  지난 7일간 3회 이상 식후 혈당을 입력한 경우에만 <br />
-                  열람 가능합니다.
-                </div>
-              </div>
-            }
-            {lowHighData && <BestWorstCards meals={lowHighData.worst} />}
-
-            {/* {lowHighData ? (
+            {lowHighData?.worst.length == 3 ? (
               <BestWorstCards meals={lowHighData.worst} />
             ) : (
               <div className="empty">
                 <div className="emptyImg">
-                  <Image
-                    src={illust.empty2}
-                    width={101}
-                    height={68}
-                    alt="character"
-                  />
+                  <Image src={illust.empty2} width={101} height={68} alt="" />
                 </div>
                 <div className="emptyText">
                   지난 7일간 3회 이상 식후 혈당을 입력한 경우에만 <br />
                   열람 가능합니다.
                 </div>
               </div>
-            )} */}
+            )}
           </div>
         </>
       </div>
@@ -145,11 +93,10 @@ export default function Report() {
         .empty {
           display: flex;
           flex-direction: column;
-          align-item: center;
+          align-items: center;
           justify-content: center;
           text-align: center;
           height: 150px;
-          // border: 1px solid #d9d9d9;
         }
         .emptyText {
           font-size: 14px;

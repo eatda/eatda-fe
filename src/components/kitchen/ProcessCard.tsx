@@ -1,3 +1,4 @@
+import { fontFamily } from "../../assets/font";
 import colors from "../../assets/styles";
 
 interface ProcessCardProps {
@@ -45,10 +46,11 @@ export default function ProcessCard({
           margin-bottom: 8.6px;
         }
         .text {
-          font-weight: 500;
           font-size: 20px;
+          font-family: ${fontFamily.normal};
         }
         .highlight {
+          font-family: ${fontFamily.medium};
           color: ${colors.mainOrange};
         }
       `}</style>

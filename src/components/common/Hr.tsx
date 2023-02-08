@@ -7,9 +7,8 @@ export default function Hr() {
       <style jsx>{`
         .hr {
           margin: 8px -25px 16px -25px;
-          height: 4px;
-          // background-color: ${colors.grayBackground};
-          background-color: none;
+          height: 8px;
+          background-color: ${colors.grayBackground};
         }
       `}</style>
     </>
