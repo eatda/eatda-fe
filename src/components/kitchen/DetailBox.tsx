@@ -42,9 +42,9 @@ export default function DetailBox({ idx, type, content }: DetailBoxProps) {
           {type === "ingredient" && <div className="tag">1인분</div>}
           <div>
             {isOpen ? (
-              <Image alt="down" width={16} height={10} src={down} priority />
-            ) : (
               <Image alt="up" width={16} height={10} src={up} priority />
+              ) : (
+              <Image alt="down" width={16} height={10} src={down} priority />
             )}
           </div>
         </div>
