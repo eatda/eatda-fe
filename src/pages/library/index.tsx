@@ -74,7 +74,6 @@ export default function Library() {
                 </div>
               ))}
             </div>
-            <Hr />
           </div>
         ))}
       </div>
@@ -89,7 +88,6 @@ export default function Library() {
         }
         .record-style {
           width: 100%;
-
         }
         .empty {
           color: ${colors.graySubTitle};

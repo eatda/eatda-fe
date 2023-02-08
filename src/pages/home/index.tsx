@@ -146,7 +146,6 @@ export default function Home() {
               )}
             </HomeSlider>
           )}
-          <Hr />
         </div>
         <div className="box">
           <div className="title">오늘의 식후 혈당</div>
@@ -169,7 +168,6 @@ export default function Home() {
               )}
             </HomeSlider>
           )}
-          <Hr />
         </div>
         <div className="box">
           <WeeklySummary />
