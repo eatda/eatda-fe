@@ -163,7 +163,14 @@ export default function Home() {
                     who_liked={v.who_liked}
                   />
                 ) : (
-                  <SugarCard key={i} is_exist={v.is_exist} />
+                  <SugarCard
+                    key={i}
+                    timeline={0}
+                    level={0}
+                    time={"0"}
+                    range={0}
+                    is_exist={v.is_exist}
+                  />
                 )
               )}
             </HomeSlider>
