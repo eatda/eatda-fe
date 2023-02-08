@@ -257,7 +257,7 @@ export default function MyPage() {
 
         .textButton {
           color: ${colors.grayTextBlack};
-          font-size: 16px;
+          font-size: 15px;
           font-weight: 600;
         }
 
