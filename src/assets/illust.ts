@@ -38,4 +38,5 @@ export const illust = {
     signup_background: "/img/illust/signup_background.svg",
     loading_ch: "/img/illust/loading_ch.svg",
     timer: "/img/illust/timer.svg",
+    library_empty: "/img/illust/library_empty.svg",
 }

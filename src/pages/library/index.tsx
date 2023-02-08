@@ -10,6 +10,7 @@ import { SugarRecordType } from "../../interface/sugarRecord";
 import { btn_add, ic_measure, ic_time } from "../../assets/icon";
 import Image from "next/image";
 import Hr from "../../components/common/Hr";
+import { illust } from "../../assets/illust";
 
 interface RecordDataType {
   date: string;
@@ -42,10 +43,20 @@ export default function Library() {
         <PushPageButton name="필터" src={btn_add} page="/library/add" />
       )}
       <div className="container">
-        {recordData.length === 0 && (
+        {
+          recordData.length === 0 && (
           <div className="empty">
+            <Image
+              alt="character"
+              width={305}
+              height={76}
+              src={illust.library_empty}
+              priority
+            />
+            <div className="text">
             새로운 혈당 수치 추가를 위해
             <br />+ 버튼을 눌러주세요!
+            </div>
           </div>
         )}
         {recordData.map((day, idx) => (
@@ -74,7 +85,7 @@ export default function Library() {
                 </div>
               ))}
             </div>
-            <Hr />
+            {/* <Hr /> */}
           </div>
         ))}
       </div>
@@ -94,6 +105,15 @@ export default function Library() {
         .empty {
           color: ${colors.graySubTitle};
           text-align: center;
+          height: 100vh;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          margin-top: -150px;
+          justify-content: center;
+        }
+        .text {
+          margin-top: 10px;
         }
         .date {
           font-weight: 700;

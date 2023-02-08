@@ -29,6 +29,7 @@ export default function Report() {
       });
       if (data.ok) {
         setLowHighData(res);
+        console.log(res, data);
       } else {
         console.log("low high data error");
       }
@@ -46,7 +47,27 @@ export default function Report() {
         <>
           <div className="box">
             <div className="title"> 식후 혈당 낮았던 식단 TOP3</div>
-            {lowHighData ? (
+            {
+              lowHighData &&
+              lowHighData.best &&
+              lowHighData.best.length ===0 &&
+              <div className="empty">
+                <div className="emptyImg">
+                  <Image
+                    src={illust.empty1}
+                    width={98}
+                    height={62}
+                    alt="character"
+                  />
+                </div>
+                <div className="emptyText">
+                  지난 7일간 3회 이상 식후 혈당을 입력한 경우에만 <br />
+                  열람 가능합니다.
+                </div>
+              </div>
+            }
+            {lowHighData && <BestWorstCards meals={lowHighData.best} />}
+            {/* {lowHighData ? (
               <BestWorstCards meals={lowHighData.best} />
             ) : (
               <div className="empty">
@@ -62,19 +83,33 @@ export default function Report() {
                   지난 7일간 3회 이상 식후 혈당을 입력한 경우에만 <br />
                   열람 가능합니다.
                 </div>
-                {/* <Image
-                src={illust.report}
-                width={300}
-                height={150}
-                alt="지난 7일간 3회 이상 식후 혈당을 입력한 경우에만
-열람 가능합니다."
-              /> */}
               </div>
-            )}
+            )} */}
           </div>
           <div className="box">
             <div className="title"> 식후 혈당 높았던 식단 TOP3</div>
-            {lowHighData ? (
+            {
+              lowHighData &&
+              lowHighData.worst &&
+              lowHighData.worst.length ===0 &&
+              <div className="empty">
+                <div className="emptyImg">
+                  <Image
+                    src={illust.empty2}
+                    width={101}
+                    height={68}
+                    alt="character"
+                  />
+                </div>
+                <div className="emptyText">
+                  지난 7일간 3회 이상 식후 혈당을 입력한 경우에만 <br />
+                  열람 가능합니다.
+                </div>
+              </div>
+            }
+            {lowHighData && <BestWorstCards meals={lowHighData.worst} />}
+
+            {/* {lowHighData ? (
               <BestWorstCards meals={lowHighData.worst} />
             ) : (
               <div className="empty">
@@ -90,15 +125,8 @@ export default function Report() {
                   지난 7일간 3회 이상 식후 혈당을 입력한 경우에만 <br />
                   열람 가능합니다.
                 </div>
-                {/* <Image
-                src={illust.report}
-                width={300}
-                height={150}
-                alt="지난 7일간 3회 이상 식후 혈당을 입력한 경우에만
-                열람 가능합니다."
-              /> */}
               </div>
-            )}
+            )} */}
           </div>
         </>
       </div>
