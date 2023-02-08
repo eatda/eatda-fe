@@ -53,7 +53,6 @@ export default function Detail({ recipeData }: DetailProps) {
       />
       <style jsx>{`
         .box {
-          // background: black;
           width: 350px;
         }
         .image {

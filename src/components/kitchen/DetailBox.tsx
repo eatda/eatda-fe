@@ -43,7 +43,7 @@ export default function DetailBox({ idx, type, content }: DetailBoxProps) {
           <div>
             {isOpen ? (
               <Image alt="up" width={16} height={10} src={up} priority />
-              ) : (
+            ) : (
               <Image alt="down" width={16} height={10} src={down} priority />
             )}
           </div>
@@ -74,7 +74,7 @@ export default function DetailBox({ idx, type, content }: DetailBoxProps) {
               </div>
             )}
             {type == "tip" && content.tip && (
-              <div className="list">
+              <div className="list tip">
                 {content.tip.map((item, idx) => (
                   <div key={idx} className="paragraph">
                     <div className="subtitle">
@@ -140,12 +140,17 @@ export default function DetailBox({ idx, type, content }: DetailBoxProps) {
           text-align: right;
         }
 
+        .tip {
+          padding: 10px 20px;
+        }
         .paragraph {
-          padding: 20px 0px;
+          padding: 10px 0px;
+          line-height: 21px;
         }
         .subtitle {
           color: ${colors.mainOrange};
           font-weight: 700;
+          margin-bottom: 4px;
         }
         .text {
           color: ${colors.graySubTitle};
