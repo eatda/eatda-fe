@@ -6,19 +6,18 @@ import { illust } from "../assets/illust";
 import { route } from "../assets/route";
 
 export default function Home() {
-  console.log("pwa 배포 완료");
   const router = useRouter();
-  console.log(router);
   const session = useSession();
-  useEffect(() => {
-    if (session.status == "authenticated") {
+
+  if (session.status == "authenticated") {
+    setTimeout(() => {
       router.replace(route.home, undefined, { shallow: true });
-    } else {
-      setTimeout(() => {
-        router.replace(route.onboarding, undefined, { shallow: true });
-      }, 5000);
-    }
-  }, []);
+    }, 2000);
+  } else if (session.status === "unauthenticated") {
+    setTimeout(() => {
+      router.replace(route.onboarding, undefined, { shallow: true });
+    }, 5000);
+  }
 
   return (
     <div className="container">
