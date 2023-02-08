@@ -130,11 +130,11 @@ export default function Signup() {
     }
   };
 
-  if (page === 0) {
-    setTimeout(() => {
-      setPage((prevNumber) => prevNumber + 1);
-    }, 5000);
-  }
+  // if (page === 0) {
+  //   setTimeout(() => {
+  //     setPage((prevNumber) => prevNumber + 1);
+  //   }, 5000);
+  // }
 
   const getPage = (current: number) => {
     switch (current) {
@@ -149,13 +149,13 @@ export default function Signup() {
             </div>
             <style jsx>{`
               .animated-gif {
-                margin-bottom: -20px;
+                margin-bottom: -30px;
                 width: 100%;
                 height: auto;
               }
               .item {
                 // margin-top: 150px;
-                margin: -80px -20px 0px -20px;
+                margin: -66px -20px 0px -20px;
                 width: 390px;
                 height: 100vh;
                 display: flex;

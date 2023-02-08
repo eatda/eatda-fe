@@ -27,4 +27,5 @@ export const illust = {
     loading: "/img/illust/loading.gif",
     signuploading: "/img/illust/signuploading.gif",
     signup_background: "/img/illust/signup_background.svg",
+    loading_ch: "/img/illust/loading_ch.svg",
 }
