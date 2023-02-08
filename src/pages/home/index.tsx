@@ -195,11 +195,13 @@ export default function Home() {
           padding: 0px 20px;
           height: 64px;
         }
+        .box {
+          margin-bottom: 6px;
+        }
         .container {
           display: flex;
           flex-direction: column;
           margin-top: -10px;
-          margin-bottom: 10px;
         }
         .title {
           font-weight: 700;

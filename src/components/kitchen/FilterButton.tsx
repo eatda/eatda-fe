@@ -41,7 +41,6 @@ export default function FilterButton({
           display: flex;
           justify-content: center;
           align-items: center;
-          width: 48px;
           height: 83px;
           text-align: center;
           margin: 15px 0px;
@@ -52,7 +51,6 @@ export default function FilterButton({
           align-items: center;
           justify-content: center;
           padding: 8px;
-          margin-bottom: 4px;
         }
         .selected .icon {
           border-radius: 100%;
@@ -64,6 +62,9 @@ export default function FilterButton({
           color: black;
         }
 
+        .name {
+          margin-top: 4px;
+        }
         .selected .name {
           color: ${colors.mainOrange};
         }

@@ -8,6 +8,7 @@ import { character } from "../../assets/illust";
 import { ic_heart } from "../../assets/icon";
 import { route } from "../../assets/route";
 import { selectUser } from "../../store/userSlice";
+import { fontFamily } from "../../assets/font";
 
 interface RecipeCardType {
   id: number;
@@ -182,10 +183,10 @@ export default function RecipeCard({
         .textComment {
           margin-left: 6px;
           font-size: 14px;
-          font-weight: 600;
-          color: ${colors.graySubTitle2};
+          font-family: ${fontFamily.normal};
+          color: ${colors.graySubTitle};
           margin-top: 10px;
-          margin-bottom: 2px;
+          margin-bottom: 5px;
         }
         .textTitle {
           margin-left: 6px;
