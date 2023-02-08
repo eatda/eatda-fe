@@ -110,7 +110,6 @@ export default function Filter({ filterData }: FilterProps) {
         .title {
           font-weight: 700;
           font-size: 20px;
-          margin: 20px 0px;
         }
         .filters {
           display: flex;
