@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import colors from "../../assets/styles";
 import { copyCode } from "../../hooks/CopyClipBoard";
+import Image from "next/image";
+import { copy, create } from "../../assets/icon";
 
 interface IChild {
   data: boolean;
@@ -26,11 +28,27 @@ const ModalBasic = ({ data, setData, group }: IChild) => {
             초대코드를 복사하여 가족에게 공유하세요!
             </div> */}
         <div className="code">
-          <div className="sub">초대코드를 복사하여 가족에게 공유하세요!</div>
+          <div className="sub">
+          <Image
+            alt="place"
+            width={16}
+            height={16}
+            src={create}
+            priority
+          />
+          초대코드를 복사하여 가족에게 공유하세요!
+          </div>
           <div className="main">{group}</div>
         </div>
       </div>
       <div className="copy" onClick={() => copyCode(group)}>
+        <Image
+          alt="copy"
+          width={24}
+          height={24}
+          src={copy.white}
+          priority
+        /> &nbsp;
         링크 복사하기
       </div>
       <style jsx>{`
@@ -76,6 +94,9 @@ const ModalBasic = ({ data, setData, group }: IChild) => {
         }
 
         .copy {
+          display: flex;
+          align-items: center;
+          justify-content: center;
           margin-top: 5px;
           width: 95%;
           height: 40px;
@@ -106,6 +127,9 @@ const ModalBasic = ({ data, setData, group }: IChild) => {
           letter-spacing: 4px;
         }
         .sub {
+          display: flex;
+          justify-content: center;
+          align-items: center;
           color: ${colors.graySubTitle2};
           font-size: 12px;
           font-weight: 600;
