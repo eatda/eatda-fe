@@ -535,7 +535,11 @@ export default function Survey({ allergyResponse }: surveyI) {
           </div>
         );
       default:
-        break;
+        return(
+          <>
+          잠시만 기다려주세요.
+          </>
+        )
     }
   };
   return (

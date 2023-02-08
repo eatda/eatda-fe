@@ -318,6 +318,12 @@ export default function Signup() {
             `}</style>
           </div>
         );
+      default:
+        return(
+          <>
+          잠시만 기다려주세요.
+          </>
+        )
     }
   };
 
