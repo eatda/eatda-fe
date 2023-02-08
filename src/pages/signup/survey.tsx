@@ -421,7 +421,7 @@ export default function Survey({ allergyResponse }: surveyI) {
             </div>
             {activityData.map((v, i) => {
               return (
-                <div key={i}>
+                <div className="activityCard" key={i}>
                   <RadioBox
                     name="activity"
                     value={i}
@@ -434,6 +434,9 @@ export default function Survey({ allergyResponse }: surveyI) {
               );
             })}
             <style jsx>{`
+              .activityCard {
+                width: 100%;
+              }
               .item {
                 display: flex;
                 align-items: center;
@@ -474,7 +477,7 @@ export default function Survey({ allergyResponse }: surveyI) {
             <div className="bar" />
             {allergyResponse.map((v, i) => {
               return (
-                <div key={i}>
+                <div className="allergyCard" key={i}>
                   <CheckBox
                     name="allergy"
                     value={v.id}
@@ -490,6 +493,7 @@ export default function Survey({ allergyResponse }: surveyI) {
                 </div>
               );
             })}
+            <div className="allergyCard">
             <CheckBox
               name="allergy"
               value={allergyResponse.length + 1}
@@ -498,8 +502,12 @@ export default function Survey({ allergyResponse }: surveyI) {
               onChange={(e) => {
                 handleAll(e.target.checked);
               }}
-            />
+              />
+            </div>
             <style jsx>{`
+              .allergyCard {
+                width: 100%;
+              }
               .item {
                 display: flex;
                 align-items: center;
