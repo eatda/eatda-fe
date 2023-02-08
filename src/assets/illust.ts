@@ -22,4 +22,5 @@ export const illust = {
     kitchen: "/img/illust/recipe_kitchen.svg",
     empty1: "/img/illust/library_empty1.svg",
     empty2: "/img/illust/library_empty2.svg",
+    splash_gif: "/img/illust/splash.gif",
 }

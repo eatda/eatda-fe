@@ -16,7 +16,7 @@ export default function Home() {
     } else {
       setTimeout(() => {
         router.replace(route.onboarding, undefined, { shallow: true });
-      }, 2000);
+      }, 5000);
     }
   }, []);
 
@@ -24,9 +24,9 @@ export default function Home() {
     <div className="container">
       <Image
         alt="character"
-        width={176}
-        height={148}
-        src={illust.splash}
+        width={360}
+        height={740}
+        src={illust.splash_gif}
         priority
       />
       <style jsx>{`
