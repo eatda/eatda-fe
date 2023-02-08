@@ -7,7 +7,7 @@ import { selectUser } from "../../store/userSlice";
 import { Post, Delete } from "../../hooks/Fetch";
 import { useRouter } from "next/router";
 import { ic_heart, ic_measure, ic_time, ic_like } from "../../assets/icon";
-import { character_like } from "../../assets/illust";
+import { character } from "../../assets/illust";
 import { route } from "../../assets/route";
 
 interface SugarCardProps {
@@ -121,7 +121,7 @@ export default function SugarCard({
                       alt="character"
                       width={20}
                       height={20}
-                      src={character_like[v]}
+                      src={character[v]}
                       priority
                     />
                   </div>

@@ -12,7 +12,7 @@ import colors from "../../assets/styles";
 import { DietType } from "../../interface/diet";
 import { SugarRecordType } from "../../interface/sugarRecord";
 import HomeSlider from "../../components/home/HomeSlider";
-import { character_like } from "../../assets/illust";
+import { character } from "../../assets/illust";
 import { logo } from "../../assets/illust";
 import { route } from "../../assets/route";
 import Hr from "../../components/common/Hr";
@@ -119,7 +119,7 @@ export default function Home() {
               alt="character"
               width={32}
               height={32}
-              src={character_like[user.usercharacter]}
+              src={character[user.usercharacter]}
               priority
             />
           </button>
