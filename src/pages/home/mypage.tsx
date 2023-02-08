@@ -115,9 +115,18 @@ export default function MyPage() {
                 <div className="infoStyle">
                 <div className="infoItem">알레르기</div>
                 <div className="infoVal">
-                  {myData?.allergy?.map((allergy, idx) => (
+                  {/* {myData?.allergy?.map((allergy, idx) => (
                     <span key={idx}>{allergy.name}, </span>
-                    ))}
+                    ))} */}
+                  {myData?.allergy?.map((allergy, idx) => {
+                    return(
+                      myData?.allergy?.length !== idx+1
+                      ?
+                      <span key={idx}>{allergy.name}, </span>
+                      :
+                      <span key={idx}>{allergy.name} </span>
+                    )
+                  })}
                 </div>
               </div>
               </div>
@@ -224,7 +233,7 @@ export default function MyPage() {
         }
         .infoStyle{
           display: flex;
-          width: 80%;
+          width: 90%;
         }
         .infoItem {
           font-size: 16px;
