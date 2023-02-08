@@ -49,7 +49,7 @@ export default function Library() {
           </div>
         )}
         {recordData.map((day, idx) => (
-          <div key={idx}>
+          <div key={idx} className="record-style">
             <div className="date">{day.date}</div>
             <div className="record-list">
               {day.data.map((data, idx) => (
@@ -87,6 +87,10 @@ export default function Library() {
           margin-top: 32px;
           width: 100%;
         }
+        .record-style {
+          width: 100%;
+
+        }
         .empty {
           color: ${colors.graySubTitle};
           text-align: center;
@@ -101,7 +105,7 @@ export default function Library() {
           justify-content: space-between;
           padding: 12px;
           box-sizing: border-box;
-          width: 340px;
+          width: 100%;
           height: 74px;
           border: solid 1px ${colors.blackSub};
           border-radius: 6px;
