@@ -12,13 +12,6 @@ export default function Timer() {
   };
   return (
     <div className="container">
-      <Image
-        alt="character"
-        width={184}
-        height={194}
-        src={illust.signup}
-        priority
-      />
       <div className="text">
         식사 완료 2시간 후 <br />
         혈당을 기록해주세요
@@ -33,9 +26,23 @@ export default function Timer() {
           align-items: center;
           justify-content: center;
           min-height: 400px;
+
+          // margin-top: 150px;
+          margin: -66px -20px 0px -20px;
+          width: 390px;
+          height: 100vh;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          text-align: center;
+          // height: 750px;
+          background-image: url(${illust.timer});
+          background-size: auto;
+          background-position: center;
         }
         .text {
-          margin-top: 32px;
+          margin-top: 190px;
           font-size: 24px;
           font-weight: 600;
           text-align: center;

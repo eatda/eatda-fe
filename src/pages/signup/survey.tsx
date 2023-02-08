@@ -391,12 +391,13 @@ export default function Survey({ allergyResponse }: surveyI) {
                 margin-bottom: -40px;
               }
               .item {
-                margin-top: 60px;
+                margin-top: -100px;
+                height: 100vh;
                 display: flex;
                 align-items: center;
+                justify-content: center;
                 flex-direction: column;
                 text-align: center;
-                // height: 100%;
               }
               .textMain {
                 display: flex;

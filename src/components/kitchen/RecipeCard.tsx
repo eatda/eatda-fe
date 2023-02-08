@@ -4,7 +4,7 @@ import colors from "../../assets/styles";
 import Image from "next/image";
 import { selectToken } from "../../store/tokenSlice";
 import { useSelector } from "react-redux";
-import { character } from "../../assets/illust";
+import { character, character_like } from "../../assets/illust";
 import { ic_heart } from "../../assets/icon";
 import { route } from "../../assets/route";
 import { selectUser } from "../../store/userSlice";
@@ -126,7 +126,7 @@ export default function RecipeCard({
                     alt="character"
                     width={20}
                     height={20}
-                    src={character[v]}
+                    src={character_like[v]}
                     priority
                   />
                 </div>
