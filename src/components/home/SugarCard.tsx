@@ -225,7 +225,7 @@ export default function SugarCard({
           flex-direction: row-reverse;
           align-items: center;
           justify-content: center;
-          width: ${whoList?.length * 20 + 16}px;
+          width: ${whoList?.length !== 0 ? whoList?.length * 20 + 16 : 0}px;
           height: 32px;
           line-height: 13px;
           border-radius: 15px;
