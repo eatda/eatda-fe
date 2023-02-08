@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { fontFamily } from "../../assets/font";
 import { ic_calendar } from "../../assets/icon";
 import colors, { sugarLevelColor } from "../../assets/styles";
 import { Get } from "../../hooks/Fetch";
@@ -119,7 +120,7 @@ export default function WeeklySummary({ duration }: { duration?: boolean }) {
           font-size: 12px;
           color: ${colors.graySubTitle};
           text-align: right;
-          font-family: "Pretendard-Regular";
+          font-family: ${fontFamily.normal};
         }
 
         // 주간 혈당 요약

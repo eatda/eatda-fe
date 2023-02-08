@@ -9,6 +9,7 @@ import { Get, Post } from "../../hooks/Fetch";
 import FooterButton from "../../components/common/FooterButton";
 import { DietType } from "../../interface/diet";
 import { down, up } from "../../assets/icon";
+import { fontFamily } from "../../assets/font";
 
 const offset = new Date().getTimezoneOffset() * 60000;
 const today = new Date(Date.now() - offset);
@@ -229,7 +230,6 @@ export default function Add() {
         }
 
         .item {
-          // gap: 12px;
           margin-top: 12px;
           display: flex;
           align-items: center;
@@ -283,7 +283,7 @@ export default function Add() {
           height: 27px;
           font-size: 16px;
           border: none;
-          font-family: "Pretendard-Regular";
+          font-family: ${fontFamily.normal};
         }
         input[type="number"] {
           text-align: right;
@@ -293,7 +293,7 @@ export default function Add() {
           height: 27px;
           font-size: 16px;
           border: none;
-          font-family: "Pretendard-Regular";
+          font-family: ${fontFamily.normal};
         }
 
         .intro {
