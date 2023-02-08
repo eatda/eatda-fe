@@ -7,7 +7,6 @@ import BestWorstCards from "../../components/library/BestWorstCards";
 import WeeklySummary from "../../components/library/WeeklySummary";
 import { DietType } from "../../interface/diet";
 import Image from "next/image";
-import { character } from "../../assets/illust";
 import Hr from "../../components/common/Hr";
 import { illust } from "../../assets/illust";
 
@@ -59,7 +58,7 @@ export default function Report() {
                   열람 가능합니다.
                 </div>
               </div>
-            )} */}
+            )}
           </div>
           <div className="box">
             <div className="title"> 식후 혈당 높았던 식단 TOP3</div>
@@ -75,7 +74,7 @@ export default function Report() {
                   열람 가능합니다.
                 </div>
               </div>
-            )} */}
+            )}
           </div>
         </>
       </div>
