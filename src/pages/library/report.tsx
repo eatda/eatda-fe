@@ -97,7 +97,6 @@ export default function Report() {
           justify-content: center;
           text-align: center;
           height: 150px;
-          border: 1px solid #d9d9d9;
         }
         .emptyText {
           font-size: 14px;
