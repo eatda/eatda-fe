@@ -150,14 +150,14 @@ export default function EnterPlace() {
           font-size: 14px;
           font-weight: 500;
           margin-right: auto;
-          margin-left: 20px;
+          // margin-left: 20px;
         }
         .mainText {
           margin-bottom: 72px;
           font-weight: 600;
           font-size: 24px;
           margin-right: auto;
-          margin-left: 20px;
+          // margin-left: 20px;
         }
         .codeText {
           margin-top: 12px;

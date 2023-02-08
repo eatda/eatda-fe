@@ -205,7 +205,7 @@ export function CTA1ButtonSmall({
       <style jsx>{`
         button {
           ${CTA1Source}
-          width: 170px;
+          width: 45%;
           background: ${active ? colors.mainOrange : colors.grayBackgroundSub};
           margin: 5px;
         }
