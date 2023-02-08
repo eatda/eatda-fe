@@ -15,5 +15,10 @@ const colors = {
 
   blackSub: "#E6E6E6",
 };
-
 export default colors;
+
+export const sugarLevelColor = [
+  colors.mainYellow,
+  colors.mainOrange,
+  colors.subRed,
+];

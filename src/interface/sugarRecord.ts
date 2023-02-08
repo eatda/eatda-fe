@@ -6,4 +6,5 @@ export interface SugarRecordType {
     time: string;
     level: number;
     timeline: number;
+    range: number;
 }

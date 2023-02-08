@@ -15,7 +15,6 @@ import HomeSlider from "../../components/home/HomeSlider";
 import { character } from "../../assets/illust";
 import { logo } from "../../assets/illust";
 import { route } from "../../assets/route";
-import Hr from "../../components/common/Hr";
 
 interface dietI {
   diet:
@@ -157,8 +156,9 @@ export default function Home() {
                     key={i}
                     is_exist={v.is_exist}
                     timeline={v.data.timeline}
-                    value={v.data.level}
+                    level={v.data.level}
                     time={v.data.time}
+                    range={v.data.range}
                     is_me_liked={v.is_me_liked}
                     who_liked={v.who_liked}
                   />

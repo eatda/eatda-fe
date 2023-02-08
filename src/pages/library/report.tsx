@@ -93,7 +93,7 @@ export default function Report() {
         .empty {
           display: flex;
           flex-direction: column;
-          align-item: center;
+          align-items: center;
           justify-content: center;
           text-align: center;
           height: 150px;
