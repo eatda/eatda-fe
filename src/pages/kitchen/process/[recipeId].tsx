@@ -99,21 +99,9 @@ export default function Process({ recipeData }: ProcessProps) {
           <div key={idx} className="process-list">
             <div className={idx == 0 ? "title main" : "title sub"}>
               {idx === 0 ? (
-                <Image
-                  alt="character"
-                  width={24}
-                  height={24}
-                  src={main}
-                  priority
-                />
+                <Image alt="" width={24} height={24} src={main} />
               ) : (
-                <Image
-                  alt="character"
-                  width={24}
-                  height={24}
-                  src={side}
-                  priority
-                />
+                <Image alt="" width={24} height={24} src={side} />
               )}
               &nbsp;
               {menu.title}
