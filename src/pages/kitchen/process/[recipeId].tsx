@@ -132,8 +132,8 @@ export default function Process({ recipeData }: ProcessProps) {
           <div className="image-box">
             <Image
               src={illust.complete}
-              width="233"
-              height="131"
+              width="280"
+              height="180"
               alt="조리완료"
             />
           </div>
@@ -198,7 +198,7 @@ export default function Process({ recipeData }: ProcessProps) {
           display: flex;
           justify-content: center;
           align-items: center;
-          padding: 10px 0px 50px 0px;
+          // padding: 10px 0px 50px 0px;
         }
         .select-meal {
           border-radius: 6px;
