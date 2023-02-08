@@ -153,7 +153,7 @@ export default function CreatePlace() {
           flex-direction: column;
           align-items: center;
           justify-content: center;
-          width: 350px;
+          width: 100%;
           height: 134px;
           background: ${colors.grayBackground};
           border-radius: 4px;
@@ -186,7 +186,7 @@ export default function CreatePlace() {
           display: flex;
           justify-content: center;
           align-items: center;
-          width: 350px;
+          width: 100%;
           height: 40px;
           border: none;
           background: ${colors.mainOrange};
