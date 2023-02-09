@@ -22,6 +22,7 @@ import {
 } from "../../../assets/icon";
 import { illust } from "../../../assets/illust";
 import { route } from "../../../assets/route";
+import KitchenModal from "../../../components/kitchen/KitchenModal";
 
 const mealButtonData = [
   {
@@ -52,12 +53,17 @@ export default function Process({ recipeData }: ProcessProps) {
   const { query } = useRouter();
   const token = useSelector(selectToken);
   const router = useRouter();
+  const [modal, setModal] = useState<boolean>(false);
+  const [modalId, setModalId] = useState<number>(-1);
+  const [text, setText] = useState<string>('');
 
   const [when, setWhen] = useState<number>();
 
   async function handleSubmit() {
     if (typeof when == "undefined") {
-      alert("식사 시간대가 선택되지 않았습니다");
+      setModalId(0);
+      setText("식사 시간대가 선택되지 않았습니다.");
+      setModal(true);
     } else {
       const requestBody = {
         diet_id: query.recipeId,
@@ -69,10 +75,13 @@ export default function Process({ recipeData }: ProcessProps) {
         requestBody: requestBody,
       });
       if (typeof data == "undefined") {
-        alert("식단이 등록되었습니다");
-        router.replace(route.timer);
+        setModalId(1);
+        setText('식단이 등록되었습니다.')
+        setModal(true);
       } else if (data.status == 403) {
-        alert("이미 해당 시간대에 등록된 식단이 있습니다.");
+        setModalId(2);
+        setText('이미 해당 시간대에 등록된 식단이 있습니다.')
+        setModal(true);
       }
     }
   }
@@ -153,6 +162,16 @@ export default function Process({ recipeData }: ProcessProps) {
         </div>
       </div>
       <FooterButton onClick={handleSubmit} text={"요리 완료하기"} />
+      {modal && (
+        <KitchenModal
+          id={modalId}
+          modal={modal}
+          setModal={(v: boolean) => {
+            setModal(v);
+          }}
+          text={text}
+          />
+      )}
       <style jsx>{`
         .container {
           display: flex;
