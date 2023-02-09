@@ -17,8 +17,7 @@
 
 <br/>
 
-<img height="300px" align="right" src="https://user-images.githubusercontent.com/75469131/217815690-1db07daa-3825-439d-8c96-85aec169bbdc.png"/>
-<img height="300px" src="https://user-images.githubusercontent.com/75469131/217818750-4e241ace-954d-40dd-9297-a745f8a653c9.png" />
+<img src="https://user-images.githubusercontent.com/75469131/217818750-4e241ace-954d-40dd-9297-a745f8a653c9.png" />
 
 <br/>
 
@@ -177,6 +176,7 @@
 │       └── userSlice.tsx
 ```
 
+<br/>
 
 ## ✨ Detail
 
