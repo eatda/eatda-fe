@@ -130,11 +130,11 @@ export default function Signup() {
     }
   };
 
-  // if (page === 0) {
-  //   setTimeout(() => {
-  //     setPage((prevNumber) => prevNumber + 1);
-  //   }, 3000);
-  // }
+  if (page === 0) {
+    setTimeout(() => {
+      setPage((prevNumber) => prevNumber + 1);
+    }, 3000);
+  }
 
   const getPage = (current: number) => {
     switch (current) {

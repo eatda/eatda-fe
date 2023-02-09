@@ -11,11 +11,11 @@ export default function Home() {
   if (session.status == "authenticated") {
     setTimeout(() => {
       router.replace(route.onboarding, undefined, { shallow: true });
-    }, 2000);
+    }, 4000);
   } else if (session.status === "unauthenticated") {
     setTimeout(() => {
       router.replace(route.onboarding, undefined, { shallow: true });
-    }, 1200);
+    }, 4000);
   }
 
   return (

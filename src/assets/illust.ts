@@ -31,7 +31,7 @@ export const illust = {
     kitchen: "/img/illust/recipe_kitchen.svg",
     empty1: "/img/illust/library_empty1.svg",
     empty2: "/img/illust/library_empty2.svg",
-    splash_gif: "/img/illust/splash.gif",
+    splash_gif: "/img/illust/splash2.gif",
     survey: "/img/illust/survey.svg",
     loading: "/img/illust/loading.gif",
     signuploading: "/img/illust/signuploading.gif",
