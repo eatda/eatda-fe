@@ -224,7 +224,8 @@ export default function Add() {
         }
 
         .today-sugar {
-          width: 340px;
+          width: 100%;
+          // width: 340px;
           height: 200px;
           font-weight: 700;
         }
@@ -236,7 +237,8 @@ export default function Add() {
           justify-content: space-between;
           padding: 0px 16px;
           box-sizing: border-box;
-          width: 342px;
+          // width: 342px;
+          width: 100%;
           height: 53px;
           border: solid 1px ${colors.blackSub};
           border-radius: 6px;
@@ -254,7 +256,8 @@ export default function Add() {
         .mymeal-list {
           display: flex;
           flex-direction: column;
-          width: 342px;
+          // width: 342px;
+          width: 100%;
           gap: 8px;
           padding: 8px;
           box-sizing: border-box;
@@ -265,7 +268,8 @@ export default function Add() {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          width: 326px;
+          // width: 326px;
+          width: 100%;
           height: 53px;
           border-radius: 6px;
           padding: 0px 12px;
@@ -341,6 +345,9 @@ export default function Add() {
           width: 160px;
           height: 22px;
           opacity: 0.3;
+        }
+        .input-list {
+          width: 100%;
         }
       `}</style>
     </>
