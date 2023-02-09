@@ -88,7 +88,7 @@ export default function Loading() {
       if (data.ok) {
         setTimeout(() => {
           setPage(1);
-        }, 5000);
+        }, 1000);
         console.log(res);
         const reduxData = {
           usersocial_id: user.usersocial_id,

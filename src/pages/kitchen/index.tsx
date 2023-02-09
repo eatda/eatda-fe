@@ -77,7 +77,7 @@ export default function Recipe() {
       </div>
       <style jsx>{`
         .textHeader {
-          margin-top: 18px;
+          margin-top: 24px;
           margin-bottom: 10px;
           font-size: 20px;
           font-weight: 700;

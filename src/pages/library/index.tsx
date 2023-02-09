@@ -10,6 +10,7 @@ import { btn_add, ic_time } from "../../assets/icon";
 import Image from "next/image";
 import Hr from "../../components/common/Hr";
 import { illust } from "../../assets/illust";
+import { useRouter } from "next/router";
 
 interface RecordDataType {
   date: string;
@@ -17,6 +18,7 @@ interface RecordDataType {
 }
 
 export default function Library() {
+  const router = useRouter();
   const user = useSelector(selectUser);
   const token = useSelector(selectToken);
   const [recordData, setRecordData] = useState<RecordDataType[]>([]);
@@ -29,6 +31,7 @@ export default function Library() {
       });
       if (data.ok) {
         setRecordData(res);
+        console.log(res,data);
       } else {
         console.log("myMealData error");
       }
@@ -36,13 +39,59 @@ export default function Library() {
     fetchMyMealData();
   }, []);
 
+  const handleClick = () => {
+    console.log(user.isDiabetes);
+    router.push('/library/add');
+  }
+
   return (
     <>
       {user.isDiabetes && (
         <PushPageButton name="필터" src={btn_add} page="/library/add" />
-      )}
+        )}
       <div className="container">
-        {
+        { 
+          recordData[0]?.data.length === 0
+          ?
+          <>
+          <div className="empty">
+          <Image
+            alt="character"
+            width={305}
+            height={76}
+            src={illust.library_empty}
+            priority
+          />
+          <div className="text">
+            새로운 혈당 수치 추가를 위해
+            <br />+ 버튼을 눌러주세요!
+          </div>
+          </div>
+          </>
+          :
+          <></>
+        }
+        {/* {
+          recordData &&
+          recordData[0] &&
+          recordData[0].data &&
+          recordData[0].data.length === 0 &&
+          (
+          <div className="empty">
+            <Image
+              alt="character"
+              width={305}
+              height={76}
+              src={illust.library_empty}
+              priority
+            />
+            <div className="text">
+            새로운 혈당 수치 추가를 위해
+            <br />+ 버튼을 눌러주세요!
+            </div>
+          </div>
+        )} */}
+        {/* {
           recordData.length === 0 && (
           <div className="empty">
             <Image
@@ -57,7 +106,7 @@ export default function Library() {
             <br />+ 버튼을 눌러주세요!
             </div>
           </div>
-        )}
+        )} */}
         {recordData.map((day, idx) => (
           <div key={idx} className="record-style">
             <div className="date">{day.date}</div>
@@ -110,11 +159,11 @@ export default function Library() {
         .empty {
           color: ${colors.graySubTitle};
           text-align: center;
-          height: 100vh;
+          height: 50vh;
           display: flex;
           flex-direction: column;
           align-items: center;
-          margin-top: -150px;
+          // margin-top: -150px;
           justify-content: center;
         }
         .text {

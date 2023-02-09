@@ -75,8 +75,8 @@ export default function OurPick() {
             <div className="emptyPick">
               <Image
                 alt="character"
-                width={146}
-                height={103}
+                width={118}
+                height={77}
                 src={illust.pick}
                 priority
               />
@@ -106,8 +106,8 @@ export default function OurPick() {
                   <div className="emptyBox">
                     <Image
                       alt="character"
-                      width={79}
-                      height={76}
+                      width={74}
+                      height={84}
                       src={illust.mine}
                       priority
                     />
@@ -162,7 +162,7 @@ export default function OurPick() {
           margin-bottom: 12px;
         }
         .text {
-          margin-top: -10px;
+          margin-top: 4px;
         }
       `}</style>
     </>

@@ -133,7 +133,7 @@ export default function Signup() {
   if (page === 0) {
     setTimeout(() => {
       setPage((prevNumber) => prevNumber + 1);
-    }, 5000);
+    }, 3000);
   }
 
   const getPage = (current: number) => {
@@ -155,9 +155,9 @@ export default function Signup() {
               }
               .item {
                 // margin-top: 150px;
-                margin: -66px -20px 0px -20px;
+                margin: -80px -20px 0px -20px;
                 width: 390px;
-                height: 100vh;
+                height: 900px;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
@@ -184,7 +184,7 @@ export default function Signup() {
               가족 공간 내에서는 닉네임으로 활동해요.
             </div>
             <TextBox2
-              text="맘스터치"
+              text=""
               onChange={handleChange}
               value={form.name}
             />
