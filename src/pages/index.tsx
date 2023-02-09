@@ -15,7 +15,7 @@ export default function Home() {
   } else if (session.status === "unauthenticated") {
     setTimeout(() => {
       router.replace(route.onboarding, undefined, { shallow: true });
-    }, 5000);
+    }, 1200);
   }
 
   return (
