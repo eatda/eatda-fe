@@ -179,11 +179,11 @@
 
 ## ✨ Detail
 
-<img width="32%" align="right" src="https://user-images.githubusercontent.com/75469131/217815698-adcc5813-253a-4db3-aeda-45e8ce414101.png"/>
-<img width="32%" align="left" src="https://user-images.githubusercontent.com/75469131/217815679-9b93948a-42c4-467c-944a-4cab1bcc2330.png"/>
-<img width="32%" src="https://user-images.githubusercontent.com/75469131/217815690-1db07daa-3825-439d-8c96-85aec169bbdc.png"/>
-<img width="32%" align="right" src="https://user-images.githubusercontent.com/75469131/217815715-8f2e8c19-5fc1-46d3-ba35-c5477056dfd7.png"/>
-<img width="32%" align="left" src="https://user-images.githubusercontent.com/75469131/217815708-f9e06fd7-0672-4334-8723-44d0e6382979.png"/>
-<img width="32%" src="https://user-images.githubusercontent.com/75469131/217815713-046cc0d1-9e68-47bb-bd95-f3dfd6dad912.png"/>
-<img width="32%" align="left" src="https://user-images.githubusercontent.com/75469131/217815718-93acbfa5-c7b5-4aa0-9ef5-1ade31efae00.png"/>
-<img width="32%" align="center" src="https://user-images.githubusercontent.com/75469131/217815724-4ad4ed45-8d46-4532-8699-7064d8cd738a.png"/>
+<img width="200px" align="right" src="https://user-images.githubusercontent.com/75469131/217815698-adcc5813-253a-4db3-aeda-45e8ce414101.png"/>
+<img width="200px" align="left" src="https://user-images.githubusercontent.com/75469131/217815679-9b93948a-42c4-467c-944a-4cab1bcc2330.png"/>
+<img width="200px" src="https://user-images.githubusercontent.com/75469131/217815690-1db07daa-3825-439d-8c96-85aec169bbdc.png"/>
+<img width="200px" align="right" src="https://user-images.githubusercontent.com/75469131/217815715-8f2e8c19-5fc1-46d3-ba35-c5477056dfd7.png"/>
+<img width="200px" align="left" src="https://user-images.githubusercontent.com/75469131/217815708-f9e06fd7-0672-4334-8723-44d0e6382979.png"/>
+<img width="200px" src="https://user-images.githubusercontent.com/75469131/217815713-046cc0d1-9e68-47bb-bd95-f3dfd6dad912.png"/>
+<img width="200px" align="left" src="https://user-images.githubusercontent.com/75469131/217815718-93acbfa5-c7b5-4aa0-9ef5-1ade31efae00.png"/>
+<img width="200px" align="center" src="https://user-images.githubusercontent.com/75469131/217815724-4ad4ed45-8d46-4532-8699-7064d8cd738a.png"/>
