@@ -142,7 +142,7 @@ export default function Add() {
                   alt="character"
                   width={16}
                   height={10}
-                  src={down}
+                  src={up}
                   priority
                 />
               ) : (
@@ -150,7 +150,7 @@ export default function Add() {
                   alt="character"
                   width={16}
                   height={10}
-                  src={up}
+                  src={down}
                   priority
                 />
               )}
