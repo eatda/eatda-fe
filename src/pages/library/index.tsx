@@ -29,6 +29,7 @@ export default function Library() {
       });
       if (data.ok) {
         setRecordData(res);
+        console.log(res,data);
       } else {
         console.log("myMealData error");
       }

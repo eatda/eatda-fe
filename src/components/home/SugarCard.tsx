@@ -156,7 +156,7 @@ export default function SugarCard({
         }
         .card {
           width: 350px;
-          height: 112px;
+          height: 118px;
           padding-top: 8px;
           padding-left: 12px;
           paddig-right: 12px;
