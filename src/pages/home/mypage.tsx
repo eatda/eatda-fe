@@ -43,7 +43,7 @@ export default function MyPage() {
 
   useEffect(() => {
     if (session.status === "unauthenticated") {
-      router.replace(route.root);
+      router.back();
     }
   }, [session.status]);
 

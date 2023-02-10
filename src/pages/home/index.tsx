@@ -15,6 +15,7 @@ import HomeSlider from "../../components/home/HomeSlider";
 import { character } from "../../assets/illust";
 import { logo } from "../../assets/illust";
 import { route } from "../../assets/route";
+import { useSession } from "next-auth/react";
 
 interface dietI {
   diet:
@@ -52,6 +53,13 @@ export default function Home() {
   const router = useRouter();
   const token = useSelector(selectToken);
   const user = useSelector(selectUser);
+  const session = useSession();
+
+  useEffect(() => {
+    if (session.status === "unauthenticated") {
+      router.replace(route.onboarding);
+    }
+  }, [session.status]);
 
   const [isLoading, setIsLoading] = useState(false);
   const [initialMealCard, setInitialMealCard] = useState(0);
