@@ -57,7 +57,7 @@ export default function Home() {
 
   useEffect(() => {
     if (session.status === "unauthenticated") {
-      router.replace(route.onboarding);
+      router.replace(route.root);
     }
   }, [session.status]);
 
