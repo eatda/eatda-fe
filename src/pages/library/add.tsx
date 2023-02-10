@@ -10,6 +10,7 @@ import FooterButton from "../../components/common/FooterButton";
 import { DietType } from "../../interface/diet";
 import { down, up } from "../../assets/icon";
 import { fontFamily } from "../../assets/font";
+import LibraryModal from "../../components/library/LibraryModal";
 
 const offset = new Date().getTimezoneOffset() * 60000;
 const today = new Date(Date.now() - offset);
@@ -32,6 +33,11 @@ export default function Add() {
   const token = useSelector(selectToken);
   const [myMealData, setMyMealData] = useState<MyMealDataType[]>([]);
   const sugarInput = useRef<HTMLInputElement>(null);
+
+  // modal
+  const [modal, setModal] = useState<boolean>(false);
+  const [modalId, setModalId] = useState<number>(-1);
+  const [text, setText] = useState<string>('');
 
   useEffect(() => {
     async function fetchMyMealData() {
@@ -80,11 +86,17 @@ export default function Add() {
 
   function handleSubmit() {
     if (typeof selectedMeal?.id == "undefined") {
-      alert("'내 식단'에서 식단을 선택해 주세요");
+      // alert("'내 식단'에서 식단을 선택해 주세요");
+      setText("'내 식단'에서 식단을 선택해 주세요");
+      setModal(true);
     } else if (typeof sugar === "undefined") {
-      alert("혈당을 기록해 주세요");
+      // alert("혈당을 기록해 주세요");
+      setText("혈당을 기록해 주세요");
+      setModal(true);
     } else if (sugar <= 0 || sugar > 300) {
-      alert("혈당량은 0 이상 300 이하의 값만 입력 가능합니다");
+      // alert("혈당량은 0 이상 300 이하의 값만 입력 가능합니다");
+      setText("혈당량은 0 이상 300 이하의 값만 입력 가능합니다");
+      setModal(true);
     } else {
       console.log(sugar);
       const requestBody = {
@@ -98,7 +110,9 @@ export default function Add() {
         requestBody: requestBody,
       });
       if (typeof data !== "undefined" && data.status === 400) {
-        alert("혈당 입력에 실패했습니다.");
+        // alert("혈당 입력에 실패했습니다.");
+        setText("혈당 입력에 실패했습니다.");
+        setModal(true);
       }
       router.back();
     }
@@ -215,6 +229,16 @@ export default function Add() {
         </div>
       </div>
       <FooterButton onClick={handleSubmit} text="혈당 기록 완료" />
+      {modal && (
+        <LibraryModal
+          id={modalId}
+          modal={modal}
+          setModal={(v: boolean) => {
+            setModal(v);
+          }}
+          text={text}
+          />
+      )}
       <style jsx>{`
         .container {
           display: flex;
