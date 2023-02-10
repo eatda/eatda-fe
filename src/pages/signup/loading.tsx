@@ -36,7 +36,7 @@ export default function Loading() {
   const [page, setPage] = useState<number>(0);
 
   const handleClick = () => {
-    router.push(route.home);
+    router.replace(route.home);
   };
 
   const fetchSignup = async () => {
@@ -128,17 +128,17 @@ export default function Loading() {
       ) : (
         <div className="making">
           <div className="style">
-          <Image
-            alt="character"
-            width={124}
-            height={182}
-            src={illust.loading_ch}
-            priority
-          />
-          <div className="textHeader">
-            건강한 맞춤 식사를 <br/>
-            만들 준비가 되셨나요?
-          </div>
+            <Image
+              alt="character"
+              width={124}
+              height={182}
+              src={illust.loading_ch}
+              priority
+            />
+            <div className="textHeader">
+              건강한 맞춤 식사를 <br />
+              만들 준비가 되셨나요?
+            </div>
           </div>
           <div className="buttonItem">
             <CTA1Button

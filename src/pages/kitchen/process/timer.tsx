@@ -1,14 +1,12 @@
 import { useRouter } from "next/router";
 import { CTA1Button } from "../../../components/common/Button";
-import Image from "next/image";
 import { illust } from "../../../assets/illust";
-import { route } from "../../../assets/route";
 
 export default function Timer() {
   const router = useRouter();
 
   const handleClick = () => {
-    router.replace(route.home);
+    router.back();
   };
   return (
     <div className="container">
@@ -27,7 +25,6 @@ export default function Timer() {
           justify-content: center;
           min-height: 400px;
 
-          // margin-top: 150px;
           margin: -66px -20px 0px -20px;
           width: 390px;
           height: 100vh;
@@ -36,7 +33,6 @@ export default function Timer() {
           justify-content: center;
           align-items: center;
           text-align: center;
-          // height: 750px;
           background-image: url(${illust.timer});
           background-size: auto;
           background-position: center;

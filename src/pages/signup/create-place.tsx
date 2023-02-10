@@ -24,13 +24,13 @@ export default function CreatePlace() {
     switch (e.currentTarget.value) {
       case "true":
         setPage((prevNumber) => prevNumber + 1);
-        dispatch(checkTeamDia({teamDiabetes : false}));
+        dispatch(checkTeamDia({ teamDiabetes: false }));
         break;
       case "false":
-        router.push(route.enterPlace);
+        router.replace(route.enterPlace);
         break;
       case "enter":
-        router.push(route.signup);
+        router.replace(route.signup);
         break;
       default:
         break;
