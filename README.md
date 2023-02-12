@@ -181,3 +181,18 @@
 ## ✨ Detail
 
 ![썸네](https://user-images.githubusercontent.com/75469131/218316964-36960537-632f-498e-b850-dd3d97fc1cb0.png)
+
+<br/>
+
+## 📺 Video
+
+<img src="https://user-images.githubusercontent.com/75469131/218319723-a6abba9d-9248-440b-a186-f8423a6edead.gif"/>
+
+<img src="https://user-images.githubusercontent.com/75469131/218319712-4a5ce856-9a03-4ec4-9639-edf697d477f6.gif"/>
+
+<img src="https://user-images.githubusercontent.com/75469131/218319717-c71db2a2-8bbc-4b7c-ac8b-144f2140a486.gif"/>
+
+
+
+
+
