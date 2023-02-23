@@ -37,6 +37,8 @@
 <br/>
 
 ## 📚 Stack
+<img src="https://img.shields.io/badge/Typescript-3178C6?style=for-the-badge&logo=Typescript&logoColor=white"/><img src="https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=Next.js&logoColor=white"/><img src="https://img.shields.io/badge/Redux Toolkit-593D88?style=for-the-badge&logo=Redux&logoColor=white"/>
+
 - **Typescript** 기반
 - **NextJS**를 이용한 Server Side Rendering 
 - **Redux**를 이용한 전역 상태관리 (유저 및 필터 정보)
