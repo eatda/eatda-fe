@@ -21,11 +21,6 @@
 
 <br/>
 
-## 📺 Video
-
-https://user-images.githubusercontent.com/75469131/226929187-cc98e642-e16b-4c1d-9f41-34989cea6e27.mp4
-
-<br/>
 
 ## 🤼‍♂️ Team
 | Plan | Design | FrontEnd | BackEnd |
@@ -186,9 +181,31 @@ https://user-images.githubusercontent.com/75469131/226929187-cc98e642-e16b-4c1d-
 
 <br/>
 
+
 ## ✨ Detail
 
 ![썸네](https://user-images.githubusercontent.com/75469131/218316964-36960537-632f-498e-b850-dd3d97fc1cb0.png)
 
+<br>
 
+## 📺 Video
+
+#### 1. 회원가입
+
+https://user-images.githubusercontent.com/75469131/226934405-652e7544-f21d-4ba3-a7d5-d27446197a4a.mp4
+
+<br>
+
+#### 2. 식단 등록
+
+https://user-images.githubusercontent.com/75469131/226935896-fa754ca3-050f-4b66-b844-e99c614a220d.mp4
+
+<br>
+
+#### 3. 혈당기록 + 식단 필터링 + 로그아
+
+https://user-images.githubusercontent.com/75469131/226936111-b437b459-6c6a-46f3-8b99-180618079e85.mp4
+
+
+<br/>
 
